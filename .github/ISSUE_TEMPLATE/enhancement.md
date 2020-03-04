@@ -5,4 +5,4 @@ about: Suggest an idea for this project
 ---
 
 
-**Is your feature reques
+**Is your feature request related to a problem?/Why 
