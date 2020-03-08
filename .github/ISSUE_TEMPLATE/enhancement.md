@@ -9,4 +9,4 @@ about: Suggest an idea for this project
 <!-- A clear and concise description of what the problem is. Ex. I'm always frustrated when [...] -->
 
 **Describe the solution you'd like in detail**
-<!-- A cle
+<!-- A clear and concise description o
