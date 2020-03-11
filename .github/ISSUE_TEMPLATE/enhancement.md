@@ -11,4 +11,5 @@ about: Suggest an idea for this project
 **Describe the solution you'd like in detail**
 <!-- A clear and concise description of what you want to happen. -->
 
-**Describe alternatives yo
+**Describe alternatives you've considered**
+<!-- A c
