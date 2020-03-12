@@ -12,4 +12,4 @@ about: Suggest an idea for this project
 <!-- A clear and concise description of what you want to happen. -->
 
 **Describe alternatives you've considered**
-<!-- A c
+<!-- A clear and concise description 
