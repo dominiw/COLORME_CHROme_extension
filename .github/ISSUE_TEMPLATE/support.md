@@ -1,3 +1,3 @@
 ---
 name: Support Request
-about: As
+about: Ask questions about this pro
