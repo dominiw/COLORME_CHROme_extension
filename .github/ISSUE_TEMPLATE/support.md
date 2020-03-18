@@ -1,3 +1,6 @@
 ---
 name: Support Request
-about: Ask questions about this pro
+about: Ask questions about this project
+
+---
+
