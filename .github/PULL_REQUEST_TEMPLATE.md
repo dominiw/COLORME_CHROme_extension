@@ -4,4 +4,5 @@
 
 **Which issue(s) this PR fixes**:
 <!--
-*Automatically closes linked issue when 
+*Automatically closes linked issue when PR is merged.
+Usage: `F
