@@ -14,4 +14,4 @@ Fixes #
 
 **Does this PR introduce an API-breaking change?**:
 <!--
-If no, just write "NON
+If no, just write "NONE" in the release-note block b
