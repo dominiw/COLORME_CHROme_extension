@@ -16,4 +16,4 @@ Fixes #
 <!--
 If no, just write "NONE" in the release-note block below.
 If yes, a release note is required:
-Enter your extended release
+Enter your extended release note in the block below. If
