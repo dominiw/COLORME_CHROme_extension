@@ -2,4 +2,5 @@
 # https://github.com/codespell-project/actions-codespell
 # https://github.com/codespell-project/codespell
 name: codespell
-on
+on: [push, pull_request]
+job
