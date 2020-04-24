@@ -3,4 +3,6 @@
 # https://github.com/codespell-project/codespell
 name: codespell
 on: [push, pull_request]
-job
+jobs:
+  codespell:
+    name: Chec
