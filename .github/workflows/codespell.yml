@@ -6,4 +6,5 @@ on: [push, pull_request]
 jobs:
   codespell:
     name: Check for spelling errors
-    runs-on: 
+    runs-on: ubuntu-latest
+    steps:
