@@ -1,3 +1,3 @@
 # How to Contribute
 
-This documen
+This document outlines some of the re
