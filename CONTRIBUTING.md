@@ -4,4 +4,4 @@ This document outlines some of the requirements and conventions for contributing
 
 ## Licence and CLA
 
-CSI is un
+CSI is under [Apache 2.0](LICENSE) and accep
