@@ -4,4 +4,6 @@ This document outlines some of the requirements and conventions for contributing
 
 ## Licence and CLA
 
-CSI is under [Apache 2.0](LICENSE) and accepts contributions via GitHub pull r
+CSI is under [Apache 2.0](LICENSE) and accepts contributions via GitHub pull requests.
+
+Before contri
