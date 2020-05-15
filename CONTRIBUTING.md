@@ -6,4 +6,4 @@ This document outlines some of the requirements and conventions for contributing
 
 CSI is under [Apache 2.0](LICENSE) and accepts contributions via GitHub pull requests.
 
-Before contributing to the Container Storage Inter
+Before contributing to the Container Storage Interface, contributors MUST si
