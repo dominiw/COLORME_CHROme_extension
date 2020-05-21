@@ -6,4 +6,5 @@ This document outlines some of the requirements and conventions for contributing
 
 CSI is under [Apache 2.0](LICENSE) and accepts contributions via GitHub pull requests.
 
-Before contributing to the Container Storage Interface, contributors MUST sign the CLA available [here](https://github.com/container-storage-interface/spec/blob/m
+Before contributing to the Container Storage Interface, contributors MUST sign the CLA available [here](https://github.com/container-storage-interface/spec/blob/master/CCLA.pdf).
+The CLA MA
