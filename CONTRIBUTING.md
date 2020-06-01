@@ -12,4 +12,4 @@ The completed CLA MUST be mailed to the CSI Approvers mailing list: container-st
 
 ## Markdown style
 
-To ke
+To keep consistency throughout the M
