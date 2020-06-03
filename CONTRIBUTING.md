@@ -13,4 +13,4 @@ The completed CLA MUST be mailed to the CSI Approvers mailing list: container-st
 ## Markdown style
 
 To keep consistency throughout the Markdown files in the CSI spec, all files should be formatted one sentence per line.
-This fixes two thing
+This fixes two things: it makes diffing easi
