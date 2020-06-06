@@ -14,4 +14,4 @@ The completed CLA MUST be mailed to the CSI Approvers mailing list: container-st
 
 To keep consistency throughout the Markdown files in the CSI spec, all files should be formatted one sentence per line.
 This fixes two things: it makes diffing easier with git and it resolves fights about line wrapping length.
-For example, this paragraph will span
+For example, this paragraph will span three lines in the Markd
