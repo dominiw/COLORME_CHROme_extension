@@ -18,4 +18,4 @@ For example, this paragraph will span three lines in the Markdown source.
 
 ## Code style
 
-This
+This also applies to the code snippets in th
