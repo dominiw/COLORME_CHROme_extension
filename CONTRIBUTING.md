@@ -20,4 +20,8 @@ For example, this paragraph will span three lines in the Markdown source.
 
 This also applies to the code snippets in the markdown files.
 
-* Please wrap the code at 72 charact
+* Please wrap the code at 72 characters.
+
+## Comments
+
+This also applies to t
