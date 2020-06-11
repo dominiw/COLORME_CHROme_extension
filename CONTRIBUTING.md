@@ -24,4 +24,4 @@ This also applies to the code snippets in the markdown files.
 
 ## Comments
 
-This also applies to t
+This also applies to the code snippets in the markdown file
