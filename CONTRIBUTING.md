@@ -24,4 +24,6 @@ This also applies to the code snippets in the markdown files.
 
 ## Comments
 
-This also applies to the code snippets in the markdown file
+This also applies to the code snippets in the markdown files.
+
+* End each sentence within
