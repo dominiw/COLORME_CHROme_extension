@@ -26,4 +26,4 @@ This also applies to the code snippets in the markdown files.
 
 This also applies to the code snippets in the markdown files.
 
-* End each sentence within
+* End each sentence within a comment with a punctuation
