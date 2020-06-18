@@ -26,4 +26,5 @@ This also applies to the code snippets in the markdown files.
 
 This also applies to the code snippets in the markdown files.
 
-* End each sentence within a comment with a punctuation mark (please note that we generally prefer periods); this applies to incomplete sentence
+* End each sentence within a comment with a punctuation mark (please note that we generally prefer periods); this applies to incomplete sentences as well.
+* For trailing comme
