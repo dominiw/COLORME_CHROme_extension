@@ -31,4 +31,4 @@ This also applies to the code snippets in the markdown files.
 
 ## Git commit
 
-The "system of record"
+The "system of record" for the specification is 
