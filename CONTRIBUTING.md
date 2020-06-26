@@ -31,4 +31,5 @@ This also applies to the code snippets in the markdown files.
 
 ## Git commit
 
-The "system of record" for the specification is the `spec.md` file and all hand-edits of the specification sho
+The "system of record" for the specification is the `spec.md` file and all hand-edits of the specification should happen there.
+**DO NOT** man
