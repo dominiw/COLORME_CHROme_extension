@@ -32,4 +32,4 @@ This also applies to the code snippets in the markdown files.
 ## Git commit
 
 The "system of record" for the specification is the `spec.md` file and all hand-edits of the specification should happen there.
-**DO NOT** manually edit the generated pro
+**DO NOT** manually edit the generated protobufs or generated language bindi
