@@ -35,4 +35,4 @@ The "system of record" for the specification is the `spec.md` file and all hand-
 **DO NOT** manually edit the generated protobufs or generated language bindings.
 Once changes to `spec.md` are complete, please run `make` to update generated files.
 
-**IMPORTANT:** Prior
+**IMPORTANT:** Prior to committing code please run 
