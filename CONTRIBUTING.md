@@ -37,4 +37,6 @@ Once changes to `spec.md` are complete, please run `make` to update generated fi
 
 **IMPORTANT:** Prior to committing code please run `make` to ensure that your specification changes have landed in all generated files.
 
-###
+### Commit Style
+
+Each commit
