@@ -39,4 +39,4 @@ Once changes to `spec.md` are complete, please run `make` to update generated fi
 
 ### Commit Style
 
-Each commit should represent a single 
+Each commit should represent a single logical (atomic) ch
