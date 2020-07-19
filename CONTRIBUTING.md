@@ -41,4 +41,5 @@ Once changes to `spec.md` are complete, please run `make` to update generated fi
 
 Each commit should represent a single logical (atomic) change: this makes your changes easier to review.
 
-* Try to avoid unrelated cleanups (e.g., typo fixes or style nits) in the same commit that makes f
+* Try to avoid unrelated cleanups (e.g., typo fixes or style nits) in the same commit that makes functional changes.
+  While t
