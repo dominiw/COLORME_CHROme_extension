@@ -43,4 +43,4 @@ Each commit should represent a single logical (atomic) change: this makes your c
 
 * Try to avoid unrelated cleanups (e.g., typo fixes or style nits) in the same commit that makes functional changes.
   While typo fixes are great, including them in the same commit as functional changes makes the commit history harder to read.
-* Developer
+* Developers often make incremental c
