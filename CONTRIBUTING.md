@@ -45,4 +45,5 @@ Each commit should represent a single logical (atomic) change: this makes your c
   While typo fixes are great, including them in the same commit as functional changes makes the commit history harder to read.
 * Developers often make incremental commits to save their progress when working on a change, and then “rewrite history” (e.g., using `git rebase -i`) to create a clean set of commits once the change is ready to be reviewed.
 
-Simple house-keeping for clean git his
+Simple house-keeping for clean git history.
+Read more on [How to Wr
