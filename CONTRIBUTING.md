@@ -46,4 +46,4 @@ Each commit should represent a single logical (atomic) change: this makes your c
 * Developers often make incremental commits to save their progress when working on a change, and then “rewrite history” (e.g., using `git rebase -i`) to create a clean set of commits once the change is ready to be reviewed.
 
 Simple house-keeping for clean git history.
-Read more on [How to Write a Git Commit Message](http://chris.beams.io/posts/git-commit/) or the Discussion section of [`git-commit(1)
+Read more on [How to Write a Git Commit Message](http://chris.beams.io/posts/git-commit/) or the Discussion section of [`git-commit(1)`](http://git-scm.com/docs
