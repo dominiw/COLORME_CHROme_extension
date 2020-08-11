@@ -48,4 +48,4 @@ Each commit should represent a single logical (atomic) change: this makes your c
 Simple house-keeping for clean git history.
 Read more on [How to Write a Git Commit Message](http://chris.beams.io/posts/git-commit/) or the Discussion section of [`git-commit(1)`](http://git-scm.com/docs/git-commit).
 
-* Separate
+* Separate the subject from body 
