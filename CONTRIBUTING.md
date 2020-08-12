@@ -49,4 +49,4 @@ Simple house-keeping for clean git history.
 Read more on [How to Write a Git Commit Message](http://chris.beams.io/posts/git-commit/) or the Discussion section of [`git-commit(1)`](http://git-scm.com/docs/git-commit).
 
 * Separate the subject from body with a blank line.
-* Limit the 
+* Limit the subject line to 50 character
