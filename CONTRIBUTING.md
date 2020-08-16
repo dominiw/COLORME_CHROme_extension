@@ -52,4 +52,5 @@ Read more on [How to Write a Git Commit Message](http://chris.beams.io/posts/git
 * Limit the subject line to 50 characters.
 * Capitalize the subject line.
 * Do not end the subject line with a period.
-* Use the imper
+* Use the imperative mood in the subject line.
+* Wrap 
