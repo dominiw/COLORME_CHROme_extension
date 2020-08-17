@@ -53,4 +53,4 @@ Read more on [How to Write a Git Commit Message](http://chris.beams.io/posts/git
 * Capitalize the subject line.
 * Do not end the subject line with a period.
 * Use the imperative mood in the subject line.
-* Wrap 
+* Wrap the body at 72 charac
