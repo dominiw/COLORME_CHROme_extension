@@ -55,4 +55,4 @@ Read more on [How to Write a Git Commit Message](http://chris.beams.io/posts/git
 * Use the imperative mood in the subject line.
 * Wrap the body at 72 characters.
 * Use the body to explain what and why vs. how.
-  * If there was important/useful/essential conversation or information, copy 
+  * If there was important/useful/essential conversation or information, copy or include a reference
