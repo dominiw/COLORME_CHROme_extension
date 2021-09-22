@@ -52,3 +52,19 @@ $(CSI_A): $(CSI_GO)
 	go mod download
 	go install ./$(CSI_PKG)
 	go build -o "$@" ./$(CSI_PKG)
+
+build_go: $(CSI_A)
+
+clean:
+	rm $(CSI_A)
+	$(MAKE) -C lib/go $@
+
+clobber: clean
+	$(MAKE) -C lib/go $@
+	rm -f $(CSI_PROTO) $(CSI_PROTO).tmp
+
+# check generated files for violation of standards
+check: $(CSI_PROTO)
+	awk '{ if (length > 72) print NR, $$0 }' $? | diff - /dev/null
+
+.PHONY: clean clobber check
