@@ -87,3 +87,32 @@ service Controller {
 
   rpc CreateSnapshot (CreateSnapshotRequest)
     returns (CreateSnapshotResponse) {}
+
+  rpc DeleteSnapshot (DeleteSnapshotRequest)
+    returns (DeleteSnapshotResponse) {}
+
+  rpc ListSnapshots (ListSnapshotsRequest)
+    returns (ListSnapshotsResponse) {}
+
+  rpc ControllerExpandVolume (ControllerExpandVolumeRequest)
+    returns (ControllerExpandVolumeResponse) {}
+
+  rpc ControllerGetVolume (ControllerGetVolumeRequest)
+    returns (ControllerGetVolumeResponse) {
+        option (alpha_method) = true;
+    }
+}
+
+service GroupController {
+  option (alpha_service) = true;
+
+  rpc GroupControllerGetCapabilities (
+        GroupControllerGetCapabilitiesRequest)
+    returns (GroupControllerGetCapabilitiesResponse) {}
+
+  rpc CreateVolumeGroupSnapshot(CreateVolumeGroupSnapshotRequest)
+    returns (CreateVolumeGroupSnapshotResponse) {
+        option (alpha_method) = true;
+    }
+
+  rpc DeleteVolumeGroupSnapshot(DeleteVolumeGroupSnapshotRequest)
