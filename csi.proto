@@ -139,3 +139,28 @@ service Node {
 
   rpc NodeUnpublishVolume (NodeUnpublishVolumeRequest)
     returns (NodeUnpublishVolumeResponse) {}
+
+  rpc NodeGetVolumeStats (NodeGetVolumeStatsRequest)
+    returns (NodeGetVolumeStatsResponse) {}
+
+
+  rpc NodeExpandVolume(NodeExpandVolumeRequest)
+    returns (NodeExpandVolumeResponse) {}
+
+
+  rpc NodeGetCapabilities (NodeGetCapabilitiesRequest)
+    returns (NodeGetCapabilitiesResponse) {}
+
+  rpc NodeGetInfo (NodeGetInfoRequest)
+    returns (NodeGetInfoResponse) {}
+}
+message GetPluginInfoRequest {
+  // Intentionally empty.
+}
+
+message GetPluginInfoResponse {
+  // The name MUST follow domain name notation format
+  // (https://tools.ietf.org/html/rfc1035#section-2.3.1). It SHOULD
+  // include the plugin's host company name and the plugin name,
+  // to minimize the possibility of collisions. It MUST be 63
+  // characters or less, beginning and ending with an alphanumeric
