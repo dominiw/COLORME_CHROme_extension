@@ -364,3 +364,41 @@ message CreateVolumeRequest {
   // If specified, the new volume will be pre-populated with data from
   // this source. This field is OPTIONAL.
   VolumeContentSource volume_content_source = 6;
+
+  // Specifies where (regions, zones, racks, etc.) the provisioned
+  // volume MUST be accessible from.
+  // An SP SHALL advertise the requirements for topological
+  // accessibility information in documentation. COs SHALL only specify
+  // topological accessibility information supported by the SP.
+  // This field is OPTIONAL.
+  // This field SHALL NOT be specified unless the SP has the
+  // VOLUME_ACCESSIBILITY_CONSTRAINTS plugin capability.
+  // If this field is not specified and the SP has the
+  // VOLUME_ACCESSIBILITY_CONSTRAINTS plugin capability, the SP MAY
+  // choose where the provisioned volume is accessible from.
+  TopologyRequirement accessibility_requirements = 7;
+}
+
+// Specifies what source the volume will be created from. One of the
+// type fields MUST be specified.
+message VolumeContentSource {
+  message SnapshotSource {
+    // Contains identity information for the existing source snapshot.
+    // This field is REQUIRED. Plugin is REQUIRED to support creating
+    // volume from snapshot if it supports the capability
+    // CREATE_DELETE_SNAPSHOT.
+    string snapshot_id = 1;
+  }
+
+  message VolumeSource {
+    // Contains identity information for the existing source volume.
+    // This field is REQUIRED. Plugins reporting CLONE_VOLUME
+    // capability MUST support creating a volume from another volume.
+    string volume_id = 1;
+  }
+
+  oneof type {
+    SnapshotSource snapshot = 1;
+    VolumeSource volume = 2;
+  }
+}
