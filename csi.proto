@@ -262,3 +262,29 @@ message PluginCapability {
       //   ControllerExpandVolume and NodeExpandVolume.
       OFFLINE = 2;
     }
+    Type type = 1;
+  }
+
+  oneof type {
+    // Service that the plugin supports.
+    Service service = 1;
+    VolumeExpansion volume_expansion = 2;
+  }
+}
+message ProbeRequest {
+  // Intentionally empty.
+}
+
+message ProbeResponse {
+  // Readiness allows a plugin to report its initialization status back
+  // to the CO. Initialization for some plugins MAY be time consuming
+  // and it is important for a CO to distinguish between the following
+  // cases:
+  //
+  // 1) The plugin is in an unhealthy state and MAY need restarting. In
+  //    this case a gRPC error code SHALL be returned.
+  // 2) The plugin is still initializing, but is otherwise perfectly
+  //    healthy. In this case a successful response SHALL be returned
+  //    with a readiness value of `false`. Calls to the plugin's
+  //    Controller and/or Node services MAY fail due to an incomplete
+  //    initialization state.
