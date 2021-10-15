@@ -562,3 +562,40 @@ message Volume {
   // from a given node when scheduling workloads.
   // This field is OPTIONAL. If it is not specified, the CO MAY assume
   // the volume is equally accessible from all nodes in the cluster and
+  // MAY schedule workloads referencing the volume on any available
+  // node.
+  //
+  // Example 1:
+  //   accessible_topology = {"region": "R1", "zone": "Z2"}
+  // Indicates a volume accessible only from the "region" "R1" and the
+  // "zone" "Z2".
+  //
+  // Example 2:
+  //   accessible_topology =
+  //     {"region": "R1", "zone": "Z2"},
+  //     {"region": "R1", "zone": "Z3"}
+  // Indicates a volume accessible from both "zone" "Z2" and "zone" "Z3"
+  // in the "region" "R1".
+  repeated Topology accessible_topology = 5;
+}
+
+message TopologyRequirement {
+  // Specifies the list of topologies the provisioned volume MUST be
+  // accessible from.
+  // This field is OPTIONAL. If TopologyRequirement is specified either
+  // requisite or preferred or both MUST be specified.
+  //
+  // If requisite is specified, the provisioned volume MUST be
+  // accessible from at least one of the requisite topologies.
+  //
+  // Given
+  //   x = number of topologies provisioned volume is accessible from
+  //   n = number of requisite topologies
+  // The CO MUST ensure n >= 1. The SP MUST ensure x >= 1
+  // If x==n, then the SP MUST make the provisioned volume available to
+  // all topologies from the list of requisite topologies. If it is
+  // unable to do so, the SP MUST fail the CreateVolume call.
+  // For example, if a volume should be accessible from a single zone,
+  // and requisite =
+  //   {"region": "R1", "zone": "Z2"}
+  // then the provisioned volume MUST be accessible from the "region"
