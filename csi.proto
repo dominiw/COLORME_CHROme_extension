@@ -530,3 +530,35 @@ message Volume {
   string volume_id = 2;
 
   // Opaque static properties of the volume. SP MAY use this field to
+  // ensure subsequent volume validation and publishing calls have
+  // contextual information.
+  // The contents of this field SHALL be opaque to a CO.
+  // The contents of this field SHALL NOT be mutable.
+  // The contents of this field SHALL be safe for the CO to cache.
+  // The contents of this field SHOULD NOT contain sensitive
+  // information.
+  // The contents of this field SHOULD NOT be used for uniquely
+  // identifying a volume. The `volume_id` alone SHOULD be sufficient to
+  // identify the volume.
+  // A volume uniquely identified by `volume_id` SHALL always report the
+  // same volume_context.
+  // This field is OPTIONAL and when present MUST be passed to volume
+  // validation and publishing calls.
+  map<string, string> volume_context = 3;
+
+  // If specified, indicates that the volume is not empty and is
+  // pre-populated with data from the specified source.
+  // This field is OPTIONAL.
+  VolumeContentSource content_source = 4;
+
+  // Specifies where (regions, zones, racks, etc.) the provisioned
+  // volume is accessible from.
+  // A plugin that returns this field MUST also set the
+  // VOLUME_ACCESSIBILITY_CONSTRAINTS plugin capability.
+  // An SP MAY specify multiple topologies to indicate the volume is
+  // accessible from multiple locations.
+  // COs MAY use this information along with the topology information
+  // returned by NodeGetInfo to ensure that a given volume is accessible
+  // from a given node when scheduling workloads.
+  // This field is OPTIONAL. If it is not specified, the CO MAY assume
+  // the volume is equally accessible from all nodes in the cluster and
