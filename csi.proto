@@ -857,3 +857,24 @@ message ValidateVolumeCapabilitiesResponse {
     // Volume context validated by the plugin.
     // This field is OPTIONAL.
     map<string, string> volume_context = 1;
+
+    // Volume capabilities supported by the plugin.
+    // This field is REQUIRED.
+    repeated VolumeCapability volume_capabilities = 2;
+
+    // The volume creation parameters validated by the plugin.
+    // This field is OPTIONAL.
+    map<string, string> parameters = 3;
+  }
+
+  // Confirmed indicates to the CO the set of capabilities that the
+  // plugin has validated. This field SHALL only be set to a non-empty
+  // value for successful validation responses.
+  // For successful validation responses, the CO SHALL compare the
+  // fields of this message to the originally requested capabilities in
+  // order to guard against an older plugin reporting "valid" for newer
+  // capability fields that it does not yet understand.
+  // This field is OPTIONAL.
+  Confirmed confirmed = 1;
+
+  // Message to the CO if `confirmed` above is empty. This field is
