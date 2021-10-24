@@ -878,3 +878,36 @@ message ValidateVolumeCapabilitiesResponse {
   Confirmed confirmed = 1;
 
   // Message to the CO if `confirmed` above is empty. This field is
+  // OPTIONAL.
+  // An empty string is equal to an unspecified field value.
+  string message = 2;
+}
+message ListVolumesRequest {
+  // If specified (non-zero value), the Plugin MUST NOT return more
+  // entries than this number in the response. If the actual number of
+  // entries is more than this number, the Plugin MUST set `next_token`
+  // in the response which can be used to get the next page of entries
+  // in the subsequent `ListVolumes` call. This field is OPTIONAL. If
+  // not specified (zero value), it means there is no restriction on the
+  // number of entries that can be returned.
+  // The value of this field MUST NOT be negative.
+  int32 max_entries = 1;
+
+  // A token to specify where to start paginating. Set this field to
+  // `next_token` returned by a previous `ListVolumes` call to get the
+  // next page of entries. This field is OPTIONAL.
+  // An empty string is equal to an unspecified field value.
+  string starting_token = 2;
+}
+
+message ListVolumesResponse {
+  message VolumeStatus{
+    // A list of all `node_id` of nodes that the volume in this entry
+    // is controller published on.
+    // This field is OPTIONAL. If it is not specified and the SP has
+    // the LIST_VOLUMES_PUBLISHED_NODES controller capability, the CO
+    // MAY assume the volume is not controller published to any nodes.
+    // If the field is not specified and the SP does not have the
+    // LIST_VOLUMES_PUBLISHED_NODES controller capability, the CO MUST
+    // not interpret this field.
+    // published_node_ids MAY include nodes not published to or
