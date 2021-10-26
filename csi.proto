@@ -973,3 +973,34 @@ message ControllerGetVolumeResponse {
   Volume volume = 1;
 
   // This field is REQUIRED.
+  VolumeStatus status = 2;
+}
+message GetCapacityRequest {
+  // If specified, the Plugin SHALL report the capacity of the storage
+  // that can be used to provision volumes that satisfy ALL of the
+  // specified `volume_capabilities`. These are the same
+  // `volume_capabilities` the CO will use in `CreateVolumeRequest`.
+  // This field is OPTIONAL.
+  repeated VolumeCapability volume_capabilities = 1;
+
+  // If specified, the Plugin SHALL report the capacity of the storage
+  // that can be used to provision volumes with the given Plugin
+  // specific `parameters`. These are the same `parameters` the CO will
+  // use in `CreateVolumeRequest`. This field is OPTIONAL.
+  map<string, string> parameters = 2;
+
+  // If specified, the Plugin SHALL report the capacity of the storage
+  // that can be used to provision volumes that in the specified
+  // `accessible_topology`. This is the same as the
+  // `accessible_topology` the CO returns in a `CreateVolumeResponse`.
+  // This field is OPTIONAL. This field SHALL NOT be set unless the
+  // plugin advertises the VOLUME_ACCESSIBILITY_CONSTRAINTS capability.
+  Topology accessible_topology = 3;
+}
+
+message GetCapacityResponse {
+  // The available capacity, in bytes, of the storage that can be used
+  // to provision volumes. If `volume_capabilities` or `parameters` is
+  // specified in the request, the Plugin SHALL take those into
+  // consideration when calculating the available capacity of the
+  // storage. This field is REQUIRED.
