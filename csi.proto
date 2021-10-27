@@ -1055,3 +1055,39 @@ message ControllerGetCapabilitiesResponse {
 // Specifies a capability of the controller service.
 message ControllerServiceCapability {
   message RPC {
+    enum Type {
+      UNKNOWN = 0;
+      CREATE_DELETE_VOLUME = 1;
+      PUBLISH_UNPUBLISH_VOLUME = 2;
+      LIST_VOLUMES = 3;
+      GET_CAPACITY = 4;
+      // Currently the only way to consume a snapshot is to create
+      // a volume from it. Therefore plugins supporting
+      // CREATE_DELETE_SNAPSHOT MUST support creating volume from
+      // snapshot.
+      CREATE_DELETE_SNAPSHOT = 5;
+      LIST_SNAPSHOTS = 6;
+
+      // Plugins supporting volume cloning at the storage level MAY
+      // report this capability. The source volume MUST be managed by
+      // the same plugin. Not all volume sources and parameters
+      // combinations MAY work.
+      CLONE_VOLUME = 7;
+
+      // Indicates the SP supports ControllerPublishVolume.readonly
+      // field.
+      PUBLISH_READONLY = 8;
+
+      // See VolumeExpansion for details.
+      EXPAND_VOLUME = 9;
+
+      // Indicates the SP supports the
+      // ListVolumesResponse.entry.published_node_ids field and the
+      // ControllerGetVolumeResponse.published_node_ids field.
+      // The SP MUST also support PUBLISH_UNPUBLISH_VOLUME.
+      LIST_VOLUMES_PUBLISHED_NODES = 10;
+
+      // Indicates that the Controller service can report volume
+      // conditions.
+      // An SP MAY implement `VolumeCondition` in only the Controller
+      // Plugin, only the Node Plugin, or both.
