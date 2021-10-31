@@ -1125,3 +1125,31 @@ message ControllerServiceCapability {
   }
 }
 message CreateSnapshotRequest {
+  // The ID of the source volume to be snapshotted.
+  // This field is REQUIRED.
+  string source_volume_id = 1;
+
+  // The suggested name for the snapshot. This field is REQUIRED for
+  // idempotency.
+  // Any Unicode string that conforms to the length limit is allowed
+  // except those containing the following banned characters:
+  // U+0000-U+0008, U+000B, U+000C, U+000E-U+001F, U+007F-U+009F.
+  // (These are control characters other than commonly used whitespace.)
+  string name = 2;
+
+  // Secrets required by plugin to complete snapshot creation request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  map<string, string> secrets = 3 [(csi_secret) = true];
+
+  // Plugin specific parameters passed in as opaque key-value pairs.
+  // This field is OPTIONAL. The Plugin is responsible for parsing and
+  // validating these parameters. COs will treat these as opaque.
+  // Use cases for opaque parameters:
+  // - Specify a policy to automatically clean up the snapshot.
+  // - Specify an expiration date for the snapshot.
+  // - Specify whether the snapshot is readonly or read/write.
+  // - Specify if the snapshot should be replicated to some place.
+  // - Specify primary or secondary for replication systems that
+  //   support snapshotting only on primary.
+  map<string, string> parameters = 4;
