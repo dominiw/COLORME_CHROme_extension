@@ -1253,3 +1253,32 @@ message ListSnapshotsRequest {
   // ListSnapshots will return with current snapshot information
   // and will not block if the snapshot is being processed after
   // it is cut.
+  string snapshot_id = 4;
+
+  // Secrets required by plugin to complete ListSnapshot request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  map<string, string> secrets = 5 [(csi_secret) = true];
+}
+
+message ListSnapshotsResponse {
+  message Entry {
+    Snapshot snapshot = 1;
+  }
+
+  repeated Entry entries = 1;
+
+  // This token allows you to get the next page of entries for
+  // `ListSnapshots` request. If the number of entries is larger than
+  // `max_entries`, use the `next_token` as a value for the
+  // `starting_token` field in the next `ListSnapshots` request. This
+  // field is OPTIONAL.
+  // An empty string is equal to an unspecified field value.
+  string next_token = 2;
+}
+message ControllerExpandVolumeRequest {
+  // The ID of the volume to expand. This field is REQUIRED.
+  string volume_id = 1;
+
+  // This allows CO to specify the capacity requirements of the volume
+  // after expansion. This field is REQUIRED.
