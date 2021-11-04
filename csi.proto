@@ -1185,3 +1185,32 @@ message Snapshot {
   string snapshot_id = 2;
 
   // Identity information for the source volume. Note that creating a
+  // snapshot from a snapshot is not supported here so the source has to
+  // be a volume. This field is REQUIRED.
+  string source_volume_id = 3;
+
+  // Timestamp when the point-in-time snapshot is taken on the storage
+  // system. This field is REQUIRED.
+  .google.protobuf.Timestamp creation_time = 4;
+
+  // Indicates if a snapshot is ready to use as a
+  // `volume_content_source` in a `CreateVolumeRequest`. The default
+  // value is false. This field is REQUIRED.
+  bool ready_to_use = 5;
+
+  // The ID of the volume group snapshot that this snapshot is part of.
+  // It uniquely identifies the group snapshot on the storage system.
+  // This field is OPTIONAL.
+  // If this snapshot is a member of a volume group snapshot, and it
+  // MUST NOT be deleted as a stand alone snapshot, then the SP
+  // MUST provide the ID of the volume group snapshot in this field.
+  // If provided, CO MUST use this field in subsequent volume group
+  // snapshot operations to indicate that this snapshot is part of the
+  // specified group snapshot.
+  // If not provided, CO SHALL treat the snapshot as independent,
+  // and SP SHALL allow it to be deleted separately.
+  // If this message is inside a VolumeGroupSnapshot message, the value
+  // MUST be the same as the group_snapshot_id in that message.
+  string group_snapshot_id = 6 [(alpha_field) = true];
+}
+message DeleteSnapshotRequest {
