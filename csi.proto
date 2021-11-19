@@ -1429,3 +1429,34 @@ message NodePublishVolumeRequest {
 
   // Volume context as returned by SP in
   // CreateVolumeResponse.Volume.volume_context.
+  // This field is OPTIONAL and MUST match the volume_context of the
+  // volume identified by `volume_id`.
+  map<string, string> volume_context = 8;
+}
+
+message NodePublishVolumeResponse {
+  // Intentionally empty.
+}
+message NodeUnpublishVolumeRequest {
+  // The ID of the volume. This field is REQUIRED.
+  string volume_id = 1;
+
+  // The path at which the volume was published. It MUST be an absolute
+  // path in the root filesystem of the process serving this request.
+  // The SP MUST delete the file or directory it created at this path.
+  // This is a REQUIRED field.
+  // This field overrides the general CSI size limit.
+  // SP SHOULD support the maximum path length allowed by the operating
+  // system/filesystem, but, at a minimum, SP MUST accept a max path
+  // length of at least 128 bytes.
+  string target_path = 2;
+}
+
+message NodeUnpublishVolumeResponse {
+  // Intentionally empty.
+}
+message NodeGetVolumeStatsRequest {
+  // The ID of the volume. This field is REQUIRED.
+  string volume_id = 1;
+
+  // It can be any valid path where volume was previously
