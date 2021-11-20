@@ -1503,3 +1503,33 @@ message VolumeUsage {
   int64 available = 1;
 
   // The total capacity in specified Unit. This field is REQUIRED.
+  // The value of this field MUST NOT be negative.
+  int64 total = 2;
+
+  // The used capacity in specified Unit. This field is OPTIONAL.
+  // The value of this field MUST NOT be negative.
+  int64 used = 3;
+
+  // Units by which values are measured. This field is REQUIRED.
+  Unit unit = 4;
+}
+
+// VolumeCondition represents the current condition of a volume.
+message VolumeCondition {
+  option (alpha_message) = true;
+
+  // Normal volumes are available for use and operating optimally.
+  // An abnormal volume does not meet these criteria.
+  // This field is REQUIRED.
+  bool abnormal = 1;
+
+  // The message describing the condition of the volume.
+  // This field is REQUIRED.
+  string message = 2;
+}
+message NodeGetCapabilitiesRequest {
+  // Intentionally empty.
+}
+
+message NodeGetCapabilitiesResponse {
+  // All the capabilities that the node service supports. This field
