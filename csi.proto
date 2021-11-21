@@ -1533,3 +1533,30 @@ message NodeGetCapabilitiesRequest {
 
 message NodeGetCapabilitiesResponse {
   // All the capabilities that the node service supports. This field
+  // is OPTIONAL.
+  repeated NodeServiceCapability capabilities = 1;
+}
+
+// Specifies a capability of the node service.
+message NodeServiceCapability {
+  message RPC {
+    enum Type {
+      UNKNOWN = 0;
+      STAGE_UNSTAGE_VOLUME = 1;
+      // If Plugin implements GET_VOLUME_STATS capability
+      // then it MUST implement NodeGetVolumeStats RPC
+      // call for fetching volume statistics.
+      GET_VOLUME_STATS = 2;
+      // See VolumeExpansion for details.
+      EXPAND_VOLUME = 3;
+      // Indicates that the Node service can report volume conditions.
+      // An SP MAY implement `VolumeCondition` in only the Node
+      // Plugin, only the Controller Plugin, or both.
+      // If `VolumeCondition` is implemented in both the Node and
+      // Controller Plugins, it SHALL report from different
+      // perspectives.
+      // If for some reason Node and Controller Plugins report
+      // misaligned volume conditions, CO SHALL assume the worst case
+      // is the truth.
+      // Note that, for alpha, `VolumeCondition` is intended to be
+      // informative for humans only, not for automation.
