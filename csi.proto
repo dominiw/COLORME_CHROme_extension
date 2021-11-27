@@ -1660,3 +1660,45 @@ message NodeExpandVolumeRequest {
   // system/filesystem, but, at a minimum, SP MUST accept a max path
   // length of at least 128 bytes.
   string staging_target_path = 4;
+
+  // Volume capability describing how the CO intends to use this volume.
+  // This allows SP to determine if volume is being used as a block
+  // device or mounted file system. For example - if volume is being
+  // used as a block device the SP MAY choose to skip expanding the
+  // filesystem in NodeExpandVolume implementation but still perform
+  // rest of the housekeeping needed for expanding the volume. If
+  // volume_capability is omitted the SP MAY determine
+  // access_type from given volume_path for the volume and perform
+  // node expansion. This is an OPTIONAL field.
+  VolumeCapability volume_capability = 5;
+
+  // Secrets required by plugin to complete node expand volume request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  map<string, string> secrets = 6
+    [(csi_secret) = true, (alpha_field) = true];
+}
+
+message NodeExpandVolumeResponse {
+  // The capacity of the volume in bytes. This field is OPTIONAL.
+  int64 capacity_bytes = 1;
+}
+message GroupControllerGetCapabilitiesRequest {
+  // Intentionally empty.
+}
+
+message GroupControllerGetCapabilitiesResponse {
+  // All the capabilities that the group controller service supports.
+  // This field is OPTIONAL.
+  repeated GroupControllerServiceCapability capabilities = 1;
+}
+
+// Specifies a capability of the group controller service.
+message GroupControllerServiceCapability {
+  message RPC {
+    enum Type {
+      UNKNOWN = 0;
+
+      // Indicates that the group controller plugin supports
+      // creating, deleting, and getting details of a volume
+      // group snapshot.
