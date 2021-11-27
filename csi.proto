@@ -1702,3 +1702,29 @@ message GroupControllerServiceCapability {
       // Indicates that the group controller plugin supports
       // creating, deleting, and getting details of a volume
       // group snapshot.
+      CREATE_DELETE_GET_VOLUME_GROUP_SNAPSHOT = 1
+      [(alpha_enum_value) = true];
+    }
+
+    Type type = 1;
+  }
+
+  oneof type {
+    // RPC that the controller supports.
+    RPC rpc = 1;
+  }
+}
+message CreateVolumeGroupSnapshotRequest {
+  option (alpha_message) = true;
+
+  // The suggested name for the group snapshot. This field is REQUIRED
+  // for idempotency.
+  // Any Unicode string that conforms to the length limit is allowed
+  // except those containing the following banned characters:
+  // U+0000-U+0008, U+000B, U+000C, U+000E-U+001F, U+007F-U+009F.
+  // (These are control characters other than commonly used whitespace.)
+  string name = 1;
+
+  // volume IDs of the source volumes to be snapshotted together.
+  // This field is REQUIRED.
+  repeated string source_volume_ids = 2;
