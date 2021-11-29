@@ -1832,3 +1832,20 @@ message GetVolumeGroupSnapshotRequest {
   // group, it MUST report an error if it has the ability to detect
   // a mismatch.
   // This field is REQUIRED.
+  repeated string snapshot_ids = 2;
+
+  // Secrets required by plugin to complete
+  // GetVolumeGroupSnapshot request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  // The secrets provided in this field SHOULD be the same for
+  // all group snapshot operations on the same group snapshot.
+  map<string, string> secrets = 3 [(csi_secret) = true];
+}
+
+message GetVolumeGroupSnapshotResponse {
+  option (alpha_message) = true;
+
+  // This field is REQUIRED
+  VolumeGroupSnapshot group_snapshot = 1;
+}
