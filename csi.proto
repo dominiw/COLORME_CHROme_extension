@@ -1772,3 +1772,34 @@ message VolumeGroupSnapshot {
   // Timestamp of when the volume group snapshot was taken.
   // This field is REQUIRED.
   .google.protobuf.Timestamp creation_time = 3;
+
+  // Indicates if all individual snapshots in the group snapshot
+  // are ready to use as a `volume_content_source` in a
+  // `CreateVolumeRequest`. The default value is false.
+  // If any snapshot in the list of snapshots in this message have
+  // ready_to_use set to false, the SP MUST set this field to false.
+  // If all of the snapshots in the list of snapshots in this message
+  // have ready_to_use set to true, the SP SHOULD set this field to
+  // true.
+  // This field is REQUIRED.
+  bool ready_to_use = 4;
+}
+message DeleteVolumeGroupSnapshotRequest {
+  option (alpha_message) = true;
+
+  // The ID of the group snapshot to be deleted.
+  // This field is REQUIRED.
+  string group_snapshot_id = 1;
+
+  // A list of snapshot IDs that are part of this group snapshot.
+  // If SP does not need to rely on this field to delete the snapshots
+  // in the group, it SHOULD check this field and report an error
+  // if it has the ability to detect a mismatch.
+  // Some SPs require this list to delete the snapshots in the group.
+  // If SP needs to use this field to delete the snapshots in the
+  // group, it MUST report an error if it has the ability to detect
+  // a mismatch.
+  // This field is REQUIRED.
+  repeated string snapshot_ids = 2;
+
+  // Secrets required by plugin to complete group snapshot deletion
