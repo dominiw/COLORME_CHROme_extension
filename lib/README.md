@@ -1,2 +1,2 @@
 # CSI Validation Libraries
-This directory 
+This directory contains language bindings 
