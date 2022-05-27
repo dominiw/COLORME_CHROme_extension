@@ -116,3 +116,12 @@ endif
 
 
 build: $(CSI_GO)
+
+clean:
+	go clean -i ./...
+	rm -rf "$(CSI_GO)" "$(CSI_BUILD)"
+
+clobber: clean
+	rm -fr "$(PROTOC)" "$(PROTOC_GEN_GO)" "$(CSI_PKG_SUB)"
+
+.PHONY: clean clobber
