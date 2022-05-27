@@ -1,3 +1,3 @@
 # CSI Go Validation
 
-This package is used to valida
+This package is used to validate the CSI specification with Go lang
