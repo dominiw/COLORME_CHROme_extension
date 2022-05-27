@@ -85,3 +85,34 @@ export PATH := $(shell pwd):$(PATH)
 ########################################################################
 CSI_PROTO := ../../csi.proto
 CSI_PKG_ROOT := github.com/container-storage-interface/spec
+CSI_PKG_SUB := $(shell cat $(CSI_PROTO) | sed -n -e 's/^package.\([^;]*\).v[0-9]\+;$$/\1/p'|tr '.' '/')
+CSI_BUILD := $(CSI_PKG_SUB)/.build
+CSI_GO := $(CSI_PKG_SUB)/csi.pb.go
+CSI_GO_TMP := $(CSI_BUILD)/$(CSI_PKG_ROOT)/csi.pb.go
+
+# This recipe generates the go language bindings to a temp area.
+$(CSI_GO_TMP): HERE := $(shell pwd)
+$(CSI_GO_TMP): PTYPES_PKG := github.com/golang/protobuf/ptypes
+$(CSI_GO_TMP): GO_OUT := plugins=grpc
+$(CSI_GO_TMP): GO_OUT := $(GO_OUT),Mgoogle/protobuf/descriptor.proto=github.com/golang/protobuf/protoc-gen-go/descriptor
+$(CSI_GO_TMP): GO_OUT := $(GO_OUT),Mgoogle/protobuf/wrappers.proto=$(PTYPES_PKG)/wrappers
+$(CSI_GO_TMP): GO_OUT := $(GO_OUT):"$(HERE)/$(CSI_BUILD)"
+$(CSI_GO_TMP): INCLUDE := -I$(GOPATH)/src -I$(HERE)/$(PROTOC_TMP_DIR)/include
+$(CSI_GO_TMP): $(CSI_PROTO) | $(PROTOC) $(PROTOC_GEN_GO)
+	@mkdir -p "$(@D)"
+	(cd "$(GOPATH)/src" && \
+		$(HERE)/$(PROTOC) $(INCLUDE) --go_out=$(GO_OUT) "$(CSI_PKG_ROOT)/$(<F)")
+
+# The temp language bindings are compared to the ones that are
+# versioned. If they are different then it means the language
+# bindings were not updated prior to being committed.
+$(CSI_GO): $(CSI_GO_TMP)
+ifeq (true,$(GITHUB_ACTIONS))
+	diff "$@" "$?"
+else
+	@mkdir -p "$(@D)"
+	diff "$@" "$?" > /dev/null 2>&1 || cp -f "$?" "$@"
+endif
+
+
+build: $(CSI_GO)
