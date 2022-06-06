@@ -5,4 +5,4 @@ It is recommended to build this package inside `GOPATH`.
 
 ## Build Reference
 
-To validat
+To validate the Go language bindings a
