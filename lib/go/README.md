@@ -7,4 +7,8 @@ It is recommended to build this package inside `GOPATH`.
 
 To validate the Go language bindings against the current specification use the following command:
 
-```b
+```bash
+$ make
+```
+
+The above
