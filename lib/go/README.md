@@ -11,4 +11,4 @@ To validate the Go language bindings against the current specification use the f
 $ make
 ```
 
-The above command will download the `protoc` and `protoc-gen-go` binaries if they are not present an
+The above command will download the `protoc` and `protoc-gen-go` binaries if they are not present and then proceed to build the C
