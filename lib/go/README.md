@@ -11,4 +11,4 @@ To validate the Go language bindings against the current specification use the f
 $ make
 ```
 
-The above
+The above command will download the `pr
