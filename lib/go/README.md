@@ -15,4 +15,4 @@ The above command will download the `protoc` and `protoc-gen-go` binaries if the
 
 ### Environment Variables
 
-The following table lists the envir
+The following table lists the environment variables that can be used
