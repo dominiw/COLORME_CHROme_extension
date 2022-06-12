@@ -17,4 +17,5 @@ The above command will download the `protoc` and `protoc-gen-go` binaries if the
 
 The following table lists the environment variables that can be used to influence the behavior of the Makefile:
 
-| Name | Defa
+| Name | Default Value | Description |
+|-----
