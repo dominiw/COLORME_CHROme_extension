@@ -51,3 +51,33 @@ const (
 	// GROUP_CONTROLLER_SERVICE indicates that the Plugin provides
 	// RPCs for operating on groups of volumes. Plugins MAY provide
 	// this capability.
+	// The presence of this capability determines whether the CO will
+	// attempt to invoke the REQUIRED GroupController service RPCs, as
+	// well as specific RPCs as indicated by
+	// GroupControllerGetCapabilities.
+	PluginCapability_Service_GROUP_CONTROLLER_SERVICE PluginCapability_Service_Type = 3
+)
+
+var PluginCapability_Service_Type_name = map[int32]string{
+	0: "UNKNOWN",
+	1: "CONTROLLER_SERVICE",
+	2: "VOLUME_ACCESSIBILITY_CONSTRAINTS",
+	3: "GROUP_CONTROLLER_SERVICE",
+}
+
+var PluginCapability_Service_Type_value = map[string]int32{
+	"UNKNOWN":                          0,
+	"CONTROLLER_SERVICE":               1,
+	"VOLUME_ACCESSIBILITY_CONSTRAINTS": 2,
+	"GROUP_CONTROLLER_SERVICE":         3,
+}
+
+func (x PluginCapability_Service_Type) String() string {
+	return proto.EnumName(PluginCapability_Service_Type_name, int32(x))
+}
+
+func (PluginCapability_Service_Type) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{4, 0, 0}
+}
+
+type PluginCapability_VolumeExpansion_Type int32
