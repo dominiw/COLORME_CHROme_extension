@@ -19,4 +19,4 @@ The following table lists the environment variables that can be used to influenc
 
 | Name | Default Value | Description |
 |------|---------------|-------------|
-| `PROTOC_VER` | `3.3.0` | The version of the protoc binary. 
+| `PROTOC_VER` | `3.3.0` | The version of the protoc binary. |
