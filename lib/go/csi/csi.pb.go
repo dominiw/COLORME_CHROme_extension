@@ -23,3 +23,31 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 // This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+
+type PluginCapability_Service_Type int32
+
+const (
+	PluginCapability_Service_UNKNOWN PluginCapability_Service_Type = 0
+	// CONTROLLER_SERVICE indicates that the Plugin provides RPCs for
+	// the ControllerService. Plugins SHOULD provide this capability.
+	// In rare cases certain plugins MAY wish to omit the
+	// ControllerService entirely from their implementation, but such
+	// SHOULD NOT be the common case.
+	// The presence of this capability determines whether the CO will
+	// attempt to invoke the REQUIRED ControllerService RPCs, as well
+	// as specific RPCs as indicated by ControllerGetCapabilities.
+	PluginCapability_Service_CONTROLLER_SERVICE PluginCapability_Service_Type = 1
+	// VOLUME_ACCESSIBILITY_CONSTRAINTS indicates that the volumes for
+	// this plugin MAY NOT be equally accessible by all nodes in the
+	// cluster. The CO MUST use the topology information returned by
+	// CreateVolumeRequest along with the topology information
+	// returned by NodeGetInfo to ensure that a given volume is
+	// accessible from a given node when scheduling workloads.
+	PluginCapability_Service_VOLUME_ACCESSIBILITY_CONSTRAINTS PluginCapability_Service_Type = 2
+	// GROUP_CONTROLLER_SERVICE indicates that the Plugin provides
+	// RPCs for operating on groups of volumes. Plugins MAY provide
+	// this capability.
