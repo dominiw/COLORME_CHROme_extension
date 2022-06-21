@@ -81,3 +81,38 @@ func (PluginCapability_Service_Type) EnumDescriptor() ([]byte, []int) {
 }
 
 type PluginCapability_VolumeExpansion_Type int32
+
+const (
+	PluginCapability_VolumeExpansion_UNKNOWN PluginCapability_VolumeExpansion_Type = 0
+	// ONLINE indicates that volumes may be expanded when published to
+	// a node. When a Plugin implements this capability it MUST
+	// implement either the EXPAND_VOLUME controller capability or the
+	// EXPAND_VOLUME node capability or both. When a plugin supports
+	// ONLINE volume expansion and also has the EXPAND_VOLUME
+	// controller capability then the plugin MUST support expansion of
+	// volumes currently published and available on a node. When a
+	// plugin supports ONLINE volume expansion and also has the
+	// EXPAND_VOLUME node capability then the plugin MAY support
+	// expansion of node-published volume via NodeExpandVolume.
+	//
+	// Example 1: Given a shared filesystem volume (e.g. GlusterFs),
+	//
+	//	the Plugin may set the ONLINE volume expansion capability and
+	//	implement ControllerExpandVolume but not NodeExpandVolume.
+	//
+	// Example 2: Given a block storage volume type (e.g. EBS), the
+	//
+	//	Plugin may set the ONLINE volume expansion capability and
+	//	implement both ControllerExpandVolume and NodeExpandVolume.
+	//
+	// Example 3: Given a Plugin that supports volume expansion only
+	//
+	//	upon a node, the Plugin may set the ONLINE volume
+	//	expansion capability and implement NodeExpandVolume but not
+	//	ControllerExpandVolume.
+	PluginCapability_VolumeExpansion_ONLINE PluginCapability_VolumeExpansion_Type = 1
+	// OFFLINE indicates that volumes currently published and
+	// available on a node SHALL NOT be expanded via
+	// ControllerExpandVolume. When a plugin supports OFFLINE volume
+	// expansion it MUST implement either the EXPAND_VOLUME controller
+	// capability or both the EXPAND_VOLUME controller capability and
