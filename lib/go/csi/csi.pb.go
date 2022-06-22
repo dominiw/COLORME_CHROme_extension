@@ -140,3 +140,37 @@ var PluginCapability_VolumeExpansion_Type_value = map[string]int32{
 }
 
 func (x PluginCapability_VolumeExpansion_Type) String() string {
+	return proto.EnumName(PluginCapability_VolumeExpansion_Type_name, int32(x))
+}
+
+func (PluginCapability_VolumeExpansion_Type) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{4, 1, 0}
+}
+
+type VolumeCapability_AccessMode_Mode int32
+
+const (
+	VolumeCapability_AccessMode_UNKNOWN VolumeCapability_AccessMode_Mode = 0
+	// Can only be published once as read/write on a single node, at
+	// any given time.
+	VolumeCapability_AccessMode_SINGLE_NODE_WRITER VolumeCapability_AccessMode_Mode = 1
+	// Can only be published once as readonly on a single node, at
+	// any given time.
+	VolumeCapability_AccessMode_SINGLE_NODE_READER_ONLY VolumeCapability_AccessMode_Mode = 2
+	// Can be published as readonly at multiple nodes simultaneously.
+	VolumeCapability_AccessMode_MULTI_NODE_READER_ONLY VolumeCapability_AccessMode_Mode = 3
+	// Can be published at multiple nodes simultaneously. Only one of
+	// the node can be used as read/write. The rest will be readonly.
+	VolumeCapability_AccessMode_MULTI_NODE_SINGLE_WRITER VolumeCapability_AccessMode_Mode = 4
+	// Can be published as read/write at multiple nodes
+	// simultaneously.
+	VolumeCapability_AccessMode_MULTI_NODE_MULTI_WRITER VolumeCapability_AccessMode_Mode = 5
+	// Can only be published once as read/write at a single workload
+	// on a single node, at any given time. SHOULD be used instead of
+	// SINGLE_NODE_WRITER for COs using the experimental
+	// SINGLE_NODE_MULTI_WRITER capability.
+	VolumeCapability_AccessMode_SINGLE_NODE_SINGLE_WRITER VolumeCapability_AccessMode_Mode = 6
+	// Can be published as read/write at multiple workloads on a
+	// single node simultaneously. SHOULD be used instead of
+	// SINGLE_NODE_WRITER for COs using the experimental
+	// SINGLE_NODE_MULTI_WRITER capability.
