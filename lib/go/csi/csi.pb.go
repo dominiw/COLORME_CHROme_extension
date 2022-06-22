@@ -116,3 +116,27 @@ const (
 	// ControllerExpandVolume. When a plugin supports OFFLINE volume
 	// expansion it MUST implement either the EXPAND_VOLUME controller
 	// capability or both the EXPAND_VOLUME controller capability and
+	// the EXPAND_VOLUME node capability.
+	//
+	// Example 1: Given a block storage volume type (e.g. Azure Disk)
+	//
+	//	that does not support expansion of "node-attached" (i.e.
+	//	controller-published) volumes, the Plugin may indicate
+	//	OFFLINE volume expansion support and implement both
+	//	ControllerExpandVolume and NodeExpandVolume.
+	PluginCapability_VolumeExpansion_OFFLINE PluginCapability_VolumeExpansion_Type = 2
+)
+
+var PluginCapability_VolumeExpansion_Type_name = map[int32]string{
+	0: "UNKNOWN",
+	1: "ONLINE",
+	2: "OFFLINE",
+}
+
+var PluginCapability_VolumeExpansion_Type_value = map[string]int32{
+	"UNKNOWN": 0,
+	"ONLINE":  1,
+	"OFFLINE": 2,
+}
+
+func (x PluginCapability_VolumeExpansion_Type) String() string {
