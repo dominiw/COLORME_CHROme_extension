@@ -174,3 +174,30 @@ const (
 	// single node simultaneously. SHOULD be used instead of
 	// SINGLE_NODE_WRITER for COs using the experimental
 	// SINGLE_NODE_MULTI_WRITER capability.
+	VolumeCapability_AccessMode_SINGLE_NODE_MULTI_WRITER VolumeCapability_AccessMode_Mode = 7
+)
+
+var VolumeCapability_AccessMode_Mode_name = map[int32]string{
+	0: "UNKNOWN",
+	1: "SINGLE_NODE_WRITER",
+	2: "SINGLE_NODE_READER_ONLY",
+	3: "MULTI_NODE_READER_ONLY",
+	4: "MULTI_NODE_SINGLE_WRITER",
+	5: "MULTI_NODE_MULTI_WRITER",
+	6: "SINGLE_NODE_SINGLE_WRITER",
+	7: "SINGLE_NODE_MULTI_WRITER",
+}
+
+var VolumeCapability_AccessMode_Mode_value = map[string]int32{
+	"UNKNOWN":                   0,
+	"SINGLE_NODE_WRITER":        1,
+	"SINGLE_NODE_READER_ONLY":   2,
+	"MULTI_NODE_READER_ONLY":    3,
+	"MULTI_NODE_SINGLE_WRITER":  4,
+	"MULTI_NODE_MULTI_WRITER":   5,
+	"SINGLE_NODE_SINGLE_WRITER": 6,
+	"SINGLE_NODE_MULTI_WRITER":  7,
+}
+
+func (x VolumeCapability_AccessMode_Mode) String() string {
+	return proto.EnumName(VolumeCapability_AccessMode_Mode_name, int32(x))
