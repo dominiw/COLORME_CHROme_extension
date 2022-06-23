@@ -201,3 +201,34 @@ var VolumeCapability_AccessMode_Mode_value = map[string]int32{
 
 func (x VolumeCapability_AccessMode_Mode) String() string {
 	return proto.EnumName(VolumeCapability_AccessMode_Mode_name, int32(x))
+}
+
+func (VolumeCapability_AccessMode_Mode) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{10, 2, 0}
+}
+
+type ControllerServiceCapability_RPC_Type int32
+
+const (
+	ControllerServiceCapability_RPC_UNKNOWN                  ControllerServiceCapability_RPC_Type = 0
+	ControllerServiceCapability_RPC_CREATE_DELETE_VOLUME     ControllerServiceCapability_RPC_Type = 1
+	ControllerServiceCapability_RPC_PUBLISH_UNPUBLISH_VOLUME ControllerServiceCapability_RPC_Type = 2
+	ControllerServiceCapability_RPC_LIST_VOLUMES             ControllerServiceCapability_RPC_Type = 3
+	ControllerServiceCapability_RPC_GET_CAPACITY             ControllerServiceCapability_RPC_Type = 4
+	// Currently the only way to consume a snapshot is to create
+	// a volume from it. Therefore plugins supporting
+	// CREATE_DELETE_SNAPSHOT MUST support creating volume from
+	// snapshot.
+	ControllerServiceCapability_RPC_CREATE_DELETE_SNAPSHOT ControllerServiceCapability_RPC_Type = 5
+	ControllerServiceCapability_RPC_LIST_SNAPSHOTS         ControllerServiceCapability_RPC_Type = 6
+	// Plugins supporting volume cloning at the storage level MAY
+	// report this capability. The source volume MUST be managed by
+	// the same plugin. Not all volume sources and parameters
+	// combinations MAY work.
+	ControllerServiceCapability_RPC_CLONE_VOLUME ControllerServiceCapability_RPC_Type = 7
+	// Indicates the SP supports ControllerPublishVolume.readonly
+	// field.
+	ControllerServiceCapability_RPC_PUBLISH_READONLY ControllerServiceCapability_RPC_Type = 8
+	// See VolumeExpansion for details.
+	ControllerServiceCapability_RPC_EXPAND_VOLUME ControllerServiceCapability_RPC_Type = 9
+	// Indicates the SP supports the
