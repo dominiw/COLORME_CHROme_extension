@@ -232,3 +232,30 @@ const (
 	// See VolumeExpansion for details.
 	ControllerServiceCapability_RPC_EXPAND_VOLUME ControllerServiceCapability_RPC_Type = 9
 	// Indicates the SP supports the
+	// ListVolumesResponse.entry.published_node_ids field and the
+	// ControllerGetVolumeResponse.published_node_ids field.
+	// The SP MUST also support PUBLISH_UNPUBLISH_VOLUME.
+	ControllerServiceCapability_RPC_LIST_VOLUMES_PUBLISHED_NODES ControllerServiceCapability_RPC_Type = 10
+	// Indicates that the Controller service can report volume
+	// conditions.
+	// An SP MAY implement `VolumeCondition` in only the Controller
+	// Plugin, only the Node Plugin, or both.
+	// If `VolumeCondition` is implemented in both the Controller and
+	// Node Plugins, it SHALL report from different perspectives.
+	// If for some reason Controller and Node Plugins report
+	// misaligned volume conditions, CO SHALL assume the worst case
+	// is the truth.
+	// Note that, for alpha, `VolumeCondition` is intended be
+	// informative for humans only, not for automation.
+	ControllerServiceCapability_RPC_VOLUME_CONDITION ControllerServiceCapability_RPC_Type = 11
+	// Indicates the SP supports the ControllerGetVolume RPC.
+	// This enables COs to, for example, fetch per volume
+	// condition after a volume is provisioned.
+	ControllerServiceCapability_RPC_GET_VOLUME ControllerServiceCapability_RPC_Type = 12
+	// Indicates the SP supports the SINGLE_NODE_SINGLE_WRITER and/or
+	// SINGLE_NODE_MULTI_WRITER access modes.
+	// These access modes are intended to replace the
+	// SINGLE_NODE_WRITER access mode to clarify the number of writers
+	// for a volume on a single node. Plugins MUST accept and allow
+	// use of the SINGLE_NODE_WRITER access mode when either
+	// SINGLE_NODE_SINGLE_WRITER and/or SINGLE_NODE_MULTI_WRITER are
