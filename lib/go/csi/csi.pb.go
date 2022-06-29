@@ -259,3 +259,33 @@ const (
 	// for a volume on a single node. Plugins MUST accept and allow
 	// use of the SINGLE_NODE_WRITER access mode when either
 	// SINGLE_NODE_SINGLE_WRITER and/or SINGLE_NODE_MULTI_WRITER are
+	// supported, in order to permit older COs to continue working.
+	ControllerServiceCapability_RPC_SINGLE_NODE_MULTI_WRITER ControllerServiceCapability_RPC_Type = 13
+)
+
+var ControllerServiceCapability_RPC_Type_name = map[int32]string{
+	0:  "UNKNOWN",
+	1:  "CREATE_DELETE_VOLUME",
+	2:  "PUBLISH_UNPUBLISH_VOLUME",
+	3:  "LIST_VOLUMES",
+	4:  "GET_CAPACITY",
+	5:  "CREATE_DELETE_SNAPSHOT",
+	6:  "LIST_SNAPSHOTS",
+	7:  "CLONE_VOLUME",
+	8:  "PUBLISH_READONLY",
+	9:  "EXPAND_VOLUME",
+	10: "LIST_VOLUMES_PUBLISHED_NODES",
+	11: "VOLUME_CONDITION",
+	12: "GET_VOLUME",
+	13: "SINGLE_NODE_MULTI_WRITER",
+}
+
+var ControllerServiceCapability_RPC_Type_value = map[string]int32{
+	"UNKNOWN":                      0,
+	"CREATE_DELETE_VOLUME":         1,
+	"PUBLISH_UNPUBLISH_VOLUME":     2,
+	"LIST_VOLUMES":                 3,
+	"GET_CAPACITY":                 4,
+	"CREATE_DELETE_SNAPSHOT":       5,
+	"LIST_SNAPSHOTS":               6,
+	"CLONE_VOLUME":                 7,
