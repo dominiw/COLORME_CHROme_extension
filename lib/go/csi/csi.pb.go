@@ -306,3 +306,36 @@ func (ControllerServiceCapability_RPC_Type) EnumDescriptor() ([]byte, []int) {
 }
 
 type VolumeUsage_Unit int32
+
+const (
+	VolumeUsage_UNKNOWN VolumeUsage_Unit = 0
+	VolumeUsage_BYTES   VolumeUsage_Unit = 1
+	VolumeUsage_INODES  VolumeUsage_Unit = 2
+)
+
+var VolumeUsage_Unit_name = map[int32]string{
+	0: "UNKNOWN",
+	1: "BYTES",
+	2: "INODES",
+}
+
+var VolumeUsage_Unit_value = map[string]int32{
+	"UNKNOWN": 0,
+	"BYTES":   1,
+	"INODES":  2,
+}
+
+func (x VolumeUsage_Unit) String() string {
+	return proto.EnumName(VolumeUsage_Unit_name, int32(x))
+}
+
+func (VolumeUsage_Unit) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{51, 0}
+}
+
+type NodeServiceCapability_RPC_Type int32
+
+const (
+	NodeServiceCapability_RPC_UNKNOWN              NodeServiceCapability_RPC_Type = 0
+	NodeServiceCapability_RPC_STAGE_UNSTAGE_VOLUME NodeServiceCapability_RPC_Type = 1
+	// If Plugin implements GET_VOLUME_STATS capability
