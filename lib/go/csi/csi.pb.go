@@ -289,3 +289,20 @@ var ControllerServiceCapability_RPC_Type_value = map[string]int32{
 	"CREATE_DELETE_SNAPSHOT":       5,
 	"LIST_SNAPSHOTS":               6,
 	"CLONE_VOLUME":                 7,
+	"PUBLISH_READONLY":             8,
+	"EXPAND_VOLUME":                9,
+	"LIST_VOLUMES_PUBLISHED_NODES": 10,
+	"VOLUME_CONDITION":             11,
+	"GET_VOLUME":                   12,
+	"SINGLE_NODE_MULTI_WRITER":     13,
+}
+
+func (x ControllerServiceCapability_RPC_Type) String() string {
+	return proto.EnumName(ControllerServiceCapability_RPC_Type_name, int32(x))
+}
+
+func (ControllerServiceCapability_RPC_Type) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{31, 0, 0}
+}
+
+type VolumeUsage_Unit int32
