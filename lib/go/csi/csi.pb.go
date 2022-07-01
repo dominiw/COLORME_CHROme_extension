@@ -339,3 +339,35 @@ const (
 	NodeServiceCapability_RPC_UNKNOWN              NodeServiceCapability_RPC_Type = 0
 	NodeServiceCapability_RPC_STAGE_UNSTAGE_VOLUME NodeServiceCapability_RPC_Type = 1
 	// If Plugin implements GET_VOLUME_STATS capability
+	// then it MUST implement NodeGetVolumeStats RPC
+	// call for fetching volume statistics.
+	NodeServiceCapability_RPC_GET_VOLUME_STATS NodeServiceCapability_RPC_Type = 2
+	// See VolumeExpansion for details.
+	NodeServiceCapability_RPC_EXPAND_VOLUME NodeServiceCapability_RPC_Type = 3
+	// Indicates that the Node service can report volume conditions.
+	// An SP MAY implement `VolumeCondition` in only the Node
+	// Plugin, only the Controller Plugin, or both.
+	// If `VolumeCondition` is implemented in both the Node and
+	// Controller Plugins, it SHALL report from different
+	// perspectives.
+	// If for some reason Node and Controller Plugins report
+	// misaligned volume conditions, CO SHALL assume the worst case
+	// is the truth.
+	// Note that, for alpha, `VolumeCondition` is intended to be
+	// informative for humans only, not for automation.
+	NodeServiceCapability_RPC_VOLUME_CONDITION NodeServiceCapability_RPC_Type = 4
+	// Indicates the SP supports the SINGLE_NODE_SINGLE_WRITER and/or
+	// SINGLE_NODE_MULTI_WRITER access modes.
+	// These access modes are intended to replace the
+	// SINGLE_NODE_WRITER access mode to clarify the number of writers
+	// for a volume on a single node. Plugins MUST accept and allow
+	// use of the SINGLE_NODE_WRITER access mode (subject to the
+	// processing rules for NodePublishVolume), when either
+	// SINGLE_NODE_SINGLE_WRITER and/or SINGLE_NODE_MULTI_WRITER are
+	// supported, in order to permit older COs to continue working.
+	NodeServiceCapability_RPC_SINGLE_NODE_MULTI_WRITER NodeServiceCapability_RPC_Type = 5
+	// Indicates that Node service supports mounting volumes
+	// with provided volume group identifier during node stage
+	// or node publish RPC calls.
+	NodeServiceCapability_RPC_VOLUME_MOUNT_GROUP NodeServiceCapability_RPC_Type = 6
+)
