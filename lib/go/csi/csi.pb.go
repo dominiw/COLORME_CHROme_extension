@@ -371,3 +371,36 @@ const (
 	// or node publish RPC calls.
 	NodeServiceCapability_RPC_VOLUME_MOUNT_GROUP NodeServiceCapability_RPC_Type = 6
 )
+
+var NodeServiceCapability_RPC_Type_name = map[int32]string{
+	0: "UNKNOWN",
+	1: "STAGE_UNSTAGE_VOLUME",
+	2: "GET_VOLUME_STATS",
+	3: "EXPAND_VOLUME",
+	4: "VOLUME_CONDITION",
+	5: "SINGLE_NODE_MULTI_WRITER",
+	6: "VOLUME_MOUNT_GROUP",
+}
+
+var NodeServiceCapability_RPC_Type_value = map[string]int32{
+	"UNKNOWN":                  0,
+	"STAGE_UNSTAGE_VOLUME":     1,
+	"GET_VOLUME_STATS":         2,
+	"EXPAND_VOLUME":            3,
+	"VOLUME_CONDITION":         4,
+	"SINGLE_NODE_MULTI_WRITER": 5,
+	"VOLUME_MOUNT_GROUP":       6,
+}
+
+func (x NodeServiceCapability_RPC_Type) String() string {
+	return proto.EnumName(NodeServiceCapability_RPC_Type_name, int32(x))
+}
+
+func (NodeServiceCapability_RPC_Type) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{55, 0, 0}
+}
+
+type GroupControllerServiceCapability_RPC_Type int32
+
+const (
+	GroupControllerServiceCapability_RPC_UNKNOWN GroupControllerServiceCapability_RPC_Type = 0
