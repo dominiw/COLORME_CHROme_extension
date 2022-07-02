@@ -404,3 +404,32 @@ type GroupControllerServiceCapability_RPC_Type int32
 
 const (
 	GroupControllerServiceCapability_RPC_UNKNOWN GroupControllerServiceCapability_RPC_Type = 0
+	// Indicates that the group controller plugin supports
+	// creating, deleting, and getting details of a volume
+	// group snapshot.
+	GroupControllerServiceCapability_RPC_CREATE_DELETE_GET_VOLUME_GROUP_SNAPSHOT GroupControllerServiceCapability_RPC_Type = 1
+)
+
+var GroupControllerServiceCapability_RPC_Type_name = map[int32]string{
+	0: "UNKNOWN",
+	1: "CREATE_DELETE_GET_VOLUME_GROUP_SNAPSHOT",
+}
+
+var GroupControllerServiceCapability_RPC_Type_value = map[string]int32{
+	"UNKNOWN": 0,
+	"CREATE_DELETE_GET_VOLUME_GROUP_SNAPSHOT": 1,
+}
+
+func (x GroupControllerServiceCapability_RPC_Type) String() string {
+	return proto.EnumName(GroupControllerServiceCapability_RPC_Type_name, int32(x))
+}
+
+func (GroupControllerServiceCapability_RPC_Type) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{62, 0, 0}
+}
+
+type GetPluginInfoRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
