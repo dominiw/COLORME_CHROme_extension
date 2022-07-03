@@ -433,3 +433,31 @@ type GetPluginInfoRequest struct {
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
+
+func (m *GetPluginInfoRequest) Reset()         { *m = GetPluginInfoRequest{} }
+func (m *GetPluginInfoRequest) String() string { return proto.CompactTextString(m) }
+func (*GetPluginInfoRequest) ProtoMessage()    {}
+func (*GetPluginInfoRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{0}
+}
+
+func (m *GetPluginInfoRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetPluginInfoRequest.Unmarshal(m, b)
+}
+func (m *GetPluginInfoRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetPluginInfoRequest.Marshal(b, m, deterministic)
+}
+func (m *GetPluginInfoRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPluginInfoRequest.Merge(m, src)
+}
+func (m *GetPluginInfoRequest) XXX_Size() int {
+	return xxx_messageInfo_GetPluginInfoRequest.Size(m)
+}
+func (m *GetPluginInfoRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPluginInfoRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetPluginInfoRequest proto.InternalMessageInfo
+
+type GetPluginInfoResponse struct {
+	// The name MUST follow domain name notation format
