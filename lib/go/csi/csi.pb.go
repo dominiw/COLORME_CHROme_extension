@@ -485,3 +485,29 @@ func (*GetPluginInfoResponse) Descriptor() ([]byte, []int) {
 }
 
 func (m *GetPluginInfoResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetPluginInfoResponse.Unmarshal(m, b)
+}
+func (m *GetPluginInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetPluginInfoResponse.Marshal(b, m, deterministic)
+}
+func (m *GetPluginInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPluginInfoResponse.Merge(m, src)
+}
+func (m *GetPluginInfoResponse) XXX_Size() int {
+	return xxx_messageInfo_GetPluginInfoResponse.Size(m)
+}
+func (m *GetPluginInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPluginInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetPluginInfoResponse proto.InternalMessageInfo
+
+func (m *GetPluginInfoResponse) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *GetPluginInfoResponse) GetVendorVersion() string {
+	if m != nil {
