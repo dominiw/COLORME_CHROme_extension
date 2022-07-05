@@ -540,3 +540,23 @@ func (m *GetPluginCapabilitiesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetPluginCapabilitiesRequest.Unmarshal(m, b)
 }
 func (m *GetPluginCapabilitiesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetPluginCapabilitiesRequest.Marshal(b, m, deterministic)
+}
+func (m *GetPluginCapabilitiesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPluginCapabilitiesRequest.Merge(m, src)
+}
+func (m *GetPluginCapabilitiesRequest) XXX_Size() int {
+	return xxx_messageInfo_GetPluginCapabilitiesRequest.Size(m)
+}
+func (m *GetPluginCapabilitiesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPluginCapabilitiesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetPluginCapabilitiesRequest proto.InternalMessageInfo
+
+type GetPluginCapabilitiesResponse struct {
+	// All the capabilities that the controller service supports. This
+	// field is OPTIONAL.
+	Capabilities         []*PluginCapability `protobuf:"bytes,1,rep,name=capabilities,proto3" json:"capabilities,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
+	XXX_unrecognized     []byte              `json:"-"`
