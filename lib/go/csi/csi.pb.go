@@ -511,3 +511,32 @@ func (m *GetPluginInfoResponse) GetName() string {
 
 func (m *GetPluginInfoResponse) GetVendorVersion() string {
 	if m != nil {
+		return m.VendorVersion
+	}
+	return ""
+}
+
+func (m *GetPluginInfoResponse) GetManifest() map[string]string {
+	if m != nil {
+		return m.Manifest
+	}
+	return nil
+}
+
+type GetPluginCapabilitiesRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetPluginCapabilitiesRequest) Reset()         { *m = GetPluginCapabilitiesRequest{} }
+func (m *GetPluginCapabilitiesRequest) String() string { return proto.CompactTextString(m) }
+func (*GetPluginCapabilitiesRequest) ProtoMessage()    {}
+func (*GetPluginCapabilitiesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{2}
+}
+
+func (m *GetPluginCapabilitiesRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetPluginCapabilitiesRequest.Unmarshal(m, b)
+}
+func (m *GetPluginCapabilitiesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
