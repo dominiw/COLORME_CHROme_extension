@@ -560,3 +560,25 @@ type GetPluginCapabilitiesResponse struct {
 	Capabilities         []*PluginCapability `protobuf:"bytes,1,rep,name=capabilities,proto3" json:"capabilities,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
 	XXX_unrecognized     []byte              `json:"-"`
+	XXX_sizecache        int32               `json:"-"`
+}
+
+func (m *GetPluginCapabilitiesResponse) Reset()         { *m = GetPluginCapabilitiesResponse{} }
+func (m *GetPluginCapabilitiesResponse) String() string { return proto.CompactTextString(m) }
+func (*GetPluginCapabilitiesResponse) ProtoMessage()    {}
+func (*GetPluginCapabilitiesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{3}
+}
+
+func (m *GetPluginCapabilitiesResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetPluginCapabilitiesResponse.Unmarshal(m, b)
+}
+func (m *GetPluginCapabilitiesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetPluginCapabilitiesResponse.Marshal(b, m, deterministic)
+}
+func (m *GetPluginCapabilitiesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPluginCapabilitiesResponse.Merge(m, src)
+}
+func (m *GetPluginCapabilitiesResponse) XXX_Size() int {
+	return xxx_messageInfo_GetPluginCapabilitiesResponse.Size(m)
+}
