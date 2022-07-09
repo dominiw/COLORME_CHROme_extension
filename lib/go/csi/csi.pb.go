@@ -582,3 +582,33 @@ func (m *GetPluginCapabilitiesResponse) XXX_Merge(src proto.Message) {
 func (m *GetPluginCapabilitiesResponse) XXX_Size() int {
 	return xxx_messageInfo_GetPluginCapabilitiesResponse.Size(m)
 }
+func (m *GetPluginCapabilitiesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPluginCapabilitiesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetPluginCapabilitiesResponse proto.InternalMessageInfo
+
+func (m *GetPluginCapabilitiesResponse) GetCapabilities() []*PluginCapability {
+	if m != nil {
+		return m.Capabilities
+	}
+	return nil
+}
+
+// Specifies a capability of the plugin.
+type PluginCapability struct {
+	// Types that are valid to be assigned to Type:
+	//
+	//	*PluginCapability_Service_
+	//	*PluginCapability_VolumeExpansion_
+	Type                 isPluginCapability_Type `protobuf_oneof:"type"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_unrecognized     []byte                  `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
+}
+
+func (m *PluginCapability) Reset()         { *m = PluginCapability{} }
+func (m *PluginCapability) String() string { return proto.CompactTextString(m) }
+func (*PluginCapability) ProtoMessage()    {}
+func (*PluginCapability) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{4}
