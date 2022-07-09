@@ -612,3 +612,36 @@ func (m *PluginCapability) String() string { return proto.CompactTextString(m) }
 func (*PluginCapability) ProtoMessage()    {}
 func (*PluginCapability) Descriptor() ([]byte, []int) {
 	return fileDescriptor_9cdb00adce470e01, []int{4}
+}
+
+func (m *PluginCapability) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PluginCapability.Unmarshal(m, b)
+}
+func (m *PluginCapability) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PluginCapability.Marshal(b, m, deterministic)
+}
+func (m *PluginCapability) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PluginCapability.Merge(m, src)
+}
+func (m *PluginCapability) XXX_Size() int {
+	return xxx_messageInfo_PluginCapability.Size(m)
+}
+func (m *PluginCapability) XXX_DiscardUnknown() {
+	xxx_messageInfo_PluginCapability.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PluginCapability proto.InternalMessageInfo
+
+type isPluginCapability_Type interface {
+	isPluginCapability_Type()
+}
+
+type PluginCapability_Service_ struct {
+	Service *PluginCapability_Service `protobuf:"bytes,1,opt,name=service,proto3,oneof"`
+}
+
+type PluginCapability_VolumeExpansion_ struct {
+	VolumeExpansion *PluginCapability_VolumeExpansion `protobuf:"bytes,2,opt,name=volume_expansion,json=volumeExpansion,proto3,oneof"`
+}
+
+func (*PluginCapability_Service_) isPluginCapability_Type() {}
