@@ -645,3 +645,31 @@ type PluginCapability_VolumeExpansion_ struct {
 }
 
 func (*PluginCapability_Service_) isPluginCapability_Type() {}
+
+func (*PluginCapability_VolumeExpansion_) isPluginCapability_Type() {}
+
+func (m *PluginCapability) GetType() isPluginCapability_Type {
+	if m != nil {
+		return m.Type
+	}
+	return nil
+}
+
+func (m *PluginCapability) GetService() *PluginCapability_Service {
+	if x, ok := m.GetType().(*PluginCapability_Service_); ok {
+		return x.Service
+	}
+	return nil
+}
+
+func (m *PluginCapability) GetVolumeExpansion() *PluginCapability_VolumeExpansion {
+	if x, ok := m.GetType().(*PluginCapability_VolumeExpansion_); ok {
+		return x.VolumeExpansion
+	}
+	return nil
+}
+
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*PluginCapability) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
+		(*PluginCapability_Service_)(nil),
