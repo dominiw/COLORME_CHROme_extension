@@ -673,3 +673,36 @@ func (m *PluginCapability) GetVolumeExpansion() *PluginCapability_VolumeExpansio
 func (*PluginCapability) XXX_OneofWrappers() []interface{} {
 	return []interface{}{
 		(*PluginCapability_Service_)(nil),
+		(*PluginCapability_VolumeExpansion_)(nil),
+	}
+}
+
+type PluginCapability_Service struct {
+	Type                 PluginCapability_Service_Type `protobuf:"varint,1,opt,name=type,proto3,enum=csi.v1.PluginCapability_Service_Type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_unrecognized     []byte                        `json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
+}
+
+func (m *PluginCapability_Service) Reset()         { *m = PluginCapability_Service{} }
+func (m *PluginCapability_Service) String() string { return proto.CompactTextString(m) }
+func (*PluginCapability_Service) ProtoMessage()    {}
+func (*PluginCapability_Service) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{4, 0}
+}
+
+func (m *PluginCapability_Service) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PluginCapability_Service.Unmarshal(m, b)
+}
+func (m *PluginCapability_Service) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PluginCapability_Service.Marshal(b, m, deterministic)
+}
+func (m *PluginCapability_Service) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PluginCapability_Service.Merge(m, src)
+}
+func (m *PluginCapability_Service) XXX_Size() int {
+	return xxx_messageInfo_PluginCapability_Service.Size(m)
+}
+func (m *PluginCapability_Service) XXX_DiscardUnknown() {
+	xxx_messageInfo_PluginCapability_Service.DiscardUnknown(m)
+}
