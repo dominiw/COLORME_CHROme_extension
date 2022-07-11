@@ -706,3 +706,30 @@ func (m *PluginCapability_Service) XXX_Size() int {
 func (m *PluginCapability_Service) XXX_DiscardUnknown() {
 	xxx_messageInfo_PluginCapability_Service.DiscardUnknown(m)
 }
+
+var xxx_messageInfo_PluginCapability_Service proto.InternalMessageInfo
+
+func (m *PluginCapability_Service) GetType() PluginCapability_Service_Type {
+	if m != nil {
+		return m.Type
+	}
+	return PluginCapability_Service_UNKNOWN
+}
+
+type PluginCapability_VolumeExpansion struct {
+	Type                 PluginCapability_VolumeExpansion_Type `protobuf:"varint,1,opt,name=type,proto3,enum=csi.v1.PluginCapability_VolumeExpansion_Type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                              `json:"-"`
+	XXX_unrecognized     []byte                                `json:"-"`
+	XXX_sizecache        int32                                 `json:"-"`
+}
+
+func (m *PluginCapability_VolumeExpansion) Reset()         { *m = PluginCapability_VolumeExpansion{} }
+func (m *PluginCapability_VolumeExpansion) String() string { return proto.CompactTextString(m) }
+func (*PluginCapability_VolumeExpansion) ProtoMessage()    {}
+func (*PluginCapability_VolumeExpansion) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{4, 1}
+}
+
+func (m *PluginCapability_VolumeExpansion) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PluginCapability_VolumeExpansion.Unmarshal(m, b)
+}
