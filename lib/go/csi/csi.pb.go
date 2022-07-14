@@ -733,3 +733,30 @@ func (*PluginCapability_VolumeExpansion) Descriptor() ([]byte, []int) {
 func (m *PluginCapability_VolumeExpansion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PluginCapability_VolumeExpansion.Unmarshal(m, b)
 }
+func (m *PluginCapability_VolumeExpansion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PluginCapability_VolumeExpansion.Marshal(b, m, deterministic)
+}
+func (m *PluginCapability_VolumeExpansion) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PluginCapability_VolumeExpansion.Merge(m, src)
+}
+func (m *PluginCapability_VolumeExpansion) XXX_Size() int {
+	return xxx_messageInfo_PluginCapability_VolumeExpansion.Size(m)
+}
+func (m *PluginCapability_VolumeExpansion) XXX_DiscardUnknown() {
+	xxx_messageInfo_PluginCapability_VolumeExpansion.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PluginCapability_VolumeExpansion proto.InternalMessageInfo
+
+func (m *PluginCapability_VolumeExpansion) GetType() PluginCapability_VolumeExpansion_Type {
+	if m != nil {
+		return m.Type
+	}
+	return PluginCapability_VolumeExpansion_UNKNOWN
+}
+
+type ProbeRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
