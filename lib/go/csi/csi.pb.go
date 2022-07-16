@@ -791,3 +791,35 @@ type ProbeResponse struct {
 	// to the CO. Initialization for some plugins MAY be time consuming
 	// and it is important for a CO to distinguish between the following
 	// cases:
+	//
+	//  1. The plugin is in an unhealthy state and MAY need restarting. In
+	//     this case a gRPC error code SHALL be returned.
+	//  2. The plugin is still initializing, but is otherwise perfectly
+	//     healthy. In this case a successful response SHALL be returned
+	//     with a readiness value of `false`. Calls to the plugin's
+	//     Controller and/or Node services MAY fail due to an incomplete
+	//     initialization state.
+	//  3. The plugin has finished initializing and is ready to service
+	//     calls to its Controller and/or Node services. A successful
+	//     response is returned with a readiness value of `true`.
+	//
+	// This field is OPTIONAL. If not present, the caller SHALL assume
+	// that the plugin is in a ready state and is accepting calls to its
+	// Controller and/or Node services (according to the plugin's reported
+	// capabilities).
+	Ready                *wrappers.BoolValue `protobuf:"bytes,1,opt,name=ready,proto3" json:"ready,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
+	XXX_unrecognized     []byte              `json:"-"`
+	XXX_sizecache        int32               `json:"-"`
+}
+
+func (m *ProbeResponse) Reset()         { *m = ProbeResponse{} }
+func (m *ProbeResponse) String() string { return proto.CompactTextString(m) }
+func (*ProbeResponse) ProtoMessage()    {}
+func (*ProbeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{6}
+}
+
+func (m *ProbeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ProbeResponse.Unmarshal(m, b)
+}
