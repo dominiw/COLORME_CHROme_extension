@@ -760,3 +760,34 @@ type ProbeRequest struct {
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
+
+func (m *ProbeRequest) Reset()         { *m = ProbeRequest{} }
+func (m *ProbeRequest) String() string { return proto.CompactTextString(m) }
+func (*ProbeRequest) ProtoMessage()    {}
+func (*ProbeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{5}
+}
+
+func (m *ProbeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ProbeRequest.Unmarshal(m, b)
+}
+func (m *ProbeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ProbeRequest.Marshal(b, m, deterministic)
+}
+func (m *ProbeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProbeRequest.Merge(m, src)
+}
+func (m *ProbeRequest) XXX_Size() int {
+	return xxx_messageInfo_ProbeRequest.Size(m)
+}
+func (m *ProbeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProbeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProbeRequest proto.InternalMessageInfo
+
+type ProbeResponse struct {
+	// Readiness allows a plugin to report its initialization status back
+	// to the CO. Initialization for some plugins MAY be time consuming
+	// and it is important for a CO to distinguish between the following
+	// cases:
