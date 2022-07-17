@@ -855,3 +855,49 @@ type CreateVolumeRequest struct {
 	//     name. If a Plugin is unable to enforce idempotency, the CO's
 	//     error recovery logic could result in multiple (unused) volumes
 	//     being provisioned.
+	//     In the case of error, the CO MUST handle the gRPC error codes
+	//     per the recovery behavior defined in the "CreateVolume Errors"
+	//     section below.
+	//     The CO is responsible for cleaning up volumes it provisioned
+	//     that it no longer needs. If the CO is uncertain whether a volume
+	//     was provisioned or not when a `CreateVolume` call fails, the CO
+	//     MAY call `CreateVolume` again, with the same name, to ensure the
+	//     volume exists and to retrieve the volume's `volume_id` (unless
+	//     otherwise prohibited by "CreateVolume Errors").
+	//  2. Suggested name - Some storage systems allow callers to specify
+	//     an identifier by which to refer to the newly provisioned
+	//     storage. If a storage system supports this, it can optionally
+	//     use this name as the identifier for the new volume.
+	//
+	// Any Unicode string that conforms to the length limit is allowed
+	// except those containing the following banned characters:
+	// U+0000-U+0008, U+000B, U+000C, U+000E-U+001F, U+007F-U+009F.
+	// (These are control characters other than commonly used whitespace.)
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// This field is OPTIONAL. This allows the CO to specify the capacity
+	// requirement of the volume to be provisioned. If not specified, the
+	// Plugin MAY choose an implementation-defined capacity range. If
+	// specified it MUST always be honored, even when creating volumes
+	// from a source; which MAY force some backends to internally extend
+	// the volume after creating it.
+	CapacityRange *CapacityRange `protobuf:"bytes,2,opt,name=capacity_range,json=capacityRange,proto3" json:"capacity_range,omitempty"`
+	// The capabilities that the provisioned volume MUST have. SP MUST
+	// provision a volume that will satisfy ALL of the capabilities
+	// specified in this list. Otherwise SP MUST return the appropriate
+	// gRPC error code.
+	// The Plugin MUST assume that the CO MAY use the provisioned volume
+	// with ANY of the capabilities specified in this list.
+	// For example, a CO MAY specify two volume capabilities: one with
+	// access mode SINGLE_NODE_WRITER and another with access mode
+	// MULTI_NODE_READER_ONLY. In this case, the SP MUST verify that the
+	// provisioned volume can be used in either mode.
+	// This also enables the CO to do early validation: If ANY of the
+	// specified volume capabilities are not supported by the SP, the call
+	// MUST return the appropriate gRPC error code.
+	// This field is REQUIRED.
+	VolumeCapabilities []*VolumeCapability `protobuf:"bytes,3,rep,name=volume_capabilities,json=volumeCapabilities,proto3" json:"volume_capabilities,omitempty"`
+	// Plugin specific parameters passed in as opaque key-value pairs.
+	// This field is OPTIONAL. The Plugin is responsible for parsing and
+	// validating these parameters. COs will treat these as opaque.
+	Parameters map[string]string `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Secrets required by plugin to complete volume creation request.
