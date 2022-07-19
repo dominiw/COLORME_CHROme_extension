@@ -935,3 +935,30 @@ func (m *CreateVolumeRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateVolumeRequest.Unmarshal(m, b)
 }
 func (m *CreateVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateVolumeRequest.Marshal(b, m, deterministic)
+}
+func (m *CreateVolumeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateVolumeRequest.Merge(m, src)
+}
+func (m *CreateVolumeRequest) XXX_Size() int {
+	return xxx_messageInfo_CreateVolumeRequest.Size(m)
+}
+func (m *CreateVolumeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateVolumeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateVolumeRequest proto.InternalMessageInfo
+
+func (m *CreateVolumeRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *CreateVolumeRequest) GetCapacityRange() *CapacityRange {
+	if m != nil {
+		return m.CapacityRange
+	}
+	return nil
+}
