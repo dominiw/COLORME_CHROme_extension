@@ -901,3 +901,37 @@ type CreateVolumeRequest struct {
 	// validating these parameters. COs will treat these as opaque.
 	Parameters map[string]string `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Secrets required by plugin to complete volume creation request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	Secrets map[string]string `protobuf:"bytes,5,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// If specified, the new volume will be pre-populated with data from
+	// this source. This field is OPTIONAL.
+	VolumeContentSource *VolumeContentSource `protobuf:"bytes,6,opt,name=volume_content_source,json=volumeContentSource,proto3" json:"volume_content_source,omitempty"`
+	// Specifies where (regions, zones, racks, etc.) the provisioned
+	// volume MUST be accessible from.
+	// An SP SHALL advertise the requirements for topological
+	// accessibility information in documentation. COs SHALL only specify
+	// topological accessibility information supported by the SP.
+	// This field is OPTIONAL.
+	// This field SHALL NOT be specified unless the SP has the
+	// VOLUME_ACCESSIBILITY_CONSTRAINTS plugin capability.
+	// If this field is not specified and the SP has the
+	// VOLUME_ACCESSIBILITY_CONSTRAINTS plugin capability, the SP MAY
+	// choose where the provisioned volume is accessible from.
+	AccessibilityRequirements *TopologyRequirement `protobuf:"bytes,7,opt,name=accessibility_requirements,json=accessibilityRequirements,proto3" json:"accessibility_requirements,omitempty"`
+	XXX_NoUnkeyedLiteral      struct{}             `json:"-"`
+	XXX_unrecognized          []byte               `json:"-"`
+	XXX_sizecache             int32                `json:"-"`
+}
+
+func (m *CreateVolumeRequest) Reset()         { *m = CreateVolumeRequest{} }
+func (m *CreateVolumeRequest) String() string { return proto.CompactTextString(m) }
+func (*CreateVolumeRequest) ProtoMessage()    {}
+func (*CreateVolumeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{7}
+}
+
+func (m *CreateVolumeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateVolumeRequest.Unmarshal(m, b)
+}
+func (m *CreateVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
