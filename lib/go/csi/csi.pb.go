@@ -962,3 +962,31 @@ func (m *CreateVolumeRequest) GetCapacityRange() *CapacityRange {
 	}
 	return nil
 }
+
+func (m *CreateVolumeRequest) GetVolumeCapabilities() []*VolumeCapability {
+	if m != nil {
+		return m.VolumeCapabilities
+	}
+	return nil
+}
+
+func (m *CreateVolumeRequest) GetParameters() map[string]string {
+	if m != nil {
+		return m.Parameters
+	}
+	return nil
+}
+
+func (m *CreateVolumeRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+func (m *CreateVolumeRequest) GetVolumeContentSource() *VolumeContentSource {
+	if m != nil {
+		return m.VolumeContentSource
+	}
+	return nil
+}
