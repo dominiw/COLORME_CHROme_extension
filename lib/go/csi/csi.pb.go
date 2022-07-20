@@ -990,3 +990,39 @@ func (m *CreateVolumeRequest) GetVolumeContentSource() *VolumeContentSource {
 	}
 	return nil
 }
+
+func (m *CreateVolumeRequest) GetAccessibilityRequirements() *TopologyRequirement {
+	if m != nil {
+		return m.AccessibilityRequirements
+	}
+	return nil
+}
+
+// Specifies what source the volume will be created from. One of the
+// type fields MUST be specified.
+type VolumeContentSource struct {
+	// Types that are valid to be assigned to Type:
+	//
+	//	*VolumeContentSource_Snapshot
+	//	*VolumeContentSource_Volume
+	Type                 isVolumeContentSource_Type `protobuf_oneof:"type"`
+	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
+	XXX_unrecognized     []byte                     `json:"-"`
+	XXX_sizecache        int32                      `json:"-"`
+}
+
+func (m *VolumeContentSource) Reset()         { *m = VolumeContentSource{} }
+func (m *VolumeContentSource) String() string { return proto.CompactTextString(m) }
+func (*VolumeContentSource) ProtoMessage()    {}
+func (*VolumeContentSource) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{8}
+}
+
+func (m *VolumeContentSource) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VolumeContentSource.Unmarshal(m, b)
+}
+func (m *VolumeContentSource) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VolumeContentSource.Marshal(b, m, deterministic)
+}
+func (m *VolumeContentSource) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VolumeContentSource.Merge(m, src)
