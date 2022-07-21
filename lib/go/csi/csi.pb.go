@@ -1026,3 +1026,39 @@ func (m *VolumeContentSource) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 }
 func (m *VolumeContentSource) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_VolumeContentSource.Merge(m, src)
+}
+func (m *VolumeContentSource) XXX_Size() int {
+	return xxx_messageInfo_VolumeContentSource.Size(m)
+}
+func (m *VolumeContentSource) XXX_DiscardUnknown() {
+	xxx_messageInfo_VolumeContentSource.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VolumeContentSource proto.InternalMessageInfo
+
+type isVolumeContentSource_Type interface {
+	isVolumeContentSource_Type()
+}
+
+type VolumeContentSource_Snapshot struct {
+	Snapshot *VolumeContentSource_SnapshotSource `protobuf:"bytes,1,opt,name=snapshot,proto3,oneof"`
+}
+
+type VolumeContentSource_Volume struct {
+	Volume *VolumeContentSource_VolumeSource `protobuf:"bytes,2,opt,name=volume,proto3,oneof"`
+}
+
+func (*VolumeContentSource_Snapshot) isVolumeContentSource_Type() {}
+
+func (*VolumeContentSource_Volume) isVolumeContentSource_Type() {}
+
+func (m *VolumeContentSource) GetType() isVolumeContentSource_Type {
+	if m != nil {
+		return m.Type
+	}
+	return nil
+}
+
+func (m *VolumeContentSource) GetSnapshot() *VolumeContentSource_SnapshotSource {
+	if x, ok := m.GetType().(*VolumeContentSource_Snapshot); ok {
+		return x.Snapshot
