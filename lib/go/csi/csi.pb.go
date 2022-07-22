@@ -1062,3 +1062,32 @@ func (m *VolumeContentSource) GetType() isVolumeContentSource_Type {
 func (m *VolumeContentSource) GetSnapshot() *VolumeContentSource_SnapshotSource {
 	if x, ok := m.GetType().(*VolumeContentSource_Snapshot); ok {
 		return x.Snapshot
+	}
+	return nil
+}
+
+func (m *VolumeContentSource) GetVolume() *VolumeContentSource_VolumeSource {
+	if x, ok := m.GetType().(*VolumeContentSource_Volume); ok {
+		return x.Volume
+	}
+	return nil
+}
+
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*VolumeContentSource) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
+		(*VolumeContentSource_Snapshot)(nil),
+		(*VolumeContentSource_Volume)(nil),
+	}
+}
+
+type VolumeContentSource_SnapshotSource struct {
+	// Contains identity information for the existing source snapshot.
+	// This field is REQUIRED. Plugin is REQUIRED to support creating
+	// volume from snapshot if it supports the capability
+	// CREATE_DELETE_SNAPSHOT.
+	SnapshotId           string   `protobuf:"bytes,1,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
