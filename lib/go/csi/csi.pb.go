@@ -1130,3 +1130,36 @@ type VolumeContentSource_VolumeSource struct {
 	// capability MUST support creating a volume from another volume.
 	VolumeId             string   `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *VolumeContentSource_VolumeSource) Reset()         { *m = VolumeContentSource_VolumeSource{} }
+func (m *VolumeContentSource_VolumeSource) String() string { return proto.CompactTextString(m) }
+func (*VolumeContentSource_VolumeSource) ProtoMessage()    {}
+func (*VolumeContentSource_VolumeSource) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{8, 1}
+}
+
+func (m *VolumeContentSource_VolumeSource) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VolumeContentSource_VolumeSource.Unmarshal(m, b)
+}
+func (m *VolumeContentSource_VolumeSource) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VolumeContentSource_VolumeSource.Marshal(b, m, deterministic)
+}
+func (m *VolumeContentSource_VolumeSource) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VolumeContentSource_VolumeSource.Merge(m, src)
+}
+func (m *VolumeContentSource_VolumeSource) XXX_Size() int {
+	return xxx_messageInfo_VolumeContentSource_VolumeSource.Size(m)
+}
+func (m *VolumeContentSource_VolumeSource) XXX_DiscardUnknown() {
+	xxx_messageInfo_VolumeContentSource_VolumeSource.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VolumeContentSource_VolumeSource proto.InternalMessageInfo
+
+func (m *VolumeContentSource_VolumeSource) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
