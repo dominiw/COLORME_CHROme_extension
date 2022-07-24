@@ -1091,3 +1091,42 @@ type VolumeContentSource_SnapshotSource struct {
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
+
+func (m *VolumeContentSource_SnapshotSource) Reset()         { *m = VolumeContentSource_SnapshotSource{} }
+func (m *VolumeContentSource_SnapshotSource) String() string { return proto.CompactTextString(m) }
+func (*VolumeContentSource_SnapshotSource) ProtoMessage()    {}
+func (*VolumeContentSource_SnapshotSource) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{8, 0}
+}
+
+func (m *VolumeContentSource_SnapshotSource) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VolumeContentSource_SnapshotSource.Unmarshal(m, b)
+}
+func (m *VolumeContentSource_SnapshotSource) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VolumeContentSource_SnapshotSource.Marshal(b, m, deterministic)
+}
+func (m *VolumeContentSource_SnapshotSource) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VolumeContentSource_SnapshotSource.Merge(m, src)
+}
+func (m *VolumeContentSource_SnapshotSource) XXX_Size() int {
+	return xxx_messageInfo_VolumeContentSource_SnapshotSource.Size(m)
+}
+func (m *VolumeContentSource_SnapshotSource) XXX_DiscardUnknown() {
+	xxx_messageInfo_VolumeContentSource_SnapshotSource.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VolumeContentSource_SnapshotSource proto.InternalMessageInfo
+
+func (m *VolumeContentSource_SnapshotSource) GetSnapshotId() string {
+	if m != nil {
+		return m.SnapshotId
+	}
+	return ""
+}
+
+type VolumeContentSource_VolumeSource struct {
+	// Contains identity information for the existing source volume.
+	// This field is REQUIRED. Plugins reporting CLONE_VOLUME
+	// capability MUST support creating a volume from another volume.
+	VolumeId             string   `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
