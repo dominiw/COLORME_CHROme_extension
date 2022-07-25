@@ -1163,3 +1163,33 @@ func (m *VolumeContentSource_VolumeSource) GetVolumeId() string {
 	if m != nil {
 		return m.VolumeId
 	}
+	return ""
+}
+
+type CreateVolumeResponse struct {
+	// Contains all attributes of the newly created volume that are
+	// relevant to the CO along with information required by the Plugin
+	// to uniquely identify the volume. This field is REQUIRED.
+	Volume               *Volume  `protobuf:"bytes,1,opt,name=volume,proto3" json:"volume,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateVolumeResponse) Reset()         { *m = CreateVolumeResponse{} }
+func (m *CreateVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*CreateVolumeResponse) ProtoMessage()    {}
+func (*CreateVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{9}
+}
+
+func (m *CreateVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateVolumeResponse.Unmarshal(m, b)
+}
+func (m *CreateVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *CreateVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateVolumeResponse.Merge(m, src)
+}
+func (m *CreateVolumeResponse) XXX_Size() int {
