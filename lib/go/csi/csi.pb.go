@@ -1224,3 +1224,26 @@ type VolumeCapability struct {
 	XXX_unrecognized     []byte                       `json:"-"`
 	XXX_sizecache        int32                        `json:"-"`
 }
+
+func (m *VolumeCapability) Reset()         { *m = VolumeCapability{} }
+func (m *VolumeCapability) String() string { return proto.CompactTextString(m) }
+func (*VolumeCapability) ProtoMessage()    {}
+func (*VolumeCapability) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{10}
+}
+
+func (m *VolumeCapability) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VolumeCapability.Unmarshal(m, b)
+}
+func (m *VolumeCapability) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VolumeCapability.Marshal(b, m, deterministic)
+}
+func (m *VolumeCapability) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VolumeCapability.Merge(m, src)
+}
+func (m *VolumeCapability) XXX_Size() int {
+	return xxx_messageInfo_VolumeCapability.Size(m)
+}
+func (m *VolumeCapability) XXX_DiscardUnknown() {
+	xxx_messageInfo_VolumeCapability.DiscardUnknown(m)
+}
