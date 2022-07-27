@@ -1193,3 +1193,34 @@ func (m *CreateVolumeResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CreateVolumeResponse.Merge(m, src)
 }
 func (m *CreateVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_CreateVolumeResponse.Size(m)
+}
+func (m *CreateVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateVolumeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateVolumeResponse proto.InternalMessageInfo
+
+func (m *CreateVolumeResponse) GetVolume() *Volume {
+	if m != nil {
+		return m.Volume
+	}
+	return nil
+}
+
+// Specify a capability of a volume.
+type VolumeCapability struct {
+	// Specifies what API the volume will be accessed using. One of the
+	// following fields MUST be specified.
+	//
+	// Types that are valid to be assigned to AccessType:
+	//
+	//	*VolumeCapability_Block
+	//	*VolumeCapability_Mount
+	AccessType isVolumeCapability_AccessType `protobuf_oneof:"access_type"`
+	// This is a REQUIRED field.
+	AccessMode           *VolumeCapability_AccessMode `protobuf:"bytes,3,opt,name=access_mode,json=accessMode,proto3" json:"access_mode,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
+	XXX_unrecognized     []byte                       `json:"-"`
+	XXX_sizecache        int32                        `json:"-"`
+}
