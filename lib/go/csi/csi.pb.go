@@ -1247,3 +1247,34 @@ func (m *VolumeCapability) XXX_Size() int {
 func (m *VolumeCapability) XXX_DiscardUnknown() {
 	xxx_messageInfo_VolumeCapability.DiscardUnknown(m)
 }
+
+var xxx_messageInfo_VolumeCapability proto.InternalMessageInfo
+
+type isVolumeCapability_AccessType interface {
+	isVolumeCapability_AccessType()
+}
+
+type VolumeCapability_Block struct {
+	Block *VolumeCapability_BlockVolume `protobuf:"bytes,1,opt,name=block,proto3,oneof"`
+}
+
+type VolumeCapability_Mount struct {
+	Mount *VolumeCapability_MountVolume `protobuf:"bytes,2,opt,name=mount,proto3,oneof"`
+}
+
+func (*VolumeCapability_Block) isVolumeCapability_AccessType() {}
+
+func (*VolumeCapability_Mount) isVolumeCapability_AccessType() {}
+
+func (m *VolumeCapability) GetAccessType() isVolumeCapability_AccessType {
+	if m != nil {
+		return m.AccessType
+	}
+	return nil
+}
+
+func (m *VolumeCapability) GetBlock() *VolumeCapability_BlockVolume {
+	if x, ok := m.GetAccessType().(*VolumeCapability_Block); ok {
+		return x.Block
+	}
+	return nil
