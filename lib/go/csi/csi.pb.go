@@ -1315,3 +1315,39 @@ func (*VolumeCapability_BlockVolume) ProtoMessage()    {}
 func (*VolumeCapability_BlockVolume) Descriptor() ([]byte, []int) {
 	return fileDescriptor_9cdb00adce470e01, []int{10, 0}
 }
+
+func (m *VolumeCapability_BlockVolume) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VolumeCapability_BlockVolume.Unmarshal(m, b)
+}
+func (m *VolumeCapability_BlockVolume) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VolumeCapability_BlockVolume.Marshal(b, m, deterministic)
+}
+func (m *VolumeCapability_BlockVolume) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VolumeCapability_BlockVolume.Merge(m, src)
+}
+func (m *VolumeCapability_BlockVolume) XXX_Size() int {
+	return xxx_messageInfo_VolumeCapability_BlockVolume.Size(m)
+}
+func (m *VolumeCapability_BlockVolume) XXX_DiscardUnknown() {
+	xxx_messageInfo_VolumeCapability_BlockVolume.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VolumeCapability_BlockVolume proto.InternalMessageInfo
+
+// Indicate that the volume will be accessed via the filesystem API.
+type VolumeCapability_MountVolume struct {
+	// The filesystem type. This field is OPTIONAL.
+	// An empty string is equal to an unspecified field value.
+	FsType string `protobuf:"bytes,1,opt,name=fs_type,json=fsType,proto3" json:"fs_type,omitempty"`
+	// The mount options that can be used for the volume. This field is
+	// OPTIONAL. `mount_flags` MAY contain sensitive information.
+	// Therefore, the CO and the Plugin MUST NOT leak this information
+	// to untrusted entities. The total size of this repeated field
+	// SHALL NOT exceed 4 KiB.
+	MountFlags []string `protobuf:"bytes,2,rep,name=mount_flags,json=mountFlags,proto3" json:"mount_flags,omitempty"`
+	// If SP has VOLUME_MOUNT_GROUP node capability and CO provides
+	// this field then SP MUST ensure that the volume_mount_group
+	// parameter is passed as the group identifier to the underlying
+	// operating system mount system call, with the understanding
+	// that the set of available mount call parameters and/or
+	// mount implementations may vary across operating systems.
