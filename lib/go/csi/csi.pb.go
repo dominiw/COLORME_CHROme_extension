@@ -1278,3 +1278,40 @@ func (m *VolumeCapability) GetBlock() *VolumeCapability_BlockVolume {
 		return x.Block
 	}
 	return nil
+}
+
+func (m *VolumeCapability) GetMount() *VolumeCapability_MountVolume {
+	if x, ok := m.GetAccessType().(*VolumeCapability_Mount); ok {
+		return x.Mount
+	}
+	return nil
+}
+
+func (m *VolumeCapability) GetAccessMode() *VolumeCapability_AccessMode {
+	if m != nil {
+		return m.AccessMode
+	}
+	return nil
+}
+
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*VolumeCapability) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
+		(*VolumeCapability_Block)(nil),
+		(*VolumeCapability_Mount)(nil),
+	}
+}
+
+// Indicate that the volume will be accessed via the block device API.
+type VolumeCapability_BlockVolume struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *VolumeCapability_BlockVolume) Reset()         { *m = VolumeCapability_BlockVolume{} }
+func (m *VolumeCapability_BlockVolume) String() string { return proto.CompactTextString(m) }
+func (*VolumeCapability_BlockVolume) ProtoMessage()    {}
+func (*VolumeCapability_BlockVolume) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{10, 0}
+}
