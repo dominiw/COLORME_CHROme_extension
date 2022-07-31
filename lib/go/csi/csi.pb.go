@@ -1351,3 +1351,33 @@ type VolumeCapability_MountVolume struct {
 	// operating system mount system call, with the understanding
 	// that the set of available mount call parameters and/or
 	// mount implementations may vary across operating systems.
+	// Additionally, new file and/or directory entries written to
+	// the underlying filesystem SHOULD be permission-labeled in such a
+	// manner, unless otherwise modified by a workload, that they are
+	// both readable and writable by said mount group identifier.
+	// This is an OPTIONAL field.
+	VolumeMountGroup     string   `protobuf:"bytes,3,opt,name=volume_mount_group,json=volumeMountGroup,proto3" json:"volume_mount_group,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *VolumeCapability_MountVolume) Reset()         { *m = VolumeCapability_MountVolume{} }
+func (m *VolumeCapability_MountVolume) String() string { return proto.CompactTextString(m) }
+func (*VolumeCapability_MountVolume) ProtoMessage()    {}
+func (*VolumeCapability_MountVolume) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{10, 1}
+}
+
+func (m *VolumeCapability_MountVolume) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VolumeCapability_MountVolume.Unmarshal(m, b)
+}
+func (m *VolumeCapability_MountVolume) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VolumeCapability_MountVolume.Marshal(b, m, deterministic)
+}
+func (m *VolumeCapability_MountVolume) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VolumeCapability_MountVolume.Merge(m, src)
+}
+func (m *VolumeCapability_MountVolume) XXX_Size() int {
+	return xxx_messageInfo_VolumeCapability_MountVolume.Size(m)
+}
