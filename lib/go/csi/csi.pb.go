@@ -1381,3 +1381,36 @@ func (m *VolumeCapability_MountVolume) XXX_Merge(src proto.Message) {
 func (m *VolumeCapability_MountVolume) XXX_Size() int {
 	return xxx_messageInfo_VolumeCapability_MountVolume.Size(m)
 }
+func (m *VolumeCapability_MountVolume) XXX_DiscardUnknown() {
+	xxx_messageInfo_VolumeCapability_MountVolume.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VolumeCapability_MountVolume proto.InternalMessageInfo
+
+func (m *VolumeCapability_MountVolume) GetFsType() string {
+	if m != nil {
+		return m.FsType
+	}
+	return ""
+}
+
+func (m *VolumeCapability_MountVolume) GetMountFlags() []string {
+	if m != nil {
+		return m.MountFlags
+	}
+	return nil
+}
+
+func (m *VolumeCapability_MountVolume) GetVolumeMountGroup() string {
+	if m != nil {
+		return m.VolumeMountGroup
+	}
+	return ""
+}
+
+// Specify how a volume can be accessed.
+type VolumeCapability_AccessMode struct {
+	// This field is REQUIRED.
+	Mode                 VolumeCapability_AccessMode_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=csi.v1.VolumeCapability_AccessMode_Mode" json:"mode,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                         `json:"-"`
+	XXX_unrecognized     []byte                           `json:"-"`
