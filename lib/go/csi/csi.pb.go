@@ -1414,3 +1414,33 @@ type VolumeCapability_AccessMode struct {
 	Mode                 VolumeCapability_AccessMode_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=csi.v1.VolumeCapability_AccessMode_Mode" json:"mode,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                         `json:"-"`
 	XXX_unrecognized     []byte                           `json:"-"`
+	XXX_sizecache        int32                            `json:"-"`
+}
+
+func (m *VolumeCapability_AccessMode) Reset()         { *m = VolumeCapability_AccessMode{} }
+func (m *VolumeCapability_AccessMode) String() string { return proto.CompactTextString(m) }
+func (*VolumeCapability_AccessMode) ProtoMessage()    {}
+func (*VolumeCapability_AccessMode) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{10, 2}
+}
+
+func (m *VolumeCapability_AccessMode) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VolumeCapability_AccessMode.Unmarshal(m, b)
+}
+func (m *VolumeCapability_AccessMode) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VolumeCapability_AccessMode.Marshal(b, m, deterministic)
+}
+func (m *VolumeCapability_AccessMode) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VolumeCapability_AccessMode.Merge(m, src)
+}
+func (m *VolumeCapability_AccessMode) XXX_Size() int {
+	return xxx_messageInfo_VolumeCapability_AccessMode.Size(m)
+}
+func (m *VolumeCapability_AccessMode) XXX_DiscardUnknown() {
+	xxx_messageInfo_VolumeCapability_AccessMode.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VolumeCapability_AccessMode proto.InternalMessageInfo
+
+func (m *VolumeCapability_AccessMode) GetMode() VolumeCapability_AccessMode_Mode {
+	if m != nil {
