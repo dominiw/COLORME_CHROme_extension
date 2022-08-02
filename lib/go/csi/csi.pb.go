@@ -1444,3 +1444,37 @@ var xxx_messageInfo_VolumeCapability_AccessMode proto.InternalMessageInfo
 
 func (m *VolumeCapability_AccessMode) GetMode() VolumeCapability_AccessMode_Mode {
 	if m != nil {
+		return m.Mode
+	}
+	return VolumeCapability_AccessMode_UNKNOWN
+}
+
+// The capacity of the storage space in bytes. To specify an exact size,
+// `required_bytes` and `limit_bytes` SHALL be set to the same value. At
+// least one of the these fields MUST be specified.
+type CapacityRange struct {
+	// Volume MUST be at least this big. This field is OPTIONAL.
+	// A value of 0 is equal to an unspecified field value.
+	// The value of this field MUST NOT be negative.
+	RequiredBytes int64 `protobuf:"varint,1,opt,name=required_bytes,json=requiredBytes,proto3" json:"required_bytes,omitempty"`
+	// Volume MUST not be bigger than this. This field is OPTIONAL.
+	// A value of 0 is equal to an unspecified field value.
+	// The value of this field MUST NOT be negative.
+	LimitBytes           int64    `protobuf:"varint,2,opt,name=limit_bytes,json=limitBytes,proto3" json:"limit_bytes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CapacityRange) Reset()         { *m = CapacityRange{} }
+func (m *CapacityRange) String() string { return proto.CompactTextString(m) }
+func (*CapacityRange) ProtoMessage()    {}
+func (*CapacityRange) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{11}
+}
+
+func (m *CapacityRange) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CapacityRange.Unmarshal(m, b)
+}
+func (m *CapacityRange) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CapacityRange.Marshal(b, m, deterministic)
