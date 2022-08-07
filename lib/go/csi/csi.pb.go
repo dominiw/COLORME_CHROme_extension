@@ -1612,3 +1612,29 @@ func (m *Volume) GetVolumeId() string {
 	if m != nil {
 		return m.VolumeId
 	}
+	return ""
+}
+
+func (m *Volume) GetVolumeContext() map[string]string {
+	if m != nil {
+		return m.VolumeContext
+	}
+	return nil
+}
+
+func (m *Volume) GetContentSource() *VolumeContentSource {
+	if m != nil {
+		return m.ContentSource
+	}
+	return nil
+}
+
+func (m *Volume) GetAccessibleTopology() []*Topology {
+	if m != nil {
+		return m.AccessibleTopology
+	}
+	return nil
+}
+
+type TopologyRequirement struct {
+	// Specifies the list of topologies the provisioned volume MUST be
