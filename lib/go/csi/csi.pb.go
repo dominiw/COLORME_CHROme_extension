@@ -1568,3 +1568,47 @@ type Volume struct {
 	//	  {"region": "R1", "zone": "Z2"},
 	//	  {"region": "R1", "zone": "Z3"}
 	//
+	// Indicates a volume accessible from both "zone" "Z2" and "zone" "Z3"
+	// in the "region" "R1".
+	AccessibleTopology   []*Topology `protobuf:"bytes,5,rep,name=accessible_topology,json=accessibleTopology,proto3" json:"accessible_topology,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *Volume) Reset()         { *m = Volume{} }
+func (m *Volume) String() string { return proto.CompactTextString(m) }
+func (*Volume) ProtoMessage()    {}
+func (*Volume) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{12}
+}
+
+func (m *Volume) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Volume.Unmarshal(m, b)
+}
+func (m *Volume) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Volume.Marshal(b, m, deterministic)
+}
+func (m *Volume) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Volume.Merge(m, src)
+}
+func (m *Volume) XXX_Size() int {
+	return xxx_messageInfo_Volume.Size(m)
+}
+func (m *Volume) XXX_DiscardUnknown() {
+	xxx_messageInfo_Volume.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Volume proto.InternalMessageInfo
+
+func (m *Volume) GetCapacityBytes() int64 {
+	if m != nil {
+		return m.CapacityBytes
+	}
+	return 0
+}
+
+func (m *Volume) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
