@@ -1743,3 +1743,42 @@ type TopologyRequirement struct {
 	// available from "zone" "Z3" in the "region" "R1" and fall back to
 	// "zone" "Z2" in the "region" "R1" if that is not possible.
 	//
+	// Example 2:
+	// Given a volume should be accessible from a single zone, and
+	// requisite =
+	//
+	//	{"region": "R1", "zone": "Z2"},
+	//	{"region": "R1", "zone": "Z3"},
+	//	{"region": "R1", "zone": "Z4"},
+	//	{"region": "R1", "zone": "Z5"}
+	//
+	// preferred =
+	//
+	//	{"region": "R1", "zone": "Z4"},
+	//	{"region": "R1", "zone": "Z2"}
+	//
+	// then the SP SHOULD first attempt to make the provisioned volume
+	// accessible from "zone" "Z4" in the "region" "R1" and fall back to
+	// "zone" "Z2" in the "region" "R1" if that is not possible. If that
+	// is not possible, the SP may choose between either the "zone"
+	// "Z3" or "Z5" in the "region" "R1".
+	//
+	// Example 3:
+	// Given a volume should be accessible from TWO zones (because an
+	// opaque parameter in CreateVolumeRequest, for example, specifies
+	// the volume is accessible from two zones, aka synchronously
+	// replicated), and
+	// requisite =
+	//
+	//	{"region": "R1", "zone": "Z2"},
+	//	{"region": "R1", "zone": "Z3"},
+	//	{"region": "R1", "zone": "Z4"},
+	//	{"region": "R1", "zone": "Z5"}
+	//
+	// preferred =
+	//
+	//	{"region": "R1", "zone": "Z5"},
+	//	{"region": "R1", "zone": "Z3"}
+	//
+	// then the SP SHOULD first attempt to make the provisioned volume
+	// accessible from the combination of the two "zones" "Z5" and "Z3" in
