@@ -1782,3 +1782,37 @@ type TopologyRequirement struct {
 	//
 	// then the SP SHOULD first attempt to make the provisioned volume
 	// accessible from the combination of the two "zones" "Z5" and "Z3" in
+	// the "region" "R1". If that's not possible, it should fall back to
+	// a combination of "Z5" and other possibilities from the list of
+	// requisite. If that's not possible, it should fall back  to a
+	// combination of "Z3" and other possibilities from the list of
+	// requisite. If that's not possible, it should fall back  to a
+	// combination of other possibilities from the list of requisite.
+	Preferred            []*Topology `protobuf:"bytes,2,rep,name=preferred,proto3" json:"preferred,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *TopologyRequirement) Reset()         { *m = TopologyRequirement{} }
+func (m *TopologyRequirement) String() string { return proto.CompactTextString(m) }
+func (*TopologyRequirement) ProtoMessage()    {}
+func (*TopologyRequirement) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{13}
+}
+
+func (m *TopologyRequirement) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TopologyRequirement.Unmarshal(m, b)
+}
+func (m *TopologyRequirement) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TopologyRequirement.Marshal(b, m, deterministic)
+}
+func (m *TopologyRequirement) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TopologyRequirement.Merge(m, src)
+}
+func (m *TopologyRequirement) XXX_Size() int {
+	return xxx_messageInfo_TopologyRequirement.Size(m)
+}
+func (m *TopologyRequirement) XXX_DiscardUnknown() {
+	xxx_messageInfo_TopologyRequirement.DiscardUnknown(m)
+}
