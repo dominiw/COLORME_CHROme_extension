@@ -1880,3 +1880,41 @@ func (m *Topology) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Topology.Unmarshal(m, b)
 }
 func (m *Topology) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Topology.Marshal(b, m, deterministic)
+}
+func (m *Topology) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Topology.Merge(m, src)
+}
+func (m *Topology) XXX_Size() int {
+	return xxx_messageInfo_Topology.Size(m)
+}
+func (m *Topology) XXX_DiscardUnknown() {
+	xxx_messageInfo_Topology.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Topology proto.InternalMessageInfo
+
+func (m *Topology) GetSegments() map[string]string {
+	if m != nil {
+		return m.Segments
+	}
+	return nil
+}
+
+type DeleteVolumeRequest struct {
+	// The ID of the volume to be deprovisioned.
+	// This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// Secrets required by plugin to complete volume deletion request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	Secrets              map[string]string `protobuf:"bytes,2,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *DeleteVolumeRequest) Reset()         { *m = DeleteVolumeRequest{} }
+func (m *DeleteVolumeRequest) String() string { return proto.CompactTextString(m) }
+func (*DeleteVolumeRequest) ProtoMessage()    {}
+func (*DeleteVolumeRequest) Descriptor() ([]byte, []int) {
