@@ -1840,3 +1840,43 @@ func (m *TopologyRequirement) GetPreferred() []*Topology {
 // like "zone3", "rack3", etc.
 // For example {"com.company/zone": "Z1", "com.company/rack": "R3"}
 // Valid keys have two segments: an OPTIONAL prefix and name, separated
+// by a slash (/), for example: "com.company.example/zone".
+// The key name segment is REQUIRED. The prefix is OPTIONAL.
+// The key name MUST be 63 characters or less, begin and end with an
+// alphanumeric character ([a-z0-9A-Z]), and contain only dashes (-),
+// underscores (_), dots (.), or alphanumerics in between, for example
+// "zone".
+// The key prefix MUST be 63 characters or less, begin and end with a
+// lower-case alphanumeric character ([a-z0-9]), contain only
+// dashes (-), dots (.), or lower-case alphanumerics in between, and
+// follow domain name notation format
+// (https://tools.ietf.org/html/rfc1035#section-2.3.1).
+// The key prefix SHOULD include the plugin's host company name and/or
+// the plugin name, to minimize the possibility of collisions with keys
+// from other plugins.
+// If a key prefix is specified, it MUST be identical across all
+// topology keys returned by the SP (across all RPCs).
+// Keys MUST be case-insensitive. Meaning the keys "Zone" and "zone"
+// MUST not both exist.
+// Each value (topological segment) MUST contain 1 or more strings.
+// Each string MUST be 63 characters or less and begin and end with an
+// alphanumeric character with '-', '_', '.', or alphanumerics in
+// between.
+type Topology struct {
+	Segments             map[string]string `protobuf:"bytes,1,rep,name=segments,proto3" json:"segments,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *Topology) Reset()         { *m = Topology{} }
+func (m *Topology) String() string { return proto.CompactTextString(m) }
+func (*Topology) ProtoMessage()    {}
+func (*Topology) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{14}
+}
+
+func (m *Topology) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Topology.Unmarshal(m, b)
+}
+func (m *Topology) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
