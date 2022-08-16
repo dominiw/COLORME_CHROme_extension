@@ -1918,3 +1918,28 @@ func (m *DeleteVolumeRequest) Reset()         { *m = DeleteVolumeRequest{} }
 func (m *DeleteVolumeRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteVolumeRequest) ProtoMessage()    {}
 func (*DeleteVolumeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{15}
+}
+
+func (m *DeleteVolumeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteVolumeRequest.Unmarshal(m, b)
+}
+func (m *DeleteVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteVolumeRequest.Marshal(b, m, deterministic)
+}
+func (m *DeleteVolumeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteVolumeRequest.Merge(m, src)
+}
+func (m *DeleteVolumeRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteVolumeRequest.Size(m)
+}
+func (m *DeleteVolumeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteVolumeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteVolumeRequest proto.InternalMessageInfo
+
+func (m *DeleteVolumeRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
