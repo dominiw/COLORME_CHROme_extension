@@ -1943,3 +1943,35 @@ func (m *DeleteVolumeRequest) GetVolumeId() string {
 	if m != nil {
 		return m.VolumeId
 	}
+	return ""
+}
+
+func (m *DeleteVolumeRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+type DeleteVolumeResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteVolumeResponse) Reset()         { *m = DeleteVolumeResponse{} }
+func (m *DeleteVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*DeleteVolumeResponse) ProtoMessage()    {}
+func (*DeleteVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{16}
+}
+
+func (m *DeleteVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteVolumeResponse.Unmarshal(m, b)
+}
+func (m *DeleteVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *DeleteVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteVolumeResponse.Merge(m, src)
+}
