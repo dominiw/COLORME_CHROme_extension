@@ -2010,3 +2010,30 @@ type ControllerPublishVolumeRequest struct {
 	// This field is OPTIONAL and MUST match the volume_context of the
 	// volume identified by `volume_id`.
 	VolumeContext        map[string]string `protobuf:"bytes,6,rep,name=volume_context,json=volumeContext,proto3" json:"volume_context,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *ControllerPublishVolumeRequest) Reset()         { *m = ControllerPublishVolumeRequest{} }
+func (m *ControllerPublishVolumeRequest) String() string { return proto.CompactTextString(m) }
+func (*ControllerPublishVolumeRequest) ProtoMessage()    {}
+func (*ControllerPublishVolumeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{17}
+}
+
+func (m *ControllerPublishVolumeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerPublishVolumeRequest.Unmarshal(m, b)
+}
+func (m *ControllerPublishVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerPublishVolumeRequest.Marshal(b, m, deterministic)
+}
+func (m *ControllerPublishVolumeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerPublishVolumeRequest.Merge(m, src)
+}
+func (m *ControllerPublishVolumeRequest) XXX_Size() int {
+	return xxx_messageInfo_ControllerPublishVolumeRequest.Size(m)
+}
+func (m *ControllerPublishVolumeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerPublishVolumeRequest.DiscardUnknown(m)
+}
