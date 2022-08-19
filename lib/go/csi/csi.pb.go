@@ -1975,3 +1975,38 @@ func (m *DeleteVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte
 func (m *DeleteVolumeResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DeleteVolumeResponse.Merge(m, src)
 }
+func (m *DeleteVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_DeleteVolumeResponse.Size(m)
+}
+func (m *DeleteVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteVolumeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteVolumeResponse proto.InternalMessageInfo
+
+type ControllerPublishVolumeRequest struct {
+	// The ID of the volume to be used on a node.
+	// This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// The ID of the node. This field is REQUIRED. The CO SHALL set this
+	// field to match the node ID returned by `NodeGetInfo`.
+	NodeId string `protobuf:"bytes,2,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+	// Volume capability describing how the CO intends to use this volume.
+	// SP MUST ensure the CO can use the published volume as described.
+	// Otherwise SP MUST return the appropriate gRPC error code.
+	// This is a REQUIRED field.
+	VolumeCapability *VolumeCapability `protobuf:"bytes,3,opt,name=volume_capability,json=volumeCapability,proto3" json:"volume_capability,omitempty"`
+	// Indicates SP MUST publish the volume in readonly mode.
+	// CO MUST set this field to false if SP does not have the
+	// PUBLISH_READONLY controller capability.
+	// This is a REQUIRED field.
+	Readonly bool `protobuf:"varint,4,opt,name=readonly,proto3" json:"readonly,omitempty"`
+	// Secrets required by plugin to complete controller publish volume
+	// request. This field is OPTIONAL. Refer to the
+	// `Secrets Requirements` section on how to use this field.
+	Secrets map[string]string `protobuf:"bytes,5,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Volume context as returned by SP in
+	// CreateVolumeResponse.Volume.volume_context.
+	// This field is OPTIONAL and MUST match the volume_context of the
+	// volume identified by `volume_id`.
+	VolumeContext        map[string]string `protobuf:"bytes,6,rep,name=volume_context,json=volumeContext,proto3" json:"volume_context,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
