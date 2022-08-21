@@ -2037,3 +2037,37 @@ func (m *ControllerPublishVolumeRequest) XXX_Size() int {
 func (m *ControllerPublishVolumeRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_ControllerPublishVolumeRequest.DiscardUnknown(m)
 }
+
+var xxx_messageInfo_ControllerPublishVolumeRequest proto.InternalMessageInfo
+
+func (m *ControllerPublishVolumeRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
+	return ""
+}
+
+func (m *ControllerPublishVolumeRequest) GetNodeId() string {
+	if m != nil {
+		return m.NodeId
+	}
+	return ""
+}
+
+func (m *ControllerPublishVolumeRequest) GetVolumeCapability() *VolumeCapability {
+	if m != nil {
+		return m.VolumeCapability
+	}
+	return nil
+}
+
+func (m *ControllerPublishVolumeRequest) GetReadonly() bool {
+	if m != nil {
+		return m.Readonly
+	}
+	return false
+}
+
+func (m *ControllerPublishVolumeRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
