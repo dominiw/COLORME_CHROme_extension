@@ -2071,3 +2071,30 @@ func (m *ControllerPublishVolumeRequest) GetReadonly() bool {
 func (m *ControllerPublishVolumeRequest) GetSecrets() map[string]string {
 	if m != nil {
 		return m.Secrets
+	}
+	return nil
+}
+
+func (m *ControllerPublishVolumeRequest) GetVolumeContext() map[string]string {
+	if m != nil {
+		return m.VolumeContext
+	}
+	return nil
+}
+
+type ControllerPublishVolumeResponse struct {
+	// Opaque static publish properties of the volume. SP MAY use this
+	// field to ensure subsequent `NodeStageVolume` or `NodePublishVolume`
+	// calls calls have contextual information.
+	// The contents of this field SHALL be opaque to a CO.
+	// The contents of this field SHALL NOT be mutable.
+	// The contents of this field SHALL be safe for the CO to cache.
+	// The contents of this field SHOULD NOT contain sensitive
+	// information.
+	// The contents of this field SHOULD NOT be used for uniquely
+	// identifying a volume. The `volume_id` alone SHOULD be sufficient to
+	// identify the volume.
+	// This field is OPTIONAL and when present MUST be passed to
+	// subsequent `NodeStageVolume` or `NodePublishVolume` calls
+	PublishContext       map[string]string `protobuf:"bytes,1,rep,name=publish_context,json=publishContext,proto3" json:"publish_context,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
