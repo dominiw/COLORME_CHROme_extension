@@ -2098,3 +2098,31 @@ type ControllerPublishVolumeResponse struct {
 	// subsequent `NodeStageVolume` or `NodePublishVolume` calls
 	PublishContext       map[string]string `protobuf:"bytes,1,rep,name=publish_context,json=publishContext,proto3" json:"publish_context,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *ControllerPublishVolumeResponse) Reset()         { *m = ControllerPublishVolumeResponse{} }
+func (m *ControllerPublishVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*ControllerPublishVolumeResponse) ProtoMessage()    {}
+func (*ControllerPublishVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{18}
+}
+
+func (m *ControllerPublishVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerPublishVolumeResponse.Unmarshal(m, b)
+}
+func (m *ControllerPublishVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerPublishVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *ControllerPublishVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerPublishVolumeResponse.Merge(m, src)
+}
+func (m *ControllerPublishVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_ControllerPublishVolumeResponse.Size(m)
+}
+func (m *ControllerPublishVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerPublishVolumeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ControllerPublishVolumeResponse proto.InternalMessageInfo
