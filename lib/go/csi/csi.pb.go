@@ -2126,3 +2126,34 @@ func (m *ControllerPublishVolumeResponse) XXX_DiscardUnknown() {
 }
 
 var xxx_messageInfo_ControllerPublishVolumeResponse proto.InternalMessageInfo
+
+func (m *ControllerPublishVolumeResponse) GetPublishContext() map[string]string {
+	if m != nil {
+		return m.PublishContext
+	}
+	return nil
+}
+
+type ControllerUnpublishVolumeRequest struct {
+	// The ID of the volume. This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// The ID of the node. This field is OPTIONAL. The CO SHOULD set this
+	// field to match the node ID returned by `NodeGetInfo` or leave it
+	// unset. If the value is set, the SP MUST unpublish the volume from
+	// the specified node. If the value is unset, the SP MUST unpublish
+	// the volume from all nodes it is published to.
+	NodeId string `protobuf:"bytes,2,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+	// Secrets required by plugin to complete controller unpublish volume
+	// request. This SHOULD be the same secrets passed to the
+	// ControllerPublishVolume call for the specified volume.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	Secrets              map[string]string `protobuf:"bytes,3,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *ControllerUnpublishVolumeRequest) Reset()         { *m = ControllerUnpublishVolumeRequest{} }
+func (m *ControllerUnpublishVolumeRequest) String() string { return proto.CompactTextString(m) }
+func (*ControllerUnpublishVolumeRequest) ProtoMessage()    {}
