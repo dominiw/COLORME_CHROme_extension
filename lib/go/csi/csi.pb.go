@@ -2157,3 +2157,31 @@ type ControllerUnpublishVolumeRequest struct {
 func (m *ControllerUnpublishVolumeRequest) Reset()         { *m = ControllerUnpublishVolumeRequest{} }
 func (m *ControllerUnpublishVolumeRequest) String() string { return proto.CompactTextString(m) }
 func (*ControllerUnpublishVolumeRequest) ProtoMessage()    {}
+func (*ControllerUnpublishVolumeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{19}
+}
+
+func (m *ControllerUnpublishVolumeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerUnpublishVolumeRequest.Unmarshal(m, b)
+}
+func (m *ControllerUnpublishVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerUnpublishVolumeRequest.Marshal(b, m, deterministic)
+}
+func (m *ControllerUnpublishVolumeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerUnpublishVolumeRequest.Merge(m, src)
+}
+func (m *ControllerUnpublishVolumeRequest) XXX_Size() int {
+	return xxx_messageInfo_ControllerUnpublishVolumeRequest.Size(m)
+}
+func (m *ControllerUnpublishVolumeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerUnpublishVolumeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ControllerUnpublishVolumeRequest proto.InternalMessageInfo
+
+func (m *ControllerUnpublishVolumeRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
+	return ""
+}
