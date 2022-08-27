@@ -2222,3 +2222,26 @@ func (m *ControllerUnpublishVolumeResponse) XXX_Marshal(b []byte, deterministic 
 func (m *ControllerUnpublishVolumeResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ControllerUnpublishVolumeResponse.Merge(m, src)
 }
+func (m *ControllerUnpublishVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_ControllerUnpublishVolumeResponse.Size(m)
+}
+func (m *ControllerUnpublishVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerUnpublishVolumeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ControllerUnpublishVolumeResponse proto.InternalMessageInfo
+
+type ValidateVolumeCapabilitiesRequest struct {
+	// The ID of the volume to check. This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// Volume context as returned by SP in
+	// CreateVolumeResponse.Volume.volume_context.
+	// This field is OPTIONAL and MUST match the volume_context of the
+	// volume identified by `volume_id`.
+	VolumeContext map[string]string `protobuf:"bytes,2,rep,name=volume_context,json=volumeContext,proto3" json:"volume_context,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// The capabilities that the CO wants to check for the volume. This
+	// call SHALL return "confirmed" only if all the volume capabilities
+	// specified below are supported. This field is REQUIRED.
+	VolumeCapabilities []*VolumeCapability `protobuf:"bytes,3,rep,name=volume_capabilities,json=volumeCapabilities,proto3" json:"volume_capabilities,omitempty"`
+	// See CreateVolumeRequest.parameters.
+	// This field is OPTIONAL.
