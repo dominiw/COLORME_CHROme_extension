@@ -2185,3 +2185,40 @@ func (m *ControllerUnpublishVolumeRequest) GetVolumeId() string {
 	}
 	return ""
 }
+
+func (m *ControllerUnpublishVolumeRequest) GetNodeId() string {
+	if m != nil {
+		return m.NodeId
+	}
+	return ""
+}
+
+func (m *ControllerUnpublishVolumeRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+type ControllerUnpublishVolumeResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ControllerUnpublishVolumeResponse) Reset()         { *m = ControllerUnpublishVolumeResponse{} }
+func (m *ControllerUnpublishVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*ControllerUnpublishVolumeResponse) ProtoMessage()    {}
+func (*ControllerUnpublishVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{20}
+}
+
+func (m *ControllerUnpublishVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerUnpublishVolumeResponse.Unmarshal(m, b)
+}
+func (m *ControllerUnpublishVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerUnpublishVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *ControllerUnpublishVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerUnpublishVolumeResponse.Merge(m, src)
+}
