@@ -2245,3 +2245,34 @@ type ValidateVolumeCapabilitiesRequest struct {
 	VolumeCapabilities []*VolumeCapability `protobuf:"bytes,3,rep,name=volume_capabilities,json=volumeCapabilities,proto3" json:"volume_capabilities,omitempty"`
 	// See CreateVolumeRequest.parameters.
 	// This field is OPTIONAL.
+	Parameters map[string]string `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Secrets required by plugin to complete volume validation request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	Secrets              map[string]string `protobuf:"bytes,5,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *ValidateVolumeCapabilitiesRequest) Reset()         { *m = ValidateVolumeCapabilitiesRequest{} }
+func (m *ValidateVolumeCapabilitiesRequest) String() string { return proto.CompactTextString(m) }
+func (*ValidateVolumeCapabilitiesRequest) ProtoMessage()    {}
+func (*ValidateVolumeCapabilitiesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{21}
+}
+
+func (m *ValidateVolumeCapabilitiesRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ValidateVolumeCapabilitiesRequest.Unmarshal(m, b)
+}
+func (m *ValidateVolumeCapabilitiesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ValidateVolumeCapabilitiesRequest.Marshal(b, m, deterministic)
+}
+func (m *ValidateVolumeCapabilitiesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ValidateVolumeCapabilitiesRequest.Merge(m, src)
+}
+func (m *ValidateVolumeCapabilitiesRequest) XXX_Size() int {
+	return xxx_messageInfo_ValidateVolumeCapabilitiesRequest.Size(m)
+}
+func (m *ValidateVolumeCapabilitiesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ValidateVolumeCapabilitiesRequest.DiscardUnknown(m)
