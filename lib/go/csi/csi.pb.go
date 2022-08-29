@@ -2307,3 +2307,39 @@ func (m *ValidateVolumeCapabilitiesRequest) GetParameters() map[string]string {
 	}
 	return nil
 }
+
+func (m *ValidateVolumeCapabilitiesRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+type ValidateVolumeCapabilitiesResponse struct {
+	// Confirmed indicates to the CO the set of capabilities that the
+	// plugin has validated. This field SHALL only be set to a non-empty
+	// value for successful validation responses.
+	// For successful validation responses, the CO SHALL compare the
+	// fields of this message to the originally requested capabilities in
+	// order to guard against an older plugin reporting "valid" for newer
+	// capability fields that it does not yet understand.
+	// This field is OPTIONAL.
+	Confirmed *ValidateVolumeCapabilitiesResponse_Confirmed `protobuf:"bytes,1,opt,name=confirmed,proto3" json:"confirmed,omitempty"`
+	// Message to the CO if `confirmed` above is empty. This field is
+	// OPTIONAL.
+	// An empty string is equal to an unspecified field value.
+	Message              string   `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ValidateVolumeCapabilitiesResponse) Reset()         { *m = ValidateVolumeCapabilitiesResponse{} }
+func (m *ValidateVolumeCapabilitiesResponse) String() string { return proto.CompactTextString(m) }
+func (*ValidateVolumeCapabilitiesResponse) ProtoMessage()    {}
+func (*ValidateVolumeCapabilitiesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{22}
+}
+
+func (m *ValidateVolumeCapabilitiesResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ValidateVolumeCapabilitiesResponse.Unmarshal(m, b)
