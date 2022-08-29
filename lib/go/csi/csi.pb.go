@@ -2276,3 +2276,34 @@ func (m *ValidateVolumeCapabilitiesRequest) XXX_Size() int {
 }
 func (m *ValidateVolumeCapabilitiesRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_ValidateVolumeCapabilitiesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ValidateVolumeCapabilitiesRequest proto.InternalMessageInfo
+
+func (m *ValidateVolumeCapabilitiesRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
+	return ""
+}
+
+func (m *ValidateVolumeCapabilitiesRequest) GetVolumeContext() map[string]string {
+	if m != nil {
+		return m.VolumeContext
+	}
+	return nil
+}
+
+func (m *ValidateVolumeCapabilitiesRequest) GetVolumeCapabilities() []*VolumeCapability {
+	if m != nil {
+		return m.VolumeCapabilities
+	}
+	return nil
+}
+
+func (m *ValidateVolumeCapabilitiesRequest) GetParameters() map[string]string {
+	if m != nil {
+		return m.Parameters
+	}
+	return nil
+}
