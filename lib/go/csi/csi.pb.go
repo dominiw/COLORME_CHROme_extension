@@ -2376,3 +2376,25 @@ func (m *ValidateVolumeCapabilitiesResponse) GetMessage() string {
 type ValidateVolumeCapabilitiesResponse_Confirmed struct {
 	// Volume context validated by the plugin.
 	// This field is OPTIONAL.
+	VolumeContext map[string]string `protobuf:"bytes,1,rep,name=volume_context,json=volumeContext,proto3" json:"volume_context,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Volume capabilities supported by the plugin.
+	// This field is REQUIRED.
+	VolumeCapabilities []*VolumeCapability `protobuf:"bytes,2,rep,name=volume_capabilities,json=volumeCapabilities,proto3" json:"volume_capabilities,omitempty"`
+	// The volume creation parameters validated by the plugin.
+	// This field is OPTIONAL.
+	Parameters           map[string]string `protobuf:"bytes,3,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *ValidateVolumeCapabilitiesResponse_Confirmed) Reset() {
+	*m = ValidateVolumeCapabilitiesResponse_Confirmed{}
+}
+func (m *ValidateVolumeCapabilitiesResponse_Confirmed) String() string {
+	return proto.CompactTextString(m)
+}
+func (*ValidateVolumeCapabilitiesResponse_Confirmed) ProtoMessage() {}
+func (*ValidateVolumeCapabilitiesResponse_Confirmed) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{22, 0}
+}
