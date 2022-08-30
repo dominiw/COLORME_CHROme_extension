@@ -2343,3 +2343,36 @@ func (*ValidateVolumeCapabilitiesResponse) Descriptor() ([]byte, []int) {
 
 func (m *ValidateVolumeCapabilitiesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ValidateVolumeCapabilitiesResponse.Unmarshal(m, b)
+}
+func (m *ValidateVolumeCapabilitiesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ValidateVolumeCapabilitiesResponse.Marshal(b, m, deterministic)
+}
+func (m *ValidateVolumeCapabilitiesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ValidateVolumeCapabilitiesResponse.Merge(m, src)
+}
+func (m *ValidateVolumeCapabilitiesResponse) XXX_Size() int {
+	return xxx_messageInfo_ValidateVolumeCapabilitiesResponse.Size(m)
+}
+func (m *ValidateVolumeCapabilitiesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ValidateVolumeCapabilitiesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ValidateVolumeCapabilitiesResponse proto.InternalMessageInfo
+
+func (m *ValidateVolumeCapabilitiesResponse) GetConfirmed() *ValidateVolumeCapabilitiesResponse_Confirmed {
+	if m != nil {
+		return m.Confirmed
+	}
+	return nil
+}
+
+func (m *ValidateVolumeCapabilitiesResponse) GetMessage() string {
+	if m != nil {
+		return m.Message
+	}
+	return ""
+}
+
+type ValidateVolumeCapabilitiesResponse_Confirmed struct {
+	// Volume context validated by the plugin.
+	// This field is OPTIONAL.
