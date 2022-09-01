@@ -2398,3 +2398,33 @@ func (*ValidateVolumeCapabilitiesResponse_Confirmed) ProtoMessage() {}
 func (*ValidateVolumeCapabilitiesResponse_Confirmed) Descriptor() ([]byte, []int) {
 	return fileDescriptor_9cdb00adce470e01, []int{22, 0}
 }
+
+func (m *ValidateVolumeCapabilitiesResponse_Confirmed) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ValidateVolumeCapabilitiesResponse_Confirmed.Unmarshal(m, b)
+}
+func (m *ValidateVolumeCapabilitiesResponse_Confirmed) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ValidateVolumeCapabilitiesResponse_Confirmed.Marshal(b, m, deterministic)
+}
+func (m *ValidateVolumeCapabilitiesResponse_Confirmed) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ValidateVolumeCapabilitiesResponse_Confirmed.Merge(m, src)
+}
+func (m *ValidateVolumeCapabilitiesResponse_Confirmed) XXX_Size() int {
+	return xxx_messageInfo_ValidateVolumeCapabilitiesResponse_Confirmed.Size(m)
+}
+func (m *ValidateVolumeCapabilitiesResponse_Confirmed) XXX_DiscardUnknown() {
+	xxx_messageInfo_ValidateVolumeCapabilitiesResponse_Confirmed.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ValidateVolumeCapabilitiesResponse_Confirmed proto.InternalMessageInfo
+
+func (m *ValidateVolumeCapabilitiesResponse_Confirmed) GetVolumeContext() map[string]string {
+	if m != nil {
+		return m.VolumeContext
+	}
+	return nil
+}
+
+func (m *ValidateVolumeCapabilitiesResponse_Confirmed) GetVolumeCapabilities() []*VolumeCapability {
+	if m != nil {
+		return m.VolumeCapabilities
+	}
