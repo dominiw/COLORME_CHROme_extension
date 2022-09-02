@@ -2428,3 +2428,34 @@ func (m *ValidateVolumeCapabilitiesResponse_Confirmed) GetVolumeCapabilities() [
 	if m != nil {
 		return m.VolumeCapabilities
 	}
+	return nil
+}
+
+func (m *ValidateVolumeCapabilitiesResponse_Confirmed) GetParameters() map[string]string {
+	if m != nil {
+		return m.Parameters
+	}
+	return nil
+}
+
+type ListVolumesRequest struct {
+	// If specified (non-zero value), the Plugin MUST NOT return more
+	// entries than this number in the response. If the actual number of
+	// entries is more than this number, the Plugin MUST set `next_token`
+	// in the response which can be used to get the next page of entries
+	// in the subsequent `ListVolumes` call. This field is OPTIONAL. If
+	// not specified (zero value), it means there is no restriction on the
+	// number of entries that can be returned.
+	// The value of this field MUST NOT be negative.
+	MaxEntries int32 `protobuf:"varint,1,opt,name=max_entries,json=maxEntries,proto3" json:"max_entries,omitempty"`
+	// A token to specify where to start paginating. Set this field to
+	// `next_token` returned by a previous `ListVolumes` call to get the
+	// next page of entries. This field is OPTIONAL.
+	// An empty string is equal to an unspecified field value.
+	StartingToken        string   `protobuf:"bytes,2,opt,name=starting_token,json=startingToken,proto3" json:"starting_token,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListVolumesRequest) Reset()         { *m = ListVolumesRequest{} }
