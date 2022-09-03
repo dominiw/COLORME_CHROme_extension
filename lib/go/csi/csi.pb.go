@@ -2459,3 +2459,33 @@ type ListVolumesRequest struct {
 }
 
 func (m *ListVolumesRequest) Reset()         { *m = ListVolumesRequest{} }
+func (m *ListVolumesRequest) String() string { return proto.CompactTextString(m) }
+func (*ListVolumesRequest) ProtoMessage()    {}
+func (*ListVolumesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{23}
+}
+
+func (m *ListVolumesRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListVolumesRequest.Unmarshal(m, b)
+}
+func (m *ListVolumesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListVolumesRequest.Marshal(b, m, deterministic)
+}
+func (m *ListVolumesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListVolumesRequest.Merge(m, src)
+}
+func (m *ListVolumesRequest) XXX_Size() int {
+	return xxx_messageInfo_ListVolumesRequest.Size(m)
+}
+func (m *ListVolumesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListVolumesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListVolumesRequest proto.InternalMessageInfo
+
+func (m *ListVolumesRequest) GetMaxEntries() int32 {
+	if m != nil {
+		return m.MaxEntries
+	}
+	return 0
+}
