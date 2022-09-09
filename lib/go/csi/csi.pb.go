@@ -2489,3 +2489,41 @@ func (m *ListVolumesRequest) GetMaxEntries() int32 {
 	}
 	return 0
 }
+
+func (m *ListVolumesRequest) GetStartingToken() string {
+	if m != nil {
+		return m.StartingToken
+	}
+	return ""
+}
+
+type ListVolumesResponse struct {
+	Entries []*ListVolumesResponse_Entry `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
+	// This token allows you to get the next page of entries for
+	// `ListVolumes` request. If the number of entries is larger than
+	// `max_entries`, use the `next_token` as a value for the
+	// `starting_token` field in the next `ListVolumes` request. This
+	// field is OPTIONAL.
+	// An empty string is equal to an unspecified field value.
+	NextToken            string   `protobuf:"bytes,2,opt,name=next_token,json=nextToken,proto3" json:"next_token,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListVolumesResponse) Reset()         { *m = ListVolumesResponse{} }
+func (m *ListVolumesResponse) String() string { return proto.CompactTextString(m) }
+func (*ListVolumesResponse) ProtoMessage()    {}
+func (*ListVolumesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{24}
+}
+
+func (m *ListVolumesResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListVolumesResponse.Unmarshal(m, b)
+}
+func (m *ListVolumesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListVolumesResponse.Marshal(b, m, deterministic)
+}
+func (m *ListVolumesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListVolumesResponse.Merge(m, src)
+}
