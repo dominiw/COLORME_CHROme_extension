@@ -2527,3 +2527,25 @@ func (m *ListVolumesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 func (m *ListVolumesResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ListVolumesResponse.Merge(m, src)
 }
+func (m *ListVolumesResponse) XXX_Size() int {
+	return xxx_messageInfo_ListVolumesResponse.Size(m)
+}
+func (m *ListVolumesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListVolumesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListVolumesResponse proto.InternalMessageInfo
+
+func (m *ListVolumesResponse) GetEntries() []*ListVolumesResponse_Entry {
+	if m != nil {
+		return m.Entries
+	}
+	return nil
+}
+
+func (m *ListVolumesResponse) GetNextToken() string {
+	if m != nil {
+		return m.NextToken
+	}
+	return ""
+}
