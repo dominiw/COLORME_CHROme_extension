@@ -2549,3 +2549,40 @@ func (m *ListVolumesResponse) GetNextToken() string {
 	}
 	return ""
 }
+
+type ListVolumesResponse_VolumeStatus struct {
+	// A list of all `node_id` of nodes that the volume in this entry
+	// is controller published on.
+	// This field is OPTIONAL. If it is not specified and the SP has
+	// the LIST_VOLUMES_PUBLISHED_NODES controller capability, the CO
+	// MAY assume the volume is not controller published to any nodes.
+	// If the field is not specified and the SP does not have the
+	// LIST_VOLUMES_PUBLISHED_NODES controller capability, the CO MUST
+	// not interpret this field.
+	// published_node_ids MAY include nodes not published to or
+	// reported by the SP. The CO MUST be resilient to that.
+	PublishedNodeIds []string `protobuf:"bytes,1,rep,name=published_node_ids,json=publishedNodeIds,proto3" json:"published_node_ids,omitempty"`
+	// Information about the current condition of the volume.
+	// This field is OPTIONAL.
+	// This field MUST be specified if the
+	// VOLUME_CONDITION controller capability is supported.
+	VolumeCondition      *VolumeCondition `protobuf:"bytes,2,opt,name=volume_condition,json=volumeCondition,proto3" json:"volume_condition,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *ListVolumesResponse_VolumeStatus) Reset()         { *m = ListVolumesResponse_VolumeStatus{} }
+func (m *ListVolumesResponse_VolumeStatus) String() string { return proto.CompactTextString(m) }
+func (*ListVolumesResponse_VolumeStatus) ProtoMessage()    {}
+func (*ListVolumesResponse_VolumeStatus) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{24, 0}
+}
+
+func (m *ListVolumesResponse_VolumeStatus) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListVolumesResponse_VolumeStatus.Unmarshal(m, b)
+}
+func (m *ListVolumesResponse_VolumeStatus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListVolumesResponse_VolumeStatus.Marshal(b, m, deterministic)
+}
+func (m *ListVolumesResponse_VolumeStatus) XXX_Merge(src proto.Message) {
