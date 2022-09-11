@@ -2586,3 +2586,23 @@ func (m *ListVolumesResponse_VolumeStatus) XXX_Marshal(b []byte, deterministic b
 	return xxx_messageInfo_ListVolumesResponse_VolumeStatus.Marshal(b, m, deterministic)
 }
 func (m *ListVolumesResponse_VolumeStatus) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListVolumesResponse_VolumeStatus.Merge(m, src)
+}
+func (m *ListVolumesResponse_VolumeStatus) XXX_Size() int {
+	return xxx_messageInfo_ListVolumesResponse_VolumeStatus.Size(m)
+}
+func (m *ListVolumesResponse_VolumeStatus) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListVolumesResponse_VolumeStatus.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListVolumesResponse_VolumeStatus proto.InternalMessageInfo
+
+func (m *ListVolumesResponse_VolumeStatus) GetPublishedNodeIds() []string {
+	if m != nil {
+		return m.PublishedNodeIds
+	}
+	return nil
+}
+
+func (m *ListVolumesResponse_VolumeStatus) GetVolumeCondition() *VolumeCondition {
+	if m != nil {
