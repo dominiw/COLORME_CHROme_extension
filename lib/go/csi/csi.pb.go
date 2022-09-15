@@ -2606,3 +2606,33 @@ func (m *ListVolumesResponse_VolumeStatus) GetPublishedNodeIds() []string {
 
 func (m *ListVolumesResponse_VolumeStatus) GetVolumeCondition() *VolumeCondition {
 	if m != nil {
+		return m.VolumeCondition
+	}
+	return nil
+}
+
+type ListVolumesResponse_Entry struct {
+	// This field is REQUIRED
+	Volume *Volume `protobuf:"bytes,1,opt,name=volume,proto3" json:"volume,omitempty"`
+	// This field is OPTIONAL. This field MUST be specified if the
+	// LIST_VOLUMES_PUBLISHED_NODES controller capability is
+	// supported.
+	Status               *ListVolumesResponse_VolumeStatus `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                          `json:"-"`
+	XXX_unrecognized     []byte                            `json:"-"`
+	XXX_sizecache        int32                             `json:"-"`
+}
+
+func (m *ListVolumesResponse_Entry) Reset()         { *m = ListVolumesResponse_Entry{} }
+func (m *ListVolumesResponse_Entry) String() string { return proto.CompactTextString(m) }
+func (*ListVolumesResponse_Entry) ProtoMessage()    {}
+func (*ListVolumesResponse_Entry) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{24, 1}
+}
+
+func (m *ListVolumesResponse_Entry) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListVolumesResponse_Entry.Unmarshal(m, b)
+}
+func (m *ListVolumesResponse_Entry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListVolumesResponse_Entry.Marshal(b, m, deterministic)
+}
