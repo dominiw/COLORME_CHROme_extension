@@ -2636,3 +2636,39 @@ func (m *ListVolumesResponse_Entry) XXX_Unmarshal(b []byte) error {
 func (m *ListVolumesResponse_Entry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ListVolumesResponse_Entry.Marshal(b, m, deterministic)
 }
+func (m *ListVolumesResponse_Entry) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListVolumesResponse_Entry.Merge(m, src)
+}
+func (m *ListVolumesResponse_Entry) XXX_Size() int {
+	return xxx_messageInfo_ListVolumesResponse_Entry.Size(m)
+}
+func (m *ListVolumesResponse_Entry) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListVolumesResponse_Entry.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListVolumesResponse_Entry proto.InternalMessageInfo
+
+func (m *ListVolumesResponse_Entry) GetVolume() *Volume {
+	if m != nil {
+		return m.Volume
+	}
+	return nil
+}
+
+func (m *ListVolumesResponse_Entry) GetStatus() *ListVolumesResponse_VolumeStatus {
+	if m != nil {
+		return m.Status
+	}
+	return nil
+}
+
+type ControllerGetVolumeRequest struct {
+	// The ID of the volume to fetch current volume information for.
+	// This field is REQUIRED.
+	VolumeId             string   `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ControllerGetVolumeRequest) Reset()         { *m = ControllerGetVolumeRequest{} }
