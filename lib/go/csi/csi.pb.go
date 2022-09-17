@@ -2672,3 +2672,36 @@ type ControllerGetVolumeRequest struct {
 }
 
 func (m *ControllerGetVolumeRequest) Reset()         { *m = ControllerGetVolumeRequest{} }
+func (m *ControllerGetVolumeRequest) String() string { return proto.CompactTextString(m) }
+func (*ControllerGetVolumeRequest) ProtoMessage()    {}
+func (*ControllerGetVolumeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{25}
+}
+
+func (m *ControllerGetVolumeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerGetVolumeRequest.Unmarshal(m, b)
+}
+func (m *ControllerGetVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerGetVolumeRequest.Marshal(b, m, deterministic)
+}
+func (m *ControllerGetVolumeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerGetVolumeRequest.Merge(m, src)
+}
+func (m *ControllerGetVolumeRequest) XXX_Size() int {
+	return xxx_messageInfo_ControllerGetVolumeRequest.Size(m)
+}
+func (m *ControllerGetVolumeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerGetVolumeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ControllerGetVolumeRequest proto.InternalMessageInfo
+
+func (m *ControllerGetVolumeRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
+	return ""
+}
+
+type ControllerGetVolumeResponse struct {
+	// This field is REQUIRED
