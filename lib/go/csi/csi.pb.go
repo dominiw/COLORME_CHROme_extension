@@ -2705,3 +2705,28 @@ func (m *ControllerGetVolumeRequest) GetVolumeId() string {
 
 type ControllerGetVolumeResponse struct {
 	// This field is REQUIRED
+	Volume *Volume `protobuf:"bytes,1,opt,name=volume,proto3" json:"volume,omitempty"`
+	// This field is REQUIRED.
+	Status               *ControllerGetVolumeResponse_VolumeStatus `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                  `json:"-"`
+	XXX_unrecognized     []byte                                    `json:"-"`
+	XXX_sizecache        int32                                     `json:"-"`
+}
+
+func (m *ControllerGetVolumeResponse) Reset()         { *m = ControllerGetVolumeResponse{} }
+func (m *ControllerGetVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*ControllerGetVolumeResponse) ProtoMessage()    {}
+func (*ControllerGetVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{26}
+}
+
+func (m *ControllerGetVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerGetVolumeResponse.Unmarshal(m, b)
+}
+func (m *ControllerGetVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerGetVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *ControllerGetVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerGetVolumeResponse.Merge(m, src)
+}
+func (m *ControllerGetVolumeResponse) XXX_Size() int {
