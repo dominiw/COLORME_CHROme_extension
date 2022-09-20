@@ -2776,3 +2776,35 @@ func (m *ControllerGetVolumeResponse_VolumeStatus) Reset() {
 }
 func (m *ControllerGetVolumeResponse_VolumeStatus) String() string { return proto.CompactTextString(m) }
 func (*ControllerGetVolumeResponse_VolumeStatus) ProtoMessage()    {}
+func (*ControllerGetVolumeResponse_VolumeStatus) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{26, 0}
+}
+
+func (m *ControllerGetVolumeResponse_VolumeStatus) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerGetVolumeResponse_VolumeStatus.Unmarshal(m, b)
+}
+func (m *ControllerGetVolumeResponse_VolumeStatus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerGetVolumeResponse_VolumeStatus.Marshal(b, m, deterministic)
+}
+func (m *ControllerGetVolumeResponse_VolumeStatus) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerGetVolumeResponse_VolumeStatus.Merge(m, src)
+}
+func (m *ControllerGetVolumeResponse_VolumeStatus) XXX_Size() int {
+	return xxx_messageInfo_ControllerGetVolumeResponse_VolumeStatus.Size(m)
+}
+func (m *ControllerGetVolumeResponse_VolumeStatus) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerGetVolumeResponse_VolumeStatus.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ControllerGetVolumeResponse_VolumeStatus proto.InternalMessageInfo
+
+func (m *ControllerGetVolumeResponse_VolumeStatus) GetPublishedNodeIds() []string {
+	if m != nil {
+		return m.PublishedNodeIds
+	}
+	return nil
+}
+
+func (m *ControllerGetVolumeResponse_VolumeStatus) GetVolumeCondition() *VolumeCondition {
+	if m != nil {
+		return m.VolumeCondition
