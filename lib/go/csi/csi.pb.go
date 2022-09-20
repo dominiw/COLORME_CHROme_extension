@@ -2730,3 +2730,49 @@ func (m *ControllerGetVolumeResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ControllerGetVolumeResponse.Merge(m, src)
 }
 func (m *ControllerGetVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_ControllerGetVolumeResponse.Size(m)
+}
+func (m *ControllerGetVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerGetVolumeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ControllerGetVolumeResponse proto.InternalMessageInfo
+
+func (m *ControllerGetVolumeResponse) GetVolume() *Volume {
+	if m != nil {
+		return m.Volume
+	}
+	return nil
+}
+
+func (m *ControllerGetVolumeResponse) GetStatus() *ControllerGetVolumeResponse_VolumeStatus {
+	if m != nil {
+		return m.Status
+	}
+	return nil
+}
+
+type ControllerGetVolumeResponse_VolumeStatus struct {
+	// A list of all the `node_id` of nodes that this volume is
+	// controller published on.
+	// This field is OPTIONAL.
+	// This field MUST be specified if the LIST_VOLUMES_PUBLISHED_NODES
+	// controller capability is supported.
+	// published_node_ids MAY include nodes not published to or
+	// reported by the SP. The CO MUST be resilient to that.
+	PublishedNodeIds []string `protobuf:"bytes,1,rep,name=published_node_ids,json=publishedNodeIds,proto3" json:"published_node_ids,omitempty"`
+	// Information about the current condition of the volume.
+	// This field is OPTIONAL.
+	// This field MUST be specified if the
+	// VOLUME_CONDITION controller capability is supported.
+	VolumeCondition      *VolumeCondition `protobuf:"bytes,2,opt,name=volume_condition,json=volumeCondition,proto3" json:"volume_condition,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *ControllerGetVolumeResponse_VolumeStatus) Reset() {
+	*m = ControllerGetVolumeResponse_VolumeStatus{}
+}
+func (m *ControllerGetVolumeResponse_VolumeStatus) String() string { return proto.CompactTextString(m) }
+func (*ControllerGetVolumeResponse_VolumeStatus) ProtoMessage()    {}
