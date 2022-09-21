@@ -2808,3 +2808,34 @@ func (m *ControllerGetVolumeResponse_VolumeStatus) GetPublishedNodeIds() []strin
 func (m *ControllerGetVolumeResponse_VolumeStatus) GetVolumeCondition() *VolumeCondition {
 	if m != nil {
 		return m.VolumeCondition
+	}
+	return nil
+}
+
+type GetCapacityRequest struct {
+	// If specified, the Plugin SHALL report the capacity of the storage
+	// that can be used to provision volumes that satisfy ALL of the
+	// specified `volume_capabilities`. These are the same
+	// `volume_capabilities` the CO will use in `CreateVolumeRequest`.
+	// This field is OPTIONAL.
+	VolumeCapabilities []*VolumeCapability `protobuf:"bytes,1,rep,name=volume_capabilities,json=volumeCapabilities,proto3" json:"volume_capabilities,omitempty"`
+	// If specified, the Plugin SHALL report the capacity of the storage
+	// that can be used to provision volumes with the given Plugin
+	// specific `parameters`. These are the same `parameters` the CO will
+	// use in `CreateVolumeRequest`. This field is OPTIONAL.
+	Parameters map[string]string `protobuf:"bytes,2,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// If specified, the Plugin SHALL report the capacity of the storage
+	// that can be used to provision volumes that in the specified
+	// `accessible_topology`. This is the same as the
+	// `accessible_topology` the CO returns in a `CreateVolumeResponse`.
+	// This field is OPTIONAL. This field SHALL NOT be set unless the
+	// plugin advertises the VOLUME_ACCESSIBILITY_CONSTRAINTS capability.
+	AccessibleTopology   *Topology `protobuf:"bytes,3,opt,name=accessible_topology,json=accessibleTopology,proto3" json:"accessible_topology,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
+}
+
+func (m *GetCapacityRequest) Reset()         { *m = GetCapacityRequest{} }
+func (m *GetCapacityRequest) String() string { return proto.CompactTextString(m) }
+func (*GetCapacityRequest) ProtoMessage()    {}
