@@ -2866,3 +2866,38 @@ func (m *GetCapacityRequest) GetVolumeCapabilities() []*VolumeCapability {
 		return m.VolumeCapabilities
 	}
 	return nil
+}
+
+func (m *GetCapacityRequest) GetParameters() map[string]string {
+	if m != nil {
+		return m.Parameters
+	}
+	return nil
+}
+
+func (m *GetCapacityRequest) GetAccessibleTopology() *Topology {
+	if m != nil {
+		return m.AccessibleTopology
+	}
+	return nil
+}
+
+type GetCapacityResponse struct {
+	// The available capacity, in bytes, of the storage that can be used
+	// to provision volumes. If `volume_capabilities` or `parameters` is
+	// specified in the request, the Plugin SHALL take those into
+	// consideration when calculating the available capacity of the
+	// storage. This field is REQUIRED.
+	// The value of this field MUST NOT be negative.
+	AvailableCapacity int64 `protobuf:"varint,1,opt,name=available_capacity,json=availableCapacity,proto3" json:"available_capacity,omitempty"`
+	// The largest size that may be used in a
+	// CreateVolumeRequest.capacity_range.required_bytes field
+	// to create a volume with the same parameters as those in
+	// GetCapacityRequest.
+	//
+	// If `volume_capabilities` or `parameters` is
+	// specified in the request, the Plugin SHALL take those into
+	// consideration when calculating the minimum volume size of the
+	// storage.
+	//
+	// This field is OPTIONAL. MUST NOT be negative.
