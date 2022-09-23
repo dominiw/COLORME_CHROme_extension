@@ -2928,3 +2928,33 @@ type GetCapacityResponse struct {
 }
 
 func (m *GetCapacityResponse) Reset()         { *m = GetCapacityResponse{} }
+func (m *GetCapacityResponse) String() string { return proto.CompactTextString(m) }
+func (*GetCapacityResponse) ProtoMessage()    {}
+func (*GetCapacityResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{28}
+}
+
+func (m *GetCapacityResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetCapacityResponse.Unmarshal(m, b)
+}
+func (m *GetCapacityResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetCapacityResponse.Marshal(b, m, deterministic)
+}
+func (m *GetCapacityResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetCapacityResponse.Merge(m, src)
+}
+func (m *GetCapacityResponse) XXX_Size() int {
+	return xxx_messageInfo_GetCapacityResponse.Size(m)
+}
+func (m *GetCapacityResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetCapacityResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetCapacityResponse proto.InternalMessageInfo
+
+func (m *GetCapacityResponse) GetAvailableCapacity() int64 {
+	if m != nil {
+		return m.AvailableCapacity
+	}
+	return 0
+}
