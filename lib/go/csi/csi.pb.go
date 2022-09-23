@@ -2901,3 +2901,30 @@ type GetCapacityResponse struct {
 	// storage.
 	//
 	// This field is OPTIONAL. MUST NOT be negative.
+	// The Plugin SHOULD provide a value for this field if it has
+	// a maximum size for individual volumes and leave it unset
+	// otherwise. COs MAY use it to make decision about
+	// where to create volumes.
+	MaximumVolumeSize *wrappers.Int64Value `protobuf:"bytes,2,opt,name=maximum_volume_size,json=maximumVolumeSize,proto3" json:"maximum_volume_size,omitempty"`
+	// The smallest size that may be used in a
+	// CreateVolumeRequest.capacity_range.limit_bytes field
+	// to create a volume with the same parameters as those in
+	// GetCapacityRequest.
+	//
+	// If `volume_capabilities` or `parameters` is
+	// specified in the request, the Plugin SHALL take those into
+	// consideration when calculating the maximum volume size of the
+	// storage.
+	//
+	// This field is OPTIONAL. MUST NOT be negative.
+	// The Plugin SHOULD provide a value for this field if it has
+	// a minimum size for individual volumes and leave it unset
+	// otherwise. COs MAY use it to make decision about
+	// where to create volumes.
+	MinimumVolumeSize    *wrappers.Int64Value `protobuf:"bytes,3,opt,name=minimum_volume_size,json=minimumVolumeSize,proto3" json:"minimum_volume_size,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
+}
+
+func (m *GetCapacityResponse) Reset()         { *m = GetCapacityResponse{} }
