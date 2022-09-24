@@ -2958,3 +2958,30 @@ func (m *GetCapacityResponse) GetAvailableCapacity() int64 {
 	}
 	return 0
 }
+
+func (m *GetCapacityResponse) GetMaximumVolumeSize() *wrappers.Int64Value {
+	if m != nil {
+		return m.MaximumVolumeSize
+	}
+	return nil
+}
+
+func (m *GetCapacityResponse) GetMinimumVolumeSize() *wrappers.Int64Value {
+	if m != nil {
+		return m.MinimumVolumeSize
+	}
+	return nil
+}
+
+type ControllerGetCapabilitiesRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ControllerGetCapabilitiesRequest) Reset()         { *m = ControllerGetCapabilitiesRequest{} }
+func (m *ControllerGetCapabilitiesRequest) String() string { return proto.CompactTextString(m) }
+func (*ControllerGetCapabilitiesRequest) ProtoMessage()    {}
+func (*ControllerGetCapabilitiesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{29}
+}
