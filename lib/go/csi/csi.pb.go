@@ -2985,3 +2985,33 @@ func (*ControllerGetCapabilitiesRequest) ProtoMessage()    {}
 func (*ControllerGetCapabilitiesRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_9cdb00adce470e01, []int{29}
 }
+
+func (m *ControllerGetCapabilitiesRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerGetCapabilitiesRequest.Unmarshal(m, b)
+}
+func (m *ControllerGetCapabilitiesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerGetCapabilitiesRequest.Marshal(b, m, deterministic)
+}
+func (m *ControllerGetCapabilitiesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerGetCapabilitiesRequest.Merge(m, src)
+}
+func (m *ControllerGetCapabilitiesRequest) XXX_Size() int {
+	return xxx_messageInfo_ControllerGetCapabilitiesRequest.Size(m)
+}
+func (m *ControllerGetCapabilitiesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerGetCapabilitiesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ControllerGetCapabilitiesRequest proto.InternalMessageInfo
+
+type ControllerGetCapabilitiesResponse struct {
+	// All the capabilities that the controller service supports. This
+	// field is OPTIONAL.
+	Capabilities         []*ControllerServiceCapability `protobuf:"bytes,1,rep,name=capabilities,proto3" json:"capabilities,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                       `json:"-"`
+	XXX_unrecognized     []byte                         `json:"-"`
+	XXX_sizecache        int32                          `json:"-"`
+}
+
+func (m *ControllerGetCapabilitiesResponse) Reset()         { *m = ControllerGetCapabilitiesResponse{} }
+func (m *ControllerGetCapabilitiesResponse) String() string { return proto.CompactTextString(m) }
