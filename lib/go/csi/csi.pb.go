@@ -3015,3 +3015,34 @@ type ControllerGetCapabilitiesResponse struct {
 
 func (m *ControllerGetCapabilitiesResponse) Reset()         { *m = ControllerGetCapabilitiesResponse{} }
 func (m *ControllerGetCapabilitiesResponse) String() string { return proto.CompactTextString(m) }
+func (*ControllerGetCapabilitiesResponse) ProtoMessage()    {}
+func (*ControllerGetCapabilitiesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{30}
+}
+
+func (m *ControllerGetCapabilitiesResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerGetCapabilitiesResponse.Unmarshal(m, b)
+}
+func (m *ControllerGetCapabilitiesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerGetCapabilitiesResponse.Marshal(b, m, deterministic)
+}
+func (m *ControllerGetCapabilitiesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerGetCapabilitiesResponse.Merge(m, src)
+}
+func (m *ControllerGetCapabilitiesResponse) XXX_Size() int {
+	return xxx_messageInfo_ControllerGetCapabilitiesResponse.Size(m)
+}
+func (m *ControllerGetCapabilitiesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerGetCapabilitiesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ControllerGetCapabilitiesResponse proto.InternalMessageInfo
+
+func (m *ControllerGetCapabilitiesResponse) GetCapabilities() []*ControllerServiceCapability {
+	if m != nil {
+		return m.Capabilities
+	}
+	return nil
+}
+
+// Specifies a capability of the controller service.
