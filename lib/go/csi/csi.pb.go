@@ -3046,3 +3046,29 @@ func (m *ControllerGetCapabilitiesResponse) GetCapabilities() []*ControllerServi
 }
 
 // Specifies a capability of the controller service.
+type ControllerServiceCapability struct {
+	// Types that are valid to be assigned to Type:
+	//
+	//	*ControllerServiceCapability_Rpc
+	Type                 isControllerServiceCapability_Type `protobuf_oneof:"type"`
+	XXX_NoUnkeyedLiteral struct{}                           `json:"-"`
+	XXX_unrecognized     []byte                             `json:"-"`
+	XXX_sizecache        int32                              `json:"-"`
+}
+
+func (m *ControllerServiceCapability) Reset()         { *m = ControllerServiceCapability{} }
+func (m *ControllerServiceCapability) String() string { return proto.CompactTextString(m) }
+func (*ControllerServiceCapability) ProtoMessage()    {}
+func (*ControllerServiceCapability) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{31}
+}
+
+func (m *ControllerServiceCapability) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerServiceCapability.Unmarshal(m, b)
+}
+func (m *ControllerServiceCapability) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerServiceCapability.Marshal(b, m, deterministic)
+}
+func (m *ControllerServiceCapability) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerServiceCapability.Merge(m, src)
+}
