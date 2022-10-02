@@ -3072,3 +3072,35 @@ func (m *ControllerServiceCapability) XXX_Marshal(b []byte, deterministic bool) 
 func (m *ControllerServiceCapability) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ControllerServiceCapability.Merge(m, src)
 }
+func (m *ControllerServiceCapability) XXX_Size() int {
+	return xxx_messageInfo_ControllerServiceCapability.Size(m)
+}
+func (m *ControllerServiceCapability) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerServiceCapability.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ControllerServiceCapability proto.InternalMessageInfo
+
+type isControllerServiceCapability_Type interface {
+	isControllerServiceCapability_Type()
+}
+
+type ControllerServiceCapability_Rpc struct {
+	Rpc *ControllerServiceCapability_RPC `protobuf:"bytes,1,opt,name=rpc,proto3,oneof"`
+}
+
+func (*ControllerServiceCapability_Rpc) isControllerServiceCapability_Type() {}
+
+func (m *ControllerServiceCapability) GetType() isControllerServiceCapability_Type {
+	if m != nil {
+		return m.Type
+	}
+	return nil
+}
+
+func (m *ControllerServiceCapability) GetRpc() *ControllerServiceCapability_RPC {
+	if x, ok := m.GetType().(*ControllerServiceCapability_Rpc); ok {
+		return x.Rpc
+	}
+	return nil
+}
