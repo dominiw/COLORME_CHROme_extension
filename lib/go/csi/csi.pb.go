@@ -3104,3 +3104,37 @@ func (m *ControllerServiceCapability) GetRpc() *ControllerServiceCapability_RPC 
 	}
 	return nil
 }
+
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*ControllerServiceCapability) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
+		(*ControllerServiceCapability_Rpc)(nil),
+	}
+}
+
+type ControllerServiceCapability_RPC struct {
+	Type                 ControllerServiceCapability_RPC_Type `protobuf:"varint,1,opt,name=type,proto3,enum=csi.v1.ControllerServiceCapability_RPC_Type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                             `json:"-"`
+	XXX_unrecognized     []byte                               `json:"-"`
+	XXX_sizecache        int32                                `json:"-"`
+}
+
+func (m *ControllerServiceCapability_RPC) Reset()         { *m = ControllerServiceCapability_RPC{} }
+func (m *ControllerServiceCapability_RPC) String() string { return proto.CompactTextString(m) }
+func (*ControllerServiceCapability_RPC) ProtoMessage()    {}
+func (*ControllerServiceCapability_RPC) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{31, 0}
+}
+
+func (m *ControllerServiceCapability_RPC) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerServiceCapability_RPC.Unmarshal(m, b)
+}
+func (m *ControllerServiceCapability_RPC) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerServiceCapability_RPC.Marshal(b, m, deterministic)
+}
+func (m *ControllerServiceCapability_RPC) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerServiceCapability_RPC.Merge(m, src)
+}
+func (m *ControllerServiceCapability_RPC) XXX_Size() int {
+	return xxx_messageInfo_ControllerServiceCapability_RPC.Size(m)
+}
