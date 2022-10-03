@@ -3138,3 +3138,31 @@ func (m *ControllerServiceCapability_RPC) XXX_Merge(src proto.Message) {
 func (m *ControllerServiceCapability_RPC) XXX_Size() int {
 	return xxx_messageInfo_ControllerServiceCapability_RPC.Size(m)
 }
+func (m *ControllerServiceCapability_RPC) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerServiceCapability_RPC.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ControllerServiceCapability_RPC proto.InternalMessageInfo
+
+func (m *ControllerServiceCapability_RPC) GetType() ControllerServiceCapability_RPC_Type {
+	if m != nil {
+		return m.Type
+	}
+	return ControllerServiceCapability_RPC_UNKNOWN
+}
+
+type CreateSnapshotRequest struct {
+	// The ID of the source volume to be snapshotted.
+	// This field is REQUIRED.
+	SourceVolumeId string `protobuf:"bytes,1,opt,name=source_volume_id,json=sourceVolumeId,proto3" json:"source_volume_id,omitempty"`
+	// The suggested name for the snapshot. This field is REQUIRED for
+	// idempotency.
+	// Any Unicode string that conforms to the length limit is allowed
+	// except those containing the following banned characters:
+	// U+0000-U+0008, U+000B, U+000C, U+000E-U+001F, U+007F-U+009F.
+	// (These are control characters other than commonly used whitespace.)
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Secrets required by plugin to complete snapshot creation request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	Secrets map[string]string `protobuf:"bytes,3,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
