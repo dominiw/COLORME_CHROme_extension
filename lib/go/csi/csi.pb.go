@@ -3166,3 +3166,36 @@ type CreateSnapshotRequest struct {
 	// This field is OPTIONAL. Refer to the `Secrets Requirements`
 	// section on how to use this field.
 	Secrets map[string]string `protobuf:"bytes,3,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Plugin specific parameters passed in as opaque key-value pairs.
+	// This field is OPTIONAL. The Plugin is responsible for parsing and
+	// validating these parameters. COs will treat these as opaque.
+	// Use cases for opaque parameters:
+	//   - Specify a policy to automatically clean up the snapshot.
+	//   - Specify an expiration date for the snapshot.
+	//   - Specify whether the snapshot is readonly or read/write.
+	//   - Specify if the snapshot should be replicated to some place.
+	//   - Specify primary or secondary for replication systems that
+	//     support snapshotting only on primary.
+	Parameters           map[string]string `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *CreateSnapshotRequest) Reset()         { *m = CreateSnapshotRequest{} }
+func (m *CreateSnapshotRequest) String() string { return proto.CompactTextString(m) }
+func (*CreateSnapshotRequest) ProtoMessage()    {}
+func (*CreateSnapshotRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{32}
+}
+
+func (m *CreateSnapshotRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateSnapshotRequest.Unmarshal(m, b)
+}
+func (m *CreateSnapshotRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateSnapshotRequest.Marshal(b, m, deterministic)
+}
+func (m *CreateSnapshotRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateSnapshotRequest.Merge(m, src)
+}
+func (m *CreateSnapshotRequest) XXX_Size() int {
