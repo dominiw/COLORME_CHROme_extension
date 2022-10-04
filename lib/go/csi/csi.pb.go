@@ -3199,3 +3199,35 @@ func (m *CreateSnapshotRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CreateSnapshotRequest.Merge(m, src)
 }
 func (m *CreateSnapshotRequest) XXX_Size() int {
+	return xxx_messageInfo_CreateSnapshotRequest.Size(m)
+}
+func (m *CreateSnapshotRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateSnapshotRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateSnapshotRequest proto.InternalMessageInfo
+
+func (m *CreateSnapshotRequest) GetSourceVolumeId() string {
+	if m != nil {
+		return m.SourceVolumeId
+	}
+	return ""
+}
+
+func (m *CreateSnapshotRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *CreateSnapshotRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+func (m *CreateSnapshotRequest) GetParameters() map[string]string {
+	if m != nil {
+		return m.Parameters
