@@ -3231,3 +3231,43 @@ func (m *CreateSnapshotRequest) GetSecrets() map[string]string {
 func (m *CreateSnapshotRequest) GetParameters() map[string]string {
 	if m != nil {
 		return m.Parameters
+	}
+	return nil
+}
+
+type CreateSnapshotResponse struct {
+	// Contains all attributes of the newly created snapshot that are
+	// relevant to the CO along with information required by the Plugin
+	// to uniquely identify the snapshot. This field is REQUIRED.
+	Snapshot             *Snapshot `protobuf:"bytes,1,opt,name=snapshot,proto3" json:"snapshot,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
+}
+
+func (m *CreateSnapshotResponse) Reset()         { *m = CreateSnapshotResponse{} }
+func (m *CreateSnapshotResponse) String() string { return proto.CompactTextString(m) }
+func (*CreateSnapshotResponse) ProtoMessage()    {}
+func (*CreateSnapshotResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{33}
+}
+
+func (m *CreateSnapshotResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateSnapshotResponse.Unmarshal(m, b)
+}
+func (m *CreateSnapshotResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateSnapshotResponse.Marshal(b, m, deterministic)
+}
+func (m *CreateSnapshotResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateSnapshotResponse.Merge(m, src)
+}
+func (m *CreateSnapshotResponse) XXX_Size() int {
+	return xxx_messageInfo_CreateSnapshotResponse.Size(m)
+}
+func (m *CreateSnapshotResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateSnapshotResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateSnapshotResponse proto.InternalMessageInfo
+
+func (m *CreateSnapshotResponse) GetSnapshot() *Snapshot {
