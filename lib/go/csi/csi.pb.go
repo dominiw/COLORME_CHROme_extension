@@ -3292,3 +3292,47 @@ type Snapshot struct {
 	// This field MUST contain enough information to uniquely identify
 	// this specific snapshot vs all other snapshots supported by this
 	// plugin.
+	// This field SHALL be used by the CO in subsequent calls to refer to
+	// this snapshot.
+	// The SP is NOT responsible for global uniqueness of snapshot_id
+	// across multiple SPs.
+	SnapshotId string `protobuf:"bytes,2,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
+	// Identity information for the source volume. Note that creating a
+	// snapshot from a snapshot is not supported here so the source has to
+	// be a volume. This field is REQUIRED.
+	SourceVolumeId string `protobuf:"bytes,3,opt,name=source_volume_id,json=sourceVolumeId,proto3" json:"source_volume_id,omitempty"`
+	// Timestamp when the point-in-time snapshot is taken on the storage
+	// system. This field is REQUIRED.
+	CreationTime *timestamp.Timestamp `protobuf:"bytes,4,opt,name=creation_time,json=creationTime,proto3" json:"creation_time,omitempty"`
+	// Indicates if a snapshot is ready to use as a
+	// `volume_content_source` in a `CreateVolumeRequest`. The default
+	// value is false. This field is REQUIRED.
+	ReadyToUse bool `protobuf:"varint,5,opt,name=ready_to_use,json=readyToUse,proto3" json:"ready_to_use,omitempty"`
+	// The ID of the volume group snapshot that this snapshot is part of.
+	// It uniquely identifies the group snapshot on the storage system.
+	// This field is OPTIONAL.
+	// If this snapshot is a member of a volume group snapshot, and it
+	// MUST NOT be deleted as a stand alone snapshot, then the SP
+	// MUST provide the ID of the volume group snapshot in this field.
+	// If provided, CO MUST use this field in subsequent volume group
+	// snapshot operations to indicate that this snapshot is part of the
+	// specified group snapshot.
+	// If not provided, CO SHALL treat the snapshot as independent,
+	// and SP SHALL allow it to be deleted separately.
+	// If this message is inside a VolumeGroupSnapshot message, the value
+	// MUST be the same as the group_snapshot_id in that message.
+	GroupSnapshotId      string   `protobuf:"bytes,6,opt,name=group_snapshot_id,json=groupSnapshotId,proto3" json:"group_snapshot_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Snapshot) Reset()         { *m = Snapshot{} }
+func (m *Snapshot) String() string { return proto.CompactTextString(m) }
+func (*Snapshot) ProtoMessage()    {}
+func (*Snapshot) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{34}
+}
+
+func (m *Snapshot) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Snapshot.Unmarshal(m, b)
