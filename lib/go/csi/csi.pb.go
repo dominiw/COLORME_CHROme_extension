@@ -3368,3 +3368,21 @@ func (m *Snapshot) GetSnapshotId() string {
 
 func (m *Snapshot) GetSourceVolumeId() string {
 	if m != nil {
+		return m.SourceVolumeId
+	}
+	return ""
+}
+
+func (m *Snapshot) GetCreationTime() *timestamp.Timestamp {
+	if m != nil {
+		return m.CreationTime
+	}
+	return nil
+}
+
+func (m *Snapshot) GetReadyToUse() bool {
+	if m != nil {
+		return m.ReadyToUse
+	}
+	return false
+}
