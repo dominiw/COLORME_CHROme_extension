@@ -3413,3 +3413,32 @@ func (*DeleteSnapshotRequest) ProtoMessage()    {}
 func (*DeleteSnapshotRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_9cdb00adce470e01, []int{35}
 }
+
+func (m *DeleteSnapshotRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteSnapshotRequest.Unmarshal(m, b)
+}
+func (m *DeleteSnapshotRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteSnapshotRequest.Marshal(b, m, deterministic)
+}
+func (m *DeleteSnapshotRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteSnapshotRequest.Merge(m, src)
+}
+func (m *DeleteSnapshotRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteSnapshotRequest.Size(m)
+}
+func (m *DeleteSnapshotRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteSnapshotRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteSnapshotRequest proto.InternalMessageInfo
+
+func (m *DeleteSnapshotRequest) GetSnapshotId() string {
+	if m != nil {
+		return m.SnapshotId
+	}
+	return ""
+}
+
+func (m *DeleteSnapshotRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
