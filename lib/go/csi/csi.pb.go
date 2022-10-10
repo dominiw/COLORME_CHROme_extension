@@ -3386,3 +3386,30 @@ func (m *Snapshot) GetReadyToUse() bool {
 	}
 	return false
 }
+
+func (m *Snapshot) GetGroupSnapshotId() string {
+	if m != nil {
+		return m.GroupSnapshotId
+	}
+	return ""
+}
+
+type DeleteSnapshotRequest struct {
+	// The ID of the snapshot to be deleted.
+	// This field is REQUIRED.
+	SnapshotId string `protobuf:"bytes,1,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
+	// Secrets required by plugin to complete snapshot deletion request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	Secrets              map[string]string `protobuf:"bytes,2,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *DeleteSnapshotRequest) Reset()         { *m = DeleteSnapshotRequest{} }
+func (m *DeleteSnapshotRequest) String() string { return proto.CompactTextString(m) }
+func (*DeleteSnapshotRequest) ProtoMessage()    {}
+func (*DeleteSnapshotRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{35}
+}
