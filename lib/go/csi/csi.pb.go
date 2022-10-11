@@ -3442,3 +3442,33 @@ func (m *DeleteSnapshotRequest) GetSnapshotId() string {
 func (m *DeleteSnapshotRequest) GetSecrets() map[string]string {
 	if m != nil {
 		return m.Secrets
+	}
+	return nil
+}
+
+type DeleteSnapshotResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteSnapshotResponse) Reset()         { *m = DeleteSnapshotResponse{} }
+func (m *DeleteSnapshotResponse) String() string { return proto.CompactTextString(m) }
+func (*DeleteSnapshotResponse) ProtoMessage()    {}
+func (*DeleteSnapshotResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{36}
+}
+
+func (m *DeleteSnapshotResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteSnapshotResponse.Unmarshal(m, b)
+}
+func (m *DeleteSnapshotResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteSnapshotResponse.Marshal(b, m, deterministic)
+}
+func (m *DeleteSnapshotResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteSnapshotResponse.Merge(m, src)
+}
+func (m *DeleteSnapshotResponse) XXX_Size() int {
+	return xxx_messageInfo_DeleteSnapshotResponse.Size(m)
+}
+func (m *DeleteSnapshotResponse) XXX_DiscardUnknown() {
