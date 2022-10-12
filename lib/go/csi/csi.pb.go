@@ -3472,3 +3472,41 @@ func (m *DeleteSnapshotResponse) XXX_Size() int {
 	return xxx_messageInfo_DeleteSnapshotResponse.Size(m)
 }
 func (m *DeleteSnapshotResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteSnapshotResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteSnapshotResponse proto.InternalMessageInfo
+
+// List all snapshots on the storage system regardless of how they were
+// created.
+type ListSnapshotsRequest struct {
+	// If specified (non-zero value), the Plugin MUST NOT return more
+	// entries than this number in the response. If the actual number of
+	// entries is more than this number, the Plugin MUST set `next_token`
+	// in the response which can be used to get the next page of entries
+	// in the subsequent `ListSnapshots` call. This field is OPTIONAL. If
+	// not specified (zero value), it means there is no restriction on the
+	// number of entries that can be returned.
+	// The value of this field MUST NOT be negative.
+	MaxEntries int32 `protobuf:"varint,1,opt,name=max_entries,json=maxEntries,proto3" json:"max_entries,omitempty"`
+	// A token to specify where to start paginating. Set this field to
+	// `next_token` returned by a previous `ListSnapshots` call to get the
+	// next page of entries. This field is OPTIONAL.
+	// An empty string is equal to an unspecified field value.
+	StartingToken string `protobuf:"bytes,2,opt,name=starting_token,json=startingToken,proto3" json:"starting_token,omitempty"`
+	// Identity information for the source volume. This field is OPTIONAL.
+	// It can be used to list snapshots by volume.
+	SourceVolumeId string `protobuf:"bytes,3,opt,name=source_volume_id,json=sourceVolumeId,proto3" json:"source_volume_id,omitempty"`
+	// Identity information for a specific snapshot. This field is
+	// OPTIONAL. It can be used to list only a specific snapshot.
+	// ListSnapshots will return with current snapshot information
+	// and will not block if the snapshot is being processed after
+	// it is cut.
+	SnapshotId string `protobuf:"bytes,4,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
+	// Secrets required by plugin to complete ListSnapshot request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	Secrets              map[string]string `protobuf:"bytes,5,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
