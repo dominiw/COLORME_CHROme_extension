@@ -3510,3 +3510,33 @@ type ListSnapshotsRequest struct {
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *ListSnapshotsRequest) Reset()         { *m = ListSnapshotsRequest{} }
+func (m *ListSnapshotsRequest) String() string { return proto.CompactTextString(m) }
+func (*ListSnapshotsRequest) ProtoMessage()    {}
+func (*ListSnapshotsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{37}
+}
+
+func (m *ListSnapshotsRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListSnapshotsRequest.Unmarshal(m, b)
+}
+func (m *ListSnapshotsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListSnapshotsRequest.Marshal(b, m, deterministic)
+}
+func (m *ListSnapshotsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListSnapshotsRequest.Merge(m, src)
+}
+func (m *ListSnapshotsRequest) XXX_Size() int {
+	return xxx_messageInfo_ListSnapshotsRequest.Size(m)
+}
+func (m *ListSnapshotsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListSnapshotsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListSnapshotsRequest proto.InternalMessageInfo
+
+func (m *ListSnapshotsRequest) GetMaxEntries() int32 {
+	if m != nil {
+		return m.MaxEntries
