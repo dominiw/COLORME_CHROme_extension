@@ -3540,3 +3540,38 @@ var xxx_messageInfo_ListSnapshotsRequest proto.InternalMessageInfo
 func (m *ListSnapshotsRequest) GetMaxEntries() int32 {
 	if m != nil {
 		return m.MaxEntries
+	}
+	return 0
+}
+
+func (m *ListSnapshotsRequest) GetStartingToken() string {
+	if m != nil {
+		return m.StartingToken
+	}
+	return ""
+}
+
+func (m *ListSnapshotsRequest) GetSourceVolumeId() string {
+	if m != nil {
+		return m.SourceVolumeId
+	}
+	return ""
+}
+
+func (m *ListSnapshotsRequest) GetSnapshotId() string {
+	if m != nil {
+		return m.SnapshotId
+	}
+	return ""
+}
+
+func (m *ListSnapshotsRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+type ListSnapshotsResponse struct {
+	Entries []*ListSnapshotsResponse_Entry `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
+	// This token allows you to get the next page of entries for
