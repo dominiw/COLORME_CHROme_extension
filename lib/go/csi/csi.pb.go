@@ -3575,3 +3575,34 @@ func (m *ListSnapshotsRequest) GetSecrets() map[string]string {
 type ListSnapshotsResponse struct {
 	Entries []*ListSnapshotsResponse_Entry `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
 	// This token allows you to get the next page of entries for
+	// `ListSnapshots` request. If the number of entries is larger than
+	// `max_entries`, use the `next_token` as a value for the
+	// `starting_token` field in the next `ListSnapshots` request. This
+	// field is OPTIONAL.
+	// An empty string is equal to an unspecified field value.
+	NextToken            string   `protobuf:"bytes,2,opt,name=next_token,json=nextToken,proto3" json:"next_token,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListSnapshotsResponse) Reset()         { *m = ListSnapshotsResponse{} }
+func (m *ListSnapshotsResponse) String() string { return proto.CompactTextString(m) }
+func (*ListSnapshotsResponse) ProtoMessage()    {}
+func (*ListSnapshotsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{38}
+}
+
+func (m *ListSnapshotsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListSnapshotsResponse.Unmarshal(m, b)
+}
+func (m *ListSnapshotsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListSnapshotsResponse.Marshal(b, m, deterministic)
+}
+func (m *ListSnapshotsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListSnapshotsResponse.Merge(m, src)
+}
+func (m *ListSnapshotsResponse) XXX_Size() int {
+	return xxx_messageInfo_ListSnapshotsResponse.Size(m)
+}
+func (m *ListSnapshotsResponse) XXX_DiscardUnknown() {
