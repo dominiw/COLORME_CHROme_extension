@@ -3606,3 +3606,28 @@ func (m *ListSnapshotsResponse) XXX_Size() int {
 	return xxx_messageInfo_ListSnapshotsResponse.Size(m)
 }
 func (m *ListSnapshotsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListSnapshotsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListSnapshotsResponse proto.InternalMessageInfo
+
+func (m *ListSnapshotsResponse) GetEntries() []*ListSnapshotsResponse_Entry {
+	if m != nil {
+		return m.Entries
+	}
+	return nil
+}
+
+func (m *ListSnapshotsResponse) GetNextToken() string {
+	if m != nil {
+		return m.NextToken
+	}
+	return ""
+}
+
+type ListSnapshotsResponse_Entry struct {
+	Snapshot             *Snapshot `protobuf:"bytes,1,opt,name=snapshot,proto3" json:"snapshot,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
+}
