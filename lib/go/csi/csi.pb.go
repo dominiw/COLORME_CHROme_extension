@@ -3668,3 +3668,43 @@ type ControllerExpandVolumeRequest struct {
 	// The ID of the volume to expand. This field is REQUIRED.
 	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
 	// This allows CO to specify the capacity requirements of the volume
+	// after expansion. This field is REQUIRED.
+	CapacityRange *CapacityRange `protobuf:"bytes,2,opt,name=capacity_range,json=capacityRange,proto3" json:"capacity_range,omitempty"`
+	// Secrets required by the plugin for expanding the volume.
+	// This field is OPTIONAL.
+	Secrets map[string]string `protobuf:"bytes,3,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Volume capability describing how the CO intends to use this volume.
+	// This allows SP to determine if volume is being used as a block
+	// device or mounted file system. For example - if volume is
+	// being used as a block device - the SP MAY set
+	// node_expansion_required to false in ControllerExpandVolumeResponse
+	// to skip invocation of NodeExpandVolume on the node by the CO.
+	// This is an OPTIONAL field.
+	VolumeCapability     *VolumeCapability `protobuf:"bytes,4,opt,name=volume_capability,json=volumeCapability,proto3" json:"volume_capability,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *ControllerExpandVolumeRequest) Reset()         { *m = ControllerExpandVolumeRequest{} }
+func (m *ControllerExpandVolumeRequest) String() string { return proto.CompactTextString(m) }
+func (*ControllerExpandVolumeRequest) ProtoMessage()    {}
+func (*ControllerExpandVolumeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{39}
+}
+
+func (m *ControllerExpandVolumeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerExpandVolumeRequest.Unmarshal(m, b)
+}
+func (m *ControllerExpandVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerExpandVolumeRequest.Marshal(b, m, deterministic)
+}
+func (m *ControllerExpandVolumeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerExpandVolumeRequest.Merge(m, src)
+}
+func (m *ControllerExpandVolumeRequest) XXX_Size() int {
+	return xxx_messageInfo_ControllerExpandVolumeRequest.Size(m)
+}
+func (m *ControllerExpandVolumeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerExpandVolumeRequest.DiscardUnknown(m)
+}
