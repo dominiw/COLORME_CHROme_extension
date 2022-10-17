@@ -3631,3 +3631,40 @@ type ListSnapshotsResponse_Entry struct {
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
 }
+
+func (m *ListSnapshotsResponse_Entry) Reset()         { *m = ListSnapshotsResponse_Entry{} }
+func (m *ListSnapshotsResponse_Entry) String() string { return proto.CompactTextString(m) }
+func (*ListSnapshotsResponse_Entry) ProtoMessage()    {}
+func (*ListSnapshotsResponse_Entry) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{38, 0}
+}
+
+func (m *ListSnapshotsResponse_Entry) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListSnapshotsResponse_Entry.Unmarshal(m, b)
+}
+func (m *ListSnapshotsResponse_Entry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListSnapshotsResponse_Entry.Marshal(b, m, deterministic)
+}
+func (m *ListSnapshotsResponse_Entry) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListSnapshotsResponse_Entry.Merge(m, src)
+}
+func (m *ListSnapshotsResponse_Entry) XXX_Size() int {
+	return xxx_messageInfo_ListSnapshotsResponse_Entry.Size(m)
+}
+func (m *ListSnapshotsResponse_Entry) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListSnapshotsResponse_Entry.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListSnapshotsResponse_Entry proto.InternalMessageInfo
+
+func (m *ListSnapshotsResponse_Entry) GetSnapshot() *Snapshot {
+	if m != nil {
+		return m.Snapshot
+	}
+	return nil
+}
+
+type ControllerExpandVolumeRequest struct {
+	// The ID of the volume to expand. This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// This allows CO to specify the capacity requirements of the volume
