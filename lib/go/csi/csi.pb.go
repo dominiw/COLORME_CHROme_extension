@@ -3708,3 +3708,35 @@ func (m *ControllerExpandVolumeRequest) XXX_Size() int {
 func (m *ControllerExpandVolumeRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_ControllerExpandVolumeRequest.DiscardUnknown(m)
 }
+
+var xxx_messageInfo_ControllerExpandVolumeRequest proto.InternalMessageInfo
+
+func (m *ControllerExpandVolumeRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
+	return ""
+}
+
+func (m *ControllerExpandVolumeRequest) GetCapacityRange() *CapacityRange {
+	if m != nil {
+		return m.CapacityRange
+	}
+	return nil
+}
+
+func (m *ControllerExpandVolumeRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+func (m *ControllerExpandVolumeRequest) GetVolumeCapability() *VolumeCapability {
+	if m != nil {
+		return m.VolumeCapability
+	}
+	return nil
+}
+
+type ControllerExpandVolumeResponse struct {
