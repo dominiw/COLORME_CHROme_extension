@@ -3740,3 +3740,36 @@ func (m *ControllerExpandVolumeRequest) GetVolumeCapability() *VolumeCapability 
 }
 
 type ControllerExpandVolumeResponse struct {
+	// Capacity of volume after expansion. This field is REQUIRED.
+	CapacityBytes int64 `protobuf:"varint,1,opt,name=capacity_bytes,json=capacityBytes,proto3" json:"capacity_bytes,omitempty"`
+	// Whether node expansion is required for the volume. When true
+	// the CO MUST make NodeExpandVolume RPC call on the node. This field
+	// is REQUIRED.
+	NodeExpansionRequired bool     `protobuf:"varint,2,opt,name=node_expansion_required,json=nodeExpansionRequired,proto3" json:"node_expansion_required,omitempty"`
+	XXX_NoUnkeyedLiteral  struct{} `json:"-"`
+	XXX_unrecognized      []byte   `json:"-"`
+	XXX_sizecache         int32    `json:"-"`
+}
+
+func (m *ControllerExpandVolumeResponse) Reset()         { *m = ControllerExpandVolumeResponse{} }
+func (m *ControllerExpandVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*ControllerExpandVolumeResponse) ProtoMessage()    {}
+func (*ControllerExpandVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{40}
+}
+
+func (m *ControllerExpandVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ControllerExpandVolumeResponse.Unmarshal(m, b)
+}
+func (m *ControllerExpandVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ControllerExpandVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *ControllerExpandVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ControllerExpandVolumeResponse.Merge(m, src)
+}
+func (m *ControllerExpandVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_ControllerExpandVolumeResponse.Size(m)
+}
+func (m *ControllerExpandVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ControllerExpandVolumeResponse.DiscardUnknown(m)
+}
