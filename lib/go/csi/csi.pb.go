@@ -3798,3 +3798,30 @@ type NodeStageVolumeRequest struct {
 	// has `PUBLISH_UNPUBLISH_VOLUME` controller capability, and SHALL be
 	// left unset if the corresponding Controller Plugin does not have
 	// this capability. This is an OPTIONAL field.
+	PublishContext map[string]string `protobuf:"bytes,2,rep,name=publish_context,json=publishContext,proto3" json:"publish_context,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// The path to which the volume MAY be staged. It MUST be an
+	// absolute path in the root filesystem of the process serving this
+	// request, and MUST be a directory. The CO SHALL ensure that there
+	// is only one `staging_target_path` per volume. The CO SHALL ensure
+	// that the path is directory and that the process serving the
+	// request has `read` and `write` permission to that directory. The
+	// CO SHALL be responsible for creating the directory if it does not
+	// exist.
+	// This is a REQUIRED field.
+	// This field overrides the general CSI size limit.
+	// SP SHOULD support the maximum path length allowed by the operating
+	// system/filesystem, but, at a minimum, SP MUST accept a max path
+	// length of at least 128 bytes.
+	StagingTargetPath string `protobuf:"bytes,3,opt,name=staging_target_path,json=stagingTargetPath,proto3" json:"staging_target_path,omitempty"`
+	// Volume capability describing how the CO intends to use this volume.
+	// SP MUST ensure the CO can use the staged volume as described.
+	// Otherwise SP MUST return the appropriate gRPC error code.
+	// This is a REQUIRED field.
+	VolumeCapability *VolumeCapability `protobuf:"bytes,4,opt,name=volume_capability,json=volumeCapability,proto3" json:"volume_capability,omitempty"`
+	// Secrets required by plugin to complete node stage volume request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	Secrets map[string]string `protobuf:"bytes,5,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Volume context as returned by SP in
+	// CreateVolumeResponse.Volume.volume_context.
+	// This field is OPTIONAL and MUST match the volume_context of the
