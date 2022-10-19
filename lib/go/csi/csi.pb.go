@@ -3773,3 +3773,28 @@ func (m *ControllerExpandVolumeResponse) XXX_Size() int {
 func (m *ControllerExpandVolumeResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_ControllerExpandVolumeResponse.DiscardUnknown(m)
 }
+
+var xxx_messageInfo_ControllerExpandVolumeResponse proto.InternalMessageInfo
+
+func (m *ControllerExpandVolumeResponse) GetCapacityBytes() int64 {
+	if m != nil {
+		return m.CapacityBytes
+	}
+	return 0
+}
+
+func (m *ControllerExpandVolumeResponse) GetNodeExpansionRequired() bool {
+	if m != nil {
+		return m.NodeExpansionRequired
+	}
+	return false
+}
+
+type NodeStageVolumeRequest struct {
+	// The ID of the volume to publish. This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// The CO SHALL set this field to the value returned by
+	// `ControllerPublishVolume` if the corresponding Controller Plugin
+	// has `PUBLISH_UNPUBLISH_VOLUME` controller capability, and SHALL be
+	// left unset if the corresponding Controller Plugin does not have
+	// this capability. This is an OPTIONAL field.
