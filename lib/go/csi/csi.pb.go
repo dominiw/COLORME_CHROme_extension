@@ -3853,3 +3853,43 @@ func (m *NodeStageVolumeRequest) XXX_Size() int {
 }
 func (m *NodeStageVolumeRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_NodeStageVolumeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeStageVolumeRequest proto.InternalMessageInfo
+
+func (m *NodeStageVolumeRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
+	return ""
+}
+
+func (m *NodeStageVolumeRequest) GetPublishContext() map[string]string {
+	if m != nil {
+		return m.PublishContext
+	}
+	return nil
+}
+
+func (m *NodeStageVolumeRequest) GetStagingTargetPath() string {
+	if m != nil {
+		return m.StagingTargetPath
+	}
+	return ""
+}
+
+func (m *NodeStageVolumeRequest) GetVolumeCapability() *VolumeCapability {
+	if m != nil {
+		return m.VolumeCapability
+	}
+	return nil
+}
+
+func (m *NodeStageVolumeRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+func (m *NodeStageVolumeRequest) GetVolumeContext() map[string]string {
