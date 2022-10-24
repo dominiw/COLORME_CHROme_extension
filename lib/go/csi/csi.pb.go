@@ -3893,3 +3893,37 @@ func (m *NodeStageVolumeRequest) GetSecrets() map[string]string {
 }
 
 func (m *NodeStageVolumeRequest) GetVolumeContext() map[string]string {
+	if m != nil {
+		return m.VolumeContext
+	}
+	return nil
+}
+
+type NodeStageVolumeResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NodeStageVolumeResponse) Reset()         { *m = NodeStageVolumeResponse{} }
+func (m *NodeStageVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*NodeStageVolumeResponse) ProtoMessage()    {}
+func (*NodeStageVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{42}
+}
+
+func (m *NodeStageVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeStageVolumeResponse.Unmarshal(m, b)
+}
+func (m *NodeStageVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeStageVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *NodeStageVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeStageVolumeResponse.Merge(m, src)
+}
+func (m *NodeStageVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_NodeStageVolumeResponse.Size(m)
+}
+func (m *NodeStageVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeStageVolumeResponse.DiscardUnknown(m)
+}
