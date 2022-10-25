@@ -3927,3 +3927,25 @@ func (m *NodeStageVolumeResponse) XXX_Size() int {
 func (m *NodeStageVolumeResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_NodeStageVolumeResponse.DiscardUnknown(m)
 }
+
+var xxx_messageInfo_NodeStageVolumeResponse proto.InternalMessageInfo
+
+type NodeUnstageVolumeRequest struct {
+	// The ID of the volume. This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// The path at which the volume was staged. It MUST be an absolute
+	// path in the root filesystem of the process serving this request.
+	// This is a REQUIRED field.
+	// This field overrides the general CSI size limit.
+	// SP SHOULD support the maximum path length allowed by the operating
+	// system/filesystem, but, at a minimum, SP MUST accept a max path
+	// length of at least 128 bytes.
+	StagingTargetPath    string   `protobuf:"bytes,2,opt,name=staging_target_path,json=stagingTargetPath,proto3" json:"staging_target_path,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NodeUnstageVolumeRequest) Reset()         { *m = NodeUnstageVolumeRequest{} }
+func (m *NodeUnstageVolumeRequest) String() string { return proto.CompactTextString(m) }
+func (*NodeUnstageVolumeRequest) ProtoMessage()    {}
