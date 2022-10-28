@@ -3949,3 +3949,43 @@ type NodeUnstageVolumeRequest struct {
 func (m *NodeUnstageVolumeRequest) Reset()         { *m = NodeUnstageVolumeRequest{} }
 func (m *NodeUnstageVolumeRequest) String() string { return proto.CompactTextString(m) }
 func (*NodeUnstageVolumeRequest) ProtoMessage()    {}
+func (*NodeUnstageVolumeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{43}
+}
+
+func (m *NodeUnstageVolumeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeUnstageVolumeRequest.Unmarshal(m, b)
+}
+func (m *NodeUnstageVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeUnstageVolumeRequest.Marshal(b, m, deterministic)
+}
+func (m *NodeUnstageVolumeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeUnstageVolumeRequest.Merge(m, src)
+}
+func (m *NodeUnstageVolumeRequest) XXX_Size() int {
+	return xxx_messageInfo_NodeUnstageVolumeRequest.Size(m)
+}
+func (m *NodeUnstageVolumeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeUnstageVolumeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeUnstageVolumeRequest proto.InternalMessageInfo
+
+func (m *NodeUnstageVolumeRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
+	return ""
+}
+
+func (m *NodeUnstageVolumeRequest) GetStagingTargetPath() string {
+	if m != nil {
+		return m.StagingTargetPath
+	}
+	return ""
+}
+
+type NodeUnstageVolumeResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
