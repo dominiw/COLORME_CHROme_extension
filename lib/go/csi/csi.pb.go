@@ -3989,3 +3989,27 @@ type NodeUnstageVolumeResponse struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NodeUnstageVolumeResponse) Reset()         { *m = NodeUnstageVolumeResponse{} }
+func (m *NodeUnstageVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*NodeUnstageVolumeResponse) ProtoMessage()    {}
+func (*NodeUnstageVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{44}
+}
+
+func (m *NodeUnstageVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeUnstageVolumeResponse.Unmarshal(m, b)
+}
+func (m *NodeUnstageVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeUnstageVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *NodeUnstageVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeUnstageVolumeResponse.Merge(m, src)
+}
+func (m *NodeUnstageVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_NodeUnstageVolumeResponse.Size(m)
+}
+func (m *NodeUnstageVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeUnstageVolumeResponse.DiscardUnknown(m)
+}
