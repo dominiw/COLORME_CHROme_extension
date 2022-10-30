@@ -4013,3 +4013,31 @@ func (m *NodeUnstageVolumeResponse) XXX_Size() int {
 func (m *NodeUnstageVolumeResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_NodeUnstageVolumeResponse.DiscardUnknown(m)
 }
+
+var xxx_messageInfo_NodeUnstageVolumeResponse proto.InternalMessageInfo
+
+type NodePublishVolumeRequest struct {
+	// The ID of the volume to publish. This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// The CO SHALL set this field to the value returned by
+	// `ControllerPublishVolume` if the corresponding Controller Plugin
+	// has `PUBLISH_UNPUBLISH_VOLUME` controller capability, and SHALL be
+	// left unset if the corresponding Controller Plugin does not have
+	// this capability. This is an OPTIONAL field.
+	PublishContext map[string]string `protobuf:"bytes,2,rep,name=publish_context,json=publishContext,proto3" json:"publish_context,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// The path to which the volume was staged by `NodeStageVolume`.
+	// It MUST be an absolute path in the root filesystem of the process
+	// serving this request.
+	// It MUST be set if the Node Plugin implements the
+	// `STAGE_UNSTAGE_VOLUME` node capability.
+	// This is an OPTIONAL field.
+	// This field overrides the general CSI size limit.
+	// SP SHOULD support the maximum path length allowed by the operating
+	// system/filesystem, but, at a minimum, SP MUST accept a max path
+	// length of at least 128 bytes.
+	StagingTargetPath string `protobuf:"bytes,3,opt,name=staging_target_path,json=stagingTargetPath,proto3" json:"staging_target_path,omitempty"`
+	// The path to which the volume will be published. It MUST be an
+	// absolute path in the root filesystem of the process serving this
+	// request. The CO SHALL ensure uniqueness of target_path per volume.
+	// The CO SHALL ensure that the parent directory of this path exists
+	// and that the process serving the request has `read` and `write`
