@@ -4071,3 +4071,36 @@ type NodePublishVolumeRequest struct {
 	// volume identified by `volume_id`.
 	VolumeContext        map[string]string `protobuf:"bytes,8,rep,name=volume_context,json=volumeContext,proto3" json:"volume_context,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *NodePublishVolumeRequest) Reset()         { *m = NodePublishVolumeRequest{} }
+func (m *NodePublishVolumeRequest) String() string { return proto.CompactTextString(m) }
+func (*NodePublishVolumeRequest) ProtoMessage()    {}
+func (*NodePublishVolumeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{45}
+}
+
+func (m *NodePublishVolumeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodePublishVolumeRequest.Unmarshal(m, b)
+}
+func (m *NodePublishVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodePublishVolumeRequest.Marshal(b, m, deterministic)
+}
+func (m *NodePublishVolumeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodePublishVolumeRequest.Merge(m, src)
+}
+func (m *NodePublishVolumeRequest) XXX_Size() int {
+	return xxx_messageInfo_NodePublishVolumeRequest.Size(m)
+}
+func (m *NodePublishVolumeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodePublishVolumeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodePublishVolumeRequest proto.InternalMessageInfo
+
+func (m *NodePublishVolumeRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
