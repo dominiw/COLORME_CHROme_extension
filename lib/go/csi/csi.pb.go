@@ -4041,3 +4041,33 @@ type NodePublishVolumeRequest struct {
 	// request. The CO SHALL ensure uniqueness of target_path per volume.
 	// The CO SHALL ensure that the parent directory of this path exists
 	// and that the process serving the request has `read` and `write`
+	// permissions to that parent directory.
+	// For volumes with an access type of block, the SP SHALL place the
+	// block device at target_path.
+	// For volumes with an access type of mount, the SP SHALL place the
+	// mounted directory at target_path.
+	// Creation of target_path is the responsibility of the SP.
+	// This is a REQUIRED field.
+	// This field overrides the general CSI size limit.
+	// SP SHOULD support the maximum path length allowed by the operating
+	// system/filesystem, but, at a minimum, SP MUST accept a max path
+	// length of at least 128 bytes.
+	TargetPath string `protobuf:"bytes,4,opt,name=target_path,json=targetPath,proto3" json:"target_path,omitempty"`
+	// Volume capability describing how the CO intends to use this volume.
+	// SP MUST ensure the CO can use the published volume as described.
+	// Otherwise SP MUST return the appropriate gRPC error code.
+	// This is a REQUIRED field.
+	VolumeCapability *VolumeCapability `protobuf:"bytes,5,opt,name=volume_capability,json=volumeCapability,proto3" json:"volume_capability,omitempty"`
+	// Indicates SP MUST publish the volume in readonly mode.
+	// This field is REQUIRED.
+	Readonly bool `protobuf:"varint,6,opt,name=readonly,proto3" json:"readonly,omitempty"`
+	// Secrets required by plugin to complete node publish volume request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	Secrets map[string]string `protobuf:"bytes,7,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Volume context as returned by SP in
+	// CreateVolumeResponse.Volume.volume_context.
+	// This field is OPTIONAL and MUST match the volume_context of the
+	// volume identified by `volume_id`.
+	VolumeContext        map[string]string `protobuf:"bytes,8,rep,name=volume_context,json=volumeContext,proto3" json:"volume_context,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
