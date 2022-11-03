@@ -4104,3 +4104,29 @@ func (m *NodePublishVolumeRequest) GetVolumeId() string {
 	if m != nil {
 		return m.VolumeId
 	}
+	return ""
+}
+
+func (m *NodePublishVolumeRequest) GetPublishContext() map[string]string {
+	if m != nil {
+		return m.PublishContext
+	}
+	return nil
+}
+
+func (m *NodePublishVolumeRequest) GetStagingTargetPath() string {
+	if m != nil {
+		return m.StagingTargetPath
+	}
+	return ""
+}
+
+func (m *NodePublishVolumeRequest) GetTargetPath() string {
+	if m != nil {
+		return m.TargetPath
+	}
+	return ""
+}
+
+func (m *NodePublishVolumeRequest) GetVolumeCapability() *VolumeCapability {
+	if m != nil {
