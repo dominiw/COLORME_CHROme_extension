@@ -4130,3 +4130,39 @@ func (m *NodePublishVolumeRequest) GetTargetPath() string {
 
 func (m *NodePublishVolumeRequest) GetVolumeCapability() *VolumeCapability {
 	if m != nil {
+		return m.VolumeCapability
+	}
+	return nil
+}
+
+func (m *NodePublishVolumeRequest) GetReadonly() bool {
+	if m != nil {
+		return m.Readonly
+	}
+	return false
+}
+
+func (m *NodePublishVolumeRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+func (m *NodePublishVolumeRequest) GetVolumeContext() map[string]string {
+	if m != nil {
+		return m.VolumeContext
+	}
+	return nil
+}
+
+type NodePublishVolumeResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NodePublishVolumeResponse) Reset()         { *m = NodePublishVolumeResponse{} }
+func (m *NodePublishVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*NodePublishVolumeResponse) ProtoMessage()    {}
+func (*NodePublishVolumeResponse) Descriptor() ([]byte, []int) {
