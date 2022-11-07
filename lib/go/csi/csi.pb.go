@@ -4166,3 +4166,28 @@ func (m *NodePublishVolumeResponse) Reset()         { *m = NodePublishVolumeResp
 func (m *NodePublishVolumeResponse) String() string { return proto.CompactTextString(m) }
 func (*NodePublishVolumeResponse) ProtoMessage()    {}
 func (*NodePublishVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{46}
+}
+
+func (m *NodePublishVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodePublishVolumeResponse.Unmarshal(m, b)
+}
+func (m *NodePublishVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodePublishVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *NodePublishVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodePublishVolumeResponse.Merge(m, src)
+}
+func (m *NodePublishVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_NodePublishVolumeResponse.Size(m)
+}
+func (m *NodePublishVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodePublishVolumeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodePublishVolumeResponse proto.InternalMessageInfo
+
+type NodeUnpublishVolumeRequest struct {
+	// The ID of the volume. This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// The path at which the volume was published. It MUST be an absolute
