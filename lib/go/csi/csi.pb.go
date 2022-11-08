@@ -4191,3 +4191,36 @@ type NodeUnpublishVolumeRequest struct {
 	// The ID of the volume. This field is REQUIRED.
 	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
 	// The path at which the volume was published. It MUST be an absolute
+	// path in the root filesystem of the process serving this request.
+	// The SP MUST delete the file or directory it created at this path.
+	// This is a REQUIRED field.
+	// This field overrides the general CSI size limit.
+	// SP SHOULD support the maximum path length allowed by the operating
+	// system/filesystem, but, at a minimum, SP MUST accept a max path
+	// length of at least 128 bytes.
+	TargetPath           string   `protobuf:"bytes,2,opt,name=target_path,json=targetPath,proto3" json:"target_path,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NodeUnpublishVolumeRequest) Reset()         { *m = NodeUnpublishVolumeRequest{} }
+func (m *NodeUnpublishVolumeRequest) String() string { return proto.CompactTextString(m) }
+func (*NodeUnpublishVolumeRequest) ProtoMessage()    {}
+func (*NodeUnpublishVolumeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{47}
+}
+
+func (m *NodeUnpublishVolumeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeUnpublishVolumeRequest.Unmarshal(m, b)
+}
+func (m *NodeUnpublishVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeUnpublishVolumeRequest.Marshal(b, m, deterministic)
+}
+func (m *NodeUnpublishVolumeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeUnpublishVolumeRequest.Merge(m, src)
+}
+func (m *NodeUnpublishVolumeRequest) XXX_Size() int {
+	return xxx_messageInfo_NodeUnpublishVolumeRequest.Size(m)
+}
+func (m *NodeUnpublishVolumeRequest) XXX_DiscardUnknown() {
