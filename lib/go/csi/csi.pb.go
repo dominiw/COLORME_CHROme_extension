@@ -4224,3 +4224,27 @@ func (m *NodeUnpublishVolumeRequest) XXX_Size() int {
 	return xxx_messageInfo_NodeUnpublishVolumeRequest.Size(m)
 }
 func (m *NodeUnpublishVolumeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeUnpublishVolumeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeUnpublishVolumeRequest proto.InternalMessageInfo
+
+func (m *NodeUnpublishVolumeRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
+	return ""
+}
+
+func (m *NodeUnpublishVolumeRequest) GetTargetPath() string {
+	if m != nil {
+		return m.TargetPath
+	}
+	return ""
+}
+
+type NodeUnpublishVolumeResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
