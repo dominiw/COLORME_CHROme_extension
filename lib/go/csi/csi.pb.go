@@ -4271,3 +4271,38 @@ func (m *NodeUnpublishVolumeResponse) XXX_Size() int {
 func (m *NodeUnpublishVolumeResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_NodeUnpublishVolumeResponse.DiscardUnknown(m)
 }
+
+var xxx_messageInfo_NodeUnpublishVolumeResponse proto.InternalMessageInfo
+
+type NodeGetVolumeStatsRequest struct {
+	// The ID of the volume. This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// It can be any valid path where volume was previously
+	// staged or published.
+	// It MUST be an absolute path in the root filesystem of
+	// the process serving this request.
+	// This is a REQUIRED field.
+	// This field overrides the general CSI size limit.
+	// SP SHOULD support the maximum path length allowed by the operating
+	// system/filesystem, but, at a minimum, SP MUST accept a max path
+	// length of at least 128 bytes.
+	VolumePath string `protobuf:"bytes,2,opt,name=volume_path,json=volumePath,proto3" json:"volume_path,omitempty"`
+	// The path where the volume is staged, if the plugin has the
+	// STAGE_UNSTAGE_VOLUME capability, otherwise empty.
+	// If not empty, it MUST be an absolute path in the root
+	// filesystem of the process serving this request.
+	// This field is OPTIONAL.
+	// This field overrides the general CSI size limit.
+	// SP SHOULD support the maximum path length allowed by the operating
+	// system/filesystem, but, at a minimum, SP MUST accept a max path
+	// length of at least 128 bytes.
+	StagingTargetPath    string   `protobuf:"bytes,3,opt,name=staging_target_path,json=stagingTargetPath,proto3" json:"staging_target_path,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NodeGetVolumeStatsRequest) Reset()         { *m = NodeGetVolumeStatsRequest{} }
+func (m *NodeGetVolumeStatsRequest) String() string { return proto.CompactTextString(m) }
+func (*NodeGetVolumeStatsRequest) ProtoMessage()    {}
+func (*NodeGetVolumeStatsRequest) Descriptor() ([]byte, []int) {
