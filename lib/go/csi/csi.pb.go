@@ -4248,3 +4248,26 @@ type NodeUnpublishVolumeResponse struct {
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
+
+func (m *NodeUnpublishVolumeResponse) Reset()         { *m = NodeUnpublishVolumeResponse{} }
+func (m *NodeUnpublishVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*NodeUnpublishVolumeResponse) ProtoMessage()    {}
+func (*NodeUnpublishVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{48}
+}
+
+func (m *NodeUnpublishVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeUnpublishVolumeResponse.Unmarshal(m, b)
+}
+func (m *NodeUnpublishVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeUnpublishVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *NodeUnpublishVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeUnpublishVolumeResponse.Merge(m, src)
+}
+func (m *NodeUnpublishVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_NodeUnpublishVolumeResponse.Size(m)
+}
+func (m *NodeUnpublishVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeUnpublishVolumeResponse.DiscardUnknown(m)
+}
