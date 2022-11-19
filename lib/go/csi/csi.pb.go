@@ -4306,3 +4306,49 @@ func (m *NodeGetVolumeStatsRequest) Reset()         { *m = NodeGetVolumeStatsReq
 func (m *NodeGetVolumeStatsRequest) String() string { return proto.CompactTextString(m) }
 func (*NodeGetVolumeStatsRequest) ProtoMessage()    {}
 func (*NodeGetVolumeStatsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{49}
+}
+
+func (m *NodeGetVolumeStatsRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeGetVolumeStatsRequest.Unmarshal(m, b)
+}
+func (m *NodeGetVolumeStatsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeGetVolumeStatsRequest.Marshal(b, m, deterministic)
+}
+func (m *NodeGetVolumeStatsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeGetVolumeStatsRequest.Merge(m, src)
+}
+func (m *NodeGetVolumeStatsRequest) XXX_Size() int {
+	return xxx_messageInfo_NodeGetVolumeStatsRequest.Size(m)
+}
+func (m *NodeGetVolumeStatsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeGetVolumeStatsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeGetVolumeStatsRequest proto.InternalMessageInfo
+
+func (m *NodeGetVolumeStatsRequest) GetVolumeId() string {
+	if m != nil {
+		return m.VolumeId
+	}
+	return ""
+}
+
+func (m *NodeGetVolumeStatsRequest) GetVolumePath() string {
+	if m != nil {
+		return m.VolumePath
+	}
+	return ""
+}
+
+func (m *NodeGetVolumeStatsRequest) GetStagingTargetPath() string {
+	if m != nil {
+		return m.StagingTargetPath
+	}
+	return ""
+}
+
+type NodeGetVolumeStatsResponse struct {
+	// This field is OPTIONAL.
+	Usage []*VolumeUsage `protobuf:"bytes,1,rep,name=usage,proto3" json:"usage,omitempty"`
+	// Information about the current condition of the volume.
