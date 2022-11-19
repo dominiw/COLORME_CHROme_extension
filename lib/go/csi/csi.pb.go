@@ -4352,3 +4352,38 @@ type NodeGetVolumeStatsResponse struct {
 	// This field is OPTIONAL.
 	Usage []*VolumeUsage `protobuf:"bytes,1,rep,name=usage,proto3" json:"usage,omitempty"`
 	// Information about the current condition of the volume.
+	// This field is OPTIONAL.
+	// This field MUST be specified if the VOLUME_CONDITION node
+	// capability is supported.
+	VolumeCondition      *VolumeCondition `protobuf:"bytes,2,opt,name=volume_condition,json=volumeCondition,proto3" json:"volume_condition,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *NodeGetVolumeStatsResponse) Reset()         { *m = NodeGetVolumeStatsResponse{} }
+func (m *NodeGetVolumeStatsResponse) String() string { return proto.CompactTextString(m) }
+func (*NodeGetVolumeStatsResponse) ProtoMessage()    {}
+func (*NodeGetVolumeStatsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{50}
+}
+
+func (m *NodeGetVolumeStatsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeGetVolumeStatsResponse.Unmarshal(m, b)
+}
+func (m *NodeGetVolumeStatsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeGetVolumeStatsResponse.Marshal(b, m, deterministic)
+}
+func (m *NodeGetVolumeStatsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeGetVolumeStatsResponse.Merge(m, src)
+}
+func (m *NodeGetVolumeStatsResponse) XXX_Size() int {
+	return xxx_messageInfo_NodeGetVolumeStatsResponse.Size(m)
+}
+func (m *NodeGetVolumeStatsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeGetVolumeStatsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeGetVolumeStatsResponse proto.InternalMessageInfo
+
+func (m *NodeGetVolumeStatsResponse) GetUsage() []*VolumeUsage {
