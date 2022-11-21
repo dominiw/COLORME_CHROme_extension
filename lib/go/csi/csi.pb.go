@@ -4387,3 +4387,37 @@ func (m *NodeGetVolumeStatsResponse) XXX_DiscardUnknown() {
 var xxx_messageInfo_NodeGetVolumeStatsResponse proto.InternalMessageInfo
 
 func (m *NodeGetVolumeStatsResponse) GetUsage() []*VolumeUsage {
+	if m != nil {
+		return m.Usage
+	}
+	return nil
+}
+
+func (m *NodeGetVolumeStatsResponse) GetVolumeCondition() *VolumeCondition {
+	if m != nil {
+		return m.VolumeCondition
+	}
+	return nil
+}
+
+type VolumeUsage struct {
+	// The available capacity in specified Unit. This field is OPTIONAL.
+	// The value of this field MUST NOT be negative.
+	Available int64 `protobuf:"varint,1,opt,name=available,proto3" json:"available,omitempty"`
+	// The total capacity in specified Unit. This field is REQUIRED.
+	// The value of this field MUST NOT be negative.
+	Total int64 `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	// The used capacity in specified Unit. This field is OPTIONAL.
+	// The value of this field MUST NOT be negative.
+	Used int64 `protobuf:"varint,3,opt,name=used,proto3" json:"used,omitempty"`
+	// Units by which values are measured. This field is REQUIRED.
+	Unit                 VolumeUsage_Unit `protobuf:"varint,4,opt,name=unit,proto3,enum=csi.v1.VolumeUsage_Unit" json:"unit,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *VolumeUsage) Reset()         { *m = VolumeUsage{} }
+func (m *VolumeUsage) String() string { return proto.CompactTextString(m) }
+func (*VolumeUsage) ProtoMessage()    {}
+func (*VolumeUsage) Descriptor() ([]byte, []int) {
