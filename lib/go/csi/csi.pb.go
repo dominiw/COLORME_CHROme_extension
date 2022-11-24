@@ -4421,3 +4421,37 @@ func (m *VolumeUsage) Reset()         { *m = VolumeUsage{} }
 func (m *VolumeUsage) String() string { return proto.CompactTextString(m) }
 func (*VolumeUsage) ProtoMessage()    {}
 func (*VolumeUsage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{51}
+}
+
+func (m *VolumeUsage) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VolumeUsage.Unmarshal(m, b)
+}
+func (m *VolumeUsage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VolumeUsage.Marshal(b, m, deterministic)
+}
+func (m *VolumeUsage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VolumeUsage.Merge(m, src)
+}
+func (m *VolumeUsage) XXX_Size() int {
+	return xxx_messageInfo_VolumeUsage.Size(m)
+}
+func (m *VolumeUsage) XXX_DiscardUnknown() {
+	xxx_messageInfo_VolumeUsage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VolumeUsage proto.InternalMessageInfo
+
+func (m *VolumeUsage) GetAvailable() int64 {
+	if m != nil {
+		return m.Available
+	}
+	return 0
+}
+
+func (m *VolumeUsage) GetTotal() int64 {
+	if m != nil {
+		return m.Total
+	}
+	return 0
+}
