@@ -4490,3 +4490,38 @@ func (*VolumeCondition) ProtoMessage()    {}
 func (*VolumeCondition) Descriptor() ([]byte, []int) {
 	return fileDescriptor_9cdb00adce470e01, []int{52}
 }
+
+func (m *VolumeCondition) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VolumeCondition.Unmarshal(m, b)
+}
+func (m *VolumeCondition) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VolumeCondition.Marshal(b, m, deterministic)
+}
+func (m *VolumeCondition) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VolumeCondition.Merge(m, src)
+}
+func (m *VolumeCondition) XXX_Size() int {
+	return xxx_messageInfo_VolumeCondition.Size(m)
+}
+func (m *VolumeCondition) XXX_DiscardUnknown() {
+	xxx_messageInfo_VolumeCondition.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VolumeCondition proto.InternalMessageInfo
+
+func (m *VolumeCondition) GetAbnormal() bool {
+	if m != nil {
+		return m.Abnormal
+	}
+	return false
+}
+
+func (m *VolumeCondition) GetMessage() string {
+	if m != nil {
+		return m.Message
+	}
+	return ""
+}
+
+type NodeGetCapabilitiesRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
