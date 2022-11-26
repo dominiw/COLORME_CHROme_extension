@@ -4455,3 +4455,38 @@ func (m *VolumeUsage) GetTotal() int64 {
 	}
 	return 0
 }
+
+func (m *VolumeUsage) GetUsed() int64 {
+	if m != nil {
+		return m.Used
+	}
+	return 0
+}
+
+func (m *VolumeUsage) GetUnit() VolumeUsage_Unit {
+	if m != nil {
+		return m.Unit
+	}
+	return VolumeUsage_UNKNOWN
+}
+
+// VolumeCondition represents the current condition of a volume.
+type VolumeCondition struct {
+	// Normal volumes are available for use and operating optimally.
+	// An abnormal volume does not meet these criteria.
+	// This field is REQUIRED.
+	Abnormal bool `protobuf:"varint,1,opt,name=abnormal,proto3" json:"abnormal,omitempty"`
+	// The message describing the condition of the volume.
+	// This field is REQUIRED.
+	Message              string   `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *VolumeCondition) Reset()         { *m = VolumeCondition{} }
+func (m *VolumeCondition) String() string { return proto.CompactTextString(m) }
+func (*VolumeCondition) ProtoMessage()    {}
+func (*VolumeCondition) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{52}
+}
