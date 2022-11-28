@@ -4553,3 +4553,33 @@ func (m *NodeGetCapabilitiesRequest) XXX_DiscardUnknown() {
 }
 
 var xxx_messageInfo_NodeGetCapabilitiesRequest proto.InternalMessageInfo
+
+type NodeGetCapabilitiesResponse struct {
+	// All the capabilities that the node service supports. This field
+	// is OPTIONAL.
+	Capabilities         []*NodeServiceCapability `protobuf:"bytes,1,rep,name=capabilities,proto3" json:"capabilities,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
+}
+
+func (m *NodeGetCapabilitiesResponse) Reset()         { *m = NodeGetCapabilitiesResponse{} }
+func (m *NodeGetCapabilitiesResponse) String() string { return proto.CompactTextString(m) }
+func (*NodeGetCapabilitiesResponse) ProtoMessage()    {}
+func (*NodeGetCapabilitiesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{54}
+}
+
+func (m *NodeGetCapabilitiesResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeGetCapabilitiesResponse.Unmarshal(m, b)
+}
+func (m *NodeGetCapabilitiesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeGetCapabilitiesResponse.Marshal(b, m, deterministic)
+}
+func (m *NodeGetCapabilitiesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeGetCapabilitiesResponse.Merge(m, src)
+}
+func (m *NodeGetCapabilitiesResponse) XXX_Size() int {
+	return xxx_messageInfo_NodeGetCapabilitiesResponse.Size(m)
+}
+func (m *NodeGetCapabilitiesResponse) XXX_DiscardUnknown() {
