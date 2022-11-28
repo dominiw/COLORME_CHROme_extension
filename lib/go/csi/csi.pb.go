@@ -4525,3 +4525,31 @@ func (m *VolumeCondition) GetMessage() string {
 
 type NodeGetCapabilitiesRequest struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NodeGetCapabilitiesRequest) Reset()         { *m = NodeGetCapabilitiesRequest{} }
+func (m *NodeGetCapabilitiesRequest) String() string { return proto.CompactTextString(m) }
+func (*NodeGetCapabilitiesRequest) ProtoMessage()    {}
+func (*NodeGetCapabilitiesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{53}
+}
+
+func (m *NodeGetCapabilitiesRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeGetCapabilitiesRequest.Unmarshal(m, b)
+}
+func (m *NodeGetCapabilitiesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeGetCapabilitiesRequest.Marshal(b, m, deterministic)
+}
+func (m *NodeGetCapabilitiesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeGetCapabilitiesRequest.Merge(m, src)
+}
+func (m *NodeGetCapabilitiesRequest) XXX_Size() int {
+	return xxx_messageInfo_NodeGetCapabilitiesRequest.Size(m)
+}
+func (m *NodeGetCapabilitiesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeGetCapabilitiesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeGetCapabilitiesRequest proto.InternalMessageInfo
