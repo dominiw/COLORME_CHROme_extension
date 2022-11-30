@@ -4617,3 +4617,43 @@ func (m *NodeServiceCapability) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NodeServiceCapability.Unmarshal(m, b)
 }
 func (m *NodeServiceCapability) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeServiceCapability.Marshal(b, m, deterministic)
+}
+func (m *NodeServiceCapability) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeServiceCapability.Merge(m, src)
+}
+func (m *NodeServiceCapability) XXX_Size() int {
+	return xxx_messageInfo_NodeServiceCapability.Size(m)
+}
+func (m *NodeServiceCapability) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeServiceCapability.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeServiceCapability proto.InternalMessageInfo
+
+type isNodeServiceCapability_Type interface {
+	isNodeServiceCapability_Type()
+}
+
+type NodeServiceCapability_Rpc struct {
+	Rpc *NodeServiceCapability_RPC `protobuf:"bytes,1,opt,name=rpc,proto3,oneof"`
+}
+
+func (*NodeServiceCapability_Rpc) isNodeServiceCapability_Type() {}
+
+func (m *NodeServiceCapability) GetType() isNodeServiceCapability_Type {
+	if m != nil {
+		return m.Type
+	}
+	return nil
+}
+
+func (m *NodeServiceCapability) GetRpc() *NodeServiceCapability_RPC {
+	if x, ok := m.GetType().(*NodeServiceCapability_Rpc); ok {
+		return x.Rpc
+	}
+	return nil
+}
+
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*NodeServiceCapability) XXX_OneofWrappers() []interface{} {
