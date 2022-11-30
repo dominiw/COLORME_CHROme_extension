@@ -4583,3 +4583,37 @@ func (m *NodeGetCapabilitiesResponse) XXX_Size() int {
 	return xxx_messageInfo_NodeGetCapabilitiesResponse.Size(m)
 }
 func (m *NodeGetCapabilitiesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeGetCapabilitiesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeGetCapabilitiesResponse proto.InternalMessageInfo
+
+func (m *NodeGetCapabilitiesResponse) GetCapabilities() []*NodeServiceCapability {
+	if m != nil {
+		return m.Capabilities
+	}
+	return nil
+}
+
+// Specifies a capability of the node service.
+type NodeServiceCapability struct {
+	// Types that are valid to be assigned to Type:
+	//
+	//	*NodeServiceCapability_Rpc
+	Type                 isNodeServiceCapability_Type `protobuf_oneof:"type"`
+	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
+	XXX_unrecognized     []byte                       `json:"-"`
+	XXX_sizecache        int32                        `json:"-"`
+}
+
+func (m *NodeServiceCapability) Reset()         { *m = NodeServiceCapability{} }
+func (m *NodeServiceCapability) String() string { return proto.CompactTextString(m) }
+func (*NodeServiceCapability) ProtoMessage()    {}
+func (*NodeServiceCapability) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{55}
+}
+
+func (m *NodeServiceCapability) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeServiceCapability.Unmarshal(m, b)
+}
+func (m *NodeServiceCapability) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
