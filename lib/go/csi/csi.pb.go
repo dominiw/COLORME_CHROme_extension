@@ -4657,3 +4657,30 @@ func (m *NodeServiceCapability) GetRpc() *NodeServiceCapability_RPC {
 
 // XXX_OneofWrappers is for the internal use of the proto package.
 func (*NodeServiceCapability) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
+		(*NodeServiceCapability_Rpc)(nil),
+	}
+}
+
+type NodeServiceCapability_RPC struct {
+	Type                 NodeServiceCapability_RPC_Type `protobuf:"varint,1,opt,name=type,proto3,enum=csi.v1.NodeServiceCapability_RPC_Type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                       `json:"-"`
+	XXX_unrecognized     []byte                         `json:"-"`
+	XXX_sizecache        int32                          `json:"-"`
+}
+
+func (m *NodeServiceCapability_RPC) Reset()         { *m = NodeServiceCapability_RPC{} }
+func (m *NodeServiceCapability_RPC) String() string { return proto.CompactTextString(m) }
+func (*NodeServiceCapability_RPC) ProtoMessage()    {}
+func (*NodeServiceCapability_RPC) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{55, 0}
+}
+
+func (m *NodeServiceCapability_RPC) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeServiceCapability_RPC.Unmarshal(m, b)
+}
+func (m *NodeServiceCapability_RPC) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeServiceCapability_RPC.Marshal(b, m, deterministic)
+}
+func (m *NodeServiceCapability_RPC) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeServiceCapability_RPC.Merge(m, src)
