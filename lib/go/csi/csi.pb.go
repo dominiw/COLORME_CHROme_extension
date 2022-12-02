@@ -4684,3 +4684,31 @@ func (m *NodeServiceCapability_RPC) XXX_Marshal(b []byte, deterministic bool) ([
 }
 func (m *NodeServiceCapability_RPC) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NodeServiceCapability_RPC.Merge(m, src)
+}
+func (m *NodeServiceCapability_RPC) XXX_Size() int {
+	return xxx_messageInfo_NodeServiceCapability_RPC.Size(m)
+}
+func (m *NodeServiceCapability_RPC) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeServiceCapability_RPC.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeServiceCapability_RPC proto.InternalMessageInfo
+
+func (m *NodeServiceCapability_RPC) GetType() NodeServiceCapability_RPC_Type {
+	if m != nil {
+		return m.Type
+	}
+	return NodeServiceCapability_RPC_UNKNOWN
+}
+
+type NodeGetInfoRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NodeGetInfoRequest) Reset()         { *m = NodeGetInfoRequest{} }
+func (m *NodeGetInfoRequest) String() string { return proto.CompactTextString(m) }
+func (*NodeGetInfoRequest) ProtoMessage()    {}
+func (*NodeGetInfoRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{56}
