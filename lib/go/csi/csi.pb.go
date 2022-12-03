@@ -4741,3 +4741,37 @@ type NodeGetInfoResponse struct {
 	// `ControllerPublishVolume`, to refer to this node.
 	// The SP is NOT responsible for global uniqueness of node_id across
 	// multiple SPs.
+	// This field overrides the general CSI size limit.
+	// The size of this field SHALL NOT exceed 256 bytes. The general
+	// CSI size limit, 128 byte, is RECOMMENDED for best backwards
+	// compatibility.
+	NodeId string `protobuf:"bytes,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+	// Maximum number of volumes that controller can publish to the node.
+	// If value is not set or zero CO SHALL decide how many volumes of
+	// this type can be published by the controller to the node. The
+	// plugin MUST NOT set negative values here.
+	// This field is OPTIONAL.
+	MaxVolumesPerNode int64 `protobuf:"varint,2,opt,name=max_volumes_per_node,json=maxVolumesPerNode,proto3" json:"max_volumes_per_node,omitempty"`
+	// Specifies where (regions, zones, racks, etc.) the node is
+	// accessible from.
+	// A plugin that returns this field MUST also set the
+	// VOLUME_ACCESSIBILITY_CONSTRAINTS plugin capability.
+	// COs MAY use this information along with the topology information
+	// returned in CreateVolumeResponse to ensure that a given volume is
+	// accessible from a given node when scheduling workloads.
+	// This field is OPTIONAL. If it is not specified, the CO MAY assume
+	// the node is not subject to any topological constraint, and MAY
+	// schedule workloads that reference any volume V, such that there are
+	// no topological constraints declared for V.
+	//
+	// Example 1:
+	//
+	//	accessible_topology =
+	//	  {"region": "R1", "zone": "Z2"}
+	//
+	// Indicates the node exists within the "region" "R1" and the "zone"
+	// "Z2".
+	AccessibleTopology   *Topology `protobuf:"bytes,3,opt,name=accessible_topology,json=accessibleTopology,proto3" json:"accessible_topology,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
