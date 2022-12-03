@@ -4712,3 +4712,32 @@ func (m *NodeGetInfoRequest) String() string { return proto.CompactTextString(m)
 func (*NodeGetInfoRequest) ProtoMessage()    {}
 func (*NodeGetInfoRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_9cdb00adce470e01, []int{56}
+}
+
+func (m *NodeGetInfoRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeGetInfoRequest.Unmarshal(m, b)
+}
+func (m *NodeGetInfoRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeGetInfoRequest.Marshal(b, m, deterministic)
+}
+func (m *NodeGetInfoRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeGetInfoRequest.Merge(m, src)
+}
+func (m *NodeGetInfoRequest) XXX_Size() int {
+	return xxx_messageInfo_NodeGetInfoRequest.Size(m)
+}
+func (m *NodeGetInfoRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeGetInfoRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeGetInfoRequest proto.InternalMessageInfo
+
+type NodeGetInfoResponse struct {
+	// The identifier of the node as understood by the SP.
+	// This field is REQUIRED.
+	// This field MUST contain enough information to uniquely identify
+	// this specific node vs all other nodes supported by this plugin.
+	// This field SHALL be used by the CO in subsequent calls, including
+	// `ControllerPublishVolume`, to refer to this node.
+	// The SP is NOT responsible for global uniqueness of node_id across
+	// multiple SPs.
