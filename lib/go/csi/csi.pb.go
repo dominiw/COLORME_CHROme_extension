@@ -4775,3 +4775,34 @@ type NodeGetInfoResponse struct {
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
+}
+
+func (m *NodeGetInfoResponse) Reset()         { *m = NodeGetInfoResponse{} }
+func (m *NodeGetInfoResponse) String() string { return proto.CompactTextString(m) }
+func (*NodeGetInfoResponse) ProtoMessage()    {}
+func (*NodeGetInfoResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{57}
+}
+
+func (m *NodeGetInfoResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeGetInfoResponse.Unmarshal(m, b)
+}
+func (m *NodeGetInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeGetInfoResponse.Marshal(b, m, deterministic)
+}
+func (m *NodeGetInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeGetInfoResponse.Merge(m, src)
+}
+func (m *NodeGetInfoResponse) XXX_Size() int {
+	return xxx_messageInfo_NodeGetInfoResponse.Size(m)
+}
+func (m *NodeGetInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeGetInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeGetInfoResponse proto.InternalMessageInfo
+
+func (m *NodeGetInfoResponse) GetNodeId() string {
+	if m != nil {
+		return m.NodeId
+	}
