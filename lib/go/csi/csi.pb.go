@@ -4806,3 +4806,28 @@ func (m *NodeGetInfoResponse) GetNodeId() string {
 	if m != nil {
 		return m.NodeId
 	}
+	return ""
+}
+
+func (m *NodeGetInfoResponse) GetMaxVolumesPerNode() int64 {
+	if m != nil {
+		return m.MaxVolumesPerNode
+	}
+	return 0
+}
+
+func (m *NodeGetInfoResponse) GetAccessibleTopology() *Topology {
+	if m != nil {
+		return m.AccessibleTopology
+	}
+	return nil
+}
+
+type NodeExpandVolumeRequest struct {
+	// The ID of the volume. This field is REQUIRED.
+	VolumeId string `protobuf:"bytes,1,opt,name=volume_id,json=volumeId,proto3" json:"volume_id,omitempty"`
+	// The path on which volume is available. This field is REQUIRED.
+	// This field overrides the general CSI size limit.
+	// SP SHOULD support the maximum path length allowed by the operating
+	// system/filesystem, but, at a minimum, SP MUST accept a max path
+	// length of at least 128 bytes.
