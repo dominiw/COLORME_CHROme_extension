@@ -4863,3 +4863,30 @@ type NodeExpandVolumeRequest struct {
 	// This field is OPTIONAL. Refer to the `Secrets Requirements`
 	// section on how to use this field.
 	Secrets              map[string]string `protobuf:"bytes,6,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *NodeExpandVolumeRequest) Reset()         { *m = NodeExpandVolumeRequest{} }
+func (m *NodeExpandVolumeRequest) String() string { return proto.CompactTextString(m) }
+func (*NodeExpandVolumeRequest) ProtoMessage()    {}
+func (*NodeExpandVolumeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{58}
+}
+
+func (m *NodeExpandVolumeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeExpandVolumeRequest.Unmarshal(m, b)
+}
+func (m *NodeExpandVolumeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeExpandVolumeRequest.Marshal(b, m, deterministic)
+}
+func (m *NodeExpandVolumeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeExpandVolumeRequest.Merge(m, src)
+}
+func (m *NodeExpandVolumeRequest) XXX_Size() int {
+	return xxx_messageInfo_NodeExpandVolumeRequest.Size(m)
+}
+func (m *NodeExpandVolumeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeExpandVolumeRequest.DiscardUnknown(m)
+}
