@@ -4831,3 +4831,35 @@ type NodeExpandVolumeRequest struct {
 	// SP SHOULD support the maximum path length allowed by the operating
 	// system/filesystem, but, at a minimum, SP MUST accept a max path
 	// length of at least 128 bytes.
+	VolumePath string `protobuf:"bytes,2,opt,name=volume_path,json=volumePath,proto3" json:"volume_path,omitempty"`
+	// This allows CO to specify the capacity requirements of the volume
+	// after expansion. If capacity_range is omitted then a plugin MAY
+	// inspect the file system of the volume to determine the maximum
+	// capacity to which the volume can be expanded. In such cases a
+	// plugin MAY expand the volume to its maximum capacity.
+	// This field is OPTIONAL.
+	CapacityRange *CapacityRange `protobuf:"bytes,3,opt,name=capacity_range,json=capacityRange,proto3" json:"capacity_range,omitempty"`
+	// The path where the volume is staged, if the plugin has the
+	// STAGE_UNSTAGE_VOLUME capability, otherwise empty.
+	// If not empty, it MUST be an absolute path in the root
+	// filesystem of the process serving this request.
+	// This field is OPTIONAL.
+	// This field overrides the general CSI size limit.
+	// SP SHOULD support the maximum path length allowed by the operating
+	// system/filesystem, but, at a minimum, SP MUST accept a max path
+	// length of at least 128 bytes.
+	StagingTargetPath string `protobuf:"bytes,4,opt,name=staging_target_path,json=stagingTargetPath,proto3" json:"staging_target_path,omitempty"`
+	// Volume capability describing how the CO intends to use this volume.
+	// This allows SP to determine if volume is being used as a block
+	// device or mounted file system. For example - if volume is being
+	// used as a block device the SP MAY choose to skip expanding the
+	// filesystem in NodeExpandVolume implementation but still perform
+	// rest of the housekeeping needed for expanding the volume. If
+	// volume_capability is omitted the SP MAY determine
+	// access_type from given volume_path for the volume and perform
+	// node expansion. This is an OPTIONAL field.
+	VolumeCapability *VolumeCapability `protobuf:"bytes,5,opt,name=volume_capability,json=volumeCapability,proto3" json:"volume_capability,omitempty"`
+	// Secrets required by plugin to complete node expand volume request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	Secrets              map[string]string `protobuf:"bytes,6,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
