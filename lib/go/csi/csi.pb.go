@@ -4923,3 +4923,35 @@ func (m *NodeExpandVolumeRequest) GetStagingTargetPath() string {
 
 func (m *NodeExpandVolumeRequest) GetVolumeCapability() *VolumeCapability {
 	if m != nil {
+		return m.VolumeCapability
+	}
+	return nil
+}
+
+func (m *NodeExpandVolumeRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+type NodeExpandVolumeResponse struct {
+	// The capacity of the volume in bytes. This field is OPTIONAL.
+	CapacityBytes        int64    `protobuf:"varint,1,opt,name=capacity_bytes,json=capacityBytes,proto3" json:"capacity_bytes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *NodeExpandVolumeResponse) Reset()         { *m = NodeExpandVolumeResponse{} }
+func (m *NodeExpandVolumeResponse) String() string { return proto.CompactTextString(m) }
+func (*NodeExpandVolumeResponse) ProtoMessage()    {}
+func (*NodeExpandVolumeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{59}
+}
+
+func (m *NodeExpandVolumeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NodeExpandVolumeResponse.Unmarshal(m, b)
+}
+func (m *NodeExpandVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NodeExpandVolumeResponse.Marshal(b, m, deterministic)
