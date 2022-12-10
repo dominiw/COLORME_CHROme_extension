@@ -4955,3 +4955,28 @@ func (m *NodeExpandVolumeResponse) XXX_Unmarshal(b []byte) error {
 }
 func (m *NodeExpandVolumeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NodeExpandVolumeResponse.Marshal(b, m, deterministic)
+}
+func (m *NodeExpandVolumeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NodeExpandVolumeResponse.Merge(m, src)
+}
+func (m *NodeExpandVolumeResponse) XXX_Size() int {
+	return xxx_messageInfo_NodeExpandVolumeResponse.Size(m)
+}
+func (m *NodeExpandVolumeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_NodeExpandVolumeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NodeExpandVolumeResponse proto.InternalMessageInfo
+
+func (m *NodeExpandVolumeResponse) GetCapacityBytes() int64 {
+	if m != nil {
+		return m.CapacityBytes
+	}
+	return 0
+}
+
+type GroupControllerGetCapabilitiesRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
