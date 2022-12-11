@@ -4980,3 +4980,36 @@ type GroupControllerGetCapabilitiesRequest struct {
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
+
+func (m *GroupControllerGetCapabilitiesRequest) Reset()         { *m = GroupControllerGetCapabilitiesRequest{} }
+func (m *GroupControllerGetCapabilitiesRequest) String() string { return proto.CompactTextString(m) }
+func (*GroupControllerGetCapabilitiesRequest) ProtoMessage()    {}
+func (*GroupControllerGetCapabilitiesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{60}
+}
+
+func (m *GroupControllerGetCapabilitiesRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GroupControllerGetCapabilitiesRequest.Unmarshal(m, b)
+}
+func (m *GroupControllerGetCapabilitiesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GroupControllerGetCapabilitiesRequest.Marshal(b, m, deterministic)
+}
+func (m *GroupControllerGetCapabilitiesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GroupControllerGetCapabilitiesRequest.Merge(m, src)
+}
+func (m *GroupControllerGetCapabilitiesRequest) XXX_Size() int {
+	return xxx_messageInfo_GroupControllerGetCapabilitiesRequest.Size(m)
+}
+func (m *GroupControllerGetCapabilitiesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GroupControllerGetCapabilitiesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GroupControllerGetCapabilitiesRequest proto.InternalMessageInfo
+
+type GroupControllerGetCapabilitiesResponse struct {
+	// All the capabilities that the group controller service supports.
+	// This field is OPTIONAL.
+	Capabilities         []*GroupControllerServiceCapability `protobuf:"bytes,1,rep,name=capabilities,proto3" json:"capabilities,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                            `json:"-"`
+	XXX_unrecognized     []byte                              `json:"-"`
+	XXX_sizecache        int32                               `json:"-"`
