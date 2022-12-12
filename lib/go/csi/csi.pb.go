@@ -5013,3 +5013,23 @@ type GroupControllerGetCapabilitiesResponse struct {
 	XXX_NoUnkeyedLiteral struct{}                            `json:"-"`
 	XXX_unrecognized     []byte                              `json:"-"`
 	XXX_sizecache        int32                               `json:"-"`
+}
+
+func (m *GroupControllerGetCapabilitiesResponse) Reset() {
+	*m = GroupControllerGetCapabilitiesResponse{}
+}
+func (m *GroupControllerGetCapabilitiesResponse) String() string { return proto.CompactTextString(m) }
+func (*GroupControllerGetCapabilitiesResponse) ProtoMessage()    {}
+func (*GroupControllerGetCapabilitiesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{61}
+}
+
+func (m *GroupControllerGetCapabilitiesResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GroupControllerGetCapabilitiesResponse.Unmarshal(m, b)
+}
+func (m *GroupControllerGetCapabilitiesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GroupControllerGetCapabilitiesResponse.Marshal(b, m, deterministic)
+}
+func (m *GroupControllerGetCapabilitiesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GroupControllerGetCapabilitiesResponse.Merge(m, src)
+}
