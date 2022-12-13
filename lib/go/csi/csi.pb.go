@@ -5033,3 +5033,38 @@ func (m *GroupControllerGetCapabilitiesResponse) XXX_Marshal(b []byte, determini
 func (m *GroupControllerGetCapabilitiesResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_GroupControllerGetCapabilitiesResponse.Merge(m, src)
 }
+func (m *GroupControllerGetCapabilitiesResponse) XXX_Size() int {
+	return xxx_messageInfo_GroupControllerGetCapabilitiesResponse.Size(m)
+}
+func (m *GroupControllerGetCapabilitiesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GroupControllerGetCapabilitiesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GroupControllerGetCapabilitiesResponse proto.InternalMessageInfo
+
+func (m *GroupControllerGetCapabilitiesResponse) GetCapabilities() []*GroupControllerServiceCapability {
+	if m != nil {
+		return m.Capabilities
+	}
+	return nil
+}
+
+// Specifies a capability of the group controller service.
+type GroupControllerServiceCapability struct {
+	// Types that are valid to be assigned to Type:
+	//
+	//	*GroupControllerServiceCapability_Rpc
+	Type                 isGroupControllerServiceCapability_Type `protobuf_oneof:"type"`
+	XXX_NoUnkeyedLiteral struct{}                                `json:"-"`
+	XXX_unrecognized     []byte                                  `json:"-"`
+	XXX_sizecache        int32                                   `json:"-"`
+}
+
+func (m *GroupControllerServiceCapability) Reset()         { *m = GroupControllerServiceCapability{} }
+func (m *GroupControllerServiceCapability) String() string { return proto.CompactTextString(m) }
+func (*GroupControllerServiceCapability) ProtoMessage()    {}
+func (*GroupControllerServiceCapability) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{62}
+}
+
+func (m *GroupControllerServiceCapability) XXX_Unmarshal(b []byte) error {
