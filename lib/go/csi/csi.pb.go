@@ -5068,3 +5068,32 @@ func (*GroupControllerServiceCapability) Descriptor() ([]byte, []int) {
 }
 
 func (m *GroupControllerServiceCapability) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GroupControllerServiceCapability.Unmarshal(m, b)
+}
+func (m *GroupControllerServiceCapability) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GroupControllerServiceCapability.Marshal(b, m, deterministic)
+}
+func (m *GroupControllerServiceCapability) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GroupControllerServiceCapability.Merge(m, src)
+}
+func (m *GroupControllerServiceCapability) XXX_Size() int {
+	return xxx_messageInfo_GroupControllerServiceCapability.Size(m)
+}
+func (m *GroupControllerServiceCapability) XXX_DiscardUnknown() {
+	xxx_messageInfo_GroupControllerServiceCapability.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GroupControllerServiceCapability proto.InternalMessageInfo
+
+type isGroupControllerServiceCapability_Type interface {
+	isGroupControllerServiceCapability_Type()
+}
+
+type GroupControllerServiceCapability_Rpc struct {
+	Rpc *GroupControllerServiceCapability_RPC `protobuf:"bytes,1,opt,name=rpc,proto3,oneof"`
+}
+
+func (*GroupControllerServiceCapability_Rpc) isGroupControllerServiceCapability_Type() {}
+
+func (m *GroupControllerServiceCapability) GetType() isGroupControllerServiceCapability_Type {
+	if m != nil {
