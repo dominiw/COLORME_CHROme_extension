@@ -5121,3 +5121,38 @@ type GroupControllerServiceCapability_RPC struct {
 	XXX_NoUnkeyedLiteral struct{}                                  `json:"-"`
 	XXX_unrecognized     []byte                                    `json:"-"`
 	XXX_sizecache        int32                                     `json:"-"`
+}
+
+func (m *GroupControllerServiceCapability_RPC) Reset()         { *m = GroupControllerServiceCapability_RPC{} }
+func (m *GroupControllerServiceCapability_RPC) String() string { return proto.CompactTextString(m) }
+func (*GroupControllerServiceCapability_RPC) ProtoMessage()    {}
+func (*GroupControllerServiceCapability_RPC) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{62, 0}
+}
+
+func (m *GroupControllerServiceCapability_RPC) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GroupControllerServiceCapability_RPC.Unmarshal(m, b)
+}
+func (m *GroupControllerServiceCapability_RPC) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GroupControllerServiceCapability_RPC.Marshal(b, m, deterministic)
+}
+func (m *GroupControllerServiceCapability_RPC) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GroupControllerServiceCapability_RPC.Merge(m, src)
+}
+func (m *GroupControllerServiceCapability_RPC) XXX_Size() int {
+	return xxx_messageInfo_GroupControllerServiceCapability_RPC.Size(m)
+}
+func (m *GroupControllerServiceCapability_RPC) XXX_DiscardUnknown() {
+	xxx_messageInfo_GroupControllerServiceCapability_RPC.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GroupControllerServiceCapability_RPC proto.InternalMessageInfo
+
+func (m *GroupControllerServiceCapability_RPC) GetType() GroupControllerServiceCapability_RPC_Type {
+	if m != nil {
+		return m.Type
+	}
+	return GroupControllerServiceCapability_RPC_UNKNOWN
+}
+
+type CreateVolumeGroupSnapshotRequest struct {
