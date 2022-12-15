@@ -5097,3 +5097,27 @@ func (*GroupControllerServiceCapability_Rpc) isGroupControllerServiceCapability_
 
 func (m *GroupControllerServiceCapability) GetType() isGroupControllerServiceCapability_Type {
 	if m != nil {
+		return m.Type
+	}
+	return nil
+}
+
+func (m *GroupControllerServiceCapability) GetRpc() *GroupControllerServiceCapability_RPC {
+	if x, ok := m.GetType().(*GroupControllerServiceCapability_Rpc); ok {
+		return x.Rpc
+	}
+	return nil
+}
+
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*GroupControllerServiceCapability) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
+		(*GroupControllerServiceCapability_Rpc)(nil),
+	}
+}
+
+type GroupControllerServiceCapability_RPC struct {
+	Type                 GroupControllerServiceCapability_RPC_Type `protobuf:"varint,1,opt,name=type,proto3,enum=csi.v1.GroupControllerServiceCapability_RPC_Type" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                  `json:"-"`
+	XXX_unrecognized     []byte                                    `json:"-"`
+	XXX_sizecache        int32                                     `json:"-"`
