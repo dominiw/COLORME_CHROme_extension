@@ -5156,3 +5156,39 @@ func (m *GroupControllerServiceCapability_RPC) GetType() GroupControllerServiceC
 }
 
 type CreateVolumeGroupSnapshotRequest struct {
+	// The suggested name for the group snapshot. This field is REQUIRED
+	// for idempotency.
+	// Any Unicode string that conforms to the length limit is allowed
+	// except those containing the following banned characters:
+	// U+0000-U+0008, U+000B, U+000C, U+000E-U+001F, U+007F-U+009F.
+	// (These are control characters other than commonly used whitespace.)
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// volume IDs of the source volumes to be snapshotted together.
+	// This field is REQUIRED.
+	SourceVolumeIds []string `protobuf:"bytes,2,rep,name=source_volume_ids,json=sourceVolumeIds,proto3" json:"source_volume_ids,omitempty"`
+	// Secrets required by plugin to complete
+	// ControllerCreateVolumeGroupSnapshot request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	// The secrets provided in this field SHOULD be the same for
+	// all group snapshot operations on the same group snapshot.
+	Secrets map[string]string `protobuf:"bytes,3,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Plugin specific parameters passed in as opaque key-value pairs.
+	// This field is OPTIONAL. The Plugin is responsible for parsing and
+	// validating these parameters. COs will treat these as opaque.
+	Parameters           map[string]string `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *CreateVolumeGroupSnapshotRequest) Reset()         { *m = CreateVolumeGroupSnapshotRequest{} }
+func (m *CreateVolumeGroupSnapshotRequest) String() string { return proto.CompactTextString(m) }
+func (*CreateVolumeGroupSnapshotRequest) ProtoMessage()    {}
+func (*CreateVolumeGroupSnapshotRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{63}
+}
+
+func (m *CreateVolumeGroupSnapshotRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateVolumeGroupSnapshotRequest.Unmarshal(m, b)
+}
