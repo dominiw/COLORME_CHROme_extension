@@ -5192,3 +5192,31 @@ func (*CreateVolumeGroupSnapshotRequest) Descriptor() ([]byte, []int) {
 func (m *CreateVolumeGroupSnapshotRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateVolumeGroupSnapshotRequest.Unmarshal(m, b)
 }
+func (m *CreateVolumeGroupSnapshotRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateVolumeGroupSnapshotRequest.Marshal(b, m, deterministic)
+}
+func (m *CreateVolumeGroupSnapshotRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateVolumeGroupSnapshotRequest.Merge(m, src)
+}
+func (m *CreateVolumeGroupSnapshotRequest) XXX_Size() int {
+	return xxx_messageInfo_CreateVolumeGroupSnapshotRequest.Size(m)
+}
+func (m *CreateVolumeGroupSnapshotRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateVolumeGroupSnapshotRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateVolumeGroupSnapshotRequest proto.InternalMessageInfo
+
+func (m *CreateVolumeGroupSnapshotRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *CreateVolumeGroupSnapshotRequest) GetSourceVolumeIds() []string {
+	if m != nil {
+		return m.SourceVolumeIds
+	}
+	return nil
+}
