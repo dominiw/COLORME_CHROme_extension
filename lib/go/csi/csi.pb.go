@@ -5288,3 +5288,35 @@ type VolumeGroupSnapshot struct {
 	// This field is REQUIRED.
 	GroupSnapshotId string `protobuf:"bytes,1,opt,name=group_snapshot_id,json=groupSnapshotId,proto3" json:"group_snapshot_id,omitempty"`
 	// A list of snapshots belonging to this group.
+	// This field is REQUIRED.
+	Snapshots []*Snapshot `protobuf:"bytes,2,rep,name=snapshots,proto3" json:"snapshots,omitempty"`
+	// Timestamp of when the volume group snapshot was taken.
+	// This field is REQUIRED.
+	CreationTime *timestamp.Timestamp `protobuf:"bytes,3,opt,name=creation_time,json=creationTime,proto3" json:"creation_time,omitempty"`
+	// Indicates if all individual snapshots in the group snapshot
+	// are ready to use as a `volume_content_source` in a
+	// `CreateVolumeRequest`. The default value is false.
+	// If any snapshot in the list of snapshots in this message have
+	// ready_to_use set to false, the SP MUST set this field to false.
+	// If all of the snapshots in the list of snapshots in this message
+	// have ready_to_use set to true, the SP SHOULD set this field to
+	// true.
+	// This field is REQUIRED.
+	ReadyToUse           bool     `protobuf:"varint,4,opt,name=ready_to_use,json=readyToUse,proto3" json:"ready_to_use,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *VolumeGroupSnapshot) Reset()         { *m = VolumeGroupSnapshot{} }
+func (m *VolumeGroupSnapshot) String() string { return proto.CompactTextString(m) }
+func (*VolumeGroupSnapshot) ProtoMessage()    {}
+func (*VolumeGroupSnapshot) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{65}
+}
+
+func (m *VolumeGroupSnapshot) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VolumeGroupSnapshot.Unmarshal(m, b)
+}
+func (m *VolumeGroupSnapshot) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VolumeGroupSnapshot.Marshal(b, m, deterministic)
