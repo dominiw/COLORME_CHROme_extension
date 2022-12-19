@@ -5320,3 +5320,38 @@ func (m *VolumeGroupSnapshot) XXX_Unmarshal(b []byte) error {
 }
 func (m *VolumeGroupSnapshot) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_VolumeGroupSnapshot.Marshal(b, m, deterministic)
+}
+func (m *VolumeGroupSnapshot) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VolumeGroupSnapshot.Merge(m, src)
+}
+func (m *VolumeGroupSnapshot) XXX_Size() int {
+	return xxx_messageInfo_VolumeGroupSnapshot.Size(m)
+}
+func (m *VolumeGroupSnapshot) XXX_DiscardUnknown() {
+	xxx_messageInfo_VolumeGroupSnapshot.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VolumeGroupSnapshot proto.InternalMessageInfo
+
+func (m *VolumeGroupSnapshot) GetGroupSnapshotId() string {
+	if m != nil {
+		return m.GroupSnapshotId
+	}
+	return ""
+}
+
+func (m *VolumeGroupSnapshot) GetSnapshots() []*Snapshot {
+	if m != nil {
+		return m.Snapshots
+	}
+	return nil
+}
+
+func (m *VolumeGroupSnapshot) GetCreationTime() *timestamp.Timestamp {
+	if m != nil {
+		return m.CreationTime
+	}
+	return nil
+}
+
+func (m *VolumeGroupSnapshot) GetReadyToUse() bool {
