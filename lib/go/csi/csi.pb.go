@@ -5417,3 +5417,42 @@ func (m *DeleteVolumeGroupSnapshotRequest) GetGroupSnapshotId() string {
 		return m.GroupSnapshotId
 	}
 	return ""
+}
+
+func (m *DeleteVolumeGroupSnapshotRequest) GetSnapshotIds() []string {
+	if m != nil {
+		return m.SnapshotIds
+	}
+	return nil
+}
+
+func (m *DeleteVolumeGroupSnapshotRequest) GetSecrets() map[string]string {
+	if m != nil {
+		return m.Secrets
+	}
+	return nil
+}
+
+type DeleteVolumeGroupSnapshotResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteVolumeGroupSnapshotResponse) Reset()         { *m = DeleteVolumeGroupSnapshotResponse{} }
+func (m *DeleteVolumeGroupSnapshotResponse) String() string { return proto.CompactTextString(m) }
+func (*DeleteVolumeGroupSnapshotResponse) ProtoMessage()    {}
+func (*DeleteVolumeGroupSnapshotResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{67}
+}
+
+func (m *DeleteVolumeGroupSnapshotResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteVolumeGroupSnapshotResponse.Unmarshal(m, b)
+}
+func (m *DeleteVolumeGroupSnapshotResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteVolumeGroupSnapshotResponse.Marshal(b, m, deterministic)
+}
+func (m *DeleteVolumeGroupSnapshotResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteVolumeGroupSnapshotResponse.Merge(m, src)
+}
+func (m *DeleteVolumeGroupSnapshotResponse) XXX_Size() int {
