@@ -5392,3 +5392,28 @@ func (m *DeleteVolumeGroupSnapshotRequest) String() string { return proto.Compac
 func (*DeleteVolumeGroupSnapshotRequest) ProtoMessage()    {}
 func (*DeleteVolumeGroupSnapshotRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_9cdb00adce470e01, []int{66}
+}
+
+func (m *DeleteVolumeGroupSnapshotRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteVolumeGroupSnapshotRequest.Unmarshal(m, b)
+}
+func (m *DeleteVolumeGroupSnapshotRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteVolumeGroupSnapshotRequest.Marshal(b, m, deterministic)
+}
+func (m *DeleteVolumeGroupSnapshotRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteVolumeGroupSnapshotRequest.Merge(m, src)
+}
+func (m *DeleteVolumeGroupSnapshotRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteVolumeGroupSnapshotRequest.Size(m)
+}
+func (m *DeleteVolumeGroupSnapshotRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteVolumeGroupSnapshotRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteVolumeGroupSnapshotRequest proto.InternalMessageInfo
+
+func (m *DeleteVolumeGroupSnapshotRequest) GetGroupSnapshotId() string {
+	if m != nil {
+		return m.GroupSnapshotId
+	}
+	return ""
