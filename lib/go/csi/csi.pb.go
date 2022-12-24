@@ -5487,3 +5487,44 @@ type GetVolumeGroupSnapshotRequest struct {
 	// all group snapshot operations on the same group snapshot.
 	Secrets              map[string]string `protobuf:"bytes,3,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *GetVolumeGroupSnapshotRequest) Reset()         { *m = GetVolumeGroupSnapshotRequest{} }
+func (m *GetVolumeGroupSnapshotRequest) String() string { return proto.CompactTextString(m) }
+func (*GetVolumeGroupSnapshotRequest) ProtoMessage()    {}
+func (*GetVolumeGroupSnapshotRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9cdb00adce470e01, []int{68}
+}
+
+func (m *GetVolumeGroupSnapshotRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetVolumeGroupSnapshotRequest.Unmarshal(m, b)
+}
+func (m *GetVolumeGroupSnapshotRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetVolumeGroupSnapshotRequest.Marshal(b, m, deterministic)
+}
+func (m *GetVolumeGroupSnapshotRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetVolumeGroupSnapshotRequest.Merge(m, src)
+}
+func (m *GetVolumeGroupSnapshotRequest) XXX_Size() int {
+	return xxx_messageInfo_GetVolumeGroupSnapshotRequest.Size(m)
+}
+func (m *GetVolumeGroupSnapshotRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetVolumeGroupSnapshotRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetVolumeGroupSnapshotRequest proto.InternalMessageInfo
+
+func (m *GetVolumeGroupSnapshotRequest) GetGroupSnapshotId() string {
+	if m != nil {
+		return m.GroupSnapshotId
+	}
+	return ""
+}
+
+func (m *GetVolumeGroupSnapshotRequest) GetSnapshotIds() []string {
+	if m != nil {
+		return m.SnapshotIds
+	}
+	return nil
