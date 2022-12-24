@@ -5456,3 +5456,34 @@ func (m *DeleteVolumeGroupSnapshotResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DeleteVolumeGroupSnapshotResponse.Merge(m, src)
 }
 func (m *DeleteVolumeGroupSnapshotResponse) XXX_Size() int {
+	return xxx_messageInfo_DeleteVolumeGroupSnapshotResponse.Size(m)
+}
+func (m *DeleteVolumeGroupSnapshotResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteVolumeGroupSnapshotResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteVolumeGroupSnapshotResponse proto.InternalMessageInfo
+
+type GetVolumeGroupSnapshotRequest struct {
+	// The ID of the group snapshot to fetch current group snapshot
+	// information for.
+	// This field is REQUIRED.
+	GroupSnapshotId string `protobuf:"bytes,1,opt,name=group_snapshot_id,json=groupSnapshotId,proto3" json:"group_snapshot_id,omitempty"`
+	// A list of snapshot IDs that are part of this group snapshot.
+	// If SP does not need to rely on this field to get the snapshots
+	// in the group, it SHOULD check this field and report an error
+	// if it has the ability to detect a mismatch.
+	// Some SPs require this list to get the snapshots in the group.
+	// If SP needs to use this field to get the snapshots in the
+	// group, it MUST report an error if it has the ability to detect
+	// a mismatch.
+	// This field is REQUIRED.
+	SnapshotIds []string `protobuf:"bytes,2,rep,name=snapshot_ids,json=snapshotIds,proto3" json:"snapshot_ids,omitempty"`
+	// Secrets required by plugin to complete
+	// GetVolumeGroupSnapshot request.
+	// This field is OPTIONAL. Refer to the `Secrets Requirements`
+	// section on how to use this field.
+	// The secrets provided in this field SHOULD be the same for
+	// all group snapshot operations on the same group snapshot.
+	Secrets              map[string]string `protobuf:"bytes,3,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
