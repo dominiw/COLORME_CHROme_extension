@@ -5564,3 +5564,29 @@ func (m *GetVolumeGroupSnapshotResponse) XXX_Merge(src proto.Message) {
 func (m *GetVolumeGroupSnapshotResponse) XXX_Size() int {
 	return xxx_messageInfo_GetVolumeGroupSnapshotResponse.Size(m)
 }
+func (m *GetVolumeGroupSnapshotResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetVolumeGroupSnapshotResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetVolumeGroupSnapshotResponse proto.InternalMessageInfo
+
+func (m *GetVolumeGroupSnapshotResponse) GetGroupSnapshot() *VolumeGroupSnapshot {
+	if m != nil {
+		return m.GroupSnapshot
+	}
+	return nil
+}
+
+var E_AlphaEnum = &proto.ExtensionDesc{
+	ExtendedType:  (*descriptor.EnumOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         1060,
+	Name:          "csi.v1.alpha_enum",
+	Tag:           "varint,1060,opt,name=alpha_enum",
+	Filename:      "github.com/container-storage-interface/spec/csi.proto",
+}
+
+var E_AlphaEnumValue = &proto.ExtensionDesc{
+	ExtendedType:  (*descriptor.EnumValueOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         1060,
