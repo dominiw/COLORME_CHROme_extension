@@ -5620,3 +5620,27 @@ var E_AlphaMessage = &proto.ExtensionDesc{
 	Name:          "csi.v1.alpha_message",
 	Tag:           "varint,1060,opt,name=alpha_message",
 	Filename:      "github.com/container-storage-interface/spec/csi.proto",
+}
+
+var E_AlphaMethod = &proto.ExtensionDesc{
+	ExtendedType:  (*descriptor.MethodOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         1060,
+	Name:          "csi.v1.alpha_method",
+	Tag:           "varint,1060,opt,name=alpha_method",
+	Filename:      "github.com/container-storage-interface/spec/csi.proto",
+}
+
+var E_AlphaService = &proto.ExtensionDesc{
+	ExtendedType:  (*descriptor.ServiceOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         1060,
+	Name:          "csi.v1.alpha_service",
+	Tag:           "varint,1060,opt,name=alpha_service",
+	Filename:      "github.com/container-storage-interface/spec/csi.proto",
+}
+
+func init() {
+	proto.RegisterEnum("csi.v1.PluginCapability_Service_Type", PluginCapability_Service_Type_name, PluginCapability_Service_Type_value)
+	proto.RegisterEnum("csi.v1.PluginCapability_VolumeExpansion_Type", PluginCapability_VolumeExpansion_Type_name, PluginCapability_VolumeExpansion_Type_value)
+	proto.RegisterEnum("csi.v1.VolumeCapability_AccessMode_Mode", VolumeCapability_AccessMode_Mode_name, VolumeCapability_AccessMode_Mode_value)
