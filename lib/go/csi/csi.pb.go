@@ -5744,3 +5744,40 @@ func init() {
 	proto.RegisterType((*NodeGetCapabilitiesRequest)(nil), "csi.v1.NodeGetCapabilitiesRequest")
 	proto.RegisterType((*NodeGetCapabilitiesResponse)(nil), "csi.v1.NodeGetCapabilitiesResponse")
 	proto.RegisterType((*NodeServiceCapability)(nil), "csi.v1.NodeServiceCapability")
+	proto.RegisterType((*NodeServiceCapability_RPC)(nil), "csi.v1.NodeServiceCapability.RPC")
+	proto.RegisterType((*NodeGetInfoRequest)(nil), "csi.v1.NodeGetInfoRequest")
+	proto.RegisterType((*NodeGetInfoResponse)(nil), "csi.v1.NodeGetInfoResponse")
+	proto.RegisterType((*NodeExpandVolumeRequest)(nil), "csi.v1.NodeExpandVolumeRequest")
+	proto.RegisterMapType((map[string]string)(nil), "csi.v1.NodeExpandVolumeRequest.SecretsEntry")
+	proto.RegisterType((*NodeExpandVolumeResponse)(nil), "csi.v1.NodeExpandVolumeResponse")
+	proto.RegisterType((*GroupControllerGetCapabilitiesRequest)(nil), "csi.v1.GroupControllerGetCapabilitiesRequest")
+	proto.RegisterType((*GroupControllerGetCapabilitiesResponse)(nil), "csi.v1.GroupControllerGetCapabilitiesResponse")
+	proto.RegisterType((*GroupControllerServiceCapability)(nil), "csi.v1.GroupControllerServiceCapability")
+	proto.RegisterType((*GroupControllerServiceCapability_RPC)(nil), "csi.v1.GroupControllerServiceCapability.RPC")
+	proto.RegisterType((*CreateVolumeGroupSnapshotRequest)(nil), "csi.v1.CreateVolumeGroupSnapshotRequest")
+	proto.RegisterMapType((map[string]string)(nil), "csi.v1.CreateVolumeGroupSnapshotRequest.ParametersEntry")
+	proto.RegisterMapType((map[string]string)(nil), "csi.v1.CreateVolumeGroupSnapshotRequest.SecretsEntry")
+	proto.RegisterType((*CreateVolumeGroupSnapshotResponse)(nil), "csi.v1.CreateVolumeGroupSnapshotResponse")
+	proto.RegisterType((*VolumeGroupSnapshot)(nil), "csi.v1.VolumeGroupSnapshot")
+	proto.RegisterType((*DeleteVolumeGroupSnapshotRequest)(nil), "csi.v1.DeleteVolumeGroupSnapshotRequest")
+	proto.RegisterMapType((map[string]string)(nil), "csi.v1.DeleteVolumeGroupSnapshotRequest.SecretsEntry")
+	proto.RegisterType((*DeleteVolumeGroupSnapshotResponse)(nil), "csi.v1.DeleteVolumeGroupSnapshotResponse")
+	proto.RegisterType((*GetVolumeGroupSnapshotRequest)(nil), "csi.v1.GetVolumeGroupSnapshotRequest")
+	proto.RegisterMapType((map[string]string)(nil), "csi.v1.GetVolumeGroupSnapshotRequest.SecretsEntry")
+	proto.RegisterType((*GetVolumeGroupSnapshotResponse)(nil), "csi.v1.GetVolumeGroupSnapshotResponse")
+	proto.RegisterExtension(E_AlphaEnum)
+	proto.RegisterExtension(E_AlphaEnumValue)
+	proto.RegisterExtension(E_CsiSecret)
+	proto.RegisterExtension(E_AlphaField)
+	proto.RegisterExtension(E_AlphaMessage)
+	proto.RegisterExtension(E_AlphaMethod)
+	proto.RegisterExtension(E_AlphaService)
+}
+
+func init() {
+	proto.RegisterFile("github.com/container-storage-interface/spec/csi.proto", fileDescriptor_9cdb00adce470e01)
+}
+
+var fileDescriptor_9cdb00adce470e01 = []byte{
+	// 4169 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe4, 0x5c, 0x4d, 0x6c, 0x1b, 0x49,
