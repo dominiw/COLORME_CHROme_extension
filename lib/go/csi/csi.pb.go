@@ -6057,3 +6057,38 @@ const _ = grpc.SupportPackageIsVersion4
 type IdentityClient interface {
 	GetPluginInfo(ctx context.Context, in *GetPluginInfoRequest, opts ...grpc.CallOption) (*GetPluginInfoResponse, error)
 	GetPluginCapabilities(ctx context.Context, in *GetPluginCapabilitiesRequest, opts ...grpc.CallOption) (*GetPluginCapabilitiesResponse, error)
+	Probe(ctx context.Context, in *ProbeRequest, opts ...grpc.CallOption) (*ProbeResponse, error)
+}
+
+type identityClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewIdentityClient(cc *grpc.ClientConn) IdentityClient {
+	return &identityClient{cc}
+}
+
+func (c *identityClient) GetPluginInfo(ctx context.Context, in *GetPluginInfoRequest, opts ...grpc.CallOption) (*GetPluginInfoResponse, error) {
+	out := new(GetPluginInfoResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Identity/GetPluginInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityClient) GetPluginCapabilities(ctx context.Context, in *GetPluginCapabilitiesRequest, opts ...grpc.CallOption) (*GetPluginCapabilitiesResponse, error) {
+	out := new(GetPluginCapabilitiesResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Identity/GetPluginCapabilities", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityClient) Probe(ctx context.Context, in *ProbeRequest, opts ...grpc.CallOption) (*ProbeResponse, error) {
+	out := new(ProbeResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Identity/Probe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
