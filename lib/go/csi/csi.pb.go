@@ -6092,3 +6092,37 @@ func (c *identityClient) Probe(ctx context.Context, in *ProbeRequest, opts ...gr
 	if err != nil {
 		return nil, err
 	}
+	return out, nil
+}
+
+// IdentityServer is the server API for Identity service.
+type IdentityServer interface {
+	GetPluginInfo(context.Context, *GetPluginInfoRequest) (*GetPluginInfoResponse, error)
+	GetPluginCapabilities(context.Context, *GetPluginCapabilitiesRequest) (*GetPluginCapabilitiesResponse, error)
+	Probe(context.Context, *ProbeRequest) (*ProbeResponse, error)
+}
+
+// UnimplementedIdentityServer can be embedded to have forward compatible implementations.
+type UnimplementedIdentityServer struct {
+}
+
+func (*UnimplementedIdentityServer) GetPluginInfo(ctx context.Context, req *GetPluginInfoRequest) (*GetPluginInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPluginInfo not implemented")
+}
+func (*UnimplementedIdentityServer) GetPluginCapabilities(ctx context.Context, req *GetPluginCapabilitiesRequest) (*GetPluginCapabilitiesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPluginCapabilities not implemented")
+}
+func (*UnimplementedIdentityServer) Probe(ctx context.Context, req *ProbeRequest) (*ProbeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Probe not implemented")
+}
+
+func RegisterIdentityServer(s *grpc.Server, srv IdentityServer) {
+	s.RegisterService(&_Identity_serviceDesc, srv)
+}
+
+func _Identity_GetPluginInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPluginInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
