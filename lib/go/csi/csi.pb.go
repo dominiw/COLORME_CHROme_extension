@@ -6157,3 +6157,40 @@ func _Identity_GetPluginCapabilities_Handler(srv interface{}, ctx context.Contex
 }
 
 func _Identity_Probe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProbeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServer).Probe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.Identity/Probe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServer).Probe(ctx, req.(*ProbeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Identity_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "csi.v1.Identity",
+	HandlerType: (*IdentityServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetPluginInfo",
+			Handler:    _Identity_GetPluginInfo_Handler,
+		},
+		{
+			MethodName: "GetPluginCapabilities",
+			Handler:    _Identity_GetPluginCapabilities_Handler,
+		},
+		{
+			MethodName: "Probe",
+			Handler:    _Identity_Probe_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/container-storage-interface/spec/csi.proto",
+}
