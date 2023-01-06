@@ -6270,3 +6270,29 @@ func (c *controllerClient) ValidateVolumeCapabilities(ctx context.Context, in *V
 func (c *controllerClient) ListVolumes(ctx context.Context, in *ListVolumesRequest, opts ...grpc.CallOption) (*ListVolumesResponse, error) {
 	out := new(ListVolumesResponse)
 	err := c.cc.Invoke(ctx, "/csi.v1.Controller/ListVolumes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) GetCapacity(ctx context.Context, in *GetCapacityRequest, opts ...grpc.CallOption) (*GetCapacityResponse, error) {
+	out := new(GetCapacityResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/GetCapacity", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) ControllerGetCapabilities(ctx context.Context, in *ControllerGetCapabilitiesRequest, opts ...grpc.CallOption) (*ControllerGetCapabilitiesResponse, error) {
+	out := new(ControllerGetCapabilitiesResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/ControllerGetCapabilities", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) CreateSnapshot(ctx context.Context, in *CreateSnapshotRequest, opts ...grpc.CallOption) (*CreateSnapshotResponse, error) {
+	out := new(CreateSnapshotResponse)
