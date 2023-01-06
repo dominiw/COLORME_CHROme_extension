@@ -6225,3 +6225,30 @@ func NewControllerClient(cc *grpc.ClientConn) ControllerClient {
 func (c *controllerClient) CreateVolume(ctx context.Context, in *CreateVolumeRequest, opts ...grpc.CallOption) (*CreateVolumeResponse, error) {
 	out := new(CreateVolumeResponse)
 	err := c.cc.Invoke(ctx, "/csi.v1.Controller/CreateVolume", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) DeleteVolume(ctx context.Context, in *DeleteVolumeRequest, opts ...grpc.CallOption) (*DeleteVolumeResponse, error) {
+	out := new(DeleteVolumeResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/DeleteVolume", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) ControllerPublishVolume(ctx context.Context, in *ControllerPublishVolumeRequest, opts ...grpc.CallOption) (*ControllerPublishVolumeResponse, error) {
+	out := new(ControllerPublishVolumeResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/ControllerPublishVolume", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) ControllerUnpublishVolume(ctx context.Context, in *ControllerUnpublishVolumeRequest, opts ...grpc.CallOption) (*ControllerUnpublishVolumeResponse, error) {
+	out := new(ControllerUnpublishVolumeResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/ControllerUnpublishVolume", in, out, opts...)
