@@ -6252,3 +6252,21 @@ func (c *controllerClient) ControllerPublishVolume(ctx context.Context, in *Cont
 func (c *controllerClient) ControllerUnpublishVolume(ctx context.Context, in *ControllerUnpublishVolumeRequest, opts ...grpc.CallOption) (*ControllerUnpublishVolumeResponse, error) {
 	out := new(ControllerUnpublishVolumeResponse)
 	err := c.cc.Invoke(ctx, "/csi.v1.Controller/ControllerUnpublishVolume", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) ValidateVolumeCapabilities(ctx context.Context, in *ValidateVolumeCapabilitiesRequest, opts ...grpc.CallOption) (*ValidateVolumeCapabilitiesResponse, error) {
+	out := new(ValidateVolumeCapabilitiesResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/ValidateVolumeCapabilities", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) ListVolumes(ctx context.Context, in *ListVolumesRequest, opts ...grpc.CallOption) (*ListVolumesResponse, error) {
+	out := new(ListVolumesResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/ListVolumes", in, out, opts...)
