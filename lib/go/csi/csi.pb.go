@@ -6536,3 +6536,23 @@ func _Controller_ControllerGetCapabilities_Handler(srv interface{}, ctx context.
 		return nil, err
 	}
 	if interceptor == nil {
+		return srv.(ControllerServer).ControllerGetCapabilities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.Controller/ControllerGetCapabilities",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ControllerServer).ControllerGetCapabilities(ctx, req.(*ControllerGetCapabilitiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Controller_CreateSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ControllerServer).CreateSnapshot(ctx, in)
+	}
