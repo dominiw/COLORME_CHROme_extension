@@ -6369,3 +6369,41 @@ func (*UnimplementedControllerServer) DeleteVolume(ctx context.Context, req *Del
 func (*UnimplementedControllerServer) ControllerPublishVolume(ctx context.Context, req *ControllerPublishVolumeRequest) (*ControllerPublishVolumeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ControllerPublishVolume not implemented")
 }
+func (*UnimplementedControllerServer) ControllerUnpublishVolume(ctx context.Context, req *ControllerUnpublishVolumeRequest) (*ControllerUnpublishVolumeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControllerUnpublishVolume not implemented")
+}
+func (*UnimplementedControllerServer) ValidateVolumeCapabilities(ctx context.Context, req *ValidateVolumeCapabilitiesRequest) (*ValidateVolumeCapabilitiesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateVolumeCapabilities not implemented")
+}
+func (*UnimplementedControllerServer) ListVolumes(ctx context.Context, req *ListVolumesRequest) (*ListVolumesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListVolumes not implemented")
+}
+func (*UnimplementedControllerServer) GetCapacity(ctx context.Context, req *GetCapacityRequest) (*GetCapacityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCapacity not implemented")
+}
+func (*UnimplementedControllerServer) ControllerGetCapabilities(ctx context.Context, req *ControllerGetCapabilitiesRequest) (*ControllerGetCapabilitiesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControllerGetCapabilities not implemented")
+}
+func (*UnimplementedControllerServer) CreateSnapshot(ctx context.Context, req *CreateSnapshotRequest) (*CreateSnapshotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSnapshot not implemented")
+}
+func (*UnimplementedControllerServer) DeleteSnapshot(ctx context.Context, req *DeleteSnapshotRequest) (*DeleteSnapshotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSnapshot not implemented")
+}
+func (*UnimplementedControllerServer) ListSnapshots(ctx context.Context, req *ListSnapshotsRequest) (*ListSnapshotsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSnapshots not implemented")
+}
+func (*UnimplementedControllerServer) ControllerExpandVolume(ctx context.Context, req *ControllerExpandVolumeRequest) (*ControllerExpandVolumeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControllerExpandVolume not implemented")
+}
+func (*UnimplementedControllerServer) ControllerGetVolume(ctx context.Context, req *ControllerGetVolumeRequest) (*ControllerGetVolumeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControllerGetVolume not implemented")
+}
+
+func RegisterControllerServer(s *grpc.Server, srv ControllerServer) {
+	s.RegisterService(&_Controller_serviceDesc, srv)
+}
+
+func _Controller_CreateVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateVolumeRequest)
+	if err := dec(in); err != nil {
