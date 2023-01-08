@@ -6296,3 +6296,38 @@ func (c *controllerClient) ControllerGetCapabilities(ctx context.Context, in *Co
 
 func (c *controllerClient) CreateSnapshot(ctx context.Context, in *CreateSnapshotRequest, opts ...grpc.CallOption) (*CreateSnapshotResponse, error) {
 	out := new(CreateSnapshotResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/CreateSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) DeleteSnapshot(ctx context.Context, in *DeleteSnapshotRequest, opts ...grpc.CallOption) (*DeleteSnapshotResponse, error) {
+	out := new(DeleteSnapshotResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/DeleteSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) ListSnapshots(ctx context.Context, in *ListSnapshotsRequest, opts ...grpc.CallOption) (*ListSnapshotsResponse, error) {
+	out := new(ListSnapshotsResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/ListSnapshots", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) ControllerExpandVolume(ctx context.Context, in *ControllerExpandVolumeRequest, opts ...grpc.CallOption) (*ControllerExpandVolumeResponse, error) {
+	out := new(ControllerExpandVolumeResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Controller/ControllerExpandVolume", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controllerClient) ControllerGetVolume(ctx context.Context, in *ControllerGetVolumeRequest, opts ...grpc.CallOption) (*ControllerGetVolumeResponse, error) {
