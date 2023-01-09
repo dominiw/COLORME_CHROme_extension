@@ -6633,3 +6633,41 @@ func _Controller_ControllerGetVolume_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/csi.v1.Controller/ControllerGetVolume",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ControllerServer).ControllerGetVolume(ctx, req.(*ControllerGetVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Controller_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "csi.v1.Controller",
+	HandlerType: (*ControllerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateVolume",
+			Handler:    _Controller_CreateVolume_Handler,
+		},
+		{
+			MethodName: "DeleteVolume",
+			Handler:    _Controller_DeleteVolume_Handler,
+		},
+		{
+			MethodName: "ControllerPublishVolume",
+			Handler:    _Controller_ControllerPublishVolume_Handler,
+		},
+		{
+			MethodName: "ControllerUnpublishVolume",
+			Handler:    _Controller_ControllerUnpublishVolume_Handler,
+		},
+		{
+			MethodName: "ValidateVolumeCapabilities",
+			Handler:    _Controller_ValidateVolumeCapabilities_Handler,
+		},
+		{
+			MethodName: "ListVolumes",
+			Handler:    _Controller_ListVolumes_Handler,
+		},
+		{
+			MethodName: "GetCapacity",
+			Handler:    _Controller_GetCapacity_Handler,
+		},
+		{
