@@ -6607,3 +6607,29 @@ func _Controller_ControllerExpandVolume_Handler(srv interface{}, ctx context.Con
 	if err := dec(in); err != nil {
 		return nil, err
 	}
+	if interceptor == nil {
+		return srv.(ControllerServer).ControllerExpandVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.Controller/ControllerExpandVolume",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ControllerServer).ControllerExpandVolume(ctx, req.(*ControllerExpandVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Controller_ControllerGetVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControllerGetVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ControllerServer).ControllerGetVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.Controller/ControllerGetVolume",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
