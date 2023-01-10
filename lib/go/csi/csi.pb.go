@@ -6697,3 +6697,34 @@ var _Controller_serviceDesc = grpc.ServiceDesc{
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "github.com/container-storage-interface/spec/csi.proto",
+}
+
+// GroupControllerClient is the client API for GroupController service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type GroupControllerClient interface {
+	GroupControllerGetCapabilities(ctx context.Context, in *GroupControllerGetCapabilitiesRequest, opts ...grpc.CallOption) (*GroupControllerGetCapabilitiesResponse, error)
+	CreateVolumeGroupSnapshot(ctx context.Context, in *CreateVolumeGroupSnapshotRequest, opts ...grpc.CallOption) (*CreateVolumeGroupSnapshotResponse, error)
+	DeleteVolumeGroupSnapshot(ctx context.Context, in *DeleteVolumeGroupSnapshotRequest, opts ...grpc.CallOption) (*DeleteVolumeGroupSnapshotResponse, error)
+	GetVolumeGroupSnapshot(ctx context.Context, in *GetVolumeGroupSnapshotRequest, opts ...grpc.CallOption) (*GetVolumeGroupSnapshotResponse, error)
+}
+
+type groupControllerClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewGroupControllerClient(cc *grpc.ClientConn) GroupControllerClient {
+	return &groupControllerClient{cc}
+}
+
+func (c *groupControllerClient) GroupControllerGetCapabilities(ctx context.Context, in *GroupControllerGetCapabilitiesRequest, opts ...grpc.CallOption) (*GroupControllerGetCapabilitiesResponse, error) {
+	out := new(GroupControllerGetCapabilitiesResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.GroupController/GroupControllerGetCapabilities", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupControllerClient) CreateVolumeGroupSnapshot(ctx context.Context, in *CreateVolumeGroupSnapshotRequest, opts ...grpc.CallOption) (*CreateVolumeGroupSnapshotResponse, error) {
+	out := new(CreateVolumeGroupSnapshotResponse)
