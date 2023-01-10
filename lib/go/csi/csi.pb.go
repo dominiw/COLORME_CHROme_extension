@@ -6671,3 +6671,29 @@ var _Controller_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Controller_GetCapacity_Handler,
 		},
 		{
+			MethodName: "ControllerGetCapabilities",
+			Handler:    _Controller_ControllerGetCapabilities_Handler,
+		},
+		{
+			MethodName: "CreateSnapshot",
+			Handler:    _Controller_CreateSnapshot_Handler,
+		},
+		{
+			MethodName: "DeleteSnapshot",
+			Handler:    _Controller_DeleteSnapshot_Handler,
+		},
+		{
+			MethodName: "ListSnapshots",
+			Handler:    _Controller_ListSnapshots_Handler,
+		},
+		{
+			MethodName: "ControllerExpandVolume",
+			Handler:    _Controller_ControllerExpandVolume_Handler,
+		},
+		{
+			MethodName: "ControllerGetVolume",
+			Handler:    _Controller_ControllerGetVolume_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/container-storage-interface/spec/csi.proto",
