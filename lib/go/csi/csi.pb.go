@@ -6728,3 +6728,37 @@ func (c *groupControllerClient) GroupControllerGetCapabilities(ctx context.Conte
 
 func (c *groupControllerClient) CreateVolumeGroupSnapshot(ctx context.Context, in *CreateVolumeGroupSnapshotRequest, opts ...grpc.CallOption) (*CreateVolumeGroupSnapshotResponse, error) {
 	out := new(CreateVolumeGroupSnapshotResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.GroupController/CreateVolumeGroupSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupControllerClient) DeleteVolumeGroupSnapshot(ctx context.Context, in *DeleteVolumeGroupSnapshotRequest, opts ...grpc.CallOption) (*DeleteVolumeGroupSnapshotResponse, error) {
+	out := new(DeleteVolumeGroupSnapshotResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.GroupController/DeleteVolumeGroupSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupControllerClient) GetVolumeGroupSnapshot(ctx context.Context, in *GetVolumeGroupSnapshotRequest, opts ...grpc.CallOption) (*GetVolumeGroupSnapshotResponse, error) {
+	out := new(GetVolumeGroupSnapshotResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.GroupController/GetVolumeGroupSnapshot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// GroupControllerServer is the server API for GroupController service.
+type GroupControllerServer interface {
+	GroupControllerGetCapabilities(context.Context, *GroupControllerGetCapabilitiesRequest) (*GroupControllerGetCapabilitiesResponse, error)
+	CreateVolumeGroupSnapshot(context.Context, *CreateVolumeGroupSnapshotRequest) (*CreateVolumeGroupSnapshotResponse, error)
+	DeleteVolumeGroupSnapshot(context.Context, *DeleteVolumeGroupSnapshotRequest) (*DeleteVolumeGroupSnapshotResponse, error)
+	GetVolumeGroupSnapshot(context.Context, *GetVolumeGroupSnapshotRequest) (*GetVolumeGroupSnapshotResponse, error)
+}
+
+// UnimplementedGroupControllerServer can be embedded to have forward compatible implementations.
