@@ -6762,3 +6762,36 @@ type GroupControllerServer interface {
 }
 
 // UnimplementedGroupControllerServer can be embedded to have forward compatible implementations.
+type UnimplementedGroupControllerServer struct {
+}
+
+func (*UnimplementedGroupControllerServer) GroupControllerGetCapabilities(ctx context.Context, req *GroupControllerGetCapabilitiesRequest) (*GroupControllerGetCapabilitiesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GroupControllerGetCapabilities not implemented")
+}
+func (*UnimplementedGroupControllerServer) CreateVolumeGroupSnapshot(ctx context.Context, req *CreateVolumeGroupSnapshotRequest) (*CreateVolumeGroupSnapshotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateVolumeGroupSnapshot not implemented")
+}
+func (*UnimplementedGroupControllerServer) DeleteVolumeGroupSnapshot(ctx context.Context, req *DeleteVolumeGroupSnapshotRequest) (*DeleteVolumeGroupSnapshotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteVolumeGroupSnapshot not implemented")
+}
+func (*UnimplementedGroupControllerServer) GetVolumeGroupSnapshot(ctx context.Context, req *GetVolumeGroupSnapshotRequest) (*GetVolumeGroupSnapshotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetVolumeGroupSnapshot not implemented")
+}
+
+func RegisterGroupControllerServer(s *grpc.Server, srv GroupControllerServer) {
+	s.RegisterService(&_GroupController_serviceDesc, srv)
+}
+
+func _GroupController_GroupControllerGetCapabilities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GroupControllerGetCapabilitiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupControllerServer).GroupControllerGetCapabilities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.GroupController/GroupControllerGetCapabilities",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
