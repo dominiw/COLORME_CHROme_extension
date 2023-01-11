@@ -6860,3 +6860,29 @@ var _GroupController_serviceDesc = grpc.ServiceDesc{
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GroupControllerGetCapabilities",
+			Handler:    _GroupController_GroupControllerGetCapabilities_Handler,
+		},
+		{
+			MethodName: "CreateVolumeGroupSnapshot",
+			Handler:    _GroupController_CreateVolumeGroupSnapshot_Handler,
+		},
+		{
+			MethodName: "DeleteVolumeGroupSnapshot",
+			Handler:    _GroupController_DeleteVolumeGroupSnapshot_Handler,
+		},
+		{
+			MethodName: "GetVolumeGroupSnapshot",
+			Handler:    _GroupController_GetVolumeGroupSnapshot_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/container-storage-interface/spec/csi.proto",
+}
+
+// NodeClient is the client API for Node service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type NodeClient interface {
+	NodeStageVolume(ctx context.Context, in *NodeStageVolumeRequest, opts ...grpc.CallOption) (*NodeStageVolumeResponse, error)
+	NodeUnstageVolume(ctx context.Context, in *NodeUnstageVolumeRequest, opts ...grpc.CallOption) (*NodeUnstageVolumeResponse, error)
+	NodePublishVolume(ctx context.Context, in *NodePublishVolumeRequest, opts ...grpc.CallOption) (*NodePublishVolumeResponse, error)
