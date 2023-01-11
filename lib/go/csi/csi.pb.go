@@ -6918,3 +6918,32 @@ func (c *nodeClient) NodeUnstageVolume(ctx context.Context, in *NodeUnstageVolum
 	}
 	return out, nil
 }
+
+func (c *nodeClient) NodePublishVolume(ctx context.Context, in *NodePublishVolumeRequest, opts ...grpc.CallOption) (*NodePublishVolumeResponse, error) {
+	out := new(NodePublishVolumeResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Node/NodePublishVolume", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nodeClient) NodeUnpublishVolume(ctx context.Context, in *NodeUnpublishVolumeRequest, opts ...grpc.CallOption) (*NodeUnpublishVolumeResponse, error) {
+	out := new(NodeUnpublishVolumeResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Node/NodeUnpublishVolume", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nodeClient) NodeGetVolumeStats(ctx context.Context, in *NodeGetVolumeStatsRequest, opts ...grpc.CallOption) (*NodeGetVolumeStatsResponse, error) {
+	out := new(NodeGetVolumeStatsResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Node/NodeGetVolumeStats", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nodeClient) NodeExpandVolume(ctx context.Context, in *NodeExpandVolumeRequest, opts ...grpc.CallOption) (*NodeExpandVolumeResponse, error) {
