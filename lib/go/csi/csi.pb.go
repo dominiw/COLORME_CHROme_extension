@@ -6827,3 +6827,36 @@ func _GroupController_DeleteVolumeGroupSnapshot_Handler(srv interface{}, ctx con
 		return srv.(GroupControllerServer).DeleteVolumeGroupSnapshot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.GroupController/DeleteVolumeGroupSnapshot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupControllerServer).DeleteVolumeGroupSnapshot(ctx, req.(*DeleteVolumeGroupSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupController_GetVolumeGroupSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVolumeGroupSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupControllerServer).GetVolumeGroupSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.GroupController/GetVolumeGroupSnapshot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupControllerServer).GetVolumeGroupSnapshot(ctx, req.(*GetVolumeGroupSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _GroupController_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "csi.v1.GroupController",
+	HandlerType: (*GroupControllerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GroupControllerGetCapabilities",
