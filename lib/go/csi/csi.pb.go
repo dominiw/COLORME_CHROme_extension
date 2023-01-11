@@ -6886,3 +6886,35 @@ type NodeClient interface {
 	NodeStageVolume(ctx context.Context, in *NodeStageVolumeRequest, opts ...grpc.CallOption) (*NodeStageVolumeResponse, error)
 	NodeUnstageVolume(ctx context.Context, in *NodeUnstageVolumeRequest, opts ...grpc.CallOption) (*NodeUnstageVolumeResponse, error)
 	NodePublishVolume(ctx context.Context, in *NodePublishVolumeRequest, opts ...grpc.CallOption) (*NodePublishVolumeResponse, error)
+	NodeUnpublishVolume(ctx context.Context, in *NodeUnpublishVolumeRequest, opts ...grpc.CallOption) (*NodeUnpublishVolumeResponse, error)
+	NodeGetVolumeStats(ctx context.Context, in *NodeGetVolumeStatsRequest, opts ...grpc.CallOption) (*NodeGetVolumeStatsResponse, error)
+	NodeExpandVolume(ctx context.Context, in *NodeExpandVolumeRequest, opts ...grpc.CallOption) (*NodeExpandVolumeResponse, error)
+	NodeGetCapabilities(ctx context.Context, in *NodeGetCapabilitiesRequest, opts ...grpc.CallOption) (*NodeGetCapabilitiesResponse, error)
+	NodeGetInfo(ctx context.Context, in *NodeGetInfoRequest, opts ...grpc.CallOption) (*NodeGetInfoResponse, error)
+}
+
+type nodeClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewNodeClient(cc *grpc.ClientConn) NodeClient {
+	return &nodeClient{cc}
+}
+
+func (c *nodeClient) NodeStageVolume(ctx context.Context, in *NodeStageVolumeRequest, opts ...grpc.CallOption) (*NodeStageVolumeResponse, error) {
+	out := new(NodeStageVolumeResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Node/NodeStageVolume", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nodeClient) NodeUnstageVolume(ctx context.Context, in *NodeUnstageVolumeRequest, opts ...grpc.CallOption) (*NodeUnstageVolumeResponse, error) {
+	out := new(NodeUnstageVolumeResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Node/NodeUnstageVolume", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
