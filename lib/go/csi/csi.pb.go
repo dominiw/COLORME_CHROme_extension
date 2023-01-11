@@ -6795,3 +6795,35 @@ func _GroupController_GroupControllerGetCapabilities_Handler(srv interface{}, ct
 		FullMethod: "/csi.v1.GroupController/GroupControllerGetCapabilities",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupControllerServer).GroupControllerGetCapabilities(ctx, req.(*GroupControllerGetCapabilitiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupController_CreateVolumeGroupSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateVolumeGroupSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupControllerServer).CreateVolumeGroupSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.GroupController/CreateVolumeGroupSnapshot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupControllerServer).CreateVolumeGroupSnapshot(ctx, req.(*CreateVolumeGroupSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupController_DeleteVolumeGroupSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteVolumeGroupSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupControllerServer).DeleteVolumeGroupSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
