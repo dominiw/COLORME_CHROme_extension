@@ -6960,3 +6960,43 @@ func (c *nodeClient) NodeGetCapabilities(ctx context.Context, in *NodeGetCapabil
 	err := c.cc.Invoke(ctx, "/csi.v1.Node/NodeGetCapabilities", in, out, opts...)
 	if err != nil {
 		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nodeClient) NodeGetInfo(ctx context.Context, in *NodeGetInfoRequest, opts ...grpc.CallOption) (*NodeGetInfoResponse, error) {
+	out := new(NodeGetInfoResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Node/NodeGetInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// NodeServer is the server API for Node service.
+type NodeServer interface {
+	NodeStageVolume(context.Context, *NodeStageVolumeRequest) (*NodeStageVolumeResponse, error)
+	NodeUnstageVolume(context.Context, *NodeUnstageVolumeRequest) (*NodeUnstageVolumeResponse, error)
+	NodePublishVolume(context.Context, *NodePublishVolumeRequest) (*NodePublishVolumeResponse, error)
+	NodeUnpublishVolume(context.Context, *NodeUnpublishVolumeRequest) (*NodeUnpublishVolumeResponse, error)
+	NodeGetVolumeStats(context.Context, *NodeGetVolumeStatsRequest) (*NodeGetVolumeStatsResponse, error)
+	NodeExpandVolume(context.Context, *NodeExpandVolumeRequest) (*NodeExpandVolumeResponse, error)
+	NodeGetCapabilities(context.Context, *NodeGetCapabilitiesRequest) (*NodeGetCapabilitiesResponse, error)
+	NodeGetInfo(context.Context, *NodeGetInfoRequest) (*NodeGetInfoResponse, error)
+}
+
+// UnimplementedNodeServer can be embedded to have forward compatible implementations.
+type UnimplementedNodeServer struct {
+}
+
+func (*UnimplementedNodeServer) NodeStageVolume(ctx context.Context, req *NodeStageVolumeRequest) (*NodeStageVolumeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodeStageVolume not implemented")
+}
+func (*UnimplementedNodeServer) NodeUnstageVolume(ctx context.Context, req *NodeUnstageVolumeRequest) (*NodeUnstageVolumeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodeUnstageVolume not implemented")
+}
+func (*UnimplementedNodeServer) NodePublishVolume(ctx context.Context, req *NodePublishVolumeRequest) (*NodePublishVolumeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodePublishVolume not implemented")
+}
+func (*UnimplementedNodeServer) NodeUnpublishVolume(ctx context.Context, req *NodeUnpublishVolumeRequest) (*NodeUnpublishVolumeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodeUnpublishVolume not implemented")
