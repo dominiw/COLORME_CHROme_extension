@@ -7000,3 +7000,37 @@ func (*UnimplementedNodeServer) NodePublishVolume(ctx context.Context, req *Node
 }
 func (*UnimplementedNodeServer) NodeUnpublishVolume(ctx context.Context, req *NodeUnpublishVolumeRequest) (*NodeUnpublishVolumeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NodeUnpublishVolume not implemented")
+}
+func (*UnimplementedNodeServer) NodeGetVolumeStats(ctx context.Context, req *NodeGetVolumeStatsRequest) (*NodeGetVolumeStatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodeGetVolumeStats not implemented")
+}
+func (*UnimplementedNodeServer) NodeExpandVolume(ctx context.Context, req *NodeExpandVolumeRequest) (*NodeExpandVolumeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodeExpandVolume not implemented")
+}
+func (*UnimplementedNodeServer) NodeGetCapabilities(ctx context.Context, req *NodeGetCapabilitiesRequest) (*NodeGetCapabilitiesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodeGetCapabilities not implemented")
+}
+func (*UnimplementedNodeServer) NodeGetInfo(ctx context.Context, req *NodeGetInfoRequest) (*NodeGetInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodeGetInfo not implemented")
+}
+
+func RegisterNodeServer(s *grpc.Server, srv NodeServer) {
+	s.RegisterService(&_Node_serviceDesc, srv)
+}
+
+func _Node_NodeStageVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NodeStageVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeServer).NodeStageVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.Node/NodeStageVolume",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeServer).NodeStageVolume(ctx, req.(*NodeStageVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
