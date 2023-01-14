@@ -6947,3 +6947,16 @@ func (c *nodeClient) NodeGetVolumeStats(ctx context.Context, in *NodeGetVolumeSt
 }
 
 func (c *nodeClient) NodeExpandVolume(ctx context.Context, in *NodeExpandVolumeRequest, opts ...grpc.CallOption) (*NodeExpandVolumeResponse, error) {
+	out := new(NodeExpandVolumeResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Node/NodeExpandVolume", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nodeClient) NodeGetCapabilities(ctx context.Context, in *NodeGetCapabilitiesRequest, opts ...grpc.CallOption) (*NodeGetCapabilitiesResponse, error) {
+	out := new(NodeGetCapabilitiesResponse)
+	err := c.cc.Invoke(ctx, "/csi.v1.Node/NodeGetCapabilities", in, out, opts...)
+	if err != nil {
+		return nil, err
