@@ -7161,3 +7161,31 @@ func _Node_NodeGetInfo_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	return interceptor(ctx, in, info, handler)
 }
+
+var _Node_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "csi.v1.Node",
+	HandlerType: (*NodeServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "NodeStageVolume",
+			Handler:    _Node_NodeStageVolume_Handler,
+		},
+		{
+			MethodName: "NodeUnstageVolume",
+			Handler:    _Node_NodeUnstageVolume_Handler,
+		},
+		{
+			MethodName: "NodePublishVolume",
+			Handler:    _Node_NodePublishVolume_Handler,
+		},
+		{
+			MethodName: "NodeUnpublishVolume",
+			Handler:    _Node_NodeUnpublishVolume_Handler,
+		},
+		{
+			MethodName: "NodeGetVolumeStats",
+			Handler:    _Node_NodeGetVolumeStats_Handler,
+		},
+		{
+			MethodName: "NodeExpandVolume",
+			Handler:    _Node_NodeExpandVolume_Handler,
