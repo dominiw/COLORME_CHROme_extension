@@ -7034,3 +7034,37 @@ func _Node_NodeStageVolume_Handler(srv interface{}, ctx context.Context, dec fun
 		return srv.(NodeServer).NodeStageVolume(ctx, req.(*NodeStageVolumeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _Node_NodeUnstageVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NodeUnstageVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeServer).NodeUnstageVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.Node/NodeUnstageVolume",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeServer).NodeUnstageVolume(ctx, req.(*NodeUnstageVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Node_NodePublishVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NodePublishVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeServer).NodePublishVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.Node/NodePublishVolume",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeServer).NodePublishVolume(ctx, req.(*NodePublishVolumeRequest))
