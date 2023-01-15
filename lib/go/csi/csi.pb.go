@@ -7189,3 +7189,16 @@ var _Node_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "NodeExpandVolume",
 			Handler:    _Node_NodeExpandVolume_Handler,
+		},
+		{
+			MethodName: "NodeGetCapabilities",
+			Handler:    _Node_NodeGetCapabilities_Handler,
+		},
+		{
+			MethodName: "NodeGetInfo",
+			Handler:    _Node_NodeGetInfo_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/container-storage-interface/spec/csi.proto",
+}
