@@ -7068,3 +7068,26 @@ func _Node_NodePublishVolume_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NodeServer).NodePublishVolume(ctx, req.(*NodePublishVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Node_NodeUnpublishVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NodeUnpublishVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeServer).NodeUnpublishVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/csi.v1.Node/NodeUnpublishVolume",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeServer).NodeUnpublishVolume(ctx, req.(*NodeUnpublishVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Node_NodeGetVolumeStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
