@@ -215,3 +215,45 @@ STAGE_UNSTAGE_VOLUME capability.
 
 ```
     Controller                  Controller
+       Publish                  Unpublish
+        Volume  +------------+  Volume
+ +------------->+ NODE_READY +--------------+
+ |              +---+----^---+              |
+ |             Node |    | Node             v
++++         Publish |    | Unpublish       +++
+|X| <-+      Volume |    | Volume          | |
++++   |         +---v----+---+             +-+
+ |    |         | PUBLISHED  |
+ |    |         +------------+
+ +----+
+   Validate
+   Volume
+   Capabilities
+
+Figure 7: The lifecycle of a pre-provisioned volume that requires
+controller to publish to a node (`ControllerPublishVolume`) prior to
+publishing on the node (`NodePublishVolume`).
+```
+
+```
+       +-+  +-+
+       |X|  | |
+       +++  +^+
+        |    |
+   Node |    | Node
+Publish |    | Unpublish
+ Volume |    | Volume
+    +---v----+---+
+    | PUBLISHED  |
+    +------------+
+
+Figure 8: Plugins MAY forego other lifecycle steps by contraindicating
+them via the capabilities API. Interactions with the volumes of such
+plugins is reduced to `NodePublishVolume` and `NodeUnpublishVolume`
+calls.
+```
+
+The above diagrams illustrate a general expectation with respect to how a CO MAY manage the lifecycle of a volume via the API presented in this specification.
+Plugins SHOULD expose all RPCs for an interface: Controller plugins SHOULD implement all RPCs for the `Controller` service.
+Unsupported RPCs SHOULD return an appropriate error code that indicates such (e.g. `CALL_NOT_IMPLEMENTED`).
+The full list of plugin capabilities is documented in the `ControllerGetCapabilities` and `NodeGetCapabilities` RPCs.
