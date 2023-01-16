@@ -93,3 +93,35 @@ Several of these possibilities are illustrated in the following figures.
 
                             CO "Node" Host(s)
 +-------------------------------------------+
+|                                           |
+|  +------------+           +------------+  |
+|  |     CO     |   gRPC    |    Node    |  |
+|  |            +----------->   Plugin   |  |
+|  +------------+           +------------+  |
+|                                           |
++-------------------------------------------+
+
+Figure 1: The Plugin runs on all nodes in the cluster: a centralized
+Controller Plugin is available on the CO master host and the Node
+Plugin is available on all of the CO Nodes.
+```
+
+```
+                            CO "Node" Host(s)
++-------------------------------------------+
+|                                           |
+|  +------------+           +------------+  |
+|  |     CO     |   gRPC    | Controller |  |
+|  |            +--+-------->   Plugin   |  |
+|  +------------+  |        +------------+  |
+|                  |                        |
+|                  |                        |
+|                  |        +------------+  |
+|                  |        |    Node    |  |
+|                  +-------->   Plugin   |  |
+|                           +------------+  |
+|                                           |
++-------------------------------------------+
+
+Figure 2: Headless Plugin deployment, only the CO Node hosts run
+Plugins. Separate, split-component Plugins supply the Controller
