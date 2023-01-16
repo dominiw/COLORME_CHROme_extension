@@ -125,3 +125,33 @@ Plugin is available on all of the CO Nodes.
 
 Figure 2: Headless Plugin deployment, only the CO Node hosts run
 Plugins. Separate, split-component Plugins supply the Controller
+Service and the Node Service respectively.
+```
+
+```
+                            CO "Node" Host(s)
++-------------------------------------------+
+|                                           |
+|  +------------+           +------------+  |
+|  |     CO     |   gRPC    | Controller |  |
+|  |            +----------->    Node    |  |
+|  +------------+           |   Plugin   |  |
+|                           +------------+  |
+|                                           |
++-------------------------------------------+
+
+Figure 3: Headless Plugin deployment, only the CO Node hosts run
+Plugins. A unified Plugin component supplies both the Controller
+Service and Node Service.
+```
+
+```
+                            CO "Node" Host(s)
++-------------------------------------------+
+|                                           |
+|  +------------+           +------------+  |
+|  |     CO     |   gRPC    |    Node    |  |
+|  |            +----------->   Plugin   |  |
+|  +------------+           +------------+  |
+|                                           |
++-------------------------------------------+
