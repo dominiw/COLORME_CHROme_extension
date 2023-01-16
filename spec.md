@@ -35,3 +35,32 @@ An implementation is compliant if it satisfies all the MUST, REQUIRED, and SHALL
 ## Objective
 
 To define an industry standard “Container Storage Interface” (CSI) that will enable storage vendors (SP) to develop a plugin once and have it work across a number of container orchestration (CO) systems.
+
+### Goals in MVP
+
+The Container Storage Interface (CSI) will
+
+* Enable SP authors to write one CSI compliant Plugin that “just works” across all COs that implement CSI.
+* Define API (RPCs) that enable:
+  * Dynamic provisioning and deprovisioning of a volume.
+  * Attaching or detaching a volume from a node.
+  * Mounting/unmounting a volume from a node.
+  * Consumption of both block and mountable volumes.
+  * Local storage providers (e.g., device mapper, lvm).
+  * Creating and deleting a snapshot (source of the snapshot is a volume).
+  * Provisioning a new volume from a snapshot (reverting snapshot, where data in the original volume is erased and replaced with data in the snapshot, is out of scope).
+* Define plugin protocol RECOMMENDATIONS.
+  * Describe a process by which a Supervisor configures a Plugin.
+  * Container deployment considerations (`CAP_SYS_ADMIN`, mount namespace, etc.).
+
+### Non-Goals in MVP
+
+The Container Storage Interface (CSI) explicitly will not define, provide, or dictate:
+
+* Specific mechanisms by which a Plugin Supervisor manages the lifecycle of a Plugin, including:
+  * How to maintain state (e.g. what is attached, mounted, etc.).
+  * How to deploy, install, upgrade, uninstall, monitor, or respawn (in case of unexpected termination) Plugins.
+* A first class message structure/field to represent "grades of storage" (aka "storage class").
+* Protocol-level authentication and authorization.
+* Packaging of a Plugin.
+* POSIX compliance: CSI provides no guarantee that volumes provided are POSIX compliant filesystems.
