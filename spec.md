@@ -64,3 +64,32 @@ The Container Storage Interface (CSI) explicitly will not define, provide, or di
 * Protocol-level authentication and authorization.
 * Packaging of a Plugin.
 * POSIX compliance: CSI provides no guarantee that volumes provided are POSIX compliant filesystems.
+  Compliance is determined by the Plugin implementation (and any backend storage system(s) upon which it depends).
+  CSI SHALL NOT obstruct a Plugin Supervisor or CO from interacting with Plugin-managed volumes in a POSIX-compliant manner.
+
+## Solution Overview
+
+This specification defines an interface along with the minimum operational and packaging recommendations for a storage provider (SP) to implement a CSI compatible plugin.
+The interface declares the RPCs that a plugin MUST expose: this is the **primary focus** of the CSI specification.
+Any operational and packaging recommendations offer additional guidance to promote cross-CO compatibility.
+
+### Architecture
+
+The primary focus of this specification is on the **protocol** between a CO and a Plugin.
+It SHOULD be possible to ship cross-CO compatible Plugins for a variety of deployment architectures.
+A CO SHOULD be equipped to handle both centralized and headless plugins, as well as split-component and unified plugins.
+Several of these possibilities are illustrated in the following figures.
+
+```
+                             CO "Master" Host
++-------------------------------------------+
+|                                           |
+|  +------------+           +------------+  |
+|  |     CO     |   gRPC    | Controller |  |
+|  |            +----------->   Plugin   |  |
+|  +------------+           +------------+  |
+|                                           |
++-------------------------------------------+
+
+                            CO "Node" Host(s)
++-------------------------------------------+
