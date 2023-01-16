@@ -155,3 +155,38 @@ Service and Node Service.
 |  +------------+           +------------+  |
 |                                           |
 +-------------------------------------------+
+
+Figure 4: Headless Plugin deployment, only the CO Node hosts run
+Plugins. A Node-only Plugin component supplies only the Node Service.
+Its GetPluginCapabilities RPC does not report the CONTROLLER_SERVICE
+capability.
+```
+
+### Volume Lifecycle
+
+```
+   CreateVolume +------------+ DeleteVolume
+ +------------->|  CREATED   +--------------+
+ |              +---+----^---+              |
+ |       Controller |    | Controller       v
++++         Publish |    | Unpublish       +++
+|X|          Volume |    | Volume          | |
++-+             +---v----+---+             +-+
+                | NODE_READY |
+                +---+----^---+
+               Node |    | Node
+            Publish |    | Unpublish
+             Volume |    | Volume
+                +---v----+---+
+                | PUBLISHED  |
+                +------------+
+
+Figure 5: The lifecycle of a dynamically provisioned volume, from
+creation to destruction.
+```
+
+```
+   CreateVolume +------------+ DeleteVolume
+ +------------->|  CREATED   +--------------+
+ |              +---+----^---+              |
+ |       Controller |    | Controller       v
