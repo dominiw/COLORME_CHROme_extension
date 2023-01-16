@@ -257,3 +257,24 @@ The above diagrams illustrate a general expectation with respect to how a CO MAY
 Plugins SHOULD expose all RPCs for an interface: Controller plugins SHOULD implement all RPCs for the `Controller` service.
 Unsupported RPCs SHOULD return an appropriate error code that indicates such (e.g. `CALL_NOT_IMPLEMENTED`).
 The full list of plugin capabilities is documented in the `ControllerGetCapabilities` and `NodeGetCapabilities` RPCs.
+
+## Container Storage Interface
+
+This section describes the interface between COs and Plugins.
+
+### RPC Interface
+
+A CO interacts with an Plugin through RPCs.
+Each SP MUST provide:
+
+* **Node Plugin**: A gRPC endpoint serving CSI RPCs that MUST be run on the Node whereupon an SP-provisioned volume will be published.
+* **Controller Plugin**: A gRPC endpoint serving CSI RPCs that MAY be run anywhere.
+* In some circumstances a single gRPC endpoint MAY serve all CSI RPCs (see Figure 3 in [Architecture](#architecture)).
+
+```protobuf
+syntax = "proto3";
+package csi.v1;
+
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
