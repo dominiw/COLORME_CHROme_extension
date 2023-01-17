@@ -306,3 +306,23 @@ extend google.protobuf.FieldOptions {
 extend google.protobuf.MessageOptions {
   // Indicates that this message is OPTIONAL and part of an experimental
   // API that may be deprecated and eventually removed between minor
+  // releases.
+  bool alpha_message = 1060;
+}
+extend google.protobuf.MethodOptions {
+  // Indicates that this method is OPTIONAL and part of an experimental
+  // API that may be deprecated and eventually removed between minor
+  // releases.
+  bool alpha_method = 1060;
+}
+extend google.protobuf.ServiceOptions {
+  // Indicates that this service is OPTIONAL and part of an experimental
+  // API that may be deprecated and eventually removed between minor
+  // releases.
+  bool alpha_service = 1060;
+}
+```
+
+There are three sets of RPCs:
+
+* **Identity Service**: Both the Node Plugin and the Controller Plugin MUST implement this sets of RPCs.
