@@ -278,3 +278,31 @@ package csi.v1;
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+
+option go_package = "csi";
+
+extend google.protobuf.EnumOptions {
+  // Indicates that this enum is OPTIONAL and part of an experimental
+  // API that may be deprecated and eventually removed between minor
+  // releases.
+  bool alpha_enum = 1060;
+}
+extend google.protobuf.EnumValueOptions {
+  // Indicates that this enum value is OPTIONAL and part of an
+  // experimental API that may be deprecated and eventually removed
+  // between minor releases.
+  bool alpha_enum_value = 1060;
+}
+extend google.protobuf.FieldOptions {
+  // Indicates that a field MAY contain information that is sensitive
+  // and MUST be treated as such (e.g. not logged).
+  bool csi_secret = 1059;
+
+  // Indicates that this field is OPTIONAL and part of an experimental
+  // API that may be deprecated and eventually removed between minor
+  // releases.
+  bool alpha_field = 1060;
+}
+extend google.protobuf.MessageOptions {
+  // Indicates that this message is OPTIONAL and part of an experimental
+  // API that may be deprecated and eventually removed between minor
