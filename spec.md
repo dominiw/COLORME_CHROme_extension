@@ -326,3 +326,30 @@ extend google.protobuf.ServiceOptions {
 There are three sets of RPCs:
 
 * **Identity Service**: Both the Node Plugin and the Controller Plugin MUST implement this sets of RPCs.
+* **Controller Service**: The Controller Plugin MUST implement this sets of RPCs.
+* **Node Service**: The Node Plugin MUST implement this sets of RPCs.
+
+```protobuf
+service Identity {
+  rpc GetPluginInfo(GetPluginInfoRequest)
+    returns (GetPluginInfoResponse) {}
+
+  rpc GetPluginCapabilities(GetPluginCapabilitiesRequest)
+    returns (GetPluginCapabilitiesResponse) {}
+
+  rpc Probe (ProbeRequest)
+    returns (ProbeResponse) {}
+}
+
+service Controller {
+  rpc CreateVolume (CreateVolumeRequest)
+    returns (CreateVolumeResponse) {}
+
+  rpc DeleteVolume (DeleteVolumeRequest)
+    returns (DeleteVolumeResponse) {}
+
+  rpc ControllerPublishVolume (ControllerPublishVolumeRequest)
+    returns (ControllerPublishVolumeResponse) {}
+
+  rpc ControllerUnpublishVolume (ControllerUnpublishVolumeRequest)
+    returns (ControllerUnpublishVolumeResponse) {}
