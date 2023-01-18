@@ -386,3 +386,34 @@ service Controller {
 
 service GroupController {
   option (alpha_service) = true;
+
+  rpc GroupControllerGetCapabilities (
+        GroupControllerGetCapabilitiesRequest)
+    returns (GroupControllerGetCapabilitiesResponse) {}
+
+  rpc CreateVolumeGroupSnapshot(CreateVolumeGroupSnapshotRequest)
+    returns (CreateVolumeGroupSnapshotResponse) {
+        option (alpha_method) = true;
+    }
+
+  rpc DeleteVolumeGroupSnapshot(DeleteVolumeGroupSnapshotRequest)
+    returns (DeleteVolumeGroupSnapshotResponse) {
+        option (alpha_method) = true;
+    }
+
+  rpc GetVolumeGroupSnapshot(
+        GetVolumeGroupSnapshotRequest)
+    returns (GetVolumeGroupSnapshotResponse) {
+        option (alpha_method) = true;
+    }
+}
+
+service Node {
+  rpc NodeStageVolume (NodeStageVolumeRequest)
+    returns (NodeStageVolumeResponse) {}
+
+  rpc NodeUnstageVolume (NodeUnstageVolumeRequest)
+    returns (NodeUnstageVolumeResponse) {}
+
+  rpc NodePublishVolume (NodePublishVolumeRequest)
+    returns (NodePublishVolumeResponse) {}
