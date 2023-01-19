@@ -514,3 +514,37 @@ A CO MAY pass the same secrets to all RPCs, therefore the keys for all unique se
 This information is sensitive and MUST be treated as such (not logged, etc.) by the CO.
 
 ### Identity Service RPC
+
+Identity service RPCs allow a CO to query a plugin for capabilities, health, and other metadata.
+The general flow of the success case MAY be as follows (protos illustrated in YAML for brevity):
+
+1. CO queries metadata via Identity RPC.
+
+```
+   # CO --(GetPluginInfo)--> Plugin
+   request:
+   response:
+      name: org.foo.whizbang.super-plugin
+      vendor_version: blue-green
+      manifest:
+        baz: qaz
+```
+
+2. CO queries available capabilities of the plugin.
+
+```
+   # CO --(GetPluginCapabilities)--> Plugin
+   request:
+   response:
+     capabilities:
+       - service:
+           type: CONTROLLER_SERVICE
+```
+
+3. CO queries the readiness of the plugin.
+
+```
+   # CO --(Probe)--> Plugin
+   request:
+   response: {}
+```
