@@ -473,3 +473,44 @@ Scalar fields, even REQUIRED ones, will be defaulted if not specified and any fi
 
 Any of the RPCs defined in this spec MAY timeout and MAY be retried.
 The CO MAY choose the maximum time it is willing to wait for a call, how long it waits between retries, and how many time it retries (these values are not negotiated between plugin and CO).
+
+Idempotency requirements ensure that a retried call with the same fields continues where it left off when retried.
+The only way to cancel a call is to issue a "negation" call if one exists.
+For example, issue a `ControllerUnpublishVolume` call to cancel a pending `ControllerPublishVolume` operation, etc.
+In some cases, a CO MAY NOT be able to cancel a pending operation because it depends on the result of the pending operation in order to execute the "negation" call.
+For example, if a `CreateVolume` call never completes then a CO MAY NOT have the `volume_id` to call `DeleteVolume` with.
+
+### Error Scheme
+
+All CSI API calls defined in this spec MUST return a [standard gRPC status](https://github.com/grpc/grpc/blob/master/src/proto/grpc/status/status.proto).
+Most gRPC libraries provide helper methods to set and read the status fields.
+
+The status `code` MUST contain a [canonical error code](https://github.com/grpc/grpc-go/blob/master/codes/codes.go). COs MUST handle all valid error codes. Each RPC defines a set of gRPC error codes that MUST be returned by the plugin when specified conditions are encountered. In addition to those, if the conditions defined below are encountered, the plugin MUST return the associated gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Missing required field | 3 INVALID_ARGUMENT | Indicates that a required field is missing from the request. More human-readable information MAY be provided in the `status.message` field. | Caller MUST fix the request by adding the missing required field before retrying. |
+| Invalid or unsupported field in the request | 3 INVALID_ARGUMENT | Indicates that the one or more fields in this field is either not allowed by the Plugin or has an invalid value. More human-readable information MAY be provided in the gRPC `status.message` field. | Caller MUST fix the field before retrying. |
+| Permission denied | 7 PERMISSION_DENIED | The Plugin is able to derive or otherwise infer an identity from the secrets present within an RPC, but that identity does not have permission to invoke the RPC. | System administrator SHOULD ensure that requisite permissions are granted, after which point the caller MAY retry the attempted RPC. |
+| Operation pending for volume | 10 ABORTED | Indicates that there is already an operation pending for the specified volume. In general the Cluster Orchestrator (CO) is responsible for ensuring that there is no more than one call "in-flight" per volume at a given time. However, in some circumstances, the CO MAY lose state (for example when the CO crashes and restarts), and MAY issue multiple calls simultaneously for the same volume. The Plugin, SHOULD handle this as gracefully as possible, and MAY return this error code to reject secondary calls. | Caller SHOULD ensure that there are no other calls pending for the specified volume, and then retry with exponential back off. |
+| Call not implemented | 12 UNIMPLEMENTED | The invoked RPC is not implemented by the Plugin or disabled in the Plugin's current mode of operation. | Caller MUST NOT retry. Caller MAY call `GetPluginCapabilities`, `ControllerGetCapabilities`, or `NodeGetCapabilities` to discover Plugin capabilities. |
+| Not authenticated | 16 UNAUTHENTICATED | The invoked RPC does not carry secrets that are valid for authentication. | Caller SHALL either fix the secrets provided in the RPC, or otherwise regalvanize said secrets such that they will pass authentication by the Plugin for the attempted RPC, after which point the caller MAY retry the attempted RPC. |
+
+The status `message` MUST contain a human readable description of error, if the status `code` is not `OK`.
+This string MAY be surfaced by CO to end users.
+
+The status `details` MUST be empty. In the future, this spec MAY require `details` to return a machine-parsable protobuf message if the status `code` is not `OK` to enable CO's to implement smarter error handling and fault resolution.
+
+### Secrets Requirements
+
+Secrets MAY be required by plugin to complete a RPC request.
+A secret is a string to string map where the key identifies the name of the secret (e.g. "username" or "password"), and the value contains the secret data (e.g. "bob" or "abc123").
+Each key MUST consist of alphanumeric characters, '-', '_' or '.'.
+Each value MUST contain a valid string.
+An SP MAY choose to accept binary (non-string) data by using a binary-to-text encoding scheme, like base64.
+An SP SHALL advertise the requirements for required secret keys and values in documentation.
+CO SHALL permit passing through the required secrets.
+A CO MAY pass the same secrets to all RPCs, therefore the keys for all unique secrets that an SP expects MUST be unique across all CSI operations.
+This information is sensitive and MUST be treated as such (not logged, etc.) by the CO.
+
+### Identity Service RPC
