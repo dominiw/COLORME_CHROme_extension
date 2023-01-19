@@ -548,3 +548,36 @@ The general flow of the success case MAY be as follows (protos illustrated in YA
    request:
    response: {}
 ```
+
+#### `GetPluginInfo`
+
+```protobuf
+message GetPluginInfoRequest {
+  // Intentionally empty.
+}
+
+message GetPluginInfoResponse {
+  // The name MUST follow domain name notation format
+  // (https://tools.ietf.org/html/rfc1035#section-2.3.1). It SHOULD
+  // include the plugin's host company name and the plugin name,
+  // to minimize the possibility of collisions. It MUST be 63
+  // characters or less, beginning and ending with an alphanumeric
+  // character ([a-z0-9A-Z]) with dashes (-), dots (.), and
+  // alphanumerics between. This field is REQUIRED.
+  string name = 1;
+
+  // This field is REQUIRED. Value of this field is opaque to the CO.
+  string vendor_version = 2;
+
+  // This field is OPTIONAL. Values are opaque to the CO.
+  map<string, string> manifest = 3;
+}
+```
+
+##### GetPluginInfo Errors
+
+If the plugin is unable to complete the GetPluginInfo call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+
+#### `GetPluginCapabilities`
+
+This REQUIRED RPC allows the CO to query the supported capabilities of the Plugin "as a whole": it is the grand sum of all capabilities of all instances of the Plugin software, as it is intended to be deployed.
