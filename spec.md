@@ -700,3 +700,28 @@ Such actions MAY include, but SHALL NOT be limited to, the following:
 The Plugin MAY verify that it has the right configurations, devices, dependencies and drivers in order to run and return a success if the validation succeeds.
 The CO MAY invoke this RPC at any time.
 A CO MAY invoke this call multiple times with the understanding that a plugin's implementation MAY NOT be trivial and there MAY be overhead incurred by such repeated calls.
+The SP SHALL document guidance and known limitations regarding a particular Plugin's implementation of this RPC.
+For example, the SP MAY document the maximum frequency at which its Probe implementation SHOULD be called.
+
+```protobuf
+message ProbeRequest {
+  // Intentionally empty.
+}
+
+message ProbeResponse {
+  // Readiness allows a plugin to report its initialization status back
+  // to the CO. Initialization for some plugins MAY be time consuming
+  // and it is important for a CO to distinguish between the following
+  // cases:
+  //
+  // 1) The plugin is in an unhealthy state and MAY need restarting. In
+  //    this case a gRPC error code SHALL be returned.
+  // 2) The plugin is still initializing, but is otherwise perfectly
+  //    healthy. In this case a successful response SHALL be returned
+  //    with a readiness value of `false`. Calls to the plugin's
+  //    Controller and/or Node services MAY fail due to an incomplete
+  //    initialization state.
+  // 3) The plugin has finished initializing and is ready to service
+  //    calls to its Controller and/or Node services. A successful
+  //    response is returned with a readiness value of `true`.
+  //
