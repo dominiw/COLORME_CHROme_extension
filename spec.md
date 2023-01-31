@@ -793,3 +793,29 @@ message CreateVolumeRequest {
   // U+0000-U+0008, U+000B, U+000C, U+000E-U+001F, U+007F-U+009F.
   // (These are control characters other than commonly used whitespace.)
   string name = 1;
+
+  // This field is OPTIONAL. This allows the CO to specify the capacity
+  // requirement of the volume to be provisioned. If not specified, the
+  // Plugin MAY choose an implementation-defined capacity range. If
+  // specified it MUST always be honored, even when creating volumes
+  // from a source; which MAY force some backends to internally extend
+  // the volume after creating it.
+  CapacityRange capacity_range = 2;
+
+  // The capabilities that the provisioned volume MUST have. SP MUST
+  // provision a volume that will satisfy ALL of the capabilities
+  // specified in this list. Otherwise SP MUST return the appropriate
+  // gRPC error code.
+  // The Plugin MUST assume that the CO MAY use the provisioned volume
+  // with ANY of the capabilities specified in this list.
+  // For example, a CO MAY specify two volume capabilities: one with
+  // access mode SINGLE_NODE_WRITER and another with access mode
+  // MULTI_NODE_READER_ONLY. In this case, the SP MUST verify that the
+  // provisioned volume can be used in either mode.
+  // This also enables the CO to do early validation: If ANY of the
+  // specified volume capabilities are not supported by the SP, the call
+  // MUST return the appropriate gRPC error code.
+  // This field is REQUIRED.
+  repeated VolumeCapability volume_capabilities = 3;
+
+  // Plugin specific parameters passed in as opaque key-value pairs.
