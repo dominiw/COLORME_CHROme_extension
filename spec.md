@@ -725,3 +725,28 @@ message ProbeResponse {
   //    calls to its Controller and/or Node services. A successful
   //    response is returned with a readiness value of `true`.
   //
+  // This field is OPTIONAL. If not present, the caller SHALL assume
+  // that the plugin is in a ready state and is accepting calls to its
+  // Controller and/or Node services (according to the plugin's reported
+  // capabilities).
+  .google.protobuf.BoolValue ready = 1;
+}
+```
+
+##### Probe Errors
+
+If the plugin is unable to complete the Probe call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Plugin not healthy | 9 FAILED_PRECONDITION | Indicates that the plugin is not in a healthy/ready state. | Caller SHOULD assume the plugin is not healthy and that future RPCs MAY fail because of this condition. |
+| Missing required dependency | 9 FAILED_PRECONDITION | Indicates that the plugin is missing one or more required dependency. | Caller MUST assume the plugin is not healthy. |
+
+
+### Controller Service RPC
+
+#### `CreateVolume`
+
+A Controller Plugin MUST implement this RPC call if it has `CREATE_DELETE_VOLUME` controller capability.
