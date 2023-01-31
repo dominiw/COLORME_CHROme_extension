@@ -612,3 +612,35 @@ message PluginCapability {
       // VOLUME_ACCESSIBILITY_CONSTRAINTS indicates that the volumes for
       // this plugin MAY NOT be equally accessible by all nodes in the
       // cluster. The CO MUST use the topology information returned by
+      // CreateVolumeRequest along with the topology information
+      // returned by NodeGetInfo to ensure that a given volume is
+      // accessible from a given node when scheduling workloads.
+      VOLUME_ACCESSIBILITY_CONSTRAINTS = 2;
+
+      // GROUP_CONTROLLER_SERVICE indicates that the Plugin provides
+      // RPCs for operating on groups of volumes. Plugins MAY provide
+      // this capability.
+      // The presence of this capability determines whether the CO will
+      // attempt to invoke the REQUIRED GroupController service RPCs, as
+      // well as specific RPCs as indicated by
+      // GroupControllerGetCapabilities.
+      GROUP_CONTROLLER_SERVICE = 3;
+    }
+    Type type = 1;
+  }
+
+  message VolumeExpansion {
+    enum Type {
+      UNKNOWN = 0;
+
+      // ONLINE indicates that volumes may be expanded when published to
+      // a node. When a Plugin implements this capability it MUST
+      // implement either the EXPAND_VOLUME controller capability or the
+      // EXPAND_VOLUME node capability or both. When a plugin supports
+      // ONLINE volume expansion and also has the EXPAND_VOLUME
+      // controller capability then the plugin MUST support expansion of
+      // volumes currently published and available on a node. When a
+      // plugin supports ONLINE volume expansion and also has the
+      // EXPAND_VOLUME node capability then the plugin MAY support
+      // expansion of node-published volume via NodeExpandVolume.
+      //
