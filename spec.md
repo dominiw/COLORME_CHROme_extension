@@ -849,3 +849,30 @@ message CreateVolumeRequest {
 // Specifies what source the volume will be created from. One of the
 // type fields MUST be specified.
 message VolumeContentSource {
+  message SnapshotSource {
+    // Contains identity information for the existing source snapshot.
+    // This field is REQUIRED. Plugin is REQUIRED to support creating
+    // volume from snapshot if it supports the capability
+    // CREATE_DELETE_SNAPSHOT.
+    string snapshot_id = 1;
+  }
+
+  message VolumeSource {
+    // Contains identity information for the existing source volume.
+    // This field is REQUIRED. Plugins reporting CLONE_VOLUME
+    // capability MUST support creating a volume from another volume.
+    string volume_id = 1;
+  }
+
+  oneof type {
+    SnapshotSource snapshot = 1;
+    VolumeSource volume = 2;
+  }
+}
+
+message CreateVolumeResponse {
+  // Contains all attributes of the newly created volume that are
+  // relevant to the CO along with information required by the Plugin
+  // to uniquely identify the volume. This field is REQUIRED.
+  Volume volume = 1;
+}
