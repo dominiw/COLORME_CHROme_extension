@@ -581,3 +581,34 @@ If the plugin is unable to complete the GetPluginInfo call successfully, it MUST
 #### `GetPluginCapabilities`
 
 This REQUIRED RPC allows the CO to query the supported capabilities of the Plugin "as a whole": it is the grand sum of all capabilities of all instances of the Plugin software, as it is intended to be deployed.
+All instances of the same version (see `vendor_version` of `GetPluginInfoResponse`) of the Plugin SHALL return the same set of capabilities, regardless of both: (a) where instances are deployed on the cluster as well as; (b) which RPCs an instance is serving.
+
+```protobuf
+message GetPluginCapabilitiesRequest {
+  // Intentionally empty.
+}
+
+message GetPluginCapabilitiesResponse {
+  // All the capabilities that the controller service supports. This
+  // field is OPTIONAL.
+  repeated PluginCapability capabilities = 1;
+}
+
+// Specifies a capability of the plugin.
+message PluginCapability {
+  message Service {
+    enum Type {
+      UNKNOWN = 0;
+      // CONTROLLER_SERVICE indicates that the Plugin provides RPCs for
+      // the ControllerService. Plugins SHOULD provide this capability.
+      // In rare cases certain plugins MAY wish to omit the
+      // ControllerService entirely from their implementation, but such
+      // SHOULD NOT be the common case.
+      // The presence of this capability determines whether the CO will
+      // attempt to invoke the REQUIRED ControllerService RPCs, as well
+      // as specific RPCs as indicated by ControllerGetCapabilities.
+      CONTROLLER_SERVICE = 1;
+
+      // VOLUME_ACCESSIBILITY_CONSTRAINTS indicates that the volumes for
+      // this plugin MAY NOT be equally accessible by all nodes in the
+      // cluster. The CO MUST use the topology information returned by
