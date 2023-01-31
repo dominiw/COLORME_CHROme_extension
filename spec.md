@@ -671,3 +671,32 @@ message PluginCapability {
       //   OFFLINE volume expansion support and implement both
       //   ControllerExpandVolume and NodeExpandVolume.
       OFFLINE = 2;
+    }
+    Type type = 1;
+  }
+
+  oneof type {
+    // Service that the plugin supports.
+    Service service = 1;
+    VolumeExpansion volume_expansion = 2;
+  }
+}
+```
+
+##### GetPluginCapabilities Errors
+
+If the plugin is unable to complete the GetPluginCapabilities call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+
+#### `Probe`
+
+A Plugin MUST implement this RPC call.
+The primary utility of the Probe RPC is to verify that the plugin is in a healthy and ready state.
+If an unhealthy state is reported, via a non-success response, a CO MAY take action with the intent to bring the plugin to a healthy state.
+Such actions MAY include, but SHALL NOT be limited to, the following:
+
+* Restarting the plugin container, or
+* Notifying the plugin supervisor.
+
+The Plugin MAY verify that it has the right configurations, devices, dependencies and drivers in order to run and return a success if the validation succeeds.
+The CO MAY invoke this RPC at any time.
+A CO MAY invoke this call multiple times with the understanding that a plugin's implementation MAY NOT be trivial and there MAY be overhead incurred by such repeated calls.
