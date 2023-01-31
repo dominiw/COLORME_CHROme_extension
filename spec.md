@@ -819,3 +819,33 @@ message CreateVolumeRequest {
   repeated VolumeCapability volume_capabilities = 3;
 
   // Plugin specific parameters passed in as opaque key-value pairs.
+  // This field is OPTIONAL. The Plugin is responsible for parsing and
+  // validating these parameters. COs will treat these as opaque.
+  map<string, string> parameters = 4;
+
+  // Secrets required by plugin to complete volume creation request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  map<string, string> secrets = 5 [(csi_secret) = true];
+
+  // If specified, the new volume will be pre-populated with data from
+  // this source. This field is OPTIONAL.
+  VolumeContentSource volume_content_source = 6;
+
+  // Specifies where (regions, zones, racks, etc.) the provisioned
+  // volume MUST be accessible from.
+  // An SP SHALL advertise the requirements for topological
+  // accessibility information in documentation. COs SHALL only specify
+  // topological accessibility information supported by the SP.
+  // This field is OPTIONAL.
+  // This field SHALL NOT be specified unless the SP has the
+  // VOLUME_ACCESSIBILITY_CONSTRAINTS plugin capability.
+  // If this field is not specified and the SP has the
+  // VOLUME_ACCESSIBILITY_CONSTRAINTS plugin capability, the SP MAY
+  // choose where the provisioned volume is accessible from.
+  TopologyRequirement accessibility_requirements = 7;
+}
+
+// Specifies what source the volume will be created from. One of the
+// type fields MUST be specified.
+message VolumeContentSource {
