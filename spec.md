@@ -929,3 +929,30 @@ message VolumeCapability {
 
       // Can be published at multiple nodes simultaneously. Only one of
       // the node can be used as read/write. The rest will be readonly.
+      MULTI_NODE_SINGLE_WRITER = 4;
+
+      // Can be published as read/write at multiple nodes
+      // simultaneously.
+      MULTI_NODE_MULTI_WRITER = 5;
+
+      // Can only be published once as read/write at a single workload
+      // on a single node, at any given time. SHOULD be used instead of
+      // SINGLE_NODE_WRITER for COs using the experimental
+      // SINGLE_NODE_MULTI_WRITER capability.
+      SINGLE_NODE_SINGLE_WRITER = 6 [(alpha_enum_value) = true];
+
+      // Can be published as read/write at multiple workloads on a
+      // single node simultaneously. SHOULD be used instead of
+      // SINGLE_NODE_WRITER for COs using the experimental
+      // SINGLE_NODE_MULTI_WRITER capability.
+      SINGLE_NODE_MULTI_WRITER = 7 [(alpha_enum_value) = true];
+    }
+
+    // This field is REQUIRED.
+    Mode mode = 1;
+  }
+
+  // Specifies what API the volume will be accessed using. One of the
+  // following fields MUST be specified.
+  oneof access_type {
+    BlockVolume block = 1;
