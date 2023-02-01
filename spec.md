@@ -876,3 +876,21 @@ message CreateVolumeResponse {
   // to uniquely identify the volume. This field is REQUIRED.
   Volume volume = 1;
 }
+
+// Specify a capability of a volume.
+message VolumeCapability {
+  // Indicate that the volume will be accessed via the block device API.
+  message BlockVolume {
+    // Intentionally empty, for now.
+  }
+
+  // Indicate that the volume will be accessed via the filesystem API.
+  message MountVolume {
+    // The filesystem type. This field is OPTIONAL.
+    // An empty string is equal to an unspecified field value.
+    string fs_type = 1;
+
+    // The mount options that can be used for the volume. This field is
+    // OPTIONAL. `mount_flags` MAY contain sensitive information.
+    // Therefore, the CO and the Plugin MUST NOT leak this information
+    // to untrusted entities. The total size of this repeated field
