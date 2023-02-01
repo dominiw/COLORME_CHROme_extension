@@ -894,3 +894,38 @@ message VolumeCapability {
     // OPTIONAL. `mount_flags` MAY contain sensitive information.
     // Therefore, the CO and the Plugin MUST NOT leak this information
     // to untrusted entities. The total size of this repeated field
+    // SHALL NOT exceed 4 KiB.
+    repeated string mount_flags = 2;
+
+    // If SP has VOLUME_MOUNT_GROUP node capability and CO provides
+    // this field then SP MUST ensure that the volume_mount_group
+    // parameter is passed as the group identifier to the underlying
+    // operating system mount system call, with the understanding
+    // that the set of available mount call parameters and/or
+    // mount implementations may vary across operating systems.
+    // Additionally, new file and/or directory entries written to
+    // the underlying filesystem SHOULD be permission-labeled in such a
+    // manner, unless otherwise modified by a workload, that they are
+    // both readable and writable by said mount group identifier.
+    // This is an OPTIONAL field.
+    string volume_mount_group = 3;
+  }
+
+  // Specify how a volume can be accessed.
+  message AccessMode {
+    enum Mode {
+      UNKNOWN = 0;
+
+      // Can only be published once as read/write on a single node, at
+      // any given time.
+      SINGLE_NODE_WRITER = 1;
+
+      // Can only be published once as readonly on a single node, at
+      // any given time.
+      SINGLE_NODE_READER_ONLY = 2;
+
+      // Can be published as readonly at multiple nodes simultaneously.
+      MULTI_NODE_READER_ONLY = 3;
+
+      // Can be published at multiple nodes simultaneously. Only one of
+      // the node can be used as read/write. The rest will be readonly.
