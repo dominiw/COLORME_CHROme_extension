@@ -1015,3 +1015,33 @@ message Volume {
 
   // If specified, indicates that the volume is not empty and is
   // pre-populated with data from the specified source.
+  // This field is OPTIONAL.
+  VolumeContentSource content_source = 4;
+
+  // Specifies where (regions, zones, racks, etc.) the provisioned
+  // volume is accessible from.
+  // A plugin that returns this field MUST also set the
+  // VOLUME_ACCESSIBILITY_CONSTRAINTS plugin capability.
+  // An SP MAY specify multiple topologies to indicate the volume is
+  // accessible from multiple locations.
+  // COs MAY use this information along with the topology information
+  // returned by NodeGetInfo to ensure that a given volume is accessible
+  // from a given node when scheduling workloads.
+  // This field is OPTIONAL. If it is not specified, the CO MAY assume
+  // the volume is equally accessible from all nodes in the cluster and
+  // MAY schedule workloads referencing the volume on any available
+  // node.
+  //
+  // Example 1:
+  //   accessible_topology = {"region": "R1", "zone": "Z2"}
+  // Indicates a volume accessible only from the "region" "R1" and the
+  // "zone" "Z2".
+  //
+  // Example 2:
+  //   accessible_topology =
+  //     {"region": "R1", "zone": "Z2"},
+  //     {"region": "R1", "zone": "Z3"}
+  // Indicates a volume accessible from both "zone" "Z2" and "zone" "Z3"
+  // in the "region" "R1".
+  repeated Topology accessible_topology = 5;
+}
