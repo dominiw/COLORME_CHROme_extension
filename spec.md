@@ -1045,3 +1045,37 @@ message Volume {
   // in the "region" "R1".
   repeated Topology accessible_topology = 5;
 }
+
+message TopologyRequirement {
+  // Specifies the list of topologies the provisioned volume MUST be
+  // accessible from.
+  // This field is OPTIONAL. If TopologyRequirement is specified either
+  // requisite or preferred or both MUST be specified.
+  //
+  // If requisite is specified, the provisioned volume MUST be
+  // accessible from at least one of the requisite topologies.
+  //
+  // Given
+  //   x = number of topologies provisioned volume is accessible from
+  //   n = number of requisite topologies
+  // The CO MUST ensure n >= 1. The SP MUST ensure x >= 1
+  // If x==n, then the SP MUST make the provisioned volume available to
+  // all topologies from the list of requisite topologies. If it is
+  // unable to do so, the SP MUST fail the CreateVolume call.
+  // For example, if a volume should be accessible from a single zone,
+  // and requisite =
+  //   {"region": "R1", "zone": "Z2"}
+  // then the provisioned volume MUST be accessible from the "region"
+  // "R1" and the "zone" "Z2".
+  // Similarly, if a volume should be accessible from two zones, and
+  // requisite =
+  //   {"region": "R1", "zone": "Z2"},
+  //   {"region": "R1", "zone": "Z3"}
+  // then the provisioned volume MUST be accessible from the "region"
+  // "R1" and both "zone" "Z2" and "zone" "Z3".
+  //
+  // If x<n, then the SP SHALL choose x unique topologies from the list
+  // of requisite topologies. If it is unable to do so, the SP MUST fail
+  // the CreateVolume call.
+  // For example, if a volume should be accessible from a single zone,
+  // and requisite =
