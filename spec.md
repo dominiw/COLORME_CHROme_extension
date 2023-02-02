@@ -1079,3 +1079,32 @@ message TopologyRequirement {
   // the CreateVolume call.
   // For example, if a volume should be accessible from a single zone,
   // and requisite =
+  //   {"region": "R1", "zone": "Z2"},
+  //   {"region": "R1", "zone": "Z3"}
+  // then the SP may choose to make the provisioned volume available in
+  // either the "zone" "Z2" or the "zone" "Z3" in the "region" "R1".
+  // Similarly, if a volume should be accessible from two zones, and
+  // requisite =
+  //   {"region": "R1", "zone": "Z2"},
+  //   {"region": "R1", "zone": "Z3"},
+  //   {"region": "R1", "zone": "Z4"}
+  // then the provisioned volume MUST be accessible from any combination
+  // of two unique topologies: e.g. "R1/Z2" and "R1/Z3", or "R1/Z2" and
+  //  "R1/Z4", or "R1/Z3" and "R1/Z4".
+  //
+  // If x>n, then the SP MUST make the provisioned volume available from
+  // all topologies from the list of requisite topologies and MAY choose
+  // the remaining x-n unique topologies from the list of all possible
+  // topologies. If it is unable to do so, the SP MUST fail the
+  // CreateVolume call.
+  // For example, if a volume should be accessible from two zones, and
+  // requisite =
+  //   {"region": "R1", "zone": "Z2"}
+  // then the provisioned volume MUST be accessible from the "region"
+  // "R1" and the "zone" "Z2" and the SP may select the second zone
+  // independently, e.g. "R1/Z4".
+  repeated Topology requisite = 1;
+
+  // Specifies the list of topologies the CO would prefer the volume to
+  // be provisioned in.
+  //
