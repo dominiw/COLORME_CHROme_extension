@@ -1108,3 +1108,26 @@ message TopologyRequirement {
   // Specifies the list of topologies the CO would prefer the volume to
   // be provisioned in.
   //
+  // This field is OPTIONAL. If TopologyRequirement is specified either
+  // requisite or preferred or both MUST be specified.
+  //
+  // An SP MUST attempt to make the provisioned volume available using
+  // the preferred topologies in order from first to last.
+  //
+  // If requisite is specified, all topologies in preferred list MUST
+  // also be present in the list of requisite topologies.
+  //
+  // If the SP is unable to to make the provisioned volume available
+  // from any of the preferred topologies, the SP MAY choose a topology
+  // from the list of requisite topologies.
+  // If the list of requisite topologies is not specified, then the SP
+  // MAY choose from the list of all possible topologies.
+  // If the list of requisite topologies is specified and the SP is
+  // unable to to make the provisioned volume available from any of the
+  // requisite topologies it MUST fail the CreateVolume call.
+  //
+  // Example 1:
+  // Given a volume should be accessible from a single zone, and
+  // requisite =
+  //   {"region": "R1", "zone": "Z2"},
+  //   {"region": "R1", "zone": "Z3"}
