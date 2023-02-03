@@ -1230,3 +1230,27 @@ The CO MUST implement the specified error recovery behavior when it encounters t
 
 A Controller Plugin MUST implement this RPC call if it has `CREATE_DELETE_VOLUME` capability.
 This RPC will be called by the CO to deprovision a volume.
+
+This operation MUST be idempotent.
+If a volume corresponding to the specified `volume_id` does not exist or the artifacts associated with the volume do not exist anymore, the Plugin MUST reply `0 OK`.
+
+CSI plugins SHOULD treat volumes independent from their snapshots.
+
+If the Controller Plugin supports deleting a volume without affecting its existing snapshots, then these snapshots MUST still be fully operational and acceptable as sources for new volumes as well as appear on `ListSnapshot` calls once the volume has been deleted.
+
+When a Controller Plugin does not support deleting a volume without affecting its existing snapshots, then the volume MUST NOT be altered in any way by the request and the operation must return the `FAILED_PRECONDITION` error code and MAY include meaningful human-readable information in the `status.message` field.
+
+```protobuf
+message DeleteVolumeRequest {
+  // The ID of the volume to be deprovisioned.
+  // This field is REQUIRED.
+  string volume_id = 1;
+
+  // Secrets required by plugin to complete volume deletion request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  map<string, string> secrets = 2 [(csi_secret) = true];
+}
+
+message DeleteVolumeResponse {
+  // Intentionally empty.
