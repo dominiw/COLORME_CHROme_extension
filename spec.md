@@ -1283,3 +1283,40 @@ If the operation failed or the CO does not know if the operation has failed or n
 The CO MAY call this RPC for publishing a volume to multiple nodes if the volume has `MULTI_NODE` capability (i.e., `MULTI_NODE_READER_ONLY`, `MULTI_NODE_SINGLE_WRITER` or `MULTI_NODE_MULTI_WRITER`).
 
 ```protobuf
+message ControllerPublishVolumeRequest {
+  // The ID of the volume to be used on a node.
+  // This field is REQUIRED.
+  string volume_id = 1;
+
+  // The ID of the node. This field is REQUIRED. The CO SHALL set this
+  // field to match the node ID returned by `NodeGetInfo`.
+  string node_id = 2;
+
+  // Volume capability describing how the CO intends to use this volume.
+  // SP MUST ensure the CO can use the published volume as described.
+  // Otherwise SP MUST return the appropriate gRPC error code.
+  // This is a REQUIRED field.
+  VolumeCapability volume_capability = 3;
+
+  // Indicates SP MUST publish the volume in readonly mode.
+  // CO MUST set this field to false if SP does not have the
+  // PUBLISH_READONLY controller capability.
+  // This is a REQUIRED field.
+  bool readonly = 4;
+
+  // Secrets required by plugin to complete controller publish volume
+  // request. This field is OPTIONAL. Refer to the
+  // `Secrets Requirements` section on how to use this field.
+  map<string, string> secrets = 5 [(csi_secret) = true];
+
+  // Volume context as returned by SP in
+  // CreateVolumeResponse.Volume.volume_context.
+  // This field is OPTIONAL and MUST match the volume_context of the
+  // volume identified by `volume_id`.
+  map<string, string> volume_context = 6;
+}
+
+message ControllerPublishVolumeResponse {
+  // Opaque static publish properties of the volume. SP MAY use this
+  // field to ensure subsequent `NodeStageVolume` or `NodePublishVolume`
+  // calls calls have contextual information.
