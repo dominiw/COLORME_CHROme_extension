@@ -1320,3 +1320,45 @@ message ControllerPublishVolumeResponse {
   // Opaque static publish properties of the volume. SP MAY use this
   // field to ensure subsequent `NodeStageVolume` or `NodePublishVolume`
   // calls calls have contextual information.
+  // The contents of this field SHALL be opaque to a CO.
+  // The contents of this field SHALL NOT be mutable.
+  // The contents of this field SHALL be safe for the CO to cache.
+  // The contents of this field SHOULD NOT contain sensitive
+  // information.
+  // The contents of this field SHOULD NOT be used for uniquely
+  // identifying a volume. The `volume_id` alone SHOULD be sufficient to
+  // identify the volume.
+  // This field is OPTIONAL and when present MUST be passed to
+  // subsequent `NodeStageVolume` or `NodePublishVolume` calls
+  map<string, string> publish_context = 1;
+}
+```
+
+##### ControllerPublishVolume Errors
+
+If the plugin is unable to complete the ControllerPublishVolume call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Volume does not exist | 5 NOT_FOUND | Indicates that a volume corresponding to the specified `volume_id` does not exist. | Caller MUST verify that the `volume_id` is correct and that the volume is accessible and has not been deleted before retrying with exponential back off. |
+| Node does not exist | 5 NOT_FOUND | Indicates that a node corresponding to the specified `node_id` does not exist. | Caller MUST verify that the `node_id` is correct and that the node is available and has not been terminated or deleted before retrying with exponential backoff. |
+| Volume published but is incompatible | 6 ALREADY_EXISTS | Indicates that a volume corresponding to the specified `volume_id` has already been published at the node corresponding to the specified `node_id` but is incompatible with the specified `volume_capability` or `readonly` flag . | Caller MUST fix the arguments before retrying. |
+| Volume published to another node | 9 FAILED_PRECONDITION | Indicates that a volume corresponding to the specified `volume_id` has already been published at another node and does not have MULTI_NODE volume capability. If this error code is returned, the Plugin SHOULD specify the `node_id` of the node at which the volume is published as part of the gRPC `status.message`. | Caller SHOULD ensure the specified volume is not published at any other node before retrying with exponential back off. |
+| Max volumes attached | 8 RESOURCE_EXHAUSTED | Indicates that the maximum supported number of volumes that can be attached to the specified node are already attached. Therefore, this operation will fail until at least one of the existing attached volumes is detached from the node. | Caller MUST ensure that the number of volumes already attached to the node is less then the maximum supported number of volumes before retrying with exponential backoff. |
+
+#### `ControllerUnpublishVolume`
+
+Controller Plugin MUST implement this RPC call if it has `PUBLISH_UNPUBLISH_VOLUME` controller capability.
+This RPC is a reverse operation of `ControllerPublishVolume`.
+It MUST be called after all `NodeUnstageVolume` and `NodeUnpublishVolume` on the volume are called and succeed.
+The Plugin SHOULD perform the work that is necessary for making the volume ready to be consumed by a different node.
+The Plugin MUST NOT assume that this RPC will be executed on the node where the volume was previously used.
+
+This RPC is typically called by the CO when the workload using the volume is being moved to a different node, or all the workload using the volume on a node has finished.
+
+This operation MUST be idempotent.
+If the volume corresponding to the `volume_id` is not attached to the node corresponding to the `node_id`, the Plugin MUST reply `0 OK`.
+If the volume corresponding to the `volume_id` or the node corresponding to `node_id` cannot be found by the Plugin and the volume can be safely regarded as ControllerUnpublished from the node, the plugin SHOULD return `0 OK`.
+If this operation failed, or the CO does not know if the operation failed or not, it can choose to call `ControllerUnpublishVolume` again.
