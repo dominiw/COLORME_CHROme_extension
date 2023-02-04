@@ -1254,3 +1254,32 @@ message DeleteVolumeRequest {
 
 message DeleteVolumeResponse {
   // Intentionally empty.
+}
+```
+
+##### DeleteVolume Errors
+
+If the plugin is unable to complete the DeleteVolume call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Volume in use | 9 FAILED_PRECONDITION | Indicates that the volume corresponding to the specified `volume_id` could not be deleted because it is in use by another resource or has snapshots and the plugin doesn't treat them as independent entities. | Caller SHOULD ensure that there are no other resources using the volume and that it has no snapshots, and then retry with exponential back off. |
+
+
+#### `ControllerPublishVolume`
+
+A Controller Plugin MUST implement this RPC call if it has `PUBLISH_UNPUBLISH_VOLUME` controller capability.
+This RPC will be called by the CO when it wants to place a workload that uses the volume onto a node.
+The Plugin SHOULD perform the work that is necessary for making the volume available on the given node.
+The Plugin MUST NOT assume that this RPC will be executed on the node where the volume will be used.
+
+This operation MUST be idempotent.
+If the volume corresponding to the `volume_id` has already been published at the node corresponding to the `node_id`, and is compatible with the specified `volume_capability` and `readonly` flag, the Plugin MUST reply `0 OK`.
+
+If the operation failed or the CO does not know if the operation has failed or not, it MAY choose to call `ControllerPublishVolume` again or choose to call `ControllerUnpublishVolume`.
+
+The CO MAY call this RPC for publishing a volume to multiple nodes if the volume has `MULTI_NODE` capability (i.e., `MULTI_NODE_READER_ONLY`, `MULTI_NODE_SINGLE_WRITER` or `MULTI_NODE_MULTI_WRITER`).
+
+```protobuf
