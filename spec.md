@@ -1450,3 +1450,36 @@ message ValidateVolumeCapabilitiesResponse {
     // This field is OPTIONAL.
     map<string, string> parameters = 3;
   }
+
+  // Confirmed indicates to the CO the set of capabilities that the
+  // plugin has validated. This field SHALL only be set to a non-empty
+  // value for successful validation responses.
+  // For successful validation responses, the CO SHALL compare the
+  // fields of this message to the originally requested capabilities in
+  // order to guard against an older plugin reporting "valid" for newer
+  // capability fields that it does not yet understand.
+  // This field is OPTIONAL.
+  Confirmed confirmed = 1;
+
+  // Message to the CO if `confirmed` above is empty. This field is
+  // OPTIONAL.
+  // An empty string is equal to an unspecified field value.
+  string message = 2;
+}
+```
+
+##### ValidateVolumeCapabilities Errors
+
+If the plugin is unable to complete the ValidateVolumeCapabilities call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Volume does not exist | 5 NOT_FOUND | Indicates that a volume corresponding to the specified `volume_id` does not exist. | Caller MUST verify that the `volume_id` is correct and that the volume is accessible and has not been deleted before retrying with exponential back off. |
+
+
+#### `ListVolumes`
+
+A Controller Plugin MUST implement this RPC call if it has `LIST_VOLUMES` capability.
+The Plugin SHALL return the information about all the volumes that it knows about.
