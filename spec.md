@@ -1557,3 +1557,30 @@ The CO MUST implement the specified error recovery behavior when it encounters t
 | Condition | gRPC Code | Description | Recovery Behavior |
 |-----------|-----------|-------------|-------------------|
 | Invalid `starting_token` | 10 ABORTED | Indicates that `starting_token` is not valid. | Caller SHOULD start the `ListVolumes` operation again with an empty `starting_token`. |
+
+#### `ControllerGetVolume`
+
+**ALPHA FEATURE**
+
+This optional RPC MAY be called by the CO to fetch current information about a volume.
+
+A Controller Plugin MUST implement this `ControllerGetVolume` RPC call if it has `GET_VOLUME` capability.
+
+A Controller Plugin MUST provide a non-empty `volume_condition` field in `ControllerGetVolumeResponse` if it has `VOLUME_CONDITION` capability.
+
+`ControllerGetVolumeResponse` should contain current information of a volume if it exists.
+If the volume does not exist any more, `ControllerGetVolume` should return gRPC error code `NOT_FOUND`.
+
+```protobuf
+message ControllerGetVolumeRequest {
+  option (alpha_message) = true;
+
+  // The ID of the volume to fetch current volume information for.
+  // This field is REQUIRED.
+  string volume_id = 1;
+}
+
+message ControllerGetVolumeResponse {
+  option (alpha_message) = true;
+
+  message VolumeStatus{
