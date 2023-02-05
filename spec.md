@@ -1423,3 +1423,30 @@ message ValidateVolumeCapabilitiesRequest {
 
   // The capabilities that the CO wants to check for the volume. This
   // call SHALL return "confirmed" only if all the volume capabilities
+  // specified below are supported. This field is REQUIRED.
+  repeated VolumeCapability volume_capabilities = 3;
+
+  // See CreateVolumeRequest.parameters.
+  // This field is OPTIONAL.
+  map<string, string> parameters = 4;
+
+  // Secrets required by plugin to complete volume validation request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  map<string, string> secrets = 5 [(csi_secret) = true];
+}
+
+message ValidateVolumeCapabilitiesResponse {
+  message Confirmed {
+    // Volume context validated by the plugin.
+    // This field is OPTIONAL.
+    map<string, string> volume_context = 1;
+
+    // Volume capabilities supported by the plugin.
+    // This field is REQUIRED.
+    repeated VolumeCapability volume_capabilities = 2;
+
+    // The volume creation parameters validated by the plugin.
+    // This field is OPTIONAL.
+    map<string, string> parameters = 3;
+  }
