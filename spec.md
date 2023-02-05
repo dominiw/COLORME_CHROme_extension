@@ -1362,3 +1362,26 @@ This operation MUST be idempotent.
 If the volume corresponding to the `volume_id` is not attached to the node corresponding to the `node_id`, the Plugin MUST reply `0 OK`.
 If the volume corresponding to the `volume_id` or the node corresponding to `node_id` cannot be found by the Plugin and the volume can be safely regarded as ControllerUnpublished from the node, the plugin SHOULD return `0 OK`.
 If this operation failed, or the CO does not know if the operation failed or not, it can choose to call `ControllerUnpublishVolume` again.
+
+```protobuf
+message ControllerUnpublishVolumeRequest {
+  // The ID of the volume. This field is REQUIRED.
+  string volume_id = 1;
+
+  // The ID of the node. This field is OPTIONAL. The CO SHOULD set this
+  // field to match the node ID returned by `NodeGetInfo` or leave it
+  // unset. If the value is set, the SP MUST unpublish the volume from
+  // the specified node. If the value is unset, the SP MUST unpublish
+  // the volume from all nodes it is published to.
+  string node_id = 2;
+
+  // Secrets required by plugin to complete controller unpublish volume
+  // request. This SHOULD be the same secrets passed to the
+  // ControllerPublishVolume call for the specified volume.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  map<string, string> secrets = 3 [(csi_secret) = true];
+}
+
+message ControllerUnpublishVolumeResponse {
+  // Intentionally empty.
