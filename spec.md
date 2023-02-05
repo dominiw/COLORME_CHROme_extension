@@ -1385,3 +1385,41 @@ message ControllerUnpublishVolumeRequest {
 
 message ControllerUnpublishVolumeResponse {
   // Intentionally empty.
+}
+```
+
+##### ControllerUnpublishVolume Errors
+
+If the plugin is unable to complete the ControllerUnpublishVolume call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Volume does not exist and volume not assumed ControllerUnpublished from node | 5 NOT_FOUND | Indicates that a volume corresponding to the specified `volume_id` does not exist and is not assumed to be ControllerUnpublished from node corresponding to the specified `node_id`. | Caller SHOULD verify that the `volume_id` is correct and that the volume is accessible and has not been deleted before retrying with exponential back off. |
+| Node does not exist and volume not assumed ControllerUnpublished from node  | 5 NOT_FOUND | Indicates that a node corresponding to the specified `node_id` does not exist and the volume corresponding to the specified `volume_id` is not assumed to be ControllerUnpublished from node. | Caller SHOULD verify that the `node_id` is correct and that the node is available and has not been terminated or deleted before retrying with exponential backoff. |
+
+
+#### `ValidateVolumeCapabilities`
+
+A Controller Plugin MUST implement this RPC call.
+This RPC will be called by the CO to check if a pre-provisioned volume has all the capabilities that the CO wants.
+This RPC call SHALL return `confirmed` only if all the volume capabilities specified in the request are supported (see caveat below).
+This operation MUST be idempotent.
+
+NOTE: Older plugins will parse but likely not "process" newer fields that MAY be present in capability-validation messages (and sub-messages) sent by a CO that is communicating using a newer, backwards-compatible version of the CSI protobufs.
+Therefore, the CO SHALL reconcile successful capability-validation responses by comparing the validated capabilities with those that it had originally requested.
+
+```protobuf
+message ValidateVolumeCapabilitiesRequest {
+  // The ID of the volume to check. This field is REQUIRED.
+  string volume_id = 1;
+
+  // Volume context as returned by SP in
+  // CreateVolumeResponse.Volume.volume_context.
+  // This field is OPTIONAL and MUST match the volume_context of the
+  // volume identified by `volume_id`.
+  map<string, string> volume_context = 2;
+
+  // The capabilities that the CO wants to check for the volume. This
+  // call SHALL return "confirmed" only if all the volume capabilities
