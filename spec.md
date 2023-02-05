@@ -1507,3 +1507,25 @@ message ListVolumesRequest {
 
 message ListVolumesResponse {
   message VolumeStatus{
+    // A list of all `node_id` of nodes that the volume in this entry
+    // is controller published on.
+    // This field is OPTIONAL. If it is not specified and the SP has
+    // the LIST_VOLUMES_PUBLISHED_NODES controller capability, the CO
+    // MAY assume the volume is not controller published to any nodes.
+    // If the field is not specified and the SP does not have the
+    // LIST_VOLUMES_PUBLISHED_NODES controller capability, the CO MUST
+    // not interpret this field.
+    // published_node_ids MAY include nodes not published to or
+    // reported by the SP. The CO MUST be resilient to that.
+    repeated string published_node_ids = 1;
+
+    // Information about the current condition of the volume.
+    // This field is OPTIONAL.
+    // This field MUST be specified if the
+    // VOLUME_CONDITION controller capability is supported.
+    VolumeCondition volume_condition = 2 [(alpha_field) = true];
+  }
+
+  message Entry {
+    // This field is REQUIRED
+    Volume volume = 1;
