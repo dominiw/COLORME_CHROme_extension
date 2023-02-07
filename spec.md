@@ -1615,3 +1615,42 @@ If the conditions defined below are encountered, the plugin MUST return the spec
 The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
 
 | Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Volume does not exist | 5 NOT_FOUND | Indicates that a volume corresponding to the specified `volume_id` does not exist. | Caller MUST verify that the `volume_id` is correct and that the volume is accessible and has not been deleted before retrying with exponential back off. |
+
+#### `GetCapacity`
+
+A Controller Plugin MUST implement this RPC call if it has `GET_CAPACITY` controller capability.
+The RPC allows the CO to query the capacity of the storage pool from which the controller provisions volumes.
+
+```protobuf
+message GetCapacityRequest {
+  // If specified, the Plugin SHALL report the capacity of the storage
+  // that can be used to provision volumes that satisfy ALL of the
+  // specified `volume_capabilities`. These are the same
+  // `volume_capabilities` the CO will use in `CreateVolumeRequest`.
+  // This field is OPTIONAL.
+  repeated VolumeCapability volume_capabilities = 1;
+
+  // If specified, the Plugin SHALL report the capacity of the storage
+  // that can be used to provision volumes with the given Plugin
+  // specific `parameters`. These are the same `parameters` the CO will
+  // use in `CreateVolumeRequest`. This field is OPTIONAL.
+  map<string, string> parameters = 2;
+
+  // If specified, the Plugin SHALL report the capacity of the storage
+  // that can be used to provision volumes that in the specified
+  // `accessible_topology`. This is the same as the
+  // `accessible_topology` the CO returns in a `CreateVolumeResponse`.
+  // This field is OPTIONAL. This field SHALL NOT be set unless the
+  // plugin advertises the VOLUME_ACCESSIBILITY_CONSTRAINTS capability.
+  Topology accessible_topology = 3;
+}
+
+message GetCapacityResponse {
+  // The available capacity, in bytes, of the storage that can be used
+  // to provision volumes. If `volume_capabilities` or `parameters` is
+  // specified in the request, the Plugin SHALL take those into
+  // consideration when calculating the available capacity of the
+  // storage. This field is REQUIRED.
+  // The value of this field MUST NOT be negative.
