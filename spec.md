@@ -1584,3 +1584,34 @@ message ControllerGetVolumeResponse {
   option (alpha_message) = true;
 
   message VolumeStatus{
+    // A list of all the `node_id` of nodes that this volume is
+    // controller published on.
+    // This field is OPTIONAL.
+    // This field MUST be specified if the LIST_VOLUMES_PUBLISHED_NODES
+    // controller capability is supported.
+    // published_node_ids MAY include nodes not published to or
+    // reported by the SP. The CO MUST be resilient to that.
+    repeated string published_node_ids = 1;
+
+    // Information about the current condition of the volume.
+    // This field is OPTIONAL.
+    // This field MUST be specified if the
+    // VOLUME_CONDITION controller capability is supported.
+    VolumeCondition volume_condition = 2;
+  }
+
+  // This field is REQUIRED
+  Volume volume = 1;
+
+  // This field is REQUIRED.
+  VolumeStatus status = 2;
+}
+```
+
+##### ControllerGetVolume Errors
+
+If the plugin is unable to complete the ControllerGetVolume call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
