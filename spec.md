@@ -1688,3 +1688,28 @@ message GetCapacityResponse {
   // a minimum size for individual volumes and leave it unset
   // otherwise. COs MAY use it to make decision about
   // where to create volumes.
+  google.protobuf.Int64Value minimum_volume_size = 3
+    [(alpha_field) = true];
+}
+```
+
+##### GetCapacity Errors
+
+If the plugin is unable to complete the GetCapacity call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+
+#### `ControllerGetCapabilities`
+
+A Controller Plugin MUST implement this RPC call. This RPC allows the CO to check the supported capabilities of controller service provided by the Plugin.
+
+```protobuf
+message ControllerGetCapabilitiesRequest {
+  // Intentionally empty.
+}
+
+message ControllerGetCapabilitiesResponse {
+  // All the capabilities that the controller service supports. This
+  // field is OPTIONAL.
+  repeated ControllerServiceCapability capabilities = 1;
+}
+
+// Specifies a capability of the controller service.
