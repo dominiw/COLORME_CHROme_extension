@@ -1746,3 +1746,32 @@ message ControllerServiceCapability {
       // ControllerGetVolumeResponse.published_node_ids field.
       // The SP MUST also support PUBLISH_UNPUBLISH_VOLUME.
       LIST_VOLUMES_PUBLISHED_NODES = 10;
+
+      // Indicates that the Controller service can report volume
+      // conditions.
+      // An SP MAY implement `VolumeCondition` in only the Controller
+      // Plugin, only the Node Plugin, or both.
+      // If `VolumeCondition` is implemented in both the Controller and
+      // Node Plugins, it SHALL report from different perspectives.
+      // If for some reason Controller and Node Plugins report
+      // misaligned volume conditions, CO SHALL assume the worst case
+      // is the truth.
+      // Note that, for alpha, `VolumeCondition` is intended be
+      // informative for humans only, not for automation.
+      VOLUME_CONDITION = 11 [(alpha_enum_value) = true];
+
+      // Indicates the SP supports the ControllerGetVolume RPC.
+      // This enables COs to, for example, fetch per volume
+      // condition after a volume is provisioned.
+      GET_VOLUME = 12 [(alpha_enum_value) = true];
+
+      // Indicates the SP supports the SINGLE_NODE_SINGLE_WRITER and/or
+      // SINGLE_NODE_MULTI_WRITER access modes.
+      // These access modes are intended to replace the
+      // SINGLE_NODE_WRITER access mode to clarify the number of writers
+      // for a volume on a single node. Plugins MUST accept and allow
+      // use of the SINGLE_NODE_WRITER access mode when either
+      // SINGLE_NODE_SINGLE_WRITER and/or SINGLE_NODE_MULTI_WRITER are
+      // supported, in order to permit older COs to continue working.
+      SINGLE_NODE_MULTI_WRITER = 13 [(alpha_enum_value) = true];
+    }
