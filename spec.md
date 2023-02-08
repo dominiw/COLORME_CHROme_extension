@@ -1775,3 +1775,35 @@ message ControllerServiceCapability {
       // supported, in order to permit older COs to continue working.
       SINGLE_NODE_MULTI_WRITER = 13 [(alpha_enum_value) = true];
     }
+
+    Type type = 1;
+  }
+
+  oneof type {
+    // RPC that the controller supports.
+    RPC rpc = 1;
+  }
+}
+```
+
+##### ControllerGetCapabilities Errors
+
+If the plugin is unable to complete the ControllerGetCapabilities call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+
+#### `CreateSnapshot`
+
+A Controller Plugin MUST implement this RPC call if it has `CREATE_DELETE_SNAPSHOT` controller capability.
+This RPC will be called by the CO to create a new snapshot from a source volume on behalf of a user.
+
+This operation MUST be idempotent.
+If a snapshot corresponding to the specified snapshot `name` is successfully cut and ready to use (meaning it MAY be specified as a `volume_content_source` in a `CreateVolumeRequest`), the Plugin MUST reply `0 OK` with the corresponding `CreateSnapshotResponse`.
+
+If an error occurs before a snapshot is cut, `CreateSnapshot` SHOULD return a corresponding gRPC error code that reflects the error condition.
+
+For plugins that supports snapshot post processing such as uploading, `CreateSnapshot` SHOULD return `0 OK` and `ready_to_use` SHOULD be set to `false` after the snapshot is cut but still being processed.
+CO SHOULD then reissue the same `CreateSnapshotRequest` periodically until boolean `ready_to_use` flips to `true` indicating the snapshot has been "processed" and is ready to use to create new volumes.
+If an error occurs during the process, `CreateSnapshot` SHOULD return a corresponding gRPC error code that reflects the error condition.
+
+A snapshot MAY be used as the source to provision a new volume.
+A CreateVolumeRequest message MAY specify an OPTIONAL source snapshot parameter.
+Reverting a snapshot, where data in the original volume is erased and replaced with data in the snapshot, is an advanced functionality not every storage system can support and therefore is currently out of scope.
