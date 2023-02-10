@@ -1807,3 +1807,33 @@ If an error occurs during the process, `CreateSnapshot` SHOULD return a correspo
 A snapshot MAY be used as the source to provision a new volume.
 A CreateVolumeRequest message MAY specify an OPTIONAL source snapshot parameter.
 Reverting a snapshot, where data in the original volume is erased and replaced with data in the snapshot, is an advanced functionality not every storage system can support and therefore is currently out of scope.
+
+##### The ready_to_use Parameter
+
+Some SPs MAY "process" the snapshot after the snapshot is cut, for example, maybe uploading the snapshot somewhere after the snapshot is cut.
+The post-cut process MAY be a long process that could take hours.
+The CO MAY freeze the application using the source volume before taking the snapshot.
+The purpose of `freeze` is to ensure the application data is in consistent state.
+When `freeze` is performed, the container is paused and the application is also paused.
+When `thaw` is performed, the container and the application start running again.
+During the snapshot processing phase, since the snapshot is already cut, a `thaw` operation can be performed so application can start running without waiting for the process to complete.
+The `ready_to_use` parameter of the snapshot will become `true` after the process is complete.
+
+For SPs that do not do additional processing after cut, the `ready_to_use` parameter SHOULD be `true` after the snapshot is cut.
+`thaw` can be done when the `ready_to_use` parameter is `true` in this case.
+
+The `ready_to_use` parameter provides guidance to the CO on when it can "thaw" the application in the process of snapshotting.
+If the cloud provider or storage system needs to process the snapshot after the snapshot is cut, the `ready_to_use` parameter returned by CreateSnapshot SHALL be `false`.
+CO MAY continue to call CreateSnapshot while waiting for the process to complete until `ready_to_use` becomes `true`.
+Note that CreateSnapshot no longer blocks after the snapshot is cut.
+
+A gRPC error code SHALL be returned if an error occurs during any stage of the snapshotting process.
+A CO SHOULD explicitly delete snapshots when an error occurs.
+
+Based on this information, CO can issue repeated (idempotent) calls to CreateSnapshot, monitor the response, and make decisions.
+Note that CreateSnapshot is a synchronous call and it MUST block until the snapshot is cut.
+
+```protobuf
+message CreateSnapshotRequest {
+  // The ID of the source volume to be snapshotted.
+  // This field is REQUIRED.
