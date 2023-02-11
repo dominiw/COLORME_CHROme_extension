@@ -1863,3 +1863,22 @@ message CreateSnapshotRequest {
   // - Specify primary or secondary for replication systems that
   //   support snapshotting only on primary.
   map<string, string> parameters = 4;
+}
+
+message CreateSnapshotResponse {
+  // Contains all attributes of the newly created snapshot that are
+  // relevant to the CO along with information required by the Plugin
+  // to uniquely identify the snapshot. This field is REQUIRED.
+  Snapshot snapshot = 1;
+}
+
+// Information about a specific snapshot.
+message Snapshot {
+  // This is the complete size of the snapshot in bytes. The purpose of
+  // this field is to give CO guidance on how much space is needed to
+  // create a volume from this snapshot. The size of the volume MUST NOT
+  // be less than the size of the source snapshot. This field is
+  // OPTIONAL. If this field is not set, it indicates that this size is
+  // unknown. The value of this field MUST NOT be negative and a size of
+  // zero means it is unspecified.
+  int64 size_bytes = 1;
