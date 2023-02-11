@@ -1906,3 +1906,25 @@ message Snapshot {
   // Indicates if a snapshot is ready to use as a
   // `volume_content_source` in a `CreateVolumeRequest`. The default
   // value is false. This field is REQUIRED.
+  bool ready_to_use = 5;
+
+  // The ID of the volume group snapshot that this snapshot is part of.
+  // It uniquely identifies the group snapshot on the storage system.
+  // This field is OPTIONAL.
+  // If this snapshot is a member of a volume group snapshot, and it
+  // MUST NOT be deleted as a stand alone snapshot, then the SP
+  // MUST provide the ID of the volume group snapshot in this field.
+  // If provided, CO MUST use this field in subsequent volume group
+  // snapshot operations to indicate that this snapshot is part of the
+  // specified group snapshot.
+  // If not provided, CO SHALL treat the snapshot as independent,
+  // and SP SHALL allow it to be deleted separately.
+  // If this message is inside a VolumeGroupSnapshot message, the value
+  // MUST be the same as the group_snapshot_id in that message.
+  string group_snapshot_id = 6 [(alpha_field) = true];
+}
+```
+
+##### CreateSnapshot Errors
+
+If the plugin is unable to complete the CreateSnapshot call successfully, it MUST return a non-ok gRPC code in the gRPC status.
