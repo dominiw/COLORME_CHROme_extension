@@ -1958,3 +1958,35 @@ message DeleteSnapshotRequest {
   string snapshot_id = 1;
 
   // Secrets required by plugin to complete snapshot deletion request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  map<string, string> secrets = 2 [(csi_secret) = true];
+}
+
+message DeleteSnapshotResponse {}
+```
+
+##### DeleteSnapshot Errors
+
+If the plugin is unable to complete the DeleteSnapshot call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Snapshot is part of a group | 3 INVALID_ARGUMENT | Indicates that the snapshot corresponding to the specified `snapshot_id` could not be deleted because it is part of a group snapshot and CAN NOT be deleted stand alone. | Caller SHOULD stop calling DeleteSnapshot and call DeleteVolumeGroupSnapshot instead. |
+| Snapshot in use | 9 FAILED_PRECONDITION | Indicates that the snapshot corresponding to the specified `snapshot_id` could not be deleted because it is in use by another resource. | Caller SHOULD ensure that there are no other resources using the snapshot, and then retry with exponential back off. |
+| Operation pending for snapshot | 10 ABORTED | Indicates that there is already an operation pending for the specified snapshot. In general the Cluster Orchestrator (CO) is responsible for ensuring that there is no more than one call "in-flight" per snapshot at a given time. However, in some circumstances, the CO MAY lose state (for example when the CO crashes and restarts), and MAY issue multiple calls simultaneously for the same snapshot. The Plugin, SHOULD handle this as gracefully as possible, and MAY return this error code to reject secondary calls. | Caller SHOULD ensure that there are no other calls pending for the specified snapshot, and then retry with exponential back off. |
+
+
+#### `ListSnapshots`
+
+A Controller Plugin MUST implement this RPC call if it has `LIST_SNAPSHOTS` capability.
+The Plugin SHALL return the information about all snapshots on the storage system within the given parameters regardless of how they were created.
+`ListSnapshots` SHALL NOT list a snapshot that is being created but has not been cut successfully yet.
+If snapshots are created and/or deleted while the CO is concurrently paging through `ListSnapshots` results then it is possible that the CO MAY either witness duplicate snapshots in the list, not witness existing snapshots, or both.
+The CO SHALL NOT expect a consistent "view" of all snapshots when paging through the snapshot list via multiple calls to `ListSnapshots`.
+
+```protobuf
+// List all snapshots on the storage system regardless of how they were
+// created.
