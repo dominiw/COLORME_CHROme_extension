@@ -2014,3 +2014,34 @@ message ListSnapshotsRequest {
   // Identity information for a specific snapshot. This field is
   // OPTIONAL. It can be used to list only a specific snapshot.
   // ListSnapshots will return with current snapshot information
+  // and will not block if the snapshot is being processed after
+  // it is cut.
+  string snapshot_id = 4;
+
+  // Secrets required by plugin to complete ListSnapshot request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  map<string, string> secrets = 5 [(csi_secret) = true];
+}
+
+message ListSnapshotsResponse {
+  message Entry {
+    Snapshot snapshot = 1;
+  }
+
+  repeated Entry entries = 1;
+
+  // This token allows you to get the next page of entries for
+  // `ListSnapshots` request. If the number of entries is larger than
+  // `max_entries`, use the `next_token` as a value for the
+  // `starting_token` field in the next `ListSnapshots` request. This
+  // field is OPTIONAL.
+  // An empty string is equal to an unspecified field value.
+  string next_token = 2;
+}
+```
+
+##### ListSnapshots Errors
+
+If the plugin is unable to complete the ListSnapshots call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
