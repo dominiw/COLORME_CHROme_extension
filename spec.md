@@ -1990,3 +1990,27 @@ The CO SHALL NOT expect a consistent "view" of all snapshots when paging through
 ```protobuf
 // List all snapshots on the storage system regardless of how they were
 // created.
+message ListSnapshotsRequest {
+  // If specified (non-zero value), the Plugin MUST NOT return more
+  // entries than this number in the response. If the actual number of
+  // entries is more than this number, the Plugin MUST set `next_token`
+  // in the response which can be used to get the next page of entries
+  // in the subsequent `ListSnapshots` call. This field is OPTIONAL. If
+  // not specified (zero value), it means there is no restriction on the
+  // number of entries that can be returned.
+  // The value of this field MUST NOT be negative.
+  int32 max_entries = 1;
+
+  // A token to specify where to start paginating. Set this field to
+  // `next_token` returned by a previous `ListSnapshots` call to get the
+  // next page of entries. This field is OPTIONAL.
+  // An empty string is equal to an unspecified field value.
+  string starting_token = 2;
+
+  // Identity information for the source volume. This field is OPTIONAL.
+  // It can be used to list snapshots by volume.
+  string source_volume_id = 3;
+
+  // Identity information for a specific snapshot. This field is
+  // OPTIONAL. It can be used to list only a specific snapshot.
+  // ListSnapshots will return with current snapshot information
