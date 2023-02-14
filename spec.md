@@ -2312,3 +2312,30 @@ If the corresponding Controller Plugin has `PUBLISH_UNPUBLISH_VOLUME` controller
 
 This operation MUST be idempotent.
 If the volume corresponding to the `volume_id` has already been published at the specified `target_path`, and is compatible with the specified `volume_capability` and `readonly` flag, the Plugin MUST reply `0 OK`.
+
+If this RPC failed, or the CO does not know if it failed or not, it MAY choose to call `NodePublishVolume` again, or choose to call `NodeUnpublishVolume`.
+
+This RPC MAY be called by the CO multiple times on the same node for the same volume with a possibly different `target_path` and/or other arguments if the volume supports either `MULTI_NODE_...` or `SINGLE_NODE_MULTI_WRITER` access modes (see second table).
+The possible `MULTI_NODE_...` access modes are `MULTI_NODE_READER_ONLY`, `MULTI_NODE_SINGLE_WRITER` or `MULTI_NODE_MULTI_WRITER`.
+COs SHOULD NOT call `NodePublishVolume` a second time with a different `volume_capability`.
+If this happens, the Plugin SHOULD return `FAILED_PRECONDITION`.
+
+The following table shows what the Plugin SHOULD return when receiving a second `NodePublishVolume` on the same volume on the same node:
+
+(**T<sub>n</sub>**: target path of the n<sup>th</sup> `NodePublishVolume`; **P<sub>n</sub>**: other arguments of the n<sup>th</sup> `NodePublishVolume` except `secrets`)
+
+|                    | T1=T2, P1=P2    | T1=T2, P1!=P2  | T1!=T2, P1=P2       | T1!=T2, P1!=P2     |
+|--------------------|-----------------|----------------|---------------------|--------------------|
+| MULTI_NODE_...     | OK (idempotent) | ALREADY_EXISTS | OK                  | OK                 |
+| Non MULTI_NODE_... | OK (idempotent) | ALREADY_EXISTS | FAILED_PRECONDITION | FAILED_PRECONDITION|
+
+NOTE: If the Plugin supports the `SINGLE_NODE_MULTI_WRITER` capability, use the following table instead for what the Plugin SHOULD return when receiving a second `NodePublishVolume` on the same volume on the same node:
+
+|                                       | T1=T2, P1=P2    | T1=T2, P1!=P2  | T1!=T2, P1=P2       | T1!=T2, P1!=P2      |
+|---------------------------------------|-----------------|----------------|---------------------|---------------------|
+| SINGLE_NODE_SINGLE_WRITER             | OK (idempotent) | ALREADY_EXISTS | FAILED_PRECONDITION | FAILED_PRECONDITION |
+| SINGLE_NODE_MULTI_WRITER              | OK (idempotent) | ALREADY_EXISTS | OK                  | OK                  |
+| MULTI_NODE_...                        | OK (idempotent) | ALREADY_EXISTS | OK                  | OK                  |
+| Non MULTI_NODE_...                    | OK (idempotent) | ALREADY_EXISTS | FAILED_PRECONDITION | FAILED_PRECONDITION |
+
+The `SINGLE_NODE_SINGLE_WRITER` and `SINGLE_NODE_MULTI_WRITER` access modes are intended to replace the `SINGLE_NODE_WRITER` access mode to clarify the number of writers for a volume on a single node.
