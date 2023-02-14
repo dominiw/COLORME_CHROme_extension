@@ -2097,3 +2097,40 @@ Examples:
 message ControllerExpandVolumeRequest {
   // The ID of the volume to expand. This field is REQUIRED.
   string volume_id = 1;
+
+  // This allows CO to specify the capacity requirements of the volume
+  // after expansion. This field is REQUIRED.
+  CapacityRange capacity_range = 2;
+
+  // Secrets required by the plugin for expanding the volume.
+  // This field is OPTIONAL.
+  map<string, string> secrets = 3 [(csi_secret) = true];
+
+  // Volume capability describing how the CO intends to use this volume.
+  // This allows SP to determine if volume is being used as a block
+  // device or mounted file system. For example - if volume is
+  // being used as a block device - the SP MAY set
+  // node_expansion_required to false in ControllerExpandVolumeResponse
+  // to skip invocation of NodeExpandVolume on the node by the CO.
+  // This is an OPTIONAL field.
+  VolumeCapability volume_capability = 4;
+}
+
+message ControllerExpandVolumeResponse {
+  // Capacity of volume after expansion. This field is REQUIRED.
+  int64 capacity_bytes = 1;
+
+  // Whether node expansion is required for the volume. When true
+  // the CO MUST make NodeExpandVolume RPC call on the node. This field
+  // is REQUIRED.
+  bool node_expansion_required = 2;
+}
+```
+
+##### ControllerExpandVolume Errors
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Exceeds capabilities | 3 INVALID_ARGUMENT | Indicates that the CO has specified capabilities not supported by the volume. | Caller MAY verify volume capabilities by calling ValidateVolumeCapabilities and retry with matching capabilities. |
+| Volume does not exist | 5 NOT FOUND | Indicates that a volume corresponding to the specified volume_id does not exist. | Caller MUST verify that the volume_id is correct and that the volume is accessible and has not been deleted before retrying with exponential back off. |
+| Volume in use | 9 FAILED_PRECONDITION | Indicates that the volume corresponding to the specified `volume_id` could not be expanded because it is currently published on a node but the plugin does not have ONLINE expansion capability. | Caller SHOULD ensure that volume is not published and retry with exponential back off. |
