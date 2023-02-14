@@ -2221,3 +2221,38 @@ message NodeStageVolumeRequest {
   map<string, string> secrets = 5 [(csi_secret) = true];
 
   // Volume context as returned by SP in
+  // CreateVolumeResponse.Volume.volume_context.
+  // This field is OPTIONAL and MUST match the volume_context of the
+  // volume identified by `volume_id`.
+  map<string, string> volume_context = 6;
+}
+
+message NodeStageVolumeResponse {
+  // Intentionally empty.
+}
+```
+
+#### NodeStageVolume Errors
+
+If the plugin is unable to complete the NodeStageVolume call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Volume does not exist | 5 NOT_FOUND | Indicates that a volume corresponding to the specified `volume_id` does not exist. | Caller MUST verify that the `volume_id` is correct and that the volume is accessible and has not been deleted before retrying with exponential back off. |
+| Volume published but is incompatible | 6 ALREADY_EXISTS | Indicates that a volume corresponding to the specified `volume_id` has already been published at the specified `staging_target_path` but is incompatible with the specified `volume_capability` flag. | Caller MUST fix the arguments before retrying. |
+| Exceeds capabilities | 9 FAILED_PRECONDITION | Indicates that the CO has specified capabilities not supported by the volume. | Caller MAY choose to call `ValidateVolumeCapabilities` to validate the volume capabilities, or wait for the volume to be unpublished on the node. |
+
+#### `NodeUnstageVolume`
+
+A Node Plugin MUST implement this RPC call if it has `STAGE_UNSTAGE_VOLUME` node capability.
+
+This RPC is a reverse operation of `NodeStageVolume`.
+This RPC MUST undo the work by the corresponding `NodeStageVolume`.
+This RPC SHALL be called by the CO once for each `staging_target_path` that was successfully setup via `NodeStageVolume`.
+
+If the corresponding Controller Plugin has `PUBLISH_UNPUBLISH_VOLUME` controller capability and the Node Plugin has `STAGE_UNSTAGE_VOLUME` capability, the CO MUST guarantee that this RPC is called and returns success before calling `ControllerUnpublishVolume` for the given node and the given volume.
+The CO MUST guarantee that this RPC is called after all `NodeUnpublishVolume` have been called and returned success for the given volume on the given node.
+
+The Plugin SHALL assume that this RPC will be executed on the node where the volume is being used.
