@@ -2165,3 +2165,27 @@ When processing is complete, the `ready_to_use` parameter of the snapshot from L
 The downside of calling ListSnapshots is that ListSnapshots will not return a gRPC error code if an error occurs during the processing. So calling CreateSnapshot repeatedly is the preferred way to check if the processing is complete.
 
 ### Node Service RPC
+
+#### `NodeStageVolume`
+
+A Node Plugin MUST implement this RPC call if it has `STAGE_UNSTAGE_VOLUME` node capability.
+
+This RPC is called by the CO prior to the volume being consumed by any workloads on the node by `NodePublishVolume`.
+The Plugin SHALL assume that this RPC will be executed on the node where the volume will be used.
+This RPC SHOULD be called by the CO when a workload that wants to use the specified volume is placed (scheduled) on the specified node for the first time or for the first time since a `NodeUnstageVolume` call for the specified volume was called and returned success on that node.
+
+If the corresponding Controller Plugin has `PUBLISH_UNPUBLISH_VOLUME` controller capability and the Node Plugin has `STAGE_UNSTAGE_VOLUME` capability, then the CO MUST guarantee that this RPC is called after `ControllerPublishVolume` is called for the given volume on the given node and returns a success.
+The CO MUST guarantee that this RPC is called and returns a success before any `NodePublishVolume` is called for the given volume on the given node.
+
+This operation MUST be idempotent.
+If the volume corresponding to the `volume_id` is already staged to the `staging_target_path`, and is identical to the specified `volume_capability` the Plugin MUST reply `0 OK`.
+
+If this RPC failed, or the CO does not know if it failed or not, it MAY choose to call `NodeStageVolume` again, or choose to call `NodeUnstageVolume`.
+
+```protobuf
+message NodeStageVolumeRequest {
+  // The ID of the volume to publish. This field is REQUIRED.
+  string volume_id = 1;
+
+  // The CO SHALL set this field to the value returned by
+  // `ControllerPublishVolume` if the corresponding Controller Plugin
