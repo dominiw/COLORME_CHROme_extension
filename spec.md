@@ -2045,3 +2045,31 @@ message ListSnapshotsResponse {
 
 If the plugin is unable to complete the ListSnapshots call successfully, it MUST return a non-ok gRPC code in the gRPC status.
 If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Invalid `starting_token` | 10 ABORTED | Indicates that `starting_token` is not valid. | Caller SHOULD start the `ListSnapshots` operation again with an empty `starting_token`. |
+
+
+#### `ControllerExpandVolume`
+
+A Controller plugin MUST implement this RPC call if plugin has `EXPAND_VOLUME` controller capability.
+This RPC allows the CO to expand the size of a volume.
+
+This operation MUST be idempotent.
+If a volume corresponding to the specified volume ID is already larger than or equal to the target capacity of the expansion request, the plugin SHOULD reply 0 OK.
+
+This call MAY be made by the CO during any time in the lifecycle of the volume after creation if plugin has `VolumeExpansion.ONLINE` capability.
+If plugin has `EXPAND_VOLUME` node capability, then `NodeExpandVolume` MUST be called after successful `ControllerExpandVolume` and `node_expansion_required` in `ControllerExpandVolumeResponse` is `true`.
+
+If specified, the `volume_capability` in `ControllerExpandVolumeRequest` should be same as what CO would pass in `ControllerPublishVolumeRequest`.
+
+If the plugin has only `VolumeExpansion.OFFLINE` expansion capability and volume is currently published or available on a node then `ControllerExpandVolume` MUST be called ONLY after either:
+- The plugin has controller `PUBLISH_UNPUBLISH_VOLUME` capability and `ControllerUnpublishVolume` has been invoked successfully.
+
+OR ELSE
+
+- The plugin does NOT have controller `PUBLISH_UNPUBLISH_VOLUME` capability, the plugin has node `STAGE_UNSTAGE_VOLUME` capability, and `NodeUnstageVolume` has been completed successfully.
+
+OR ELSE
