@@ -2256,3 +2256,25 @@ If the corresponding Controller Plugin has `PUBLISH_UNPUBLISH_VOLUME` controller
 The CO MUST guarantee that this RPC is called after all `NodeUnpublishVolume` have been called and returned success for the given volume on the given node.
 
 The Plugin SHALL assume that this RPC will be executed on the node where the volume is being used.
+
+This RPC MAY be called by the CO when the workload using the volume is being moved to a different node, or all the workloads using the volume on a node have finished.
+
+This operation MUST be idempotent.
+If the volume corresponding to the `volume_id` is not staged to the `staging_target_path`,  the Plugin MUST reply `0 OK`.
+
+If this RPC failed, or the CO does not know if it failed or not, it MAY choose to call `NodeUnstageVolume` again.
+
+```protobuf
+message NodeUnstageVolumeRequest {
+  // The ID of the volume. This field is REQUIRED.
+  string volume_id = 1;
+
+  // The path at which the volume was staged. It MUST be an absolute
+  // path in the root filesystem of the process serving this request.
+  // This is a REQUIRED field.
+  // This field overrides the general CSI size limit.
+  // SP SHOULD support the maximum path length allowed by the operating
+  // system/filesystem, but, at a minimum, SP MUST accept a max path
+  // length of at least 128 bytes.
+  string staging_target_path = 2;
+}
