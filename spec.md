@@ -2427,3 +2427,28 @@ The CO MUST implement the specified error recovery behavior when it encounters t
 
 
 #### `NodeUnpublishVolume`
+
+A Node Plugin MUST implement this RPC call.
+This RPC is a reverse operation of `NodePublishVolume`.
+This RPC MUST undo the work by the corresponding `NodePublishVolume`.
+This RPC SHALL be called by the CO at least once for each `target_path` that was successfully setup via `NodePublishVolume`.
+If the corresponding Controller Plugin has `PUBLISH_UNPUBLISH_VOLUME` controller capability, the CO SHOULD issue all `NodeUnpublishVolume` (as specified above) before calling `ControllerUnpublishVolume` for the given node and the given volume.
+The Plugin SHALL assume that this RPC will be executed on the node where the volume is being used.
+
+This RPC is typically called by the CO when the workload using the volume is being moved to a different node, or all the workload using the volume on a node has finished.
+
+This operation MUST be idempotent.
+If this RPC failed, or the CO does not know if it failed or not, it can choose to call `NodeUnpublishVolume` again.
+
+```protobuf
+message NodeUnpublishVolumeRequest {
+  // The ID of the volume. This field is REQUIRED.
+  string volume_id = 1;
+
+  // The path at which the volume was published. It MUST be an absolute
+  // path in the root filesystem of the process serving this request.
+  // The SP MUST delete the file or directory it created at this path.
+  // This is a REQUIRED field.
+  // This field overrides the general CSI size limit.
+  // SP SHOULD support the maximum path length allowed by the operating
+  // system/filesystem, but, at a minimum, SP MUST accept a max path
