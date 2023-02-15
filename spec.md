@@ -2365,3 +2365,39 @@ message NodePublishVolumeRequest {
   // system/filesystem, but, at a minimum, SP MUST accept a max path
   // length of at least 128 bytes.
   string staging_target_path = 3;
+
+  // The path to which the volume will be published. It MUST be an
+  // absolute path in the root filesystem of the process serving this
+  // request. The CO SHALL ensure uniqueness of target_path per volume.
+  // The CO SHALL ensure that the parent directory of this path exists
+  // and that the process serving the request has `read` and `write`
+  // permissions to that parent directory.
+  // For volumes with an access type of block, the SP SHALL place the
+  // block device at target_path.
+  // For volumes with an access type of mount, the SP SHALL place the
+  // mounted directory at target_path.
+  // Creation of target_path is the responsibility of the SP.
+  // This is a REQUIRED field.
+  // This field overrides the general CSI size limit.
+  // SP SHOULD support the maximum path length allowed by the operating
+  // system/filesystem, but, at a minimum, SP MUST accept a max path
+  // length of at least 128 bytes.
+  string target_path = 4;
+
+  // Volume capability describing how the CO intends to use this volume.
+  // SP MUST ensure the CO can use the published volume as described.
+  // Otherwise SP MUST return the appropriate gRPC error code.
+  // This is a REQUIRED field.
+  VolumeCapability volume_capability = 5;
+
+  // Indicates SP MUST publish the volume in readonly mode.
+  // This field is REQUIRED.
+  bool readonly = 6;
+
+  // Secrets required by plugin to complete node publish volume request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  map<string, string> secrets = 7 [(csi_secret) = true];
+
+  // Volume context as returned by SP in
+  // CreateVolumeResponse.Volume.volume_context.
