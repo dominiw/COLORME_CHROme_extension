@@ -2476,3 +2476,28 @@ The CO MUST implement the specified error recovery behavior when it encounters t
 
 A Node plugin MUST implement this RPC call if it has GET_VOLUME_STATS node capability or VOLUME_CONDITION node capability.
 `NodeGetVolumeStats` RPC call returns the volume capacity statistics available for the volume.
+
+If the volume is being used in `BlockVolume` mode then `used` and `available` MAY be omitted from `usage` field of `NodeGetVolumeStatsResponse`.
+Similarly, inode information MAY be omitted from `NodeGetVolumeStatsResponse` when unavailable.
+
+The `staging_target_path` field is not required, for backwards compatibility, but the CO SHOULD supply it.
+Plugins can use this field to determine if `volume_path` is where the volume is published or staged,
+and setting this field to non-empty allows plugins to function with less stored state on the node.
+
+```protobuf
+message NodeGetVolumeStatsRequest {
+  // The ID of the volume. This field is REQUIRED.
+  string volume_id = 1;
+
+  // It can be any valid path where volume was previously
+  // staged or published.
+  // It MUST be an absolute path in the root filesystem of
+  // the process serving this request.
+  // This is a REQUIRED field.
+  // This field overrides the general CSI size limit.
+  // SP SHOULD support the maximum path length allowed by the operating
+  // system/filesystem, but, at a minimum, SP MUST accept a max path
+  // length of at least 128 bytes.
+  string volume_path = 2;
+
+  // The path where the volume is staged, if the plugin has the
