@@ -2452,3 +2452,27 @@ message NodeUnpublishVolumeRequest {
   // This field overrides the general CSI size limit.
   // SP SHOULD support the maximum path length allowed by the operating
   // system/filesystem, but, at a minimum, SP MUST accept a max path
+  // length of at least 128 bytes.
+  string target_path = 2;
+}
+
+message NodeUnpublishVolumeResponse {
+  // Intentionally empty.
+}
+```
+
+##### NodeUnpublishVolume Errors
+
+If the plugin is unable to complete the NodeUnpublishVolume call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Volume does not exist | 5 NOT_FOUND | Indicates that a volume corresponding to the specified `volume_id` does not exist. | Caller MUST verify that the `volume_id` is correct and that the volume is accessible and has not been deleted before retrying with exponential back off. |
+
+
+#### `NodeGetVolumeStats`
+
+A Node plugin MUST implement this RPC call if it has GET_VOLUME_STATS node capability or VOLUME_CONDITION node capability.
+`NodeGetVolumeStats` RPC call returns the volume capacity statistics available for the volume.
