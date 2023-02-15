@@ -2339,3 +2339,29 @@ NOTE: If the Plugin supports the `SINGLE_NODE_MULTI_WRITER` capability, use the 
 | Non MULTI_NODE_...                    | OK (idempotent) | ALREADY_EXISTS | FAILED_PRECONDITION | FAILED_PRECONDITION |
 
 The `SINGLE_NODE_SINGLE_WRITER` and `SINGLE_NODE_MULTI_WRITER` access modes are intended to replace the `SINGLE_NODE_WRITER` access mode to clarify the number of writers for a volume on a single node.
+Plugins MUST accept and allow use of the `SINGLE_NODE_WRITER` access mode (subject to the processing rules above), when either `SINGLE_NODE_SINGLE_WRITER` and/or `SINGLE_NODE_MULTI_WRITER` are supported, in order to permit older COs to continue working.
+
+
+```protobuf
+message NodePublishVolumeRequest {
+  // The ID of the volume to publish. This field is REQUIRED.
+  string volume_id = 1;
+
+  // The CO SHALL set this field to the value returned by
+  // `ControllerPublishVolume` if the corresponding Controller Plugin
+  // has `PUBLISH_UNPUBLISH_VOLUME` controller capability, and SHALL be
+  // left unset if the corresponding Controller Plugin does not have
+  // this capability. This is an OPTIONAL field.
+  map<string, string> publish_context = 2;
+
+  // The path to which the volume was staged by `NodeStageVolume`.
+  // It MUST be an absolute path in the root filesystem of the process
+  // serving this request.
+  // It MUST be set if the Node Plugin implements the
+  // `STAGE_UNSTAGE_VOLUME` node capability.
+  // This is an OPTIONAL field.
+  // This field overrides the general CSI size limit.
+  // SP SHOULD support the maximum path length allowed by the operating
+  // system/filesystem, but, at a minimum, SP MUST accept a max path
+  // length of at least 128 bytes.
+  string staging_target_path = 3;
