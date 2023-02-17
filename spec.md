@@ -2501,3 +2501,45 @@ message NodeGetVolumeStatsRequest {
   string volume_path = 2;
 
   // The path where the volume is staged, if the plugin has the
+  // STAGE_UNSTAGE_VOLUME capability, otherwise empty.
+  // If not empty, it MUST be an absolute path in the root
+  // filesystem of the process serving this request.
+  // This field is OPTIONAL.
+  // This field overrides the general CSI size limit.
+  // SP SHOULD support the maximum path length allowed by the operating
+  // system/filesystem, but, at a minimum, SP MUST accept a max path
+  // length of at least 128 bytes.
+  string staging_target_path = 3;
+}
+
+message NodeGetVolumeStatsResponse {
+  // This field is OPTIONAL.
+  repeated VolumeUsage usage = 1;
+  // Information about the current condition of the volume.
+  // This field is OPTIONAL.
+  // This field MUST be specified if the VOLUME_CONDITION node
+  // capability is supported.
+  VolumeCondition volume_condition = 2 [(alpha_field) = true];
+}
+
+message VolumeUsage {
+  enum Unit {
+    UNKNOWN = 0;
+    BYTES = 1;
+    INODES = 2;
+  }
+  // The available capacity in specified Unit. This field is OPTIONAL.
+  // The value of this field MUST NOT be negative.
+  int64 available = 1;
+
+  // The total capacity in specified Unit. This field is REQUIRED.
+  // The value of this field MUST NOT be negative.
+  int64 total = 2;
+
+  // The used capacity in specified Unit. This field is OPTIONAL.
+  // The value of this field MUST NOT be negative.
+  int64 used = 3;
+
+  // Units by which values are measured. This field is REQUIRED.
+  Unit unit = 4;
+}
