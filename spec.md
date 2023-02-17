@@ -2543,3 +2543,39 @@ message VolumeUsage {
   // Units by which values are measured. This field is REQUIRED.
   Unit unit = 4;
 }
+
+// VolumeCondition represents the current condition of a volume.
+message VolumeCondition {
+  option (alpha_message) = true;
+
+  // Normal volumes are available for use and operating optimally.
+  // An abnormal volume does not meet these criteria.
+  // This field is REQUIRED.
+  bool abnormal = 1;
+
+  // The message describing the condition of the volume.
+  // This field is REQUIRED.
+  string message = 2;
+}
+```
+
+##### NodeGetVolumeStats Errors
+
+If the plugin is unable to complete the `NodeGetVolumeStats` call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Volume does not exist | 5 NOT_FOUND | Indicates that a volume corresponding to the specified `volume_id` does not exist on specified `volume_path`. | Caller MUST verify that the `volume_id` is correct and that the volume is accessible on specified `volume_path` and has not been deleted before retrying with exponential back off. |
+
+#### `NodeGetCapabilities`
+
+A Node Plugin MUST implement this RPC call.
+This RPC allows the CO to check the supported capabilities of node service provided by the Plugin.
+
+```protobuf
+message NodeGetCapabilitiesRequest {
+  // Intentionally empty.
+}
