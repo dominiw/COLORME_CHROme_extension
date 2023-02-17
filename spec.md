@@ -2579,3 +2579,40 @@ This RPC allows the CO to check the supported capabilities of node service provi
 message NodeGetCapabilitiesRequest {
   // Intentionally empty.
 }
+
+message NodeGetCapabilitiesResponse {
+  // All the capabilities that the node service supports. This field
+  // is OPTIONAL.
+  repeated NodeServiceCapability capabilities = 1;
+}
+
+// Specifies a capability of the node service.
+message NodeServiceCapability {
+  message RPC {
+    enum Type {
+      UNKNOWN = 0;
+      STAGE_UNSTAGE_VOLUME = 1;
+      // If Plugin implements GET_VOLUME_STATS capability
+      // then it MUST implement NodeGetVolumeStats RPC
+      // call for fetching volume statistics.
+      GET_VOLUME_STATS = 2;
+      // See VolumeExpansion for details.
+      EXPAND_VOLUME = 3;
+      // Indicates that the Node service can report volume conditions.
+      // An SP MAY implement `VolumeCondition` in only the Node
+      // Plugin, only the Controller Plugin, or both.
+      // If `VolumeCondition` is implemented in both the Node and
+      // Controller Plugins, it SHALL report from different
+      // perspectives.
+      // If for some reason Node and Controller Plugins report
+      // misaligned volume conditions, CO SHALL assume the worst case
+      // is the truth.
+      // Note that, for alpha, `VolumeCondition` is intended to be
+      // informative for humans only, not for automation.
+      VOLUME_CONDITION = 4 [(alpha_enum_value) = true];
+
+      // Indicates the SP supports the SINGLE_NODE_SINGLE_WRITER and/or
+      // SINGLE_NODE_MULTI_WRITER access modes.
+      // These access modes are intended to replace the
+      // SINGLE_NODE_WRITER access mode to clarify the number of writers
+      // for a volume on a single node. Plugins MUST accept and allow
