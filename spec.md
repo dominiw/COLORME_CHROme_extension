@@ -2702,3 +2702,32 @@ message NodeGetInfoResponse {
 
 If the plugin is unable to complete the NodeGetInfo call successfully, it MUST return a non-ok gRPC code in the gRPC status.
 The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+#### `NodeExpandVolume`
+
+A Node Plugin MUST implement this RPC call if it has `EXPAND_VOLUME` node capability.
+This RPC call allows CO to expand volume on a node.
+
+This operation MUST be idempotent.
+If a volume corresponding to the specified volume ID is already larger than or equal to the target capacity of the expansion request, the plugin SHOULD reply 0 OK.
+
+`NodeExpandVolume` ONLY supports expansion of already node-published or node-staged volumes on the given `volume_path`.
+
+If plugin has `STAGE_UNSTAGE_VOLUME` node capability then:
+* `NodeExpandVolume` MUST be called after successful `NodeStageVolume`.
+* `NodeExpandVolume` MAY be called before or after `NodePublishVolume`.
+
+Otherwise `NodeExpandVolume` MUST be called after successful `NodePublishVolume`.
+
+If a plugin only supports expansion via the `VolumeExpansion.OFFLINE` capability, then the volume MUST first be taken offline and expanded via `ControllerExpandVolume` (see `ControllerExpandVolume` for more details), and then node-staged or node-published before it can be expanded on the node via `NodeExpandVolume`.
+
+The `staging_target_path` field is not required, for backwards compatibility, but the CO SHOULD supply it.
+Plugins can use this field to determine if `volume_path` is where the volume is published or staged,
+and setting this field to non-empty allows plugins to function with less stored state on the node.
+
+```protobuf
+message NodeExpandVolumeRequest {
+  // The ID of the volume. This field is REQUIRED.
+  string volume_id = 1;
+
+  // The path on which volume is available. This field is REQUIRED.
