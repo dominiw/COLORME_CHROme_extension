@@ -2854,3 +2854,38 @@ For plugins that support snapshot post processing such as uploading, CreateVolum
 The CO SHOULD issue the CreateVolumeGroupSnapshotRequest RPC with the same arguments again periodically until the ready_to_use field has a value of true indicating all the snapshots have been "processed" and are ready to use to create new volumes.
 If an error occurs during the process for any individual snapshot, CreateVolumeGroupSnapshot SHOULD return a corresponding gRPC error code that reflects the error condition.
 The ready_to_use field for each individual snapshot SHOULD have a value of false until the snapshot has been "processed" and is ready to use to create new volumes.
+
+After snapshot creation, any individual snapshot from the group MAY be used as a source to provision a new volume.
+
+In the VolumeGroupSnapshot message, both snapshots and group_snapshot_id are required fields.
+
+If an error occurs before all the individual snapshots are cut when creating a group snapshot of multiple volumes and a group_snapshot_id is not yet available for CO to do clean up, SP MUST return an error, and SP SHOULD also do clean up and make sure no snapshots are leaked.
+
+```protobuf
+message CreateVolumeGroupSnapshotRequest {
+  option (alpha_message) = true;
+
+  // The suggested name for the group snapshot. This field is REQUIRED
+  // for idempotency.
+  // Any Unicode string that conforms to the length limit is allowed
+  // except those containing the following banned characters:
+  // U+0000-U+0008, U+000B, U+000C, U+000E-U+001F, U+007F-U+009F.
+  // (These are control characters other than commonly used whitespace.)
+  string name = 1;
+
+  // volume IDs of the source volumes to be snapshotted together.
+  // This field is REQUIRED.
+  repeated string source_volume_ids = 2;
+
+  // Secrets required by plugin to complete
+  // ControllerCreateVolumeGroupSnapshot request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  // The secrets provided in this field SHOULD be the same for 
+  // all group snapshot operations on the same group snapshot. 
+  map<string, string> secrets = 3 [(csi_secret) = true];
+
+  // Plugin specific parameters passed in as opaque key-value pairs.
+  // This field is OPTIONAL. The Plugin is responsible for parsing and
+  // validating these parameters. COs will treat these as opaque.
+  map<string, string> parameters = 4;
