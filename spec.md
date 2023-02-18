@@ -2788,3 +2788,39 @@ message NodeExpandVolumeResponse {
 | Volume does not exist | 5 NOT FOUND | Indicates that a volume corresponding to the specified volume_id does not exist. | Caller MUST verify that the volume_id is correct and that the volume is accessible and has not been deleted before retrying with exponential back off. |
 | Volume in use | 9 FAILED_PRECONDITION | Indicates that the volume corresponding to the specified `volume_id` could not be expanded because it is node-published or node-staged and the underlying filesystem does not support expansion of published or staged volumes. | Caller MUST NOT retry. |
 | Unsupported capacity_range | 11 OUT_OF_RANGE | Indicates that the capacity range is not allowed by the Plugin. More human-readable information MAY be provided in the gRPC `status.message` field. | Caller MUST fix the capacity range before retrying. |
+
+### Group Controller Service RPCs
+
+#### `GroupControllerGetCapabilities`
+
+A Plugin that implements GroupController MUST implement this RPC call.
+This RPC allows the CO to check the supported capabilities of group controller service provided by the Plugin.
+
+```protobuf
+message GroupControllerGetCapabilitiesRequest {
+  // Intentionally empty.
+}
+
+message GroupControllerGetCapabilitiesResponse {
+  // All the capabilities that the group controller service supports.
+  // This field is OPTIONAL.
+  repeated GroupControllerServiceCapability capabilities = 1;
+}
+
+// Specifies a capability of the group controller service.
+message GroupControllerServiceCapability {
+  message RPC {
+    enum Type {
+      UNKNOWN = 0;
+
+      // Indicates that the group controller plugin supports
+      // creating, deleting, and getting details of a volume
+      // group snapshot.
+      CREATE_DELETE_GET_VOLUME_GROUP_SNAPSHOT = 1
+      [(alpha_enum_value) = true];
+    }
+
+    Type type = 1;
+  }
+
+  oneof type {
