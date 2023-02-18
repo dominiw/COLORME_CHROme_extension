@@ -2731,3 +2731,33 @@ message NodeExpandVolumeRequest {
   string volume_id = 1;
 
   // The path on which volume is available. This field is REQUIRED.
+  // This field overrides the general CSI size limit.
+  // SP SHOULD support the maximum path length allowed by the operating
+  // system/filesystem, but, at a minimum, SP MUST accept a max path
+  // length of at least 128 bytes.
+  string volume_path = 2;
+
+  // This allows CO to specify the capacity requirements of the volume
+  // after expansion. If capacity_range is omitted then a plugin MAY
+  // inspect the file system of the volume to determine the maximum
+  // capacity to which the volume can be expanded. In such cases a
+  // plugin MAY expand the volume to its maximum capacity.
+  // This field is OPTIONAL.
+  CapacityRange capacity_range = 3;
+
+  // The path where the volume is staged, if the plugin has the
+  // STAGE_UNSTAGE_VOLUME capability, otherwise empty.
+  // If not empty, it MUST be an absolute path in the root
+  // filesystem of the process serving this request.
+  // This field is OPTIONAL.
+  // This field overrides the general CSI size limit.
+  // SP SHOULD support the maximum path length allowed by the operating
+  // system/filesystem, but, at a minimum, SP MUST accept a max path
+  // length of at least 128 bytes.
+  string staging_target_path = 4;
+
+  // Volume capability describing how the CO intends to use this volume.
+  // This allows SP to determine if volume is being used as a block
+  // device or mounted file system. For example - if volume is being
+  // used as a block device the SP MAY choose to skip expanding the
+  // filesystem in NodeExpandVolume implementation but still perform
