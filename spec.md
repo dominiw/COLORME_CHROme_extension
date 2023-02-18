@@ -2669,3 +2669,36 @@ message NodeGetInfoResponse {
   // CSI size limit, 128 byte, is RECOMMENDED for best backwards
   // compatibility.
   string node_id = 1;
+
+  // Maximum number of volumes that controller can publish to the node.
+  // If value is not set or zero CO SHALL decide how many volumes of
+  // this type can be published by the controller to the node. The
+  // plugin MUST NOT set negative values here.
+  // This field is OPTIONAL.
+  int64 max_volumes_per_node = 2;
+
+  // Specifies where (regions, zones, racks, etc.) the node is
+  // accessible from.
+  // A plugin that returns this field MUST also set the
+  // VOLUME_ACCESSIBILITY_CONSTRAINTS plugin capability.
+  // COs MAY use this information along with the topology information
+  // returned in CreateVolumeResponse to ensure that a given volume is
+  // accessible from a given node when scheduling workloads.
+  // This field is OPTIONAL. If it is not specified, the CO MAY assume
+  // the node is not subject to any topological constraint, and MAY
+  // schedule workloads that reference any volume V, such that there are
+  // no topological constraints declared for V.
+  //
+  // Example 1:
+  //   accessible_topology =
+  //     {"region": "R1", "zone": "Z2"}
+  // Indicates the node exists within the "region" "R1" and the "zone"
+  // "Z2".
+  Topology accessible_topology = 3;
+}
+```
+
+##### NodeGetInfo Errors
+
+If the plugin is unable to complete the NodeGetInfo call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
