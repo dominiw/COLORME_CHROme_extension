@@ -2824,3 +2824,33 @@ message GroupControllerServiceCapability {
   }
 
   oneof type {
+    // RPC that the controller supports.
+    RPC rpc = 1;
+  }
+}
+```
+
+##### GroupControllerGetCapabilities Errors
+
+If the plugin is unable to complete the GroupControllerGetCapabilities call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+
+#### `CreateVolumeGroupSnapshot`
+
+**ALPHA FEATURE**
+
+A Group Controller Plugin MUST implement this RPC call if it has `CREATE_DELETE_GET_VOLUME_GROUP_SNAPSHOT` controller capability.
+This RPC will be called by the CO to create a new volume group snapshot from a list of source volumes on behalf of a user.
+
+The purpose of this call is to request the creation of a multi-volume group snapshot.
+This group snapshot MUST give a write-order consistency guarantee or fail if that's not possible.
+That is to say, all the of the volume snapshots in the group MUST be taken at the same point-in-time relative to a stream of write traffic to the specified volumes.
+Note that calls to this function MUST be idempotent - the function may be called multiple times for the same name, with the same `source_volume_ids` and `parameters` - the group snapshot MUST only be created once.
+
+If a group snapshot corresponding to the specified group snapshot `name`, `source_volume_ids`, and `parameters` is successfully created (meaning all snapshots associated with the group are successfully cut), the Plugin MUST reply `0 OK` with the corresponding `CreateVolumeGroupSnapshotResponse`.
+
+If an error occurs before a group snapshot is cut, `CreateVolumeGroupSnapshot` SHOULD return a corresponding gRPC error code that reflects the error condition.
+
+For plugins that support snapshot post processing such as uploading, CreateVolumeGroupSnapshot SHOULD return 0 OK and the ready_to_use field SHOULD be set to false after the group snapshot is cut but still being processed.
+The CO SHOULD issue the CreateVolumeGroupSnapshotRequest RPC with the same arguments again periodically until the ready_to_use field has a value of true indicating all the snapshots have been "processed" and are ready to use to create new volumes.
+If an error occurs during the process for any individual snapshot, CreateVolumeGroupSnapshot SHOULD return a corresponding gRPC error code that reflects the error condition.
+The ready_to_use field for each individual snapshot SHOULD have a value of false until the snapshot has been "processed" and is ready to use to create new volumes.
