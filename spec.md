@@ -2643,3 +2643,29 @@ message NodeServiceCapability {
 If the plugin is unable to complete the NodeGetCapabilities call successfully, it MUST return a non-ok gRPC code in the gRPC status.
 
 #### `NodeGetInfo`
+
+A Node Plugin MUST implement this RPC call if the plugin has `PUBLISH_UNPUBLISH_VOLUME` controller capability.
+The Plugin SHALL assume that this RPC will be executed on the node where the volume will be used.
+The CO SHOULD call this RPC for the node at which it wants to place the workload.
+The CO MAY call this RPC more than once for a given node.
+The SP SHALL NOT expect the CO to call this RPC more than once.
+The result of this call will be used by CO in `ControllerPublishVolume`.
+
+```protobuf
+message NodeGetInfoRequest {
+}
+
+message NodeGetInfoResponse {
+  // The identifier of the node as understood by the SP.
+  // This field is REQUIRED.
+  // This field MUST contain enough information to uniquely identify
+  // this specific node vs all other nodes supported by this plugin.
+  // This field SHALL be used by the CO in subsequent calls, including
+  // `ControllerPublishVolume`, to refer to this node.
+  // The SP is NOT responsible for global uniqueness of node_id across
+  // multiple SPs.
+  // This field overrides the general CSI size limit.
+  // The size of this field SHALL NOT exceed 256 bytes. The general
+  // CSI size limit, 128 byte, is RECOMMENDED for best backwards
+  // compatibility.
+  string node_id = 1;
