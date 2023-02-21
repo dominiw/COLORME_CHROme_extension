@@ -2916,3 +2916,22 @@ message VolumeGroupSnapshot {
   // A list of snapshots belonging to this group.
   // This field is REQUIRED.
   repeated Snapshot snapshots = 2;
+
+  // Timestamp of when the volume group snapshot was taken.
+  // This field is REQUIRED.
+  .google.protobuf.Timestamp creation_time = 3;
+
+  // Indicates if all individual snapshots in the group snapshot
+  // are ready to use as a `volume_content_source` in a
+  // `CreateVolumeRequest`. The default value is false.
+  // If any snapshot in the list of snapshots in this message have
+  // ready_to_use set to false, the SP MUST set this field to false.
+  // If all of the snapshots in the list of snapshots in this message
+  // have ready_to_use set to true, the SP SHOULD set this field to
+  // true.
+  // This field is REQUIRED.
+  bool ready_to_use = 4;
+}
+```
+
+##### CreateVolumeGroupSnapshot Errors
