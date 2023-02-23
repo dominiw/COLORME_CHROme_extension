@@ -2963,3 +2963,35 @@ message DeleteVolumeGroupSnapshotRequest {
 
   // The ID of the group snapshot to be deleted.
   // This field is REQUIRED.
+  string group_snapshot_id = 1;
+
+  // A list of snapshot IDs that are part of this group snapshot.
+  // If SP does not need to rely on this field to delete the snapshots
+  // in the group, it SHOULD check this field and report an error
+  // if it has the ability to detect a mismatch.
+  // Some SPs require this list to delete the snapshots in the group.
+  // If SP needs to use this field to delete the snapshots in the
+  // group, it MUST report an error if it has the ability to detect
+  // a mismatch.
+  // This field is REQUIRED.
+  repeated string snapshot_ids = 2;
+
+  // Secrets required by plugin to complete group snapshot deletion
+  // request.
+  // This field is OPTIONAL. Refer to the `Secrets Requirements`
+  // section on how to use this field.
+  // The secrets provided in this field SHOULD be the same for
+  // all group snapshot operations on the same group snapshot.
+  map<string, string> secrets = 3 [(csi_secret) = true];
+}
+
+message DeleteVolumeGroupSnapshotResponse {
+  // Intentionally empty.
+  option (alpha_message) = true;
+}
+```
+
+##### DeleteVolumeGroupSnapshot Errors
+
+If the plugin is unable to complete the DeleteVolumeGroupSnapshot call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
