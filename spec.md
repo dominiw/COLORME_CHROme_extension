@@ -2935,3 +2935,31 @@ message VolumeGroupSnapshot {
 ```
 
 ##### CreateVolumeGroupSnapshot Errors
+
+If the plugin is unable to complete the CreateVolumeGroupSnapshot call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Group snapshot already exists but is incompatible | 6 ALREADY_EXISTS | Indicates that a group snapshot corresponding to the specified group snapshot `name` already exists but is incompatible with the specified `source_volume_ids` or `parameters`. | Caller MUST fix the arguments or use a different `name` before retrying. |
+| Cannot snapshot multiple volumes together | 9 FAILED_PRECONDITION | Indicates that the specified volumes cannot be snapshotted together because the volumes are not configured properly based on requirements from the SP. | Caller MUST fix the configuration of the volumes so that they meet the requirements for group snapshotting before retrying. |
+| Not enough space to create group snapshot | 13 RESOURCE_EXHAUSTED | There is not enough space on the storage system to handle the create group snapshot request. | Future calls to CreateVolumeGroupSnapshot MAY succeed if space is freed up. |
+
+#### `DeleteVolumeGroupSnapshot`
+
+**ALPHA FEATURE**
+
+A Controller Plugin MUST implement this RPC call if it has `CREATE_DELETE_GET_VOLUME_GROUP_SNAPSHOT` capability.
+This RPC will be called by the CO to delete a volume group snapshot.
+This operation will delete a volume group snapshot as well as all individual snapshots that are part of this volume group snapshot.
+
+This operation MUST be idempotent.
+If a group snapshot corresponding to the specified `group_snapshot_id` does not exist or the artifacts associated with the group snapshot do not exist anymore, the Plugin MUST reply `0 OK`.
+
+```protobuf
+message DeleteVolumeGroupSnapshotRequest {
+  option (alpha_message) = true;
+
+  // The ID of the group snapshot to be deleted.
+  // This field is REQUIRED.
