@@ -2995,3 +2995,27 @@ message DeleteVolumeGroupSnapshotResponse {
 
 If the plugin is unable to complete the DeleteVolumeGroupSnapshot call successfully, it MUST return a non-ok gRPC code in the gRPC status.
 If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Snapshot list mismatch | 3 INVALID_ARGUMENT | Besides the general cases, this code SHOULD also be used to indicate when plugin supporting CREATE_DELETE_GET_VOLUME_GROUP_SNAPSHOT detects a mismatch in the `snapshot_ids`. | If a mismatch is detected in the `snapshot_ids`, caller SHOULD use different `snapshot_ids`. |
+| Volume group snapshot in use | 9 FAILED_PRECONDITION | Indicates that the volume group snapshot corresponding to the specified `group_snapshot_id` could not be deleted because it is in use by another resource. | Caller SHOULD ensure that there are no other resources using the volume group snapshot, and then retry with exponential back off. |
+
+#### `GetVolumeGroupSnapshot`
+
+**ALPHA FEATURE**
+
+This optional RPC MAY be called by the CO to fetch current information about a volume group snapshot.
+
+A Controller Plugin MUST implement this `GetVolumeGroupSnapshot` RPC call if it has `CREATE_DELETE_GET_VOLUME_GROUP_SNAPSHOT` capability.
+
+`GetVolumeGroupSnapshotResponse` should contain current information of a volume group snapshot if it exists.
+If the volume group snapshot does not exist any more, `GetVolumeGroupSnapshot` should return gRPC error code `NOT_FOUND`.
+
+```protobuf
+message GetVolumeGroupSnapshotRequest {
+  option (alpha_message) = true;
+
+  // The ID of the group snapshot to fetch current group snapshot
+  // information for.
