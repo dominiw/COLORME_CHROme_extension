@@ -3113,3 +3113,39 @@ The CO MUST implement the specified error recovery behavior when it encounters t
   * The Plugin Supervisor is the ultimate authority of the directory in which the UNIX socket endpoint is created and MAY enforce policies to prevent and/or mitigate abuse of the directory by Plugins.
 
 ### Supervised Lifecycle Management
+
+* For Plugins packaged in software form:
+  * Plugin Packages SHOULD use a well-documented container image format (e.g., Docker, OCI).
+  * The chosen package image format MAY expose configurable Plugin properties as environment variables, unless otherwise indicated in the section below.
+    Variables so exposed SHOULD be assigned default values in the image manifest.
+  * A Plugin Supervisor MAY programmatically evaluate or otherwise scan a Plugin Package’s image manifest in order to discover configurable environment variables.
+  * A Plugin SHALL NOT assume that an operator or Plugin Supervisor will scan an image manifest for environment variables.
+
+#### Environment Variables
+
+* Variables defined by this specification SHALL be identifiable by their `CSI_` name prefix.
+* Configuration properties not defined by the CSI specification SHALL NOT use the same `CSI_` name prefix; this prefix is reserved for common configuration properties defined by the CSI specification.
+* The Plugin Supervisor SHOULD supply all RECOMMENDED CSI environment variables to a Plugin.
+* The Plugin Supervisor SHALL supply all REQUIRED CSI environment variables to a Plugin.
+
+##### `CSI_ENDPOINT`
+
+Network endpoint at which a Plugin SHALL host CSI RPC services. The general format is:
+
+    {scheme}://{authority}{endpoint}
+
+The following address types SHALL be supported by Plugins:
+
+    unix:///path/to/unix/socket.sock
+
+Note: All UNIX endpoints SHALL end with `.sock`. See [gRPC Name Resolution](https://github.com/grpc/grpc/blob/master/doc/naming.md).
+
+This variable is REQUIRED.
+
+#### Operational Recommendations
+
+The Plugin Supervisor expects that a Plugin SHALL act as a long-running service vs. an on-demand, CLI-driven process.
+
+Supervised plugins MAY be isolated and/or resource-bounded.
+
+##### Logging
