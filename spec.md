@@ -3053,3 +3053,37 @@ message GetVolumeGroupSnapshotResponse {
 ##### GetVolumeGroupSnapshot Errors
 
 If the plugin is unable to complete the GetVolumeGroupSnapshot call successfully, it MUST return a non-ok gRPC code in the gRPC status.
+If the conditions defined below are encountered, the plugin MUST return the specified gRPC error code.
+The CO MUST implement the specified error recovery behavior when it encounters the gRPC error code.
+
+| Condition | gRPC Code | Description | Recovery Behavior |
+|-----------|-----------|-------------|-------------------|
+| Snapshot list mismatch | 3 INVALID_ARGUMENT | Besides the general cases, this code SHOULD also be used to indicate when plugin supporting CREATE_DELETE_GET_VOLUME_GROUP_SNAPSHOT detects a mismatch in the `snapshot_ids`. | If a mismatch is detected in the `snapshot_ids`, caller SHOULD use different `snapshot_ids`. |
+| Volume group snapshot does not exist | 5 NOT_FOUND | Indicates that a volume group snapshot corresponding to the specified `group_snapshot_id` does not exist. | Caller MUST verify that the `group_snapshot_id` is correct and that the volume group snapshot is accessible and has not been deleted before retrying with exponential back off. |
+
+## Protocol
+
+### Connectivity
+
+* A CO SHALL communicate with a Plugin using gRPC to access the `Identity`, and (optionally) the `Controller` and `Node` services.
+  * proto3 SHOULD be used with gRPC, as per the [official recommendations](http://www.grpc.io/docs/guides/#protocol-buffer-versions).
+  * All Plugins SHALL implement the REQUIRED Identity service RPCs.
+    Support for OPTIONAL RPCs is reported by the `ControllerGetCapabilities` and `NodeGetCapabilities` RPC calls.
+* The CO SHALL provide the listen-address for the Plugin by way of the `CSI_ENDPOINT` environment variable.
+  Plugin components SHALL create, bind, and listen for RPCs on the specified listen address.
+  * Only UNIX Domain Sockets MAY be used as endpoints.
+    This will likely change in a future version of this specification to support non-UNIX platforms.
+* All supported RPC services MUST be available at the listen address of the Plugin.
+
+### Security
+
+* The CO operator and Plugin Supervisor SHOULD take steps to ensure that any and all communication between the CO and Plugin Service are secured according to best practices.
+* Communication between a CO and a Plugin SHALL be transported over UNIX Domain Sockets.
+  * gRPC is compatible with UNIX Domain Sockets; it is the responsibility of the CO operator and Plugin Supervisor to properly secure access to the Domain Socket using OS filesystem ACLs and/or other OS-specific security context tooling.
+  * SP’s supplying stand-alone Plugin controller appliances, or other remote components that are incompatible with UNIX Domain Sockets MUST provide a software component that proxies communication between a UNIX Domain Socket and the remote component(s).
+    Proxy components transporting communication over IP networks SHALL be responsible for securing communications over such networks.
+* Both the CO and Plugin SHOULD avoid accidental leakage of sensitive information (such as redacting such information from log files).
+
+### Debugging
+
+* Debugging and tracing are supported by external, CSI-independent additions and extensions to gRPC APIs, such as [OpenTracing](https://github.com/grpc-ecosystem/grpc-opentracing).
