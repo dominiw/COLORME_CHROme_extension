@@ -3149,3 +3149,38 @@ The Plugin Supervisor expects that a Plugin SHALL act as a long-running service 
 Supervised plugins MAY be isolated and/or resource-bounded.
 
 ##### Logging
+
+* Plugins SHOULD generate log messages to ONLY standard output and/or standard error.
+  * In this case the Plugin Supervisor SHALL assume responsibility for all log lifecycle management.
+* Plugin implementations that deviate from the above recommendation SHALL clearly and unambiguously document the following:
+  * Logging configuration flags and/or variables, including working sample configurations.
+  * Default log destination(s) (where do the logs go if no configuration is specified?)
+  * Log lifecycle management ownership and related guidance (size limits, rate limits, rolling, archiving, expunging, etc.) applicable to the logging mechanism embedded within the Plugin.
+* Plugins SHOULD NOT write potentially sensitive data to logs (e.g. secrets).
+
+##### Available Services
+
+* Plugin Packages MAY support all or a subset of CSI services; service combinations MAY be configurable at runtime by the Plugin Supervisor.
+  * A plugin MUST know the "mode" in which it is operating (e.g. node, controller, or both).
+  * This specification does not dictate the mechanism by which mode of operation MUST be discovered, and instead places that burden upon the SP.
+* Misconfigured plugin software SHOULD fail-fast with an OS-appropriate error code.
+
+##### Linux Capabilities
+
+* Plugin Supervisor SHALL guarantee that plugins will have `CAP_SYS_ADMIN` capability on Linux when running on Nodes.
+* Plugins SHOULD clearly document any additionally required capabilities and/or security context.
+
+##### Namespaces
+
+* A Plugin SHOULD NOT assume that it is in the same [Linux namespaces](https://en.wikipedia.org/wiki/Linux_namespaces) as the Plugin Supervisor.
+  The CO MUST clearly document the [mount propagation](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt) requirements for Node Plugins and the Plugin Supervisor SHALL satisfy the CO’s requirements.
+
+##### Cgroups Isolation
+
+* A Plugin MAY be constrained by cgroups.
+* An operator or Plugin Supervisor MAY configure the devices cgroups subsystem to ensure that a Plugin MAY access requisite devices.
+* A Plugin Supervisor MAY define resource limits for a Plugin.
+
+##### Resource Requirements
+
+* SPs SHOULD unambiguously document all of a Plugin’s resource requirements.
