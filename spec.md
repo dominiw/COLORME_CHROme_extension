@@ -3087,3 +3087,29 @@ The CO MUST implement the specified error recovery behavior when it encounters t
 ### Debugging
 
 * Debugging and tracing are supported by external, CSI-independent additions and extensions to gRPC APIs, such as [OpenTracing](https://github.com/grpc-ecosystem/grpc-opentracing).
+
+## Configuration and Operation
+
+### General Configuration
+
+* The `CSI_ENDPOINT` environment variable SHALL be supplied to the Plugin by the Plugin Supervisor.
+* An operator SHALL configure the CO to connect to the Plugin via the listen address identified by `CSI_ENDPOINT` variable.
+* With exception to sensitive data, Plugin configuration SHOULD be specified by environment variables, whenever possible, instead of by command line flags or bind-mounted/injected files.
+
+
+#### Plugin Bootstrap Example
+
+* Supervisor -> Plugin: `CSI_ENDPOINT=unix:///path/to/unix/domain/socket.sock`.
+* Operator -> CO: use plugin at endpoint `unix:///path/to/unix/domain/socket.sock`.
+* CO: monitor `/path/to/unix/domain/socket.sock`.
+* Plugin: read `CSI_ENDPOINT`, create UNIX socket at specified path, bind and listen.
+* CO: observe that socket now exists, establish connection.
+* CO: invoke `GetPluginCapabilities`.
+
+#### Filesystem
+
+* Plugins SHALL NOT specify requirements that include or otherwise reference directories and/or files on the root filesystem of the CO.
+* Plugins SHALL NOT create additional files or directories adjacent to the UNIX socket specified by `CSI_ENDPOINT`; violations of this requirement constitute "abuse".
+  * The Plugin Supervisor is the ultimate authority of the directory in which the UNIX socket endpoint is created and MAY enforce policies to prevent and/or mitigate abuse of the directory by Plugins.
+
+### Supervised Lifecycle Management
